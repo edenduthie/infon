@@ -148,3 +148,54 @@ def test_pyproject_build_system():
     
     # Verify build-backend
     assert "build-backend" in build_system, "pyproject.toml missing build-system.build-backend"
+
+
+def test_pyproject_dev_dependencies():
+    """Verify all dev dependencies are present with correct version constraints (Task 1.3)."""
+    repo_root = pathlib.Path(__file__).parent.parent
+    pyproject_file = repo_root / "pyproject.toml"
+    
+    with open(pyproject_file, "rb") as f:
+        data = tomllib.load(f)
+    
+    project = data["project"]
+    
+    # Verify optional-dependencies section exists
+    assert "optional-dependencies" in project, \
+        "pyproject.toml missing project.optional-dependencies"
+    optional_deps = project["optional-dependencies"]
+    
+    # Verify dev dependencies section exists
+    assert "dev" in optional_deps, \
+        "pyproject.toml missing project.optional-dependencies.dev"
+    dev_deps = optional_deps["dev"]
+    
+    # Expected dev dependencies with version constraints
+    expected_dev_deps = {
+        "pytest": ">=8.0",
+        "pytest-asyncio": None,  # No specific version required beyond what's there
+        "ruff": None,  # No specific version required beyond what's there
+        "mypy": None,  # No specific version required beyond what's there
+        "mkdocs-material": ">=9.0",
+        "python-build": None,  # No version constraint specified
+    }
+    
+    # Build a dictionary of actual dev dependencies from list
+    actual_dev_deps = {}
+    for dep in dev_deps:
+        if ">=" in dep:
+            name, version = dep.split(">=")
+            actual_dev_deps[name.strip()] = f">={version.strip()}"
+        else:
+            # Handle packages without version constraints
+            actual_dev_deps[dep.strip()] = None
+    
+    # Verify each expected dependency is present
+    for dep_name, expected_version in expected_dev_deps.items():
+        assert dep_name in actual_dev_deps, \
+            f"Missing dev dependency: {dep_name}"
+        
+        # If a specific version is expected, verify it matches
+        if expected_version is not None:
+            assert actual_dev_deps[dep_name] == expected_version, \
+                f"Dev dependency {dep_name} has version '{actual_dev_deps[dep_name]}', expected '{expected_version}'"
