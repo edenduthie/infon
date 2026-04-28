@@ -1,4 +1,20 @@
-
 # Dolt database files (added by bd init)
 .dolt/
 *.db
+
+# infon knowledge base files
+.infon/
+*.ddb
+
+# Build artifacts
+dist/
+
+# Virtual environments
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
