@@ -2,14 +2,132 @@
 
 This file provides instructions and context for the **infon** project — an open-source Python project described by the openspec specification.
 
-<!-- BEGIN BEADS INTEGRATION v:2 profile:skill hash:d4f96305 -->
-## Issue Tracking
+<!-- BEGIN BEADS INTEGRATION v:1 profile:full hash:d4f96305 -->
+## Issue Tracking with bd (beads)
 
-This project uses **bd (beads)** for issue tracking. Load the `beads` skill via the `skill` tool for full workflow instructions.
+**IMPORTANT**: This project uses **bd (beads)** for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods.
 
-**Short reminder:** always use `bd` (not TODOs), use `--json`, check `bd ready` for unblocked work, `bd update <id> --claim` to claim, `bd close <id>` to complete. On session end: push everything.
+### Why bd?
+
+- Dependency-aware: Track blockers and relationships between issues
+- Git-friendly: Dolt-powered version control with native sync
+- Agent-optimized: JSON output, ready work detection, discovered-from links
+- Prevents duplicate tracking systems and confusion
+
+### Quick Start
+
+**Check for ready work:**
+
+```bash
+bd ready --json
+```
+
+**Create new issues:**
+
+```bash
+bd create "Issue title" --description="Detailed context" -t bug|feature|task -p 0-4 --json
+bd create "Issue title" --description="What this issue is about" -p 1 --deps discovered-from:bd-123 --json
+```
+
+**Claim and update:**
+
+```bash
+bd update <id> --claim --json
+bd update bd-42 --priority 1 --json
+```
+
+**Complete work:**
+
+```bash
+bd close bd-42 --reason "Completed" --json
+```
+
+### Issue Types
+
+- `bug` - Something broken
+- `feature` - New functionality
+- `task` - Work item (tests, docs, refactoring)
+- `epic` - Large feature with subtasks
+- `chore` - Maintenance (dependencies, tooling)
+
+### Priorities
+
+- `0` - Critical (security, data loss, broken builds)
+- `1` - High (major features, important bugs)
+- `2` - Medium (default, nice-to-have)
+- `3` - Low (polish, optimization)
+- `4` - Backlog (future ideas)
+
+### Workflow for AI Agents
+
+1. **Check ready work**: `bd ready` shows unblocked issues
+2. **Claim your task atomically**: `bd update <id> --claim`
+3. **Work on it**: Implement, test, document
+4. **Discover new work?** Create linked issue:
+   - `bd create "Found bug" --description="Details about what was found" -p 1 --deps discovered-from:<parent-id>`
+5. **Complete**: `bd close <id> --reason "Done"`
+
+### Auto-Sync
+
+bd automatically syncs via Dolt:
+
+- Each write auto-commits to Dolt history
+- Use `bd dolt push`/`bd dolt pull` for remote sync
+- No manual export/import needed!
+
+### Important Rules
+
+- ✅ Use bd for ALL task tracking
+- ✅ Always use `--json` flag for programmatic use
+- ✅ Link discovered work with `discovered-from` dependencies
+- ✅ Check `bd ready` before asking "what should I work on?"
+- ❌ Do NOT create markdown TODO lists
+- ❌ Do NOT use external issue trackers
+- ❌ Do NOT duplicate tracking systems
+
+For more details, see README.md and docs/QUICKSTART.md.
+
+## Landing the Plane (Session Completion)
+
+**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
+
+**MANDATORY WORKFLOW:**
+
+1. **File issues for remaining work** - Create issues for anything that needs follow-up
+2. **Run quality gates** (if code changed) - Tests, linters, builds
+3. **Update issue status** - Close finished work, update in-progress items
+4. **PUSH TO REMOTE** - This is MANDATORY:
+   ```bash
+   git pull --rebase
+   bd dolt push
+   git push
+   git status  # MUST show "up to date with origin"
+   ```
+5. **Clean up** - Clear stashes, prune remote branches
+6. **Verify** - All changes committed AND pushed
+7. **Hand off** - Provide context for next session
+
+**CRITICAL RULES:**
+- Work is NOT complete until `git push` succeeds
+- NEVER stop before pushing - that leaves work stranded locally
+- NEVER say "ready to push when you are" - YOU must push
+- If push fails, resolve and retry until it succeeds
 
 <!-- END BEADS INTEGRATION -->
+
+## Development Approach — Phased MVP
+
+Development proceeds in **phases**, each producing a working vertical slice of the full system. The goal is to reach a minimal end-to-end system (MVP) **as quickly as possible**, so design errors are caught early.
+
+### Why Phased MVP?
+
+Building each module to completion before moving on hides integration problems until the final assembly phase — that's when you discover your data model doesn't fit the store, or the encoder's output doesn't match the retrieval pipeline. Phased MVP surfaces these issues in Phase 1 or 2, not Phase 12.
+
+**Each phase must:**
+
+1. **Be independently testable** — the system works end-to-end at the phase boundary, even if minimally.
+2. **Add one new capability layer** — Phase 1 is the data model, Phase 2 adds persistence, Phase 3 adds encoding, etc. Each phase builds on the previous one and verifies the integration works.
+3. **Ship as little as necessary to prove the concept** — the first end-to-end flow through all layers should happen in the earliest possible phase, even if it's a stripped-down flow.
 
 ## Development Rules
 
@@ -46,23 +164,25 @@ Do not accept incomplete implementations or partial test coverage:
 - Do not accept code that does not fully meet the openspec specification.
 - If a test is difficult to write, the difficulty is a signal that the real integration needs to be built — do not circumvent it.
 
-### 4. Post-Task Review — Mandatory
+### 4. Phase-Boundary Review — Mandatory at the End of Each Phase
 
-After completing each task, perform a thorough review:
+After completing all tasks in a phase, perform a thorough review **before moving to the next phase**. This is where the heavy lifting happens — not after every task, but at each phase boundary, where integration risk is highest.
 
-a. **Spec compliance** — re-read the relevant openspec spec and `tasks.md` sections to verify all prior requirements are still met and functioning.
+a. **Full regression suite** — run `pytest -v`. Every test must pass. Phase boundaries are where regressions actually surface, so this check matters.
 
-b. **Regression tests** — run the **full test suite** to confirm no regressions. Every test must pass before moving on.
+b. **Spec compliance** — re-read the relevant openspec spec and `tasks.md` sections to verify all requirements for this phase and prior phases are still met and functioning.
 
-c. **Next-step validation** — verify the planned next steps make sense given the current state.
+c. **MVP checkpoint** — does the system work end-to-end at this phase? Even a minimal flow through all built layers should succeed. If not, the phase is incomplete.
 
 d. **Inconsistency Resolution** — if any inconsistencies are found between the spec, implementation, or tasks, fix them immediately.
 
 e. **Update openspec plan** — modify the openspec plan to reflect the completed work and any discovered changes.
 
-f. **Update beads tasks** — update any pending beads tasks to reflect the current state,Dependencies, and blockers.
+f. **Update beads tasks** — update any pending beads tasks to reflect the current state, dependencies, and blockers.
 
-This review is not optional. It ensures the project remains consistent, spec-compliant, and regression-free at every step.
+**After each individual task** within a phase, the agent only needs to confirm the task's own tests pass. The full review is reserved for the phase boundary unless something goes wrong mid-phase.
+
+This balance prevents wasteful regression checks after trivial tasks (like creating a directory or writing a `.toml` file) while still catching regressions at the points that matter.
 
 ## Build & Test
 
@@ -86,5 +206,5 @@ _open-source Python project — refer to openspec/ for full specification_
 - Follow TDD religiously: red → green → refactor → repeat
 - Integration tests only — no mocks, no stubs, no unit tests
 - Provision and tear down real dependencies in every test
-- Review spec compliance and run full regressions after every task
+- Run full regression and review spec compliance at each phase boundary (not after every task)
 - Update openspec and beads tasks to stay in sync with progress
