@@ -23,11 +23,11 @@
 - [x] 1.7b Implement `Anchor` and `AnchorSchema` in `src/infon/schema.py`; include the eight built-in code relation anchors as a module-level constant `CODE_RELATION_ANCHORS`; implement `AnchorSchema.from_json()`, `AnchorSchema.to_json()`, `ancestors()`, `descendants()`. **Verify test passes (green).**
 - [x] **PHASE-BOUNDARY REVIEW Phase 1:** Run `pytest -v`, verify spec compliance for all Phase 1 requirements, confirm data model and grounding work end-to-end, update openspec plan and beads tasks.
 
-## Phase 2 — DuckDB Store
+## Phase 2 — DuckDB Store ✅
 
-- [ ] 2.1 Write `tests/test_store.py` integration test first: create `InfonStore` in temp dir, verify all four tables created with indexes, test `upsert()` and reinforcement merge, test `get()`/`query()`/`add_edge()`/`get_edges()`/`upsert_constraint()`/`upsert_document()`/`stats()`, test concurrent write detection, test context manager. **Verify test fails (red).**
-- [ ] 2.1b Implement `InfonStore` in `src/infon/store.py`; create all four tables on first open (`infons`, `edges`, `constraints`, `documents`) with all indexes; use DuckDB WAL mode; detect concurrent writer and raise `ConcurrentWriteError`; implement `upsert()`, `get()`, `query()`, `add_edge()`, `get_edges()`, `upsert_constraint()`, `upsert_document()`, `stats()`, `close()` with context manager. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 2:** Run `pytest -v`, verify spec compliance, confirm data model persists and queries end-to-end through DuckDB, update openspec plan and beads tasks.
+- [x] 2.1 Write `tests/test_store.py` integration test first: create `InfonStore` in temp dir, verify all four tables created with indexes, test `upsert()` and reinforcement merge, test `get()`/`query()`/`add_edge()`/`get_edges()`/`upsert_constraint()`/`upsert_document()`/`stats()`, test concurrent write detection, test context manager. **Verify test fails (red).**
+- [x] 2.1b Implement `InfonStore` in `src/infon/store.py`; create all four tables on first open (`infons`, `edges`, `constraints`, `documents`) with all indexes; use DuckDB WAL mode; detect concurrent writer and raise `ConcurrentWriteError`; implement `upsert()`, `get()`, `query()`, `add_edge()`, `get_edges()`, `upsert_constraint()`, `upsert_document()`, `stats()`, `close()` with context manager. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 2:** Run `pytest -v`, verify spec compliance, confirm data model persists and queries end-to-end through DuckDB, update openspec plan and beads tasks.
 
 ## Phase 3 — SPLADE Encoder and Anchor Projection
 
