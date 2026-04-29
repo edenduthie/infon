@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/infon/__init__.py
+src/infon.egg-info/PKG-INFO
+src/infon.egg-info/SOURCES.txt
+src/infon.egg-info/dependency_links.txt
+src/infon.egg-info/entry_points.txt
+src/infon.egg-info/requires.txt
+src/infon.egg-info/top_level.txt
+tests/test_grounding.py
+tests/test_pyproject.py
+tests/test_repository_structure.py

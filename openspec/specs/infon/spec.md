@@ -1,3 +1,14 @@
+## Hard Rules
+
+- **TDD only:** Every requirement must be implemented via Test-Driven Development. Write the integration test first, verify it fails (red), write the minimal implementation, verify it passes (green). Iterate until green.
+- **No mocks, no stubs, no test doubles:** Never use `MagicMock`, `mock`, `stub`, `patch`, or any form of test double. Tests that exercise a mock are testing the mock, not the system.
+- **No isolated unit tests:** Every test must exercise the full stack — real database, real file system, real subprocess, real network. No testing a function in vacuum.
+- **Provision real dependencies:** If the feature needs a database, the test creates a real DuckDB instance in a temp directory. If it needs a subprocess, the test spawns a real process. No fakes.
+- **Tear down after the test:** All provisions must be cleaned up. No leftover state between test runs.
+- **No skips:** `pytest.mark.skip`, `pytest.mark.xfail`, or equivalent bypasses are forbidden. Difficulty writing a test is a signal that the real integration needs to be built.
+- **No shortcuts:** A partially working system with skipped tests is not done. Iterate until all tests pass and the full regression suite is green.
+- **Phase-boundary review:** After completing all tasks in a phase, re-read the relevant spec sections, run the full regression test suite, verify spec compliance, check the system works end-to-end at this phase, update the openspec plan, and update beads tasks. After each individual task within a phase, only confirm that task's own tests pass — the full review is reserved for the phase boundary.
+
 ## ADDED Requirements
 
 ### Requirement: Infon Data Model
@@ -31,6 +42,8 @@ The `Infon` dataclass SHALL be immutable (frozen Pydantic model or `@dataclass(f
 - **WHEN** an `Infon` is retrieved from the DuckDB store
 - **THEN** attempting to modify any field SHALL raise an error; callers that need a modified copy SHALL use the `Infon.replace(**kwargs)` helper
 
+**Testability:** A test constructs real `Infon` instances with both `TextGrounding` and `ASTGrounding`, verifies immutability by attempting field assignment (expecting `FrozenInstanceError`), calls `Infon.replace()` and asserts the new instance has the updated fields while the original is unchanged, and round-trips through JSON serialization. No mocks — all real Pydantic model instances.
+
 ---
 
 ### Requirement: AnchorSchema
@@ -54,6 +67,7 @@ The `AnchorSchema` SHALL be serialisable to and from JSON. The canonical on-disk
 - `relations` — filtered list of relation-type anchors
 - `features` — filtered list of feature-type anchors
 - `markets` — filtered list of market-type anchors
+- `locations` — filtered list of location-type anchors
 - `ancestors(key)` — list of ancestor anchor keys by walking `parent` links
 - `descendants(key)` — list of descendant anchor keys
 
@@ -66,6 +80,8 @@ For `language=code`, the `AnchorSchema` SHALL always include the eight built-in 
 #### Scenario: Anchor hierarchy traversal
 - **WHEN** `schema.descendants("database_layer")` is called on a schema where `postgresql`, `redis`, and `dynamodb` all have `parent="database_layer"`
 - **THEN** the returned list contains all three descendant keys
+
+**Testability:** A test writes a real `schema.json` file to a temp directory with parent-child anchor relationships, calls `AnchorSchema.from_json()`, asserts all anchors deserialize with correct types, calls `ancestors()` and `descendants()` and verifies traversal, then writes the schema back to JSON and reloads to prove round-trip fidelity. No mocked file I/O.
 
 ---
 
@@ -89,6 +105,8 @@ The encoder MUST NOT require network access at runtime. All model weights are lo
 - **WHEN** the encoder is initialised with no network access (e.g., `TRANSFORMERS_OFFLINE=1`)
 - **THEN** it loads successfully from the bundled model path and encodes text correctly; it SHALL NOT attempt to contact HuggingFace or any external service
 
+**Testability:** A test sets `TRANSFORMERS_OFFLINE=1`, loads the model from the bundled path, calls `encode_sparse()` with real text and asserts the output is a non-empty sparse dict, calls `project()` with a real `AnchorSchema` and asserts anchor keys match, and calls the combined `encode()` and verifies output keys are a subset of the schema keys. No mocked model — real model loaded from the bundled files.
+
 ---
 
 ### Requirement: Text Extraction Pipeline
@@ -105,7 +123,7 @@ The pipeline SHALL process text in the following stages:
 7. **Importance scoring** — compute `ImportanceScore` from activation strength, sentence position, novelty vs. existing constraints, and specificity of the triple
 8. **Infon construction** — assemble `Infon` instances with `kind=extracted` and `TextGrounding`
 
-The pipeline SHALL be accessible as `extract_text(text: str, doc_id: str, schema: AnchorSchema) -> list[Infon]`.
+The pipeline SHALL be accessible as `extract_text(text: str, doc_id: str, schema: AnchorSchema) -> list[Infon]`. The `doc_id` parameter identifies the source document and is stored in the `Infon.doc_id` field and recorded in the `documents` table for incremental ingest tracking. When called from `store_observation`, `doc_id` SHALL be set to `"<source>:<timestamp>"` (e.g., `"agent:2024-01-15T10:30:00Z"`).
 
 #### Scenario: Observation stored via MCP tool produces infons
 - **WHEN** `store_observation("UserService now delegates auth to the new TokenValidator")` is called via the MCP server
@@ -114,6 +132,8 @@ The pipeline SHALL be accessible as `extract_text(text: str, doc_id: str, schema
 #### Scenario: Negated sentence sets polarity false
 - **WHEN** the sentence "UserService no longer calls DatabasePool directly" is extracted
 - **THEN** the resulting infon has `polarity=False`
+
+**Testability:** A test calls `extract_text()` with real sentences using a real `AnchorSchema`, asserts that affirmative sentences produce `polarity=True`, negated sentences produce `polarity=False`, multi-sentence input produces multiple infons, and empty input returns an empty list. The encoder and schema are real — no mocked components.
 
 ---
 
@@ -127,7 +147,7 @@ The `infon` package SHALL implement an AST extraction pipeline that converts sou
 
 **Pluggable extractor interface:** `BaseASTExtractor` SHALL define an abstract interface with a single method `extract(source: bytes, file_path: str, schema: AnchorSchema) -> list[Infon]`. Each language extractor SHALL subclass `BaseASTExtractor`. New language support SHALL be addable by implementing `BaseASTExtractor` and registering the subclass for a file extension — no changes to the core pipeline.
 
-**Repo walker:** `ingest_repo(root: str, schema: AnchorSchema, store: InfonStore, *, incremental: bool = False) -> IngestStats` SHALL recursively walk a directory, dispatch each file to the appropriate extractor, and persist the resulting infons. With `incremental=True`, it SHALL use `git diff --name-only HEAD` to identify changed files and only re-ingest those. Files that fail to parse SHALL be logged and skipped; the walker SHALL NOT raise on individual file failures.
+**Repo walker:** `ingest_repo(root: str, schema: AnchorSchema, store: InfonStore, *, incremental: bool = False) -> IngestStats` SHALL recursively walk a directory, dispatch each file to the appropriate extractor, and persist the resulting infons. Each ingested file SHALL be recorded in the `documents` table with its path and `ingested_at` timestamp. With `incremental=True`, it SHALL use the `documents` table to identify files whose current mtime is newer than their recorded `ingested_at` (or that are missing from the table), re-ingesting only those files. As a fallback when `documents` is empty (first run), it SHALL use `git diff --name-only HEAD` to identify changed files. Files that fail to parse SHALL be logged and skipped; the walker SHALL NOT raise on individual file failures.
 
 **AST node to infon mapping:** Each language extractor SHALL map the node types listed in the design document to infon predicates. All AST infons use the eight built-in relation anchors. Grounding SHALL use `ASTGrounding(file_path, line_number, node_type)`.
 
@@ -146,6 +166,8 @@ The `infon` package SHALL implement an AST extraction pipeline that converts sou
 #### Scenario: Incremental ingest only re-processes changed files
 - **WHEN** `infon ingest --incremental` is run after two files have changed since the last ingest
 - **THEN** only those two files are re-parsed; infons from unchanged files are preserved in the store
+
+**Testability:** A test provisions a real temp directory with Python and TypeScript fixture files, calls `ingest_repo()` with a real `InfonStore` and real `AnchorSchema`, asserts >50 infons were produced, verifies specific `calls`/`imports`/`inherits` infons have correct grounding. The `tests/fixtures/` directory contains real source files parsed by real tree-sitter. No mocked extractors or parsers.
 
 ---
 
@@ -177,6 +199,8 @@ The `infon` package SHALL implement a `SchemaDiscovery` class that derives an `A
 #### Scenario: Minimum corpus size warning
 - **WHEN** `infon init` is run on a corpus with fewer than 50 source files
 - **THEN** schema discovery completes but emits a warning: "Corpus has fewer than 50 files; auto-discovered schema may be noisy. Consider providing a manual schema with --schema."
+
+**Testability:** A test runs `SchemaDiscovery.discover()` against the real `tests/fixtures/` Python project with a real `SpladeEncoder`, asserts the produced schema contains at minimum the eight built-in relation anchors, serialises to JSON and reloads, and verifies a small corpus emits a warning (`warnings.catch_warnings`). No mocked encoder or clustering — real spectral clustering on real co-activation data.
 
 ---
 
@@ -212,6 +236,8 @@ All write operations SHALL be wrapped in transactions. The store SHALL use DuckD
 - **WHEN** 500 infons and 200 edges have been persisted and `store.stats()` is called
 - **THEN** the returned `StoreStats` has `infon_count=500` and `edge_count=200`
 
+**Testability:** A test provisions a real DuckDB store in a temp directory, upserts real `Infon` instances, calls `get()` and `query()` with filter combinations, adds real edges, upserts constraints and documents, calls `stats()` and verifies counts, tests concurrent write detection by opening a second writer, and uses the context manager to verify clean close. The database is a real `.ddb` file — no patched database connections.
+
 ---
 
 ### Requirement: Consolidation
@@ -234,6 +260,8 @@ The `infon` package SHALL implement a `consolidate(store: InfonStore, schema: An
 #### Scenario: Consolidation is idempotent
 - **WHEN** `consolidate(store, schema)` is called, then called again without any new infons
 - **THEN** the edge count and constraint count are identical after both calls; no duplicate edges are created
+
+**Testability:** A test populates a real `InfonStore` with chronologically ordered real infons sharing an anchor, calls `consolidate()`, asserts NEXT edges exist between consecutive infons with correct weights, calls `consolidate()` again and asserts edge count is unchanged (idempotency), verifies constraint aggregation produces correct `evidence_count`/`strength`/`persistence`, and manually backdates infon timestamps to test importance decay. No mocked store — real DuckDB with real infons.
 
 ---
 
@@ -261,6 +289,8 @@ The `infon` package SHALL implement a `retrieve(query: str, store: InfonStore, s
 - **WHEN** `retrieve("authentication", store, schema, persona="regulator")` is called
 - **THEN** infons with `predicate="validates"` or `predicate="enforces"` (positive for regulator persona) rank higher than equivalent infons with `predicate="bypasses"` (negative for regulator)
 
+**Testability:** A test populates a real `InfonStore` with diverse infons and edges, calls `retrieve()` with real queries and asserts results are sorted by score descending, validates anchor expansion includes descendants, verifies persona valence shifts ranking order, and tests empty store returns empty list. Real encoder, real store, real schema — no mocked pipeline stages.
+
 ---
 
 ### Requirement: MCP Server
@@ -270,7 +300,7 @@ The `infon` package SHALL implement a stdio MCP server (`infon serve`) using Fas
 **Tools:**
 
 - `search(query: str, limit: int = 10) -> list[dict]` — runs `retrieve()` and returns ranked infons as JSON-serialisable dicts. Each dict SHALL include `subject`, `predicate`, `object`, `polarity`, `confidence`, `score`, `grounding` (file path + line or doc + span), and `context` (adjacent NEXT-edge infons).
-- `store_observation(text: str, source: str = "agent") -> dict` — runs `extract_text()` on the input, persists the resulting infons to the store, runs `consolidate()`, and returns a summary `{infons_added: int, infons_reinforced: int}`.
+- `store_observation(text: str, source: str = "agent") -> dict` — constructs a `doc_id` as `"<source>:<current-UTC-timestamp>"`, runs `extract_text()` on the input with that `doc_id`, persists the resulting infons to the store, runs `consolidate()`, and returns a summary `{infons_added: int, infons_reinforced: int}`.
 - `query_ast(symbol: str, relation: str | None = None, limit: int = 20) -> list[dict]` — queries the store for infons where `subject` or `object` matches `symbol` (exact or ancestor match), optionally filtered by `predicate=relation`. Returns infons sorted by `reinforcement_count` descending.
 
 **Resources:**
@@ -306,6 +336,8 @@ The MCP server SHALL handle tool call errors gracefully — if `search` or `quer
 - **AND** the user starts a Claude Code session in that project directory
 - **THEN** Claude Code spawns the `infon serve` process via uvx and the three tools are available to the agent without any further configuration
 
+**Testability:** A test spawns a real `run_server()` subprocess with a pre-populated real `InfonStore`, opens a real JSON-RPC session over stdin/stdout, sends `tools/list` and asserts all three tools are registered, calls `search` via JSON-RPC and asserts ranked results match stored infons, calls `store_observation` and verifies new infons are persisted plus consolidation ran, calls `query_ast` for a known symbol and verifies results, sends an invalid `query_ast` payload and asserts a JSON error dict without process crash, and fetches `infon://stats`, `infon://schema`, `infon://recent` resources asserting non-empty Markdown. Real subprocess, real store, real JSON-RPC — no mocked MCP transport.
+
 ---
 
 ### Requirement: CLI
@@ -333,6 +365,8 @@ All commands that open the DuckDB store SHALL print a clear error and exit with 
 #### Scenario: Missing store gives actionable error
 - **WHEN** `infon search "anything"` is run in a directory with no `.infon/` directory
 - **THEN** the CLI prints "No knowledge base found. Run 'infon init' to create one." and exits with code 1
+
+**Testability:** A test uses Click's `CliRunner` to invoke the first four subcommands against `tests/fixtures/`, asserts `infon init` end-to-end produces `.infon/` with schema and populated DB, `infon search` returns tabular output after init, `infon stats` prints non-empty output, missing store exits 1 with expected message. A separate test provisions a real git repo in a temp directory with known commits on two files, runs `infon init` via subprocess to ingest all files, modifies one file and commits, then runs `infon ingest --incremental` via subprocess and asserts only the changed file's infons are re-created. No mocked CLI — real Click runner with real store and real fixtures.
 
 ---
 
@@ -364,6 +398,8 @@ The README SHALL document all three paths with copy-pasteable commands. The docs
 - **WHEN** `pip install infon` completes in a fresh virtualenv
 - **THEN** `infon --version` prints the package version and exits 0; `infon --help` lists all commands
 
+**Testability:** A test creates a fresh Python virtualenv, runs `pip install` from the local package, invokes `infon --version` and `infon --help` as subprocesses and asserts correct output, and verifies `pip install` into a project-local venv writes the correct binary path in `.mcp.json`. These are verification tasks (Phase 13) run as real subprocess commands — no mocked pip or venv.
+
 ---
 
 ### Requirement: Documentation Site
@@ -386,6 +422,8 @@ The `infon` package SHALL include a MkDocs Material documentation site at `docs/
 #### Scenario: Docs site deployed on push to main
 - **WHEN** a commit is pushed to `main`
 - **THEN** the `docs.yml` GitHub Actions workflow runs, `mkdocs build` succeeds with no warnings, and the updated site is live at `https://<owner>.github.io/infon` within 3 minutes
+
+**Testability:** A test runs `mkdocs build` as a subprocess against a real `docs/` directory with all required pages populated, asserts the build succeeds with zero warnings, and verifies the generated HTML contains all expected page titles. The `gh-deploy` step is verified by CI, but the local build is testable in every test run.
 
 ---
 
@@ -412,3 +450,5 @@ All tests SHALL be integration tests — no unit tests with mocks. Tests run aga
 #### Scenario: PyPI publish triggered by release
 - **WHEN** a GitHub Release is created with tag `v0.1.0`
 - **THEN** the publish workflow builds the wheel and uploads it to PyPI; `pip install infon==0.1.0` succeeds within 5 minutes of the release
+
+**Testability:** A test runs `python -m build` as a subprocess and asserts the wheel and sdist are produced in `dist/`, verifies `ruff check src/` and `mypy src/infon/` succeed as subprocesses with no errors, and verifies lint/format pass. The PyPI upload itself is gated by CI OIDC but the build artifact and all CI checks are testable locally as real subprocess commands — no mocked CI runner.

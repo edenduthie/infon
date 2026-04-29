@@ -5,11 +5,18 @@ description: "Execute Beads epic tasks in parallel using opencode subagents."
 
 # Epic Executor
 
-Executes tasks from a Beads epic using opencode subagents, running independent tasks in parallel.
+Executes tasks from a Beads epic using opencode subagents, running independent tasks in parallel within each phase, with full review at phase boundaries.
 
 **Trigger:** Run when user provides an epic ID or asks to execute tasks from an epic.
 
 **Input:** Epic ID (e.g., `bd-123`), or reference to `openspec/change-name/`
+
+## Core Principle — Phased MVP
+
+Tasks are organized into phases. Within each phase, independent tasks run in parallel. At the phase boundary — when all tasks in a phase are complete — a full review and regression suite runs. This catches integration problems early without wasting cycles on regression checks after trivial tasks.
+
+**Per-task:** Subagent confirms its own tests pass. No full regression needed.
+**Per-phase:** Full regression, spec compliance, openspec update, beads update. **This is mandatory.**
 
 ## Process
 
@@ -19,7 +26,7 @@ Executes tasks from a Beads epic using opencode subagents, running independent t
 bd ready --json
 ```
 
-Filter for tasks belonging to the target epic. These are tasks with no unmet dependencies — they can run in parallel.
+Filter for tasks belonging to the target epic. These are tasks with no unmet dependencies — they can run in parallel. Note which phase they belong to (tasks prefixed with `Phase N:`).
 
 ### 2. Classify Tasks by Subagent Type
 
@@ -40,6 +47,7 @@ Execute task <bd-id> "<task title>"
 
 Context:
 - Epic: <epic-id>
+- Phase: <phase number>
 - Task description: <full task description from bd>
 - Design context: <design field from bd>
 - Acceptance criteria: <acceptance field from bd>
@@ -49,7 +57,6 @@ Rules (from AGENTS.md):
 1. STRICT TDD — write tests first, verify they fail red, implement minimally, verify green
 2. NO MOCKS, NO STUBS, NO UNIT TESTS — real dependencies, real integrations only
 3. ITERATE UNTIL GREEN — no skips, no xfails, no shortcuts
-4. POST-TASK REVIEW — verify spec compliance, run full regression, update openspec plan
 
 Commit format: <type>(<scope>): <description> (<bd-id>)
 ```
@@ -66,23 +73,14 @@ Task(subagent_type="general", prompt="<above prompt for implementation tasks>")
 - If Task A and Task B are both ready (no deps on each other), launch both in the same message
 - If Task B depends on Task A, wait for Task A to complete in Step 4, then proceed to Step 5
 
-### 4. Post-Task Review
+### 4. Collect Task Results
 
-After each subagent completes, run the full review **before** closing the task. This mirrors AGENTS.md Rule 4.
+Wait for all subagents to return. For each completed task:
 
-For each completed task:
+a. Verify the subagent's own tests pass (the subagent should have already done this).
+b. If a subagent's tests fail, send it back with the failure output and iterate until green.
+c. Once green, close the task:
 
-a. **Spec compliance** — re-read the relevant `openspec/specs/` sections and `tasks.md` to verify the task's requirements are fully met.
-
-b. **Full regression suite** — run `pytest -v` (or the project's full test command). **Every test must pass.** If any test fails, send the task back to the subagent with the failure output and iterate until green.
-
-c. **Inconsistency resolution** — check for conflicts between the spec, the implementation, and `tasks.md`. Fix immediately.
-
-d. **Update openspec plan** — modify the openspec plan to reflect the completed work.
-
-e. **Update beads tasks** — update any pending beads tasks whose dependencies or blockers have changed.
-
-Only after the review passes, close the task:
 ```bash
 bd close <bd-id> --reason "Completed" --json
 ```
@@ -92,29 +90,48 @@ Update the epic's Timeline and Learnings sections:
 bd update <epic-id> --json
 ```
 
-**Important:** A task is NOT complete until the full regression suite passes. Do not skip this step to maintain parallelism — parallelism is between independent tasks, not between work and review.
+**Per-task note:** This is a lightweight check. Do NOT run the full regression suite here. The full review happens at the phase boundary (Step 5).
 
-### 5. Check for New Ready Tasks
+### 5. Check Phase Completion
 
-After closing completed tasks, re-check for newly unblocked work:
+After closing all currently-ready tasks, determine if the current phase is complete:
 
 ```bash
 bd ready --json
 ```
 
-If tasks are now ready (their dependencies just completed), return to Step 2. If no ready tasks remain and no open tasks remain, the epic is complete.
+If no tasks from the current phase remain open, **the phase is complete**. Proceed to Step 6 (Phase-Boundary Review).
 
-### 6. Epic Completion
+If new tasks from a later phase are now unblocked, hold — do not start the next phase until the phase-boundary review passes.
 
-When all tasks are closed:
+### 6. Phase-Boundary Review
 
-a. **Final regression:** Run the full test suite (`pytest -v`) to confirm zero regressions.
-b. **Spec compliance pass:** Re-read all relevant `openspec/specs/` files and verify implementation matches every requirement.
-c. **Update openspec plan:** Modify the openspec change plan to reflect completed work.
+**This is mandatory before starting the next phase.**
+
+a. **Full regression suite** — run `pytest -v`. Every test must pass. If any test fails, fix the issue before proceeding.
+
+b. **Spec compliance** — re-read the relevant `openspec/specs/` sections and `tasks.md` to verify all requirements for this phase and prior phases are still met and functioning.
+
+c. **MVP checkpoint** — does the system work end-to-end at this phase? Even a minimal flow through all built layers should succeed. If not, the phase is incomplete.
+
+d. **Inconsistency Resolution** — if any inconsistencies are found between the spec, implementation, or tasks, fix them immediately.
+
+e. **Update openspec plan** — modify the openspec plan to reflect the completed work and any discovered changes.
+
+f. **Update beads tasks** — update any pending beads tasks to reflect the current state, dependencies, and blockers.
+
+Only after the phase-boundary review passes may you begin the next phase. Return to Step 1.
+
+### 7. Epic Completion
+
+When all tasks are closed and all phases have passed their boundary review:
+
+a. **Final regression:** Run `pytest -v` one last time.
+b. **Final spec compliance:** Re-read all `openspec/specs/` files and verify full compliance.
+c. **Quality gates:** Run `ruff check src/`, `ruff format --check src/`, type checks.
 d. **Update epic Learnings:** Append final summary to the epic's Learnings section.
-e. **Quality gates:** Run `ruff check src/`, `ruff format --check src/`, type checks.
 
-### 7. Session Landing
+### 8. Session Landing
 
 Follow the beads skill landing procedure:
 
@@ -129,17 +146,26 @@ git status  # Must show "up to date with origin"
 
 ```
 Phase 1 tasks: [1.1, 1.2, 1.3] — all independent → launch 3 subagents
-Phase 2 tasks: [2.1, 2.2]      — depends on Phase 1 → wait, then launch 2 subagents
+  → all 3 complete → close tasks → PHASE 1 REVIEW (full regression, spec check)
+  → review passes → proceed
+
+Phase 2 tasks: [2.1, 2.2]      — depends on Phase 1 → now launchable
+  → both complete → close tasks → PHASE 2 REVIEW
+  → review passes → proceed
+
 Phase 3 tasks: [3.1, 3.2, 3.3] — 3.1 and 3.2 independent, 3.3 depends on 3.1
                                     → launch 3.1 + 3.2 in parallel, then 3.3
+  → all complete → PHASE 3 REVIEW
 ```
 
 ## Key Rules
 
-- **Maximum parallelism** — launch all independent tasks simultaneously
+- **Maximum parallelism within a phase** — launch all independent tasks simultaneously
 - **Claim before dispatch** — `bd update <id> --claim --json` before sending to subagent
 - **No sequential bottlenecks** — never run tasks one at a time when they could run in parallel
-- **Verify each subagent** — check that each subagent completed its task and ran its tests green
+- **Phase-gate discipline** — do not start the next phase until the phase-boundary review passes
+- **Per-task: lightweight check only** — confirm the subagent's own tests pass
+- **Per-phase: full review** — this is where regressions are caught
 - **Always `--json`** for all `bd` commands
 - **Conventional commits** — all commits must follow `<type>(<scope>): <description> (<bd-id>)`
 - **TDD is non-negotiable** — every subagent must follow red-green-refactor

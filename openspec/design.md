@@ -175,7 +175,7 @@ Scope v1 to ingestion and retrieval only. Defer graph MCTS reasoning and GA imag
 
 Execute the implementation as a sequence of phases, each ending with a working vertical slice, rather than building each module to completion before moving on.
 
-**Why:** The same rationale as the agent-harness change: phased vertical delivery surfaces integration issues early, keeps `main` always-working, and enables real usage feedback before all features land. Phase 1 ends with a working DuckDB store and data model. Phase 3 ends with text extraction into the store. Phase 5 ends with AST extraction running on a real Python repo. Phase 7 ends with a working MCP server. Phase 9 ends with a polished CLI. Phase 10 ends with a live docs site and PyPI package.
+**Why:** The same rationale as the agent-harness change: phased vertical delivery surfaces integration issues early, keeps `main` always-working, and enables real usage feedback before all features land. Phase 1 ends with the data model and schema. Phase 2 adds persistence with DuckDB. Phase 4 ends with text extraction into the store. Phase 5 ends with AST extraction running on a real Python repo. Phase 7 ends with consolidation (NEXT edges, constraints). Phase 9 ends with a working MCP server. Phase 10 ends with the CLI tying everything together. Phase 12 ends with a live docs site. Phase 13 completes with PyPI packaging.
 
 ## Risks / Trade-offs
 

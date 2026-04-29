@@ -1,11 +1,11 @@
 ---
 name: spec-writer
-description: "Write openspec specs with TDD, no-mock, and review-after-each-task directives."
+description: "Write openspec specs with TDD, no-mock, and phase-boundary review directives."
 ---
 
 # Spec Writer
 
-Writes openspec change specifications that enforce TDD, real integrations, and post-task review.
+Writes openspec change specifications that enforce TDD, real integrations, and phased MVP development with reviews at phase boundaries.
 
 **Trigger:** When user asks for a new feature, plan, or openspec change.
 
@@ -95,25 +95,28 @@ Each spec file covers one feature area. Format:
 
 ### tasks.md
 
-Phase-based, numbered tasks. Each task is a single unit of work that one agent can complete.
+Phase-based, numbered tasks organized to produce a working vertical slice by the end of each phase. Follow the **Phased MVP** approach: each phase adds one capability layer and the system works end-to-end at the phase boundary.
 
 ```markdown
 ## Phase 1 — <Phase name>
 
 - [ ] 1.1 <Action> — <description of what to do>
 - [ ] 1.2 <Action> — <description, reference other tasks for dependencies>
-- [ ] 1.N Write integration tests covering: <list assertions>
+- [ ] 1.3 Write integration tests covering: <list assertions>
+- [ ] **PHASE 1 REVIEW:** Run full regression, verify all Phase 1 spec sections, update openspec plan and beads tasks. Do not begin Phase 2 until this passes.
 
 ## Phase 2 — <Phase name>
 
 - [ ] 2.1 ...
+- [ ] **PHASE 2 REVIEW:** ...
 ```
 
 **Task ordering rules:**
 - Phase N depends on Phase N-1 completion
-- Tests go at the end of each phase to verify the phase is working
+- Each phase ends with a review task that gates phase N+1
 - Independent tasks within a phase can run in parallel
 - Each task must reference what it modifies (files, APIs)
+- **Phased MVP:** aim for a minimal end-to-end flow through all built layers by the earliest possible phase
 
 ## TDD Directives in Specs
 
@@ -133,14 +136,14 @@ Shall store an (subject, predicate, object) triple to disk and retrieve it by pr
 
 ### In tasks.md
 
-Every implementation task must be paired with a test task. Pattern:
+TDD-first ordering: write the test task before the implementation task. Pattern:
 
 ```markdown
-- [ ] 4.1 Implement `extract_text` in `src/infon/extract.py` — <details>
-- [ ] 4.2 Write integration tests in `tests/test_extract.py` covering: <real assertions>
+- [ ] 4.1 Write integration tests in `tests/test_extract.py` first: <real assertions>. **Verify test fails (red).**
+- [ ] 4.1b Implement `extract_text` in `src/infon/extract.py` — <details>. **Verify test passes (green).**
 ```
 
-The test task always follows the implementation task in the dependency graph, enforcing the "write test first, verify red" cycle.
+The test task always precedes the implementation task in numbering, enforcing "write test first, verify red, implement, verify green."
 
 ## No-Mock Directives
 
