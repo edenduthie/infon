@@ -4,10 +4,13 @@ The encoder implements a two-stage pipeline:
 1. SpladeEncoder: Maps text to sparse 30,522-dimensional BERT token space
 2. AnchorProjector: Maps SPLADE token space to domain anchor space
 
-All model weights are loaded from the bundled path (no network access required).
-Encoding is deterministic and stateless.
+Model weights are downloaded on first use from the HuggingFace Hub and cached
+locally by the `transformers` library (default: ~/.cache/huggingface). The model
+ID can be overridden via the INFON_SPLADE_MODEL environment variable, or by
+passing `model_name` to SpladeEncoder. A local filesystem path also works.
 """
 
+import os
 from pathlib import Path
 from typing import Any
 
@@ -16,29 +19,33 @@ from transformers import AutoModelForMaskedLM, AutoTokenizer
 
 from infon.schema import AnchorSchema
 
-# Bundled model path (relative to this file)
-BUNDLED_MODEL_PATH = Path(__file__).parent / "models" / "splade-tiny"
+DEFAULT_SPLADE_MODEL = "naver/splade-cocondenser-ensembledistil"
 
 
 class SpladeEncoder:
     """SPLADE encoder for sparse text representation.
 
-    Uses the bundled splade-tiny model (4.4M params) to encode text into a sparse
-    30,522-dimensional vector via log(1 + ReLU(MLM_logits)) max-pooled across tokens.
+    Encodes text into a sparse 30,522-dimensional vector via
+    log(1 + ReLU(MLM_logits)) max-pooled across tokens.
 
-    The model is loaded from the bundled path on first initialization and cached
-    in memory. No network access is required.
+    The model is fetched from the HuggingFace Hub on first use and cached by
+    the transformers library. Override with the INFON_SPLADE_MODEL env var or
+    by passing `model_name` (which may be a Hub ID or a local path).
     """
 
-    def __init__(self, model_path: Path | None = None):
+    def __init__(self, model_name: str | Path | None = None):
         """Initialize the SPLADE encoder.
 
         Args:
-            model_path: Optional override for model path (defaults to bundled path)
+            model_name: HF Hub model ID or local filesystem path. Defaults to
+                the INFON_SPLADE_MODEL env var, then DEFAULT_SPLADE_MODEL.
         """
-        self.model_path = model_path or BUNDLED_MODEL_PATH
-        
-        # Lazy-init model and tokenizer
+        self.model_name = str(
+            model_name
+            or os.environ.get("INFON_SPLADE_MODEL")
+            or DEFAULT_SPLADE_MODEL
+        )
+
         self._model: Any = None
         self._tokenizer: Any = None
 
@@ -46,22 +53,15 @@ class SpladeEncoder:
     def model(self) -> Any:
         """Lazy-load the SPLADE model."""
         if self._model is None:
-            # Load from bundled path, offline mode
-            self._model = AutoModelForMaskedLM.from_pretrained(
-                str(self.model_path),
-                local_files_only=True,
-            )
-            self._model.eval()  # Set to evaluation mode
+            self._model = AutoModelForMaskedLM.from_pretrained(self.model_name)
+            self._model.eval()
         return self._model
 
     @property
     def tokenizer(self) -> Any:
         """Lazy-load the tokenizer."""
         if self._tokenizer is None:
-            self._tokenizer = AutoTokenizer.from_pretrained(
-                str(self.model_path),
-                local_files_only=True,
-            )
+            self._tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         return self._tokenizer
 
     def encode_sparse(self, text: str) -> dict[int, float]:

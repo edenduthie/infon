@@ -10,6 +10,9 @@
 dist/
 site/
 
+# Bundled model weights (fetched from HF Hub at runtime)
+src/infon/models/
+
 # Virtual environments
 .venv/
 
