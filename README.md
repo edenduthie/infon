@@ -150,7 +150,7 @@ Extracted relations:
 
 Natural language text (docstrings, comments, agent observations) is converted into infons via **change-of-basis projection** from BERT token space to anchor concept space.
 
-- **Zero training** — uses pre-trained SPLADE model (bundled with transformers)
+- **Zero training** — uses a pre-trained SPLADE model from the HuggingFace Hub (downloaded on first use, cached locally; override with `INFON_SPLADE_MODEL`)
 - **Sparse activations** — activates ~100-300 tokens per text unit
 - **Semantic expansion** — "validate" activates "check", "verify", etc.
 

@@ -12,7 +12,7 @@
 
 - **Infon data model** — typed triples `<<predicate, subject, object; polarity>>` grounded to source file + line number, drawn from situation semantics (Barwise & Perry 1983).
 - **Multi-language AST extraction** — Python and TypeScript/JavaScript via tree-sitter. Extracts calls, imports, inheritance, mutations, definitions, returns, raises, and decorators into grounded infons.
-- **SPLADE-based text extraction** — Converts docstrings, comments, and natural-language observations into infons via change-of-basis projection from BERT token space to anchor concept space. Zero training, bundled model.
+- **SPLADE-based text extraction** — Converts docstrings, comments, and natural-language observations into infons via change-of-basis projection from BERT token space to anchor concept space. Zero training; model is fetched from the HuggingFace Hub on first use.
 - **Schema auto-discovery** — `infon init` runs spectral clustering on a co-activation matrix to derive anchors from your codebase. No hand-authored schema required.
 - **Consolidation** — Duplicate merging, NEXT-edge temporal chains, constraint aggregation, and importance decay.
 - **Persona-aware retrieval** — Persona-specific valence scoring (`investor`, `engineer`, `executive`, `regulator`, `analyst`) shifts ranking based on who's asking.
