@@ -1,0 +1,69 @@
+site_name: infon
+site_description: Structured, interpretable knowledge-base memory for AI agents
+site_url: https://edenduthie.github.io/infon/
+repo_url: https://github.com/edenduthie/infon
+repo_name: edenduthie/infon
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: installation.md
+      - Concepts: concepts.md
+  - Usage:
+      - CLI Reference: cli.md
+      - MCP Server: mcp.md
+      - API Reference: api-reference.md
+  - Advanced:
+      - AST Extraction: ast-extraction.md
+      - Schema Discovery: schema-discovery.md
+  - Contributing: contributing.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/edenduthie/infon

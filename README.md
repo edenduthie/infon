@@ -1,68 +1,345 @@
 # infon
 
-Structured, interpretable knowledge-base memory for AI agents — backed by DuckDB, tree-sitter AST extraction, and zero-training SPLADE projection.
+**Structured, interpretable knowledge-base memory for AI agents — backed by DuckDB, tree-sitter AST extraction, and zero-training SPLADE projection.**
 
-## What it does
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](https://github.com/edenduthie/infon/actions)
+
+---
+
+## What is infon?
 
 `infon` gives AI agents (Claude Code, Cursor, etc.) **structured memory** backed by a local DuckDB knowledge graph. It transforms a code repository into typed, queryable triples called **infons** — each grounded to a source file and line number — so an agent can reason about code structure, remember observations, and trace every fact back to its origin.
 
-Run one command to index a repo:
+### The Problem
+
+AI agents currently rely on:
+
+- **Flat files** — no semantic structure, difficult to query
+- **Short-context summaries** — lossy, brittle, limited recall
+- **RAG over embeddings** — opaque, unexplainable, no grounding
+
+None of these approaches provide:
+
+- ✅ **Structured triples** (subject-predicate-object)
+- ✅ **Grounding** (file path + line number)
+- ✅ **Temporal memory** (NEXT-edge event chains)
+- ✅ **Reinforcement learning** (facts get stronger with repetition)
+- ✅ **Zero training** (works out of the box on any codebase)
+
+### The Solution
+
+`infon` solves this by:
+
+1. **Extracting AST infons** from Python and TypeScript/JavaScript source files (calls, imports, inheritance, etc.)
+2. **Auto-discovering anchors** (conceptual vocabulary) from your codebase via spectral clustering
+3. **Storing infons** in a DuckDB knowledge base with full grounding and temporal chains
+4. **Providing an MCP server** for Claude Code integration (three tools, three resources)
+
+**One command** to index your repository:
 
 ```bash
 uvx infon init
 ```
 
-Then connect Claude Code via MCP, and the agent gains the ability to:
-- **Query code structure**: "What calls `DatabasePool`?" returns grounded triples with file paths and line numbers.
-- **Store observations mid-session**: Decisions, refactorings, and architectural notes become searchable memory.
-- **Auto-discover domain vocabulary**: No manual schema needed — `infon init` derives an anchor schema from your repository using spectral clustering.
-
-## Quick start
+**One command** to connect to Claude Code:
 
 ```bash
-# 1. Index the current repository (auto-discovers schema, extracts AST infons)
-uvx infon init
-
-# 2. Search the knowledge base
-uvx infon search "what calls DatabasePool"
-
-# 3. Start the MCP server (stdio) for Claude Code
 uvx infon serve
 ```
 
-That's it. `.infon/schema.json` and `.infon/kb.ddb` are created in your project root (auto-ignored by `.gitignore`). A `.mcp.json` is written so Claude Code picks up the three tools automatically.
+That's it. Your agent now has structured memory.
+
+---
+
+## Quick Start
+
+### 1. Index Your Repository
+
+```bash
+# Run infon init in your project directory
+cd my-project
+uvx infon init
+```
+
+This:
+
+- Auto-discovers an anchor schema from your codebase
+- Extracts AST infons from Python/TypeScript files
+- Creates `.infon/kb.ddb` (DuckDB knowledge base)
+- Writes `.infon/schema.json` (anchor schema)
+- Creates `.mcp.json` (Claude Code integration)
+
+### 2. Search the Knowledge Base
+
+```bash
+uvx infon search "what calls DatabasePool"
+```
+
+Output:
+
+```
+Found 3 results:
+
+Subject                        Predicate            Object
+--------------------------------------------------------------------------------
+process_data                   calls                DatabasePool
+update_user                    calls                DatabasePool
+migrate_schema                 calls                DatabasePool
+```
+
+### 3. Start the MCP Server
+
+```bash
+uvx infon serve
+```
+
+Restart Claude Desktop, and Claude will automatically detect and connect to the infon MCP server.
+
+Now you can ask Claude:
+
+```
+Claude, search my codebase for functions that call process_data
+```
+
+Claude will use the `query_ast` or `search` tool and return grounded results with file paths and line numbers.
+
+---
 
 ## Features
 
-- **Infon data model** — typed triples `<<predicate, subject, object; polarity>>` grounded to source file + line number, drawn from situation semantics (Barwise & Perry 1983).
-- **Multi-language AST extraction** — Python and TypeScript/JavaScript via tree-sitter. Extracts calls, imports, inheritance, mutations, definitions, returns, raises, and decorators into grounded infons.
-- **SPLADE-based text extraction** — Converts docstrings, comments, and natural-language observations into infons via change-of-basis projection from BERT token space to anchor concept space. Zero training, bundled model.
-- **Schema auto-discovery** — `infon init` runs spectral clustering on a co-activation matrix to derive anchors from your codebase. No hand-authored schema required.
-- **Consolidation** — Duplicate merging, NEXT-edge temporal chains, constraint aggregation, and importance decay.
-- **Persona-aware retrieval** — Persona-specific valence scoring (`investor`, `engineer`, `executive`, `regulator`, `analyst`) shifts ranking based on who's asking.
-- **MCP server** — stdio-based FastMCP server exposing `search`, `store_observation`, and `query_ast` tools, plus `infon://stats`, `infon://schema`, `infon://recent` resources. Connects to Claude Code via `.mcp.json`.
-- **DuckDB storage** — Embedded, columnar, zero-configuration. Analytical queries 5-50x faster than row-based alternatives.
-- **Three install paths** — `uvx infon` (zero-install), `pip install infon`, or project-local venv.
+### Infon Data Model
+
+Infons are typed, grounded triples following situation semantics (Barwise & Perry 1983):
+
+```
+<<predicate, subject, object; polarity>>
+```
+
+Example:
+
+```python
+<<calls, "process_data", "validate_input"; +>>
+  grounding: src/services/data.py:15
+  confidence: 1.0
+  reinforcement_count: 1
+```
+
+Each infon is **grounded** to a source location:
+
+- **AST grounding**: file path, line number, node type
+- **Text grounding**: document ID, sentence ID, character span, sentence text
+
+### Multi-Language AST Extraction
+
+Supports Python (`.py`) and TypeScript/JavaScript (`.ts`, `.tsx`, `.js`, `.jsx`) via tree-sitter.
+
+Extracted relations:
+
+- `calls` — function/method calls
+- `imports` — module/package imports
+- `inherits` — class inheritance
+- `defines` — function/class definitions
+- `returns` — return statements
+- `raises` — exception raising
+- `decorates` — decorator applications
+- `mutates` — attribute mutations (e.g., `self.x = y`)
+
+### SPLADE-Based Text Extraction
+
+Natural language text (docstrings, comments, agent observations) is converted into infons via **change-of-basis projection** from BERT token space to anchor concept space.
+
+- **Zero training** — uses pre-trained SPLADE model (bundled with transformers)
+- **Sparse activations** — activates ~100-300 tokens per text unit
+- **Semantic expansion** — "validate" activates "check", "verify", etc.
+
+### Schema Auto-Discovery
+
+`infon init` automatically discovers anchors from your codebase using **spectral clustering** on a SPLADE co-activation matrix.
+
+No manual schema required. The algorithm:
+
+1. Encodes code with SPLADE
+2. Builds co-activation matrix (NPMI)
+3. Runs spectral clustering (bottom-K eigenvectors)
+4. Labels clusters as entities, relations, properties, constraints, or events
+
+For code mode, the eight built-in code relation anchors (`calls`, `imports`, etc.) are always included.
+
+### Consolidation
+
+Duplicate infons are **consolidated** to maintain coherence:
+
+- **Duplicate merging** — increment `reinforcement_count`
+- **NEXT-edge temporal chains** — link event sequences
+- **Constraint aggregation** — merge min/max/count/sum constraints
+- **Importance decay** — older facts become less relevant unless reinforced
+
+### Persona-Aware Retrieval
+
+Retrieval can be adjusted based on **persona**:
+
+- `investor` — prioritizes revenue, growth, risk
+- `engineer` — prioritizes performance, reliability, maintainability
+- `executive` — prioritizes strategy, alignment, outcomes
+- `regulator` — prioritizes compliance, security, audit
+- `analyst` — prioritizes metrics, trends, anomalies
+
+The same query returns different results depending on who's asking.
+
+### MCP Server
+
+stdio-based FastMCP server exposing:
+
+**Three Tools**:
+
+1. `search(query, limit)` — semantic search over the knowledge base
+2. `store_observation(text, source)` — store agent observations as infons
+3. `query_ast(symbol, relation, limit)` — query AST-derived code relationships
+
+**Three Resources**:
+
+1. `infon://stats` — knowledge base statistics
+2. `infon://schema` — active anchor schema
+3. `infon://recent` — 20 most recent infons
+
+Connects to Claude Desktop via `.mcp.json` (written by `infon init`).
+
+### DuckDB Storage
+
+Embedded, columnar, zero-configuration. Analytical queries 5-50x faster than row-based alternatives.
+
+- WAL mode for write-ahead logging
+- Concurrent reader support
+- Automatic checkpointing
+- Native JSON support
+
+---
 
 ## Installation
 
-| Path | Command | Best for |
-|---|---|---|
-| `uvx` (zero-install) | `uvx infon init` | Quick start, Claude Code |
-| `pip` | `pip install infon` | Teams with existing Python tooling |
-| Project venv | `pip install infon` in venv | CI, isolation |
+### Option 1: uvx (Zero-Install, Recommended)
 
-## CLI commands
+Run `infon` without installation using `uvx`:
+
+```bash
+uvx infon init
+uvx infon search "query"
+uvx infon serve
+```
+
+First run downloads dependencies (cached for subsequent runs).
+
+### Option 2: pip (System or Virtual Environment)
+
+Install globally:
+
+```bash
+pip install infon
+```
+
+Or in a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install infon
+```
+
+### Option 3: Install from Source
+
+For development or customization:
+
+```bash
+git clone https://github.com/edenduthie/infon.git
+cd infon
+pip install -e ".[dev]"
+```
+
+---
+
+## CLI Commands
 
 | Command | Description |
-|---|---|
-| `infon init` | Auto-discover schema, ingest repo, configure MCP |
-| `infon ingest [PATH]` | Ingest a directory into the knowledge base |
-| `infon search QUERY` | Query the knowledge base |
+|---------|-------------|
+| `infon init` | Initialize knowledge base (auto-discover schema, ingest repo, configure MCP) |
+| `infon search QUERY` | Search the knowledge base |
 | `infon stats` | Print knowledge base statistics |
+| `infon ingest [PATH]` | Ingest a directory into the knowledge base |
 | `infon serve` | Start the MCP stdio server |
 
-## Project structure
+See [CLI Reference](https://edenduthie.github.io/infon/cli/) for details.
+
+---
+
+## Use Cases
+
+### 1. Code Structure Queries
+
+Query code relationships across your repository:
+
+```bash
+infon search "what calls DatabasePool"
+infon search "which functions raise ValueError"
+```
+
+### 2. Agent Memory
+
+Store observations mid-session so the agent remembers decisions:
+
+```python
+from infon.store import InfonStore
+from infon.infon import Infon
+from infon.grounding import Grounding, TextGrounding
+
+store = InfonStore(".infon/kb.ddb")
+observation = Infon(
+    subject="UserService",
+    predicate="needs_refactoring",
+    object="circular_dependency",
+    polarity=True,
+    grounding=Grounding(root=TextGrounding(
+        grounding_type="text",
+        doc_id="session-123",
+        sent_id=0,
+        char_start=0,
+        char_end=50,
+        sentence_text="UserService has circular dependency with AuthService"
+    )),
+    confidence=0.9
+)
+store.insert([observation])
+```
+
+### 3. Domain Vocabulary Discovery
+
+Automatically discover the concepts that define your codebase:
+
+```bash
+infon init
+cat .infon/schema.json
+```
+
+The schema lists anchors derived from your codebase, ranked by frequency and semantic coherence.
+
+---
+
+## Documentation
+
+- **[Home](https://edenduthie.github.io/infon/)** — overview and quick start
+- **[Installation](https://edenduthie.github.io/infon/installation/)** — three install paths
+- **[Concepts](https://edenduthie.github.io/infon/concepts/)** — infons, anchors, consolidation
+- **[CLI Reference](https://edenduthie.github.io/infon/cli/)** — all five commands
+- **[MCP Server](https://edenduthie.github.io/infon/mcp/)** — integrate with Claude Code
+- **[AST Extraction](https://edenduthie.github.io/infon/ast-extraction/)** — supported languages and mapping table
+- **[Schema Discovery](https://edenduthie.github.io/infon/schema-discovery/)** — algorithm and tuning
+- **[API Reference](https://edenduthie.github.io/infon/api-reference/)** — Python API
+- **[Contributing](https://edenduthie.github.io/infon/contributing/)** — development setup and PR process
+
+---
+
+## Project Structure
 
 ```
 .infon/
@@ -71,6 +348,63 @@ That's it. `.infon/schema.json` and `.infon/kb.ddb` are created in your project 
 .mcp.json             # Claude Code MCP config
 ```
 
+---
+
+## Why "infon"?
+
+The term **infon** comes from situation semantics (Barwise & Perry 1983), where an infon is a discrete unit of information about a situation. In `infon`, each triple is a grounded assertion about your codebase — a fact that can be traced back to its source.
+
+---
+
 ## License
 
 Apache 2.0
+
+---
+
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](https://edenduthie.github.io/infon/contributing/) for development setup and guidelines.
+
+**Quick start**:
+
+```bash
+git clone https://github.com/edenduthie/infon.git
+cd infon
+pip install -e ".[dev]"
+pytest -v
+```
+
+All development follows strict TDD with **no mocks** (real dependencies only).
+
+---
+
+## Questions?
+
+- **Issues**: [GitHub Issues](https://github.com/edenduthie/infon/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/edenduthie/infon/discussions)
+- **Email**: eduthie@gmail.com
+
+---
+
+## Roadmap
+
+- ✅ Phase 1-11: Core implementation (infon model, storage, extraction, retrieval, MCP server)
+- ✅ Phase 12: Complete documentation site
+- 🚧 Phase 13: Production readiness (packaging, CI/CD, publishing to PyPI)
+- 🔮 Future: Rust, Go, Java extractors; graph visualization; distributed deployment
+
+---
+
+## Acknowledgments
+
+- **Situation Semantics** — Barwise & Perry (1983) for the infon data model
+- **SPLADE** — Formal et al. (2021) for sparse lexical expansion
+- **Spectral Clustering** — Ng, Jordan, Weiss (2001) for anchor discovery
+- **Tree-sitter** — Max Brunsfeld for language-agnostic AST parsing
+- **DuckDB** — Mark Raasveldt & Hannes Mühleisen for embedded analytics
+- **FastMCP** — Anthropic for the MCP protocol and FastMCP framework
+
+---
+
+**Give your AI agents the structured memory they deserve. Start with `uvx infon init`.**
