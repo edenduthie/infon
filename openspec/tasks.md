@@ -79,30 +79,30 @@
 - [x] 10.1b Implement `src/infon/cli.py` with Click group and all five subcommands; implement `src/infon/mcp_config.py` for `.mcp.json` writer (detects uvx vs venv install path and writes appropriate command); add missing-store guard to all commands. **Verify test passes (green).**
 - [x] **PHASE-BOUNDARY REVIEW Phase 10:** Run `pytest -v`, verify spec compliance, confirm CLI drives full init → ingest → search → serve flow end-to-end, update openspec plan and beads tasks.
 
-## Phase 11 — GitHub Actions CI
+## Phase 11 — GitHub Actions CI ✅
 
-- [ ] 11.1 Write `.github/workflows/ci.yml` — trigger on push and pull request to `main`; steps: checkout, setup Python 3.11, install with `pip install -e ".[dev]"`, run `pytest tests/ -v`, run `ruff check src/`, run `ruff format --check src/`, run `mypy src/infon/`
-- [ ] 11.2 Write `.github/workflows/publish.yml` — trigger on GitHub Release (`v*.*.*` tag); steps: checkout, setup Python, build wheel + sdist with `python -m build`, publish to PyPI using OIDC trusted publishing
-- [ ] 11.3 Configure OIDC trusted publisher on PyPI project page (document steps in `CONTRIBUTING.md`)
-- [ ] 11.4 Write `ruff.toml` (or inline `[tool.ruff]` in `pyproject.toml`) with line length 100, select `E,F,I,UP`, ignore `E501`
-- [ ] 11.5 Write `mypy.ini` (or inline `[tool.mypy]`) with `strict = true`, `ignore_missing_imports = true`
-- [ ] **PHASE-BOUNDARY REVIEW Phase 11:** Run `pytest -v`, `ruff check src/`, `ruff format --check src/`, `mypy src/infon/`, verify CI workflow syntax (run `actionlint`), verify spec compliance, update openspec plan and beads tasks.
+- [x] 11.1 Write `.github/workflows/ci.yml` — trigger on push and pull request to `main`; steps: checkout, setup Python 3.11, install with `pip install -e ".[dev]"`, run `pytest tests/ -v`, run `ruff check src/`, run `ruff format --check src/`, run `mypy src/infon/`
+- [x] 11.2 Write `.github/workflows/publish.yml` — trigger on GitHub Release (`v*.*.*` tag); steps: checkout, setup Python, build wheel + sdist with `python -m build`, publish to PyPI using OIDC trusted publishing
+- [x] 11.3 Configure OIDC trusted publisher on PyPI project page (document steps in `CONTRIBUTING.md`)
+- [x] 11.4 Write `ruff.toml` (or inline `[tool.ruff]` in `pyproject.toml`) with line length 100, select `E,F,I,UP`, ignore `E501`
+- [x] 11.5 Write `mypy.ini` (or inline `[tool.mypy]`) with `strict = true`, `ignore_missing_imports = true`
+- [x] **PHASE-BOUNDARY REVIEW Phase 11:** Run `pytest -v`, `ruff check src/`, `ruff format --check src/`, `mypy src/infon/`, verify CI workflow syntax (run `actionlint`), verify spec compliance, update openspec plan and beads tasks.
 
-## Phase 12 — Docs Site
+## Phase 12 — Docs Site ✅
 
-- [ ] 12.1 Write `mkdocs.yml` with Material theme, project name `infon`, repo URL, navigation structure matching all required pages; enable search plugin and code block extensions
-- [ ] 12.2 Write `.github/workflows/docs.yml` — trigger on push to `main`; build and deploy docs site
-- [ ] 12.3 Write `docs/index.md` — overview, quick start, conceptual summary
-- [ ] 12.4 Write `docs/installation.md` — three install paths with commands
-- [ ] 12.5 Write `docs/concepts.md` — infons, anchors, change of basis, consolidation
-- [ ] 12.6 Write `docs/cli.md` — all five commands with flags and examples
-- [ ] 12.7 Write `docs/mcp.md` — MCP server setup, tools, resources, CLAUDE.md snippet
-- [ ] 12.8 Write `docs/ast-extraction.md` — supported languages, mapping table, how to add new language
-- [ ] 12.9 Write `docs/schema-discovery.md` — algorithm in plain English, schema output, manual override
-- [ ] 12.10 Write `docs/api-reference.md` — Python API with type signatures and examples
-- [ ] 12.11 Write `docs/contributing.md` — development setup, testing, adding extractors, PR process
-- [ ] 12.12 Write `README.md` — tagline, quick start, feature list, install options, badges
-- [ ] **PHASE-BOUNDARY REVIEW Phase 12:** Run `pytest -v`, `mkdocs build --strict`, verify all pages render with zero warnings, verify docs workflow syntax, verify spec compliance, update openspec plan and beads tasks.
+- [x] 12.1 Write `mkdocs.yml` with Material theme, project name `infon`, repo URL, navigation structure matching all required pages; enable search plugin and code block extensions
+- [x] 12.2 Write `.github/workflows/docs.yml` — trigger on push to `main`; build and deploy docs site
+- [x] 12.3 Write `docs/index.md` — overview, quick start, conceptual summary
+- [x] 12.4 Write `docs/installation.md` — three install paths with commands
+- [x] 12.5 Write `docs/concepts.md` — infons, anchors, change of basis, consolidation
+- [x] 12.6 Write `docs/cli.md` — all five commands with flags and examples
+- [x] 12.7 Write `docs/mcp.md` — MCP server setup, tools, resources, CLAUDE.md snippet
+- [x] 12.8 Write `docs/ast-extraction.md` — supported languages, mapping table, how to add new language
+- [x] 12.9 Write `docs/schema-discovery.md` — algorithm in plain English, schema output, manual override
+- [x] 12.10 Write `docs/api-reference.md` — Python API with type signatures and examples
+- [x] 12.11 Write `docs/contributing.md` — development setup, testing, adding extractors, PR process
+- [x] 12.12 Write `README.md` — tagline, quick start, feature list, install options, badges
+- [x] **PHASE-BOUNDARY REVIEW Phase 12:** Run `pytest -v`, `mkdocs build --strict`, verify all pages render with zero warnings, verify docs workflow syntax, verify spec compliance, update openspec plan and beads tasks.
 
 ## Phase 13 — Packaging and Release Preparation
 
