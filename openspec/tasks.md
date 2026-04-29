@@ -49,35 +49,35 @@
 - [x] 5.2b Implement `BaseASTExtractor` abstract class, `PythonASTExtractor`, `TypeScriptASTExtractor`, `ExtractorRegistry`, and `ingest_repo()` in their respective modules. **Verify test passes (green).**
 - [x] **PHASE-BOUNDARY REVIEW Phase 5:** Run `pytest -v`, verify spec compliance, confirm repo ingestion produces infons with correct grounding through store end-to-end, update openspec plan and beads tasks.
 
-## Phase 6 — Schema Discovery
+## Phase 6 — Schema Discovery ✅
 
-- [ ] 6.1 Write `tests/test_discovery.py` integration test first: run `SchemaDiscovery.discover()` on `tests/fixtures/` in code mode, assert schema contains eight built-in relation anchors; verify JSON round-trip; verify small corpus warning. **Verify test fails (red).**
-- [ ] 6.1b Implement `_build_coactivation_matrix()`, `_filter_frequent_tokens()`, `_spectral_cluster()`, `_infer_anchor_type()`, and `SchemaDiscovery.discover()` in `src/infon/discovery.py`. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 6:** Run `pytest -v`, verify spec compliance, confirm schema discovery produces valid schema that integrates with encoder and store, update openspec plan and beads tasks.
+- [x] 6.1 Write `tests/test_discovery.py` integration test first: run `SchemaDiscovery.discover()` on `tests/fixtures/` in code mode, assert schema contains eight built-in relation anchors; verify JSON round-trip; verify small corpus warning. **Verify test fails (red).**
+- [x] 6.1b Implement `_build_coactivation_matrix()`, `_filter_frequent_tokens()`, `_spectral_cluster()`, `_infer_anchor_type()`, and `SchemaDiscovery.discover()` in `src/infon/discovery.py`. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 6:** Run `pytest -v`, verify spec compliance, confirm schema discovery produces valid schema that integrates with encoder and store, update openspec plan and beads tasks.
 
-## Phase 7 — Consolidation
+## Phase 7 — Consolidation ✅
 
-- [ ] 7.1 Write `tests/test_consolidate.py` integration test first: populate real store with chronologically ordered infons, call `consolidate()`, assert NEXT edges; call `consolidate()` again for idempotency; verify constraint aggregation; backdate timestamps and verify importance decay. **Verify test fails (red).**
-- [ ] 7.1b Implement `_build_next_edges()`, `_aggregate_constraints()`, `_apply_importance_decay()`, and `consolidate()` in `src/infon/consolidate.py`. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 7:** Run `pytest -v`, verify spec compliance, confirm ingested infons are enriched with NEXT edges and constraints end-to-end, update openspec plan and beads tasks.
+- [x] 7.1 Write `tests/test_consolidate.py` integration test first: populate real store with chronologically ordered infons, call `consolidate()`, assert NEXT edges; call `consolidate()` again for idempotency; verify constraint aggregation; backdate timestamps and verify importance decay. **Verify test fails (red).**
+- [x] 7.1b Implement `_build_next_edges()`, `_aggregate_constraints()`, `_apply_importance_decay()`, and `consolidate()` in `src/infon/consolidate.py`. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 7:** Run `pytest -v`, verify spec compliance, confirm ingested infons are enriched with NEXT edges and constraints end-to-end, update openspec plan and beads tasks.
 
-## Phase 8 — Query Engine / Retrieval
+## Phase 8 — Query Engine ✅ / Retrieval
 
-- [ ] 8.1 Write `tests/test_retrieve.py` integration test first: populate real store, call `retrieve()` with real query, assert sorted by score descending; verify anchor expansion; verify persona valence shifts ranking; verify empty store returns empty list. **Verify test fails (red).**
-- [ ] 8.1b Define persona valence tables in `src/infon/personas.py`; implement `ScoredInfon` dataclass; implement `retrieve()` in `src/infon/retrieve.py` with all pipeline stages. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 8:** Run `pytest -v`, verify spec compliance, confirm query returns ranked results with context from ingested and consolidated data end-to-end, update openspec plan and beads tasks.
+- [x] 8.1 Write `tests/test_retrieve.py` integration test first: populate real store, call `retrieve()` with real query, assert sorted by score descending; verify anchor expansion; verify persona valence shifts ranking; verify empty store returns empty list. **Verify test fails (red).**
+- [x] 8.1b Define persona valence tables in `src/infon/personas.py`; implement `ScoredInfon` dataclass; implement `retrieve()` in `src/infon/retrieve.py` with all pipeline stages. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 8:** Run `pytest -v`, verify spec compliance, confirm query returns ranked results with context from ingested and consolidated data end-to-end, update openspec plan and beads tasks.
 
-## Phase 9 — MCP Server
+## Phase 9 — MCP Server ✅
 
-- [ ] 9.1 Write `tests/test_mcp.py` integration test first: spawn real `run_server()` subprocess with pre-populated store, open JSON-RPC session, send `tools/list`, call `search`/`store_observation`/`query_ast` via JSON-RPC, verify tool error handling, fetch all three resources. **Verify test fails (red).**
-- [ ] 9.1b Implement `src/infon/mcp/server.py` using FastMCP with all three tools and three resources; implement `run_server()`; register tools and resources; handle errors as JSON dicts. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 9:** Run `pytest -v`, verify spec compliance, confirm MCP server exposes tools and resources and drives the full pipeline end-to-end, update openspec plan and beads tasks.
+- [x] 9.1 Write `tests/test_mcp.py` integration test first: spawn real `run_server()` subprocess with pre-populated store, open JSON-RPC session, send `tools/list`, call `search`/`store_observation`/`query_ast` via JSON-RPC, verify tool error handling, fetch all three resources. **Verify test fails (red).**
+- [x] 9.1b Implement `src/infon/mcp/server.py` using FastMCP with all three tools and three resources; implement `run_server()`; register tools and resources; handle errors as JSON dicts. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 9:** Run `pytest -v`, verify spec compliance, confirm MCP server exposes tools and resources and drives the full pipeline end-to-end, update openspec plan and beads tasks.
 
-## Phase 10 — CLI
+## Phase 10 — CLI ✅
 
-- [ ] 10.1 Write `tests/test_cli.py` integration test first using Click's `CliRunner`: `infon init` end-to-end on `tests/fixtures/`, `infon search` returns results, `infon stats` prints output, missing store exits 1, `infon ingest --incremental` in real git repo. **Verify test fails (red).**
-- [ ] 10.1b Implement `src/infon/cli.py` with Click group and all five subcommands; implement `src/infon/mcp_config.py` for `.mcp.json` writer (detects uvx vs venv install path and writes appropriate command); add missing-store guard to all commands. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 10:** Run `pytest -v`, verify spec compliance, confirm CLI drives full init → ingest → search → serve flow end-to-end, update openspec plan and beads tasks.
+- [x] 10.1 Write `tests/test_cli.py` integration test first using Click's `CliRunner`: `infon init` end-to-end on `tests/fixtures/`, `infon search` returns results, `infon stats` prints output, missing store exits 1, `infon ingest --incremental` in real git repo. **Verify test fails (red).**
+- [x] 10.1b Implement `src/infon/cli.py` with Click group and all five subcommands; implement `src/infon/mcp_config.py` for `.mcp.json` writer (detects uvx vs venv install path and writes appropriate command); add missing-store guard to all commands. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 10:** Run `pytest -v`, verify spec compliance, confirm CLI drives full init → ingest → search → serve flow end-to-end, update openspec plan and beads tasks.
 
 ## Phase 11 — GitHub Actions CI
 
