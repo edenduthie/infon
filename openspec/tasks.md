@@ -36,11 +36,11 @@
 - [x] 3.2b Implement `SpladeEncoder` in `src/infon/encoder.py` — lazy-init from bundled path; implement `encode_sparse()`; implement `AnchorProjector.project()`; implement module-level `encode()`. **Verify test passes (green).**
 - [x] **PHASE-BOUNDARY REVIEW Phase 3:** Run `pytest -v`, verify spec compliance, confirm text encodes to anchor space end-to-end with real bundled model, update openspec plan and beads tasks.
 
-## Phase 4 — Text Extraction Pipeline
+## Phase 4 — Text Extraction Pipeline ✅
 
-- [ ] 4.1 Write `tests/test_extract.py` integration test first: call `extract_text()` with affirmative sentence, assert `polarity=True`; with negated sentence, assert `polarity=False`; with multi-sentence input, assert multiple infons; with empty text, assert empty list; with no activated anchors, assert empty list. **Verify test fails (red).**
-- [ ] 4.1b Implement sentence splitter in `src/infon/extract.py`, then `_form_triples()`, `_find_spans()`, `_detect_negation()`, `_classify_tense()`, `_score_importance()`, and `extract_text()` assembling all stages. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 4:** Run `pytest -v`, verify spec compliance, confirm text encodes to infons and persists through store end-to-end, update openspec plan and beads tasks.
+- [x] 4.1 Write `tests/test_extract.py` integration test first: call `extract_text()` with affirmative sentence, assert `polarity=True`; with negated sentence, assert `polarity=False`; with multi-sentence input, assert multiple infons; with empty text, assert empty list; with no activated anchors, assert empty list. **Verify test fails (red).**
+- [x] 4.1b Implement sentence splitter in `src/infon/extract.py`, then `_form_triples()`, `_find_spans()`, `_detect_negation()`, `_classify_tense()`, `_score_importance()`, and `extract_text()` assembling all stages. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 4:** Run `pytest -v`, verify spec compliance, confirm text encodes to infons and persists through store end-to-end, update openspec plan and beads tasks.
 
 ## Phase 5 — AST Extraction Pipeline
 
