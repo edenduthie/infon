@@ -42,12 +42,12 @@
 - [x] 4.1b Implement sentence splitter in `src/infon/extract.py`, then `_form_triples()`, `_find_spans()`, `_detect_negation()`, `_classify_tense()`, `_score_importance()`, and `extract_text()` assembling all stages. **Verify test passes (green).**
 - [x] **PHASE-BOUNDARY REVIEW Phase 4:** Run `pytest -v`, verify spec compliance, confirm text encodes to infons and persists through store end-to-end, update openspec plan and beads tasks.
 
-## Phase 5 — AST Extraction Pipeline
+## Phase 5 — AST Extraction Pipeline ✅
 
-- [ ] 5.1 Create `tests/fixtures/` with a synthetic Python project (`main.py`, `auth.py`, `db.py`, `models.py`, ~200 lines total) and a synthetic TypeScript project (`app.ts`, `auth.ts`, `db.ts`, ~150 lines total) covering all eight relation types
-- [ ] 5.2 Write `tests/test_ast.py` integration test first: call `ingest_repo()` on `tests/fixtures/` with real store and real schema, assert >50 infons produced; verify Python `calls` infons with correct grounding; verify TypeScript `imports` infons; verify `inherits` infons; verify unknown extension skipped. **Verify test fails (red).**
-- [ ] 5.2b Implement `BaseASTExtractor` abstract class, `PythonASTExtractor`, `TypeScriptASTExtractor`, `ExtractorRegistry`, and `ingest_repo()` in their respective modules. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 5:** Run `pytest -v`, verify spec compliance, confirm repo ingestion produces infons with correct grounding through store end-to-end, update openspec plan and beads tasks.
+- [x] 5.1 Create `tests/fixtures/` with a synthetic Python project (`main.py`, `auth.py`, `db.py`, `models.py`, ~200 lines total) and a synthetic TypeScript project (`app.ts`, `auth.ts`, `db.ts`, ~150 lines total) covering all eight relation types
+- [x] 5.2 Write `tests/test_ast.py` integration test first: call `ingest_repo()` on `tests/fixtures/` with real store and real schema, assert >50 infons produced; verify Python `calls` infons with correct grounding; verify TypeScript `imports` infons; verify `inherits` infons; verify unknown extension skipped. **Verify test fails (red).**
+- [x] 5.2b Implement `BaseASTExtractor` abstract class, `PythonASTExtractor`, `TypeScriptASTExtractor`, `ExtractorRegistry`, and `ingest_repo()` in their respective modules. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 5:** Run `pytest -v`, verify spec compliance, confirm repo ingestion produces infons with correct grounding through store end-to-end, update openspec plan and beads tasks.
 
 ## Phase 6 — Schema Discovery
 
