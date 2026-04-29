@@ -29,12 +29,12 @@
 - [x] 2.1b Implement `InfonStore` in `src/infon/store.py`; create all four tables on first open (`infons`, `edges`, `constraints`, `documents`) with all indexes; use DuckDB WAL mode; detect concurrent writer and raise `ConcurrentWriteError`; implement `upsert()`, `get()`, `query()`, `add_edge()`, `get_edges()`, `upsert_constraint()`, `upsert_document()`, `stats()`, `close()` with context manager. **Verify test passes (green).**
 - [x] **PHASE-BOUNDARY REVIEW Phase 2:** Run `pytest -v`, verify spec compliance, confirm data model persists and queries end-to-end through DuckDB, update openspec plan and beads tasks.
 
-## Phase 3 — SPLADE Encoder and Anchor Projection
+## Phase 3 — SPLADE Encoder and Anchor Projection ✅
 
-- [ ] 3.1 Download `splade-cocondenser-selfdistil` (splade-tiny, 4.4M params) weights and bundle them inside the package at `src/infon/models/splade-tiny/` — include `config.json`, `tokenizer.json`, `tokenizer_config.json`, `special_tokens_map.json`, `pytorch_model.bin` (or `model.safetensors`)
-- [ ] 3.2 Write `tests/test_encoder.py` integration test first: set `TRANSFORMERS_OFFLINE=1`, call `encode_sparse()` with real text, assert non-empty sparse dict; call `project()` with real `AnchorSchema`, assert anchor keys match; call `encode()` and assert output keys are subset of schema. **Verify test fails (red).**
-- [ ] 3.2b Implement `SpladeEncoder` in `src/infon/encoder.py` — lazy-init from bundled path; implement `encode_sparse()`; implement `AnchorProjector.project()`; implement module-level `encode()`. **Verify test passes (green).**
-- [ ] **PHASE-BOUNDARY REVIEW Phase 3:** Run `pytest -v`, verify spec compliance, confirm text encodes to anchor space end-to-end with real bundled model, update openspec plan and beads tasks.
+- [x] 3.1 Download `splade-cocondenser-selfdistil` (splade-tiny, 4.4M params) weights and bundle them inside the package at `src/infon/models/splade-tiny/` — include `config.json`, `tokenizer.json`, `tokenizer_config.json`, `special_tokens_map.json`, `pytorch_model.bin` (or `model.safetensors`)
+- [x] 3.2 Write `tests/test_encoder.py` integration test first: set `TRANSFORMERS_OFFLINE=1`, call `encode_sparse()` with real text, assert non-empty sparse dict; call `project()` with real `AnchorSchema`, assert anchor keys match; call `encode()` and assert output keys are subset of schema. **Verify test fails (red).**
+- [x] 3.2b Implement `SpladeEncoder` in `src/infon/encoder.py` — lazy-init from bundled path; implement `encode_sparse()`; implement `AnchorProjector.project()`; implement module-level `encode()`. **Verify test passes (green).**
+- [x] **PHASE-BOUNDARY REVIEW Phase 3:** Run `pytest -v`, verify spec compliance, confirm text encodes to anchor space end-to-end with real bundled model, update openspec plan and beads tasks.
 
 ## Phase 4 — Text Extraction Pipeline
 
