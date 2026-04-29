@@ -54,3 +54,14 @@ Homepage = "https://github.com/ontological/infon"
 Documentation = "https://infon.readthedocs.io"
 Repository = "https://github.com/ontological/infon"
 Issues = "https://github.com/ontological/infon/issues"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true

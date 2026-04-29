@@ -13,13 +13,13 @@ No mocks, no stubs - real DuckDB database in temp directory with real Infon inst
 
 import tempfile
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
 
-from infon.infon import Infon, ImportanceScore
 from infon.grounding import ASTGrounding, Grounding, TextGrounding
+from infon.infon import ImportanceScore, Infon
 
 
 def test_store_creates_all_tables_with_indexes():
@@ -115,7 +115,7 @@ def test_upsert_and_reinforcement_merge():
                 sentence_text="UserService calls the database pool."
             )),
             confidence=0.8,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             importance=ImportanceScore(
                 activation=0.8,
                 coherence=0.7,
@@ -146,7 +146,7 @@ def test_upsert_and_reinforcement_merge():
                 sentence_text="The user service calls database pool."
             )),
             confidence=0.9,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             importance=ImportanceScore(
                 activation=0.8,
                 coherence=0.7,
@@ -198,7 +198,7 @@ def test_get_by_id():
                 node_type="FunctionCall"
             )),
             confidence=0.95,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             importance=ImportanceScore(
                 activation=0.8,
                 coherence=0.7,
@@ -250,7 +250,7 @@ def test_query_with_filters():
                     node_type="FunctionCall"
                 )),
                 confidence=0.9,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 importance=ImportanceScore(
                     activation=0.8, coherence=0.7, specificity=0.6,
                     novelty=0.5, reinforcement=0.4
@@ -270,7 +270,7 @@ def test_query_with_filters():
                     node_type="FunctionCall"
                 )),
                 confidence=0.7,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 importance=ImportanceScore(
                     activation=0.8, coherence=0.7, specificity=0.6,
                     novelty=0.5, reinforcement=0.4
@@ -290,7 +290,7 @@ def test_query_with_filters():
                     node_type="FunctionCall"
                 )),
                 confidence=0.85,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 importance=ImportanceScore(
                     activation=0.8, coherence=0.7, specificity=0.6,
                     novelty=0.5, reinforcement=0.4
@@ -357,7 +357,7 @@ def test_add_edge_and_get_edges():
                 node_type="FunctionCall"
             )),
             confidence=0.9,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             importance=ImportanceScore(
                 activation=0.8, coherence=0.7, specificity=0.6,
                 novelty=0.5, reinforcement=0.4
@@ -379,7 +379,7 @@ def test_add_edge_and_get_edges():
                 node_type="FunctionCall"
             )),
             confidence=0.85,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             importance=ImportanceScore(
                 activation=0.8, coherence=0.7, specificity=0.6,
                 novelty=0.5, reinforcement=0.4
@@ -540,7 +540,7 @@ def test_stats():
                     node_type="FunctionCall"
                 )),
                 confidence=0.9,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 importance=ImportanceScore(
                     activation=0.8, coherence=0.7, specificity=0.6,
                     novelty=0.5, reinforcement=0.4
@@ -578,7 +578,7 @@ def test_stats():
 
 def test_concurrent_write_detection():
     """Test that opening a second writer raises ConcurrentWriteError."""
-    from infon.store import InfonStore, ConcurrentWriteError
+    from infon.store import ConcurrentWriteError, InfonStore
     
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = Path(tmpdir) / "test.ddb"
@@ -620,7 +620,7 @@ def test_context_manager():
                     node_type="FunctionCall"
                 )),
                 confidence=0.9,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 importance=ImportanceScore(
                     activation=0.8, coherence=0.7, specificity=0.6,
                     novelty=0.5, reinforcement=0.4

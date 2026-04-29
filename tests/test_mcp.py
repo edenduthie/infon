@@ -14,15 +14,13 @@ No mocks — real subprocess, real store, real JSON-RPC.
 
 import json
 import subprocess
-import tempfile
 import uuid
-from datetime import datetime, timezone
-from pathlib import Path
+from datetime import UTC, datetime
 
 import pytest
 
 from infon.grounding import ASTGrounding, TextGrounding
-from infon.infon import Infon, ImportanceScore
+from infon.infon import ImportanceScore, Infon
 from infon.schema import Anchor, AnchorSchema
 from infon.store import InfonStore
 
@@ -103,7 +101,7 @@ def populated_store(sample_schema, tmp_path):
             node_type="call_expression",
         ),
         confidence=0.95,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.8,
             coherence=0.7,
@@ -127,7 +125,7 @@ def populated_store(sample_schema, tmp_path):
             node_type="import_statement",
         ),
         confidence=0.99,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.9,
             coherence=0.8,
@@ -153,7 +151,7 @@ def populated_store(sample_schema, tmp_path):
             sentence_text="TokenValidator no longer calls DatabasePool directly.",
         ),
         confidence=0.85,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.7,
             coherence=0.6,

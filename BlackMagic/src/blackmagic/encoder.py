@@ -13,14 +13,13 @@ variants (XLM-R / SentencePiece) live in the `cognition` package.
 
 from __future__ import annotations
 
-import json
 import re
 import warnings
 from pathlib import Path
 
 import numpy as np
 import torch
-from transformers import AutoTokenizer, AutoModelForMaskedLM
+from transformers import AutoModelForMaskedLM, AutoTokenizer
 
 # Bundled splade-tiny model (17MB, shipped with the package)
 _BUNDLED_MODEL = str(Path(__file__).parent / "model")

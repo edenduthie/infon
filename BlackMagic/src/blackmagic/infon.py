@@ -9,8 +9,7 @@ See INFON_SPEC.md for the full specification.
 
 from __future__ import annotations
 
-import json
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 
 
 @dataclass
@@ -210,7 +209,7 @@ class ImaginationNode:
     node_id: str = ""
     anchor_path: list = field(default_factory=list)       # anchors touched
     infons: list[Infon] = field(default_factory=list)    # GA population members
-    parent: "ImaginationNode | None" = None
+    parent: ImaginationNode | None = None
     children: list = field(default_factory=list)         # list[ImaginationNode]
     visit_count: int = 0                                  # generation depth
     belief_mass: object | None = None                     # MassFunction — DS-shaped

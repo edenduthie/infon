@@ -3,8 +3,6 @@
 This module demonstrates function calls, state mutations, and return values.
 """
 
-import os
-from typing import Optional
 
 from models import ConnectionError, QueryError
 
@@ -63,7 +61,7 @@ def create_database(config: dict) -> Database:
     return db
 
 
-def execute_with_retry(db: Database, query: str, max_retries: int = 3) -> Optional[list]:
+def execute_with_retry(db: Database, query: str, max_retries: int = 3) -> list | None:
     """Execute query with retry logic."""
     for attempt in range(max_retries):
         try:

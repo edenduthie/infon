@@ -6,11 +6,11 @@ the extract() method to produce Infons from source code files.
 
 import uuid
 from abc import ABC, abstractmethod
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from infon.grounding import ASTGrounding, Grounding
-from infon.infon import Infon, ImportanceScore
+from infon.infon import ImportanceScore, Infon
 from infon.schema import AnchorSchema
 
 
@@ -100,7 +100,7 @@ class BaseASTExtractor(ABC):
             polarity=True,
             grounding=grounding,
             confidence=confidence,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             importance=importance,
             kind="extracted",
             reinforcement_count=1,

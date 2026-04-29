@@ -1,8 +1,6 @@
 """Tests for blackmagic.encoder."""
-import numpy as np
-import pytest
 
-from blackmagic.encoder import Encoder, SpladeEncoder, AnchorProjector
+from blackmagic.encoder import Encoder, SpladeEncoder
 
 
 def test_splade_loads():

@@ -9,7 +9,8 @@ The Grounding hierarchy uses Pydantic's discriminated union pattern with
 grounding_type as the discriminator field.
 """
 
-from typing import Annotated, Literal, Union
+from typing import Annotated, Literal
+
 from pydantic import BaseModel, Discriminator, Field, RootModel
 
 
@@ -61,7 +62,7 @@ class ASTGrounding(BaseModel):
 
 # Define the discriminated union type
 GroundingUnion = Annotated[
-    Union[TextGrounding, ASTGrounding],
+    TextGrounding | ASTGrounding,
     Discriminator("grounding_type")
 ]
 

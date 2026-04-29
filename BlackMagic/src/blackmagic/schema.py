@@ -10,7 +10,6 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
-
 # Hierarchy fields per anchor type (beyond type/tokens)
 HIERARCHY_FIELDS = {
     "actor":    {"organisation_type", "country_code", "canonical_name", "parent"},

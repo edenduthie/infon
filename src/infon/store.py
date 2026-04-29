@@ -16,14 +16,14 @@ to prevent database corruption.
 
 import json
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import duckdb
 
 from infon.grounding import ASTGrounding, Grounding, TextGrounding
-from infon.infon import Infon, ImportanceScore
+from infon.infon import ImportanceScore, Infon
 
 
 class ConcurrentWriteError(Exception):
@@ -113,7 +113,7 @@ class InfonStore:
 
         # Create lock file
         try:
-            self._lock_path.write_text(str(datetime.now(timezone.utc)))
+            self._lock_path.write_text(str(datetime.now(UTC)))
         except Exception as e:
             raise ConcurrentWriteError(
                 f"Failed to create lock file: {self._lock_path}"
@@ -122,7 +122,7 @@ class InfonStore:
         # Open connection
         try:
             self._conn = duckdb.connect(str(self.db_path))
-        except Exception as e:
+        except Exception:
             # Clean up lock file on connection failure
             self._lock_path.unlink(missing_ok=True)
             raise
@@ -316,7 +316,7 @@ class InfonStore:
                     infon.kind,
                     infon.reinforcement_count,
                     doc_id,
-                    datetime.now(timezone.utc),
+                    datetime.now(UTC),
                 ],
             )
 
@@ -428,7 +428,7 @@ class InfonStore:
                 to_infon_id,
                 edge_type,
                 weight,
-                datetime.now(timezone.utc),
+                datetime.now(UTC),
             ],
         )
 
@@ -519,7 +519,7 @@ class InfonStore:
                     evidence_count,
                     strength,
                     persistence,
-                    datetime.now(timezone.utc),
+                    datetime.now(UTC),
                     existing[0],
                 ],
             )
@@ -542,7 +542,7 @@ class InfonStore:
                     evidence_count,
                     strength,
                     persistence,
-                    datetime.now(timezone.utc),
+                    datetime.now(UTC),
                 ],
             )
 
@@ -577,7 +577,7 @@ class InfonStore:
                     ingested_at = ?
                 WHERE id = ?
                 """,
-                [path, kind, token_count, datetime.now(timezone.utc), doc_id],
+                [path, kind, token_count, datetime.now(UTC), doc_id],
             )
         else:
             # Insert new document
@@ -586,7 +586,7 @@ class InfonStore:
                 INSERT INTO documents (id, path, kind, ingested_at, token_count)
                 VALUES (?, ?, ?, ?, ?)
                 """,
-                [doc_id, path, kind, datetime.now(timezone.utc), token_count],
+                [doc_id, path, kind, datetime.now(UTC), token_count],
             )
 
     def stats(self) -> StoreStats:

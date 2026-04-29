@@ -14,13 +14,13 @@ No mocks — real encoder, real store, real schema.
 
 import tempfile
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
 
 from infon.grounding import TextGrounding
-from infon.infon import Infon, ImportanceScore
+from infon.infon import ImportanceScore, Infon
 from infon.retrieve import ScoredInfon, retrieve
 from infon.schema import Anchor, AnchorSchema
 from infon.store import InfonStore
@@ -118,7 +118,7 @@ def populated_store(sample_schema: AnchorSchema) -> InfonStore:
             sentence_text="UserService calls the database connection pool.",
         ),
         confidence=0.95,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.9,
             coherence=0.8,
@@ -147,7 +147,7 @@ def populated_store(sample_schema: AnchorSchema) -> InfonStore:
             sentence_text="The authentication service validates tokens using the validator.",
         ),
         confidence=0.90,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.8,
             coherence=0.85,
@@ -176,7 +176,7 @@ def populated_store(sample_schema: AnchorSchema) -> InfonStore:
             sentence_text="The token validator bypasses the database connection pool.",
         ),
         confidence=0.85,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.7,
             coherence=0.75,
@@ -205,7 +205,7 @@ def populated_store(sample_schema: AnchorSchema) -> InfonStore:
             sentence_text="The user service enforces token validation.",
         ),
         confidence=0.88,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.75,
             coherence=0.8,
@@ -234,7 +234,7 @@ def populated_store(sample_schema: AnchorSchema) -> InfonStore:
             sentence_text="Database pool sends results to user service.",
         ),
         confidence=0.80,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.7,
             coherence=0.75,
@@ -463,7 +463,7 @@ def test_retrieve_deduplicates_by_triple(populated_store, sample_schema):
             sentence_text="Duplicate with lower score.",
         ),
         confidence=0.50,  # Lower confidence than original
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.4,
             coherence=0.4,

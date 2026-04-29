@@ -10,10 +10,8 @@ The consolidation process is idempotent - running it multiple times produces
 the same result as running it once.
 """
 
-from datetime import datetime, timedelta, timezone
-from typing import Any
+from datetime import UTC, datetime, timedelta
 
-from infon.infon import ImportanceScore
 from infon.schema import AnchorSchema
 from infon.store import InfonStore
 
@@ -149,7 +147,7 @@ def _apply_importance_decay(
         decay_threshold_days: Number of days before decay starts (default 7)
     """
     conn = store._conn
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     threshold_date = now - timedelta(days=decay_threshold_days)
     
     # Get all infons older than threshold

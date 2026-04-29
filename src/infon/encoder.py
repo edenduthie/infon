@@ -8,7 +8,6 @@ All model weights are loaded from the bundled path (no network access required).
 Encoding is deterministic and stateless.
 """
 
-import os
 from pathlib import Path
 from typing import Any
 
@@ -16,7 +15,6 @@ import torch
 from transformers import AutoModelForMaskedLM, AutoTokenizer
 
 from infon.schema import AnchorSchema
-
 
 # Bundled model path (relative to this file)
 BUNDLED_MODEL_PATH = Path(__file__).parent / "models" / "splade-tiny"

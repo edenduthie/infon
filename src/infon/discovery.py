@@ -16,7 +16,6 @@ Algorithm:
 import warnings
 from collections import defaultdict
 from pathlib import Path
-from typing import Any
 
 import numpy as np
 from scipy.cluster.vq import kmeans2

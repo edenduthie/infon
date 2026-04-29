@@ -15,15 +15,13 @@ No mocks — real encoder, real schema, real Infon models.
 
 import re
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from itertools import product
-from typing import Any
 
 from infon.encoder import encode
 from infon.grounding import Grounding, TextGrounding
 from infon.infon import ImportanceScore, Infon
 from infon.schema import AnchorSchema
-
 
 # Negation words that flip polarity
 NEGATION_WORDS = {
@@ -342,7 +340,7 @@ def extract_text(text: str, doc_id: str, schema: AnchorSchema) -> list[Infon]:
                 polarity=polarity,
                 grounding=grounding,
                 confidence=confidence,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 importance=importance,
                 kind="extracted",
                 reinforcement_count=1,

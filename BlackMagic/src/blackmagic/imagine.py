@@ -30,14 +30,14 @@ from __future__ import annotations
 import hashlib
 import random
 import time
-from dataclasses import dataclass
 
-from .infon import (
-    Infon, ImaginationNode, ImaginationResult,
-    IMAGINATION_TO_MCTS_VERDICT,
-)
 from .dempster_shafer import MassFunction, combine_multiple
-
+from .infon import (
+    IMAGINATION_TO_MCTS_VERDICT,
+    ImaginationNode,
+    ImaginationResult,
+    Infon,
+)
 
 # ── Mutators ────────────────────────────────────────────────────────────
 

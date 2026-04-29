@@ -12,13 +12,11 @@ No mocks, no stubs - real DuckDB database in temp directory with real Infon inst
 
 import tempfile
 import uuid
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-import pytest
-
-from infon.grounding import ASTGrounding, Grounding, TextGrounding
-from infon.infon import Infon, ImportanceScore
+from infon.grounding import ASTGrounding, Grounding
+from infon.infon import ImportanceScore, Infon
 from infon.schema import AnchorSchema
 from infon.store import InfonStore
 
@@ -33,7 +31,7 @@ def test_consolidate_creates_next_edges():
 
         # Create three infons sharing the same subject anchor "user_service"
         # with timestamps T1 < T2 < T3
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         t1 = now - timedelta(hours=2)
         t2 = now - timedelta(hours=1)
         t3 = now
@@ -162,7 +160,7 @@ def test_consolidate_is_idempotent():
         store = InfonStore(db_path)
 
         # Create two infons sharing an anchor
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
 
         infon1 = Infon(
             id=str(uuid.uuid4()),
@@ -244,7 +242,7 @@ def test_consolidate_aggregates_constraints():
         db_path = Path(tmpdir) / "test.ddb"
         store = InfonStore(db_path)
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
 
         # Create two infons with the same (subject, predicate, object) triple
         # The second one will be merged via upsert, increasing reinforcement_count
@@ -347,7 +345,7 @@ def test_consolidate_applies_importance_decay():
         db_path = Path(tmpdir) / "test.ddb"
         store = InfonStore(db_path)
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
 
         # Create an infon that's 10 days old
         old_timestamp = now - timedelta(days=10)

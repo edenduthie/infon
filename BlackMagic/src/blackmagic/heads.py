@@ -38,15 +38,14 @@ The backbone stays frozen (17MB). Total model: ~17.5MB.
 
 from __future__ import annotations
 
-import json
+from dataclasses import dataclass
+from pathlib import Path
+
+import numpy as np
 import torch
 import torch.nn as nn
-import numpy as np
-from pathlib import Path
-from dataclasses import dataclass
 
 from .dempster_shafer import MassFunction
-
 
 # ═══════════════════════════════════════════════════════════════════════
 # HEAD ARCHITECTURES
@@ -396,7 +395,6 @@ def _detect_polarity_label(text: str) -> int:
 
 def _detect_relation_type(text: str) -> int:
     """Heuristic relation type for training data seed."""
-    import re
     text_lower = text.lower()
 
     # Causal

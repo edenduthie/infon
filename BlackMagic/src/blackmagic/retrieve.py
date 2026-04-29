@@ -13,9 +13,9 @@ import math
 from collections import defaultdict
 from datetime import datetime
 
-from .infon import Infon, Edge, Constraint, QueryResult
-from .schema import AnchorSchema
 from .encoder import Encoder
+from .infon import Infon, QueryResult
+from .schema import AnchorSchema
 
 
 def _expand_descendants(anchor_name: str, schema: AnchorSchema) -> list[str]:

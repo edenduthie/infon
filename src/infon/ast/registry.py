@@ -5,7 +5,6 @@ and provides methods to get the appropriate extractor for a given file.
 """
 
 from pathlib import Path
-from typing import Type
 
 from infon.ast.base import BaseASTExtractor
 from infon.ast.python_extractor import PythonASTExtractor
@@ -31,7 +30,7 @@ class ExtractorRegistry:
             schema: AnchorSchema to pass to extractors
         """
         self.schema = schema
-        self._extractors: dict[str, Type[BaseASTExtractor]] = {}
+        self._extractors: dict[str, type[BaseASTExtractor]] = {}
         self._instances: dict[str, BaseASTExtractor] = {}
         
         # Register default extractors
@@ -48,7 +47,7 @@ class ExtractorRegistry:
         self._extractors[".tsx"] = TypeScriptASTExtractor
         self._extractors[".jsx"] = TypeScriptASTExtractor
     
-    def register(self, extension: str, extractor_class: Type[BaseASTExtractor]) -> None:
+    def register(self, extension: str, extractor_class: type[BaseASTExtractor]) -> None:
         """Register a new extractor for a file extension.
         
         Args:

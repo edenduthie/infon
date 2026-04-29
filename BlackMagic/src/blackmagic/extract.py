@@ -7,15 +7,14 @@ spatial context, and importance scores.
 
 from __future__ import annotations
 
-import re
 import hashlib
-import numpy as np
-from collections import defaultdict
-from dataclasses import asdict
+import re
 
-from .infon import Infon, Span, Edge
-from .schema import AnchorSchema
+import numpy as np
+
 from .encoder import Encoder
+from .infon import Edge, Infon
+from .schema import AnchorSchema
 
 # English sentence splitter — split after .!? followed by whitespace + capital.
 # BlackMagic is English-only; use cognition if you need CJK / Korean handling.

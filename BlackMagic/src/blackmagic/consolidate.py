@@ -12,9 +12,9 @@ from __future__ import annotations
 
 import math
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime
 
-from .infon import Infon, Edge, Constraint
+from .infon import Constraint, Edge, Infon
 
 
 def aggregate_constraints(infons: list[Infon]) -> list[Constraint]:

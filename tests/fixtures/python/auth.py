@@ -4,9 +4,8 @@ This module demonstrates imports, function definitions, calls, and mutations.
 """
 
 import hashlib
-from typing import Optional
 
-from db import Database, create_database
+from db import Database
 from models import Session, User, validate_email
 
 

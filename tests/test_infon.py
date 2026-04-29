@@ -12,13 +12,13 @@ No mocks, no stubs - real Pydantic model instances with real dependencies.
 
 import json
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from pydantic import ValidationError
 
-from infon.infon import Infon, ImportanceScore
-from infon.grounding import TextGrounding, ASTGrounding, Grounding
+from infon.grounding import ASTGrounding, Grounding, TextGrounding
+from infon.infon import ImportanceScore, Infon
 
 
 def test_infon_immutability():
@@ -38,7 +38,7 @@ def test_infon_immutability():
             sentence_text="UserService calls the database pool."
         )),
         confidence=0.85,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.8,
             coherence=0.7,
@@ -76,7 +76,7 @@ def test_infon_replace():
             sentence_text="UserService calls the database pool."
         )),
         confidence=0.85,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.8,
             coherence=0.7,
@@ -118,7 +118,7 @@ def test_infon_replace():
 def test_infon_json_round_trip():
     """Test that Infon can be serialized to JSON and deserialized back correctly."""
     # Create an Infon with TextGrounding
-    timestamp = datetime.now(timezone.utc)
+    timestamp = datetime.now(UTC)
     infon_id = str(uuid.uuid4())
     
     original = Infon(
@@ -205,7 +205,7 @@ def test_infon_with_ast_grounding():
             node_type="FunctionDef"
         )),
         confidence=0.95,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.9,
             coherence=0.8,
@@ -249,7 +249,7 @@ def test_infon_negated_polarity():
             sentence_text="UserService no longer calls the database pool directly."
         )),
         confidence=0.75,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.7,
             coherence=0.6,
@@ -285,7 +285,7 @@ def test_infon_all_required_fields():
             sentence_text="Test sentence."
         )),
         confidence=0.8,
-        timestamp=datetime.now(timezone.utc),
+        timestamp=datetime.now(UTC),
         importance=ImportanceScore(
             activation=0.8,
             coherence=0.7,

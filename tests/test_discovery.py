@@ -7,7 +7,6 @@ All tests use real SpladeEncoder, real tree-sitter parsers, and real fixtures.
 No mocks or stubs.
 """
 
-import json
 import tempfile
 import warnings
 from pathlib import Path

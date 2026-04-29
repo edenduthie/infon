@@ -10,7 +10,9 @@ implementation is complete.
 """
 
 import json
+
 import pytest
+
 from infon.infon import ImportanceScore
 
 

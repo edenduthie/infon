@@ -10,8 +10,10 @@ implementation is complete.
 """
 
 import json
+
 import pytest
-from infon.grounding import Grounding, TextGrounding, ASTGrounding
+
+from infon.grounding import ASTGrounding, Grounding, TextGrounding
 
 
 def test_text_grounding_construction_and_serialization():

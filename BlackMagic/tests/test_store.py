@@ -1,6 +1,6 @@
 """Tests for blackmagic.store."""
+from blackmagic.infon import Constraint, Edge, Infon
 from blackmagic.store import LocalStore
-from blackmagic.infon import Infon, Edge, Constraint
 
 
 def _make_infon(**overrides):

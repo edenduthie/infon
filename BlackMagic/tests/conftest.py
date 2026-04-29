@@ -2,10 +2,9 @@
 from __future__ import annotations
 
 import pytest
-
-from blackmagic import BlackMagic, BlackMagicConfig
 from blackmagic.schema import AnchorSchema
 
+from blackmagic import BlackMagic, BlackMagicConfig
 
 TINY_SCHEMA = {
     # actors

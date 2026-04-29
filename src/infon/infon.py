@@ -11,7 +11,7 @@ All models are frozen (immutable) Pydantic models with JSON serialization suppor
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 
 from infon.grounding import Grounding
 

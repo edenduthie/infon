@@ -18,7 +18,7 @@ from pathlib import Path
 
 import pytest
 
-from infon.schema import Anchor, AnchorSchema, CODE_RELATION_ANCHORS
+from infon.schema import CODE_RELATION_ANCHORS, Anchor, AnchorSchema
 
 
 class TestAnchor:

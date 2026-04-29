@@ -15,7 +15,7 @@ from pathlib import Path
 
 import click
 
-from infon.schema import AnchorSchema, CODE_RELATION_ANCHORS
+from infon.schema import CODE_RELATION_ANCHORS, AnchorSchema
 from infon.store import InfonStore
 
 
@@ -42,7 +42,7 @@ def ensure_store_exists(db_path: Path | None) -> Path:
     
     if not db_path.exists():
         click.echo(
-            f"No knowledge base found. Run 'infon init' to create one.",
+            "No knowledge base found. Run 'infon init' to create one.",
             err=True
         )
         sys.exit(1)
@@ -214,7 +214,7 @@ def stats(db: Path | None):
         click.echo(f"Documents:    {stats_obj.document_count}")
         
         if stats_obj.top_anchors:
-            click.echo(f"\nTop Anchors:")
+            click.echo("\nTop Anchors:")
             for anchor, count in stats_obj.top_anchors[:10]:
                 click.echo(f"  {anchor:<40} {count:>5}")
 
@@ -317,7 +317,7 @@ def write_mcp_config(repo_path: Path):
     
     # Skip if .mcp.json already exists
     if mcp_config_path.exists():
-        click.echo(f".mcp.json already exists, skipping")
+        click.echo(".mcp.json already exists, skipping")
         return
     
     # Default to uvx for simplicity
@@ -358,9 +358,9 @@ def update_gitignore(repo_path: Path):
         gitignore_content += ".infon/\n"
         
         gitignore_path.write_text(gitignore_content)
-        click.echo(f"Added .infon/ to .gitignore")
+        click.echo("Added .infon/ to .gitignore")
     else:
-        click.echo(f".gitignore already contains .infon/")
+        click.echo(".gitignore already contains .infon/")
 
 
 if __name__ == "__main__":

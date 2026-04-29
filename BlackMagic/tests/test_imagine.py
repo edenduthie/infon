@@ -1,13 +1,16 @@
 """Tests for blackmagic.imagine — the GA imagination layer."""
-import pytest
+
+import random
 
 from blackmagic.imagine import (
-    HierarchyWalkMutator, PredicateSubstitutionMutator,
-    PolarityFlipMutator, RoleRecombinationMutator,
-    FitnessFunction, Imagination, _clone_with, _imagined_id,
+    FitnessFunction,
+    PolarityFlipMutator,
+    PredicateSubstitutionMutator,
+    RoleRecombinationMutator,
+    _clone_with,
+    _imagined_id,
 )
-from blackmagic.infon import Infon, IMAGINATION_TO_MCTS_VERDICT
-import random
+from blackmagic.infon import IMAGINATION_TO_MCTS_VERDICT, Infon
 
 
 def _sample_infon(**overrides):

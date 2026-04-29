@@ -22,13 +22,19 @@ Quickstart:
 from __future__ import annotations
 
 from .config import BlackMagicConfig
-from .schema import AnchorSchema
 from .infon import (
-    Infon, Edge, Constraint, Span,
-    Hit, QueryResult, SearchResult,
-    ImaginationNode, ImaginationResult,
     IMAGINATION_TO_MCTS_VERDICT,
+    Constraint,
+    Edge,
+    Hit,
+    ImaginationNode,
+    ImaginationResult,
+    Infon,
+    QueryResult,
+    SearchResult,
+    Span,
 )
+from .schema import AnchorSchema
 
 __version__ = "0.1.0"
 

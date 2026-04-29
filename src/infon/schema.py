@@ -10,9 +10,8 @@ anchors: calls, imports, inherits, mutates, defines, returns, raises, decorates.
 
 import json
 from pathlib import Path
-from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class SchemaLoadError(Exception):

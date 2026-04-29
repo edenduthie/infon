@@ -5,8 +5,8 @@ as typed, grounded triples (infons).
 """
 
 from infon.grounding import ASTGrounding, Grounding, TextGrounding
-from infon.infon import Infon, ImportanceScore
-from infon.schema import Anchor, AnchorSchema, CODE_RELATION_ANCHORS, SchemaLoadError
+from infon.infon import ImportanceScore, Infon
+from infon.schema import CODE_RELATION_ANCHORS, Anchor, AnchorSchema, SchemaLoadError
 
 __all__ = [
     # Grounding types

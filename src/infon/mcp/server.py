@@ -16,8 +16,7 @@ Resources:
 
 import argparse
 import json
-import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -29,7 +28,6 @@ from infon.extract import extract_text
 from infon.infon import Infon
 from infon.schema import AnchorSchema
 from infon.store import InfonStore
-
 
 # Initialize FastMCP server
 mcp = FastMCP("infon", version="0.1.0")
@@ -56,7 +54,7 @@ def _init_server(db_path: Path) -> tuple[InfonStore, AnchorSchema]:
     if not schema_path.exists():
         raise FileNotFoundError(f"Schema not found at {schema_path}")
     
-    with open(schema_path, "r") as f:
+    with open(schema_path) as f:
         schema_data = json.load(f)
     
     schema = AnchorSchema(**schema_data)
@@ -212,7 +210,7 @@ def store_observation(text: str, source: str = "agent") -> dict[str, int]:
             return {"error": "Server not initialized", "infons_added": 0, "infons_reinforced": 0}
         
         # Construct doc_id as "<source>:<timestamp>"
-        timestamp = datetime.now(timezone.utc).isoformat()
+        timestamp = datetime.now(UTC).isoformat()
         doc_id = f"{source}:{timestamp}"
         
         # Extract infons from text

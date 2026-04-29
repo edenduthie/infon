@@ -9,7 +9,7 @@ import tempfile
 from pathlib import Path
 
 from infon.ast import ingest_repo
-from infon.schema import AnchorSchema, CODE_RELATION_ANCHORS
+from infon.schema import CODE_RELATION_ANCHORS, AnchorSchema
 from infon.store import InfonStore
 
 

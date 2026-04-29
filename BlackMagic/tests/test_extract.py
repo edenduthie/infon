@@ -1,8 +1,9 @@
 """Tests for blackmagic.extract."""
-import pytest
 
 from blackmagic.extract import (
-    split_sentences, _detect_polarity, _make_infon_id, extract_infons,
+    _detect_polarity,
+    _make_infon_id,
+    split_sentences,
 )
 
 

@@ -4,7 +4,6 @@ This module demonstrates all eight relation types working together.
 """
 
 import sys
-from typing import Optional
 
 from auth import (
     AuthenticationError,
@@ -29,7 +28,7 @@ def initialize_database() -> Database:
     return db
 
 
-def run_query(db: Database, query: str) -> Optional[list]:
+def run_query(db: Database, query: str) -> list | None:
     """Run database query with error handling."""
     try:
         results = execute_with_retry(db, query)
@@ -42,7 +41,7 @@ def run_query(db: Database, query: str) -> Optional[list]:
         raise
 
 
-def handle_user_registration(email: str, username: str, password: str) -> Optional[User]:
+def handle_user_registration(email: str, username: str, password: str) -> User | None:
     """Handle new user registration flow."""
     db = initialize_database()
 
@@ -56,7 +55,7 @@ def handle_user_registration(email: str, username: str, password: str) -> Option
         db.disconnect()
 
 
-def handle_user_login(email: str, password: str) -> Optional[Session]:
+def handle_user_login(email: str, password: str) -> Session | None:
     """Handle user login flow."""
     db = initialize_database()
 

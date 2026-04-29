@@ -26,17 +26,12 @@ from __future__ import annotations
 import math
 import time
 from dataclasses import dataclass, field
-from collections import defaultdict
-from typing import Optional
 
 import torch
-import numpy as np
 
-from .infon import Infon, Edge
-from .dempster_shafer import MassFunction, combine_multiple, combine_dempster
+from .dempster_shafer import MassFunction, combine_dempster, combine_multiple
 from .heads import CognitionHeads
-from .encoder import SpladeEncoder
-
+from .infon import Edge, Infon
 
 # ═══════════════════════════════════════════════════════════════════════
 # MCTS NODE (traversal state, not graph node)
@@ -60,7 +55,7 @@ class MCTSNode:
     per_infon_masses: list[MassFunction] = field(default_factory=list)
 
     # Tree structure
-    parent: Optional[MCTSNode] = field(default=None, repr=False)
+    parent: MCTSNode | None = field(default=None, repr=False)
     children: list[MCTSNode] = field(default_factory=list)
 
     # Expansion state
@@ -101,7 +96,7 @@ class MCTSResult:
     nodes_explored: int = 0
     infons_evaluated: int = 0
     chains_discovered: list[list[str]] = field(default_factory=list)
-    traversal_tree: Optional[MCTSNode] = None
+    traversal_tree: MCTSNode | None = None
     elapsed_s: float = 0.0
     iteration_log: list[dict] = field(default_factory=list)
 
@@ -430,7 +425,7 @@ class GraphMCTS:
 
     def _evaluate_heuristic(self, node: MCTSNode):
         """Fallback evaluation without trained heads."""
-        from .dempster_shafer import mass_from_polarity, mass_from_confidence
+        from .dempster_shafer import mass_from_confidence, mass_from_polarity
         masses = []
         for infon in node.infons[:5]:
             m1 = mass_from_polarity(infon)
@@ -486,7 +481,6 @@ class GraphMCTS:
         """Get [CLS] embeddings, with caching."""
         uncached = [t for t in texts if t not in self._cls_cache]
         if uncached:
-            from .heads import CognitionHeads
             # Use encoder's backbone directly
             all_cls = []
             device = self.encoder.splade.device if hasattr(self.encoder, 'splade') else 'cpu'
@@ -559,7 +553,7 @@ class GraphMCTS:
                       f"R={child.belief_mass.refutes:.2f} "
                       f"θ={child.belief_mass.theta:.2f})")
         else:
-            print(f"  EXPAND: terminal (no new edges)")
+            print("  EXPAND: terminal (no new edges)")
 
         print(f"  ROOT: S={root.belief_mass.supports:.3f} "
               f"R={root.belief_mass.refutes:.3f} "
@@ -595,7 +589,7 @@ def format_mcts_result(result: MCTSResult) -> str:
         path = first["selected_path"]
         # Find the cluster with most infons
         best_cluster = path[0] if path else "?"
-        lines.append(f"├── SELECT: highest-entropy anchor cluster")
+        lines.append("├── SELECT: highest-entropy anchor cluster")
         lines.append(f"│   → \"{best_cluster} + {path[1] if len(path) > 1 else '?'}\" "
                      f"has {len(root.infons)} infons, "
                      f"{sum(1 for e in result.chains_discovered)} NEXT chains")
@@ -617,7 +611,7 @@ def format_mcts_result(result: MCTSResult) -> str:
             else:
                 neutral_chains.append((chain, m))
 
-    lines.append(f"├── EXPAND: follow NEXT edges from those infons")
+    lines.append("├── EXPAND: follow NEXT edges from those infons")
     for chain, m in supporting_chains[:3]:
         chain_str = "→".join(chain[-4:])
         lines.append(f"│   → discovers chain: {chain_str}")
@@ -631,7 +625,7 @@ def format_mcts_result(result: MCTSResult) -> str:
     lines.append("│")
 
     # EVALUATE phase
-    lines.append(f"├── EVALUATE: NLI head scores each chain against query")
+    lines.append("├── EVALUATE: NLI head scores each chain against query")
     for chain, m in supporting_chains[:3]:
         chain_str = "→".join(chain[-3:])
         lines.append(f"│   → {chain_str}: supports ({m.supports:.2f})")
@@ -645,7 +639,7 @@ def format_mcts_result(result: MCTSResult) -> str:
 
     # BACKPROP phase
     m = result.combined_mass
-    lines.append(f"├── BACKPROP: DS combination over discovered paths")
+    lines.append("├── BACKPROP: DS combination over discovered paths")
     lines.append(f"│   → combined belief: SUPPORTS {m.supports:.2f}, "
                  f"REFUTES {m.refutes:.2f}, θ {m.theta:.2f}")
     lines.append("│")
@@ -653,14 +647,14 @@ def format_mcts_result(result: MCTSResult) -> str:
     # NEXT ITERATION hint
     if refuting_chains:
         chain_str = "→".join(refuting_chains[0][0][-3:])
-        lines.append(f"└── NEXT ITERATION: drill into high-uncertainty branch")
+        lines.append("└── NEXT ITERATION: drill into high-uncertainty branch")
         lines.append(f"    → follow the {chain_str} chain to verify...")
     elif neutral_chains:
         chain_str = "→".join(neutral_chains[0][0][-3:])
-        lines.append(f"└── NEXT ITERATION: drill into uncertain branch")
+        lines.append("└── NEXT ITERATION: drill into uncertain branch")
         lines.append(f"    → follow the {chain_str} chain for more evidence...")
     else:
-        lines.append(f"└── CONVERGED: all branches evaluated")
+        lines.append("└── CONVERGED: all branches evaluated")
 
     # Final summary
     lines.append("")

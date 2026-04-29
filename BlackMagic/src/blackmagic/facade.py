@@ -7,21 +7,19 @@
 """
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 from .config import BlackMagicConfig
-from .schema import AnchorSchema
-from .infon import (
-    Infon, Edge, Constraint, QueryResult, SearchResult,
-    ImaginationResult,
-)
+from .consolidate import aggregate_constraints, apply_decay, build_next_edges
+from .dempster_shafer import VerificationVerdict, verify_claim
 from .encoder import Encoder
 from .extract import extract_infons
-from .consolidate import aggregate_constraints, build_next_edges, apply_decay
-from .store import LocalStore
-from .retrieve import query as _query_fn
-from .dempster_shafer import verify_claim, VerificationVerdict
 from .graph_mcts import GraphMCTS, MCTSResult
+from .infon import (
+    ImaginationResult,
+    SearchResult,
+)
+from .retrieve import query as _query_fn
+from .schema import AnchorSchema
+from .store import LocalStore
 
 
 class BlackMagic:

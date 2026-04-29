@@ -18,11 +18,9 @@ principled belief calculus that can detect semantic contradictions.
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 
 from .infon import Infon
-
 
 # ═══════════════════════════════════════════════════════════════════════
 # MASS FUNCTIONS
