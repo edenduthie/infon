@@ -18,47 +18,75 @@ infon init [OPTIONS]
 
 | Option | Type | Description |
 |--------|------|-------------|
-| `--schema PATH` | Path | Path to custom schema JSON file (default: auto-discover) |
+| `--schema PATH` | Path | Path to a hand-tuned schema JSON file (skips auto-discovery) |
 | `--db PATH` | Path | Database path (default: `.infon/kb.ddb`) |
+| `--shallow` | Flag | Skip schema discovery and text extraction (AST-only). Faster but conceptual queries won't work. |
 
 ### Behavior
 
-The `init` command:
+By default the `init` command does the full pipeline:
 
-1. Creates `.infon/` directory in the current directory
-2. Auto-discovers anchor schema from the codebase (or loads from `--schema` if provided)
-3. Writes schema to `.infon/schema.json`
-4. Creates DuckDB database at `.infon/kb.ddb`
-5. Ingests the current repository (extracts AST infons from Python/TypeScript files)
-6. Writes `.mcp.json` configuration for Claude Code integration
-7. Updates `.gitignore` to exclude `.infon/` directory
+1. Creates `.infon/` directory.
+2. **Discovers an anchor schema** from the corpus via spectral clustering on SPLADE co-activations (Phase 6). The discovered schema includes actor anchors derived from the actual repo vocabulary (e.g. `infon_store`, `splade_encoder`) plus the eight built-in code relation anchors (`calls`, `imports`, `defines`, `inherits`, `mutates`, `returns`, `raises`, `decorates`).
+3. Writes schema to `.infon/schema.json`.
+4. Creates DuckDB database at `.infon/kb.ddb`.
+5. **Extracts AST infons** from Python/TypeScript files.
+6. Registers `.md`/`.rst`/`.txt` documents in the documents table.
+7. **Extracts docstring text** from `.py` files (module/class/function docstrings) into text-grounded infons.
+8. **Extracts markdown/RST/TXT content** into text-grounded infons.
+9. Runs consolidation (NEXT edges, constraint aggregation).
+10. Writes `.mcp.json` configuration for Claude Code integration.
+11. Updates `.gitignore` to exclude `.infon/` directory.
+
+### Time cost
+
+Default init is **slow** on first run because every line in the corpus and every docstring sentence goes through the SPLADE encoder, which on CPU does ~200-500 lines/min in batched mode. Expect 10-30+ minutes on a moderate (~100-file) repo. The discovery step alone is bounded at 2000 unique lines (override with the `INFON_DISCOVERY_LINES` env var).
+
+The trade-off: the resulting kb supports **conceptual queries** like `infon search "how does the SPLADE encoder work"` that return docstring-grounded results. Without discovery + text extraction, that query returns AST junk.
+
+If you don't need conceptual queries — for example, you only want structural search like `infon search "what calls UserService"` — pass `--shallow` to skip the slow steps.
 
 ### Examples
 
-**Basic initialization (auto-discover schema):**
+**Default initialization (full discovery + text extraction):**
 
 ```bash
 cd my-project
 infon init
 ```
 
-Output:
+Output (abbreviated):
 
 ```
 Initializing infon knowledge base...
-Creating default code schema...
-Schema written to .infon/schema.json
+Discovering schema from corpus (this may take 30-90s; use --shallow to skip)...
+Schema written to .infon/schema.json (58 anchors)
 Creating database at .infon/kb.ddb
-Ingesting repository...
-Extracted 1234 infons
+Extracting code structure...
+Registering documents...
+  36 documents registered
+Extracting Python docstring text...
+  37914 infons from docstrings
+Extracting markdown/RST/TXT text...
+  4521 infons from documents
+Consolidating (NEXT edges, constraints)...
 
 Knowledge base initialized!
-  Infons: 1234
-  Edges: 0
-  Documents: 0
+  Infons:      45842
+  Edges:       28391
+  Constraints: 5474
+  Documents:   36
 ```
 
-**Initialize with custom schema:**
+**Fast initialization (AST-only, skip discovery + text):**
+
+```bash
+infon init --shallow
+```
+
+Roughly 60x faster than the default; structural queries still work, conceptual queries return AST infons that may not be useful.
+
+**Initialize with hand-tuned schema (skip discovery, keep text extraction):**
 
 ```bash
 infon init --schema my-schema.json
@@ -259,20 +287,22 @@ infon ingest [OPTIONS]
 
 | Option | Type | Description |
 |--------|------|-------------|
-| `--incremental` | Flag | Only process files changed since last ingest (requires git) |
+| `--incremental` | Flag | Print which files changed since the last commit (informational; always re-ingests today) |
 | `--db PATH` | Path | Database path (default: `.infon/kb.ddb`) |
+| `--shallow` | Flag | Skip text extraction (AST + consolidation only). Faster for tight loops. |
 
 ### Behavior
 
-The `ingest` command:
+By default the `ingest` command runs the same pipeline as `init` minus schema discovery (the schema is reused from `.infon/schema.json`):
 
-1. Loads schema from `.infon/schema.json`
-2. Scans the current directory for Python and TypeScript/JavaScript files
-3. Extracts AST infons from each file
-4. Inserts infons into the database
-5. Displays extraction statistics
+1. Loads schema from `.infon/schema.json`.
+2. AST extraction (Python + TypeScript/JavaScript).
+3. Document registration (`.md`/`.rst`/`.txt`).
+4. Docstring text extraction from `.py` files.
+5. Markdown/RST/TXT content text extraction.
+6. Consolidation.
 
-With `--incremental`, only processes files changed since the last git commit.
+Pass `--shallow` to skip steps 4-5; useful when iterating on code structure without changing documentation.
 
 ### Examples
 

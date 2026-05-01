@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (default behaviour change — opt out with `--shallow`)
+
+- **`infon init` now runs full schema discovery and text extraction by
+  default.** Previous default was AST-only with a static 8-anchor relation
+  schema. The new default also derives actor anchors from the corpus
+  (Phase 6 spectral clustering), extracts module/class/function docstrings
+  from `.py` files, and extracts sentences from `.md`/`.rst`/`.txt` files.
+  This is what makes conceptual queries like "how does the SPLADE encoder
+  work" return results grounded in docstrings rather than random AST
+  infons.
+- **Cost:** default init takes 10-30+ minutes on a moderate (~100-file) repo
+  on CPU because every line goes through SPLADE. GPU support would bring
+  this to seconds and is filed as v0.1.3 work.
+- **Opt out:** `infon init --shallow` (and `infon ingest --shallow`) skip
+  schema discovery and text extraction, restoring the v0.1.1 fast path
+  (~10s on the same repo). Use it for tight iteration loops or kbs that
+  only need structural queries.
+- `infon init --schema <path>` continues to skip discovery (you supply the
+  schema) but still runs text extraction unless combined with `--shallow`.
+
+### Added
+
+- **`SpladeEncoder.encode_sparse_batch(texts, batch_size, max_length)`** —
+  batches multiple texts through one tokenizer + forward pass. Used by
+  schema discovery; provides a 5-10x speedup on CPU vs the per-text path.
+  `encode_sparse()` now delegates to it for behavioural parity.
+- **`INFON_DISCOVERY_LINES` env var** — overrides the default 2000-line
+  cap on the discovery corpus. Larger values produce richer schemas at
+  proportionally longer wall time.
+
 ### Fixed
 
 - **CLI search no longer returns "No results found" for natural-language
