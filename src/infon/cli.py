@@ -68,53 +68,65 @@ def cli():
 @click.option(
     "--schema",
     type=click.Path(exists=True, path_type=Path),
-    help="Path to schema JSON file (default: auto-discover)"
+    help="Path to schema JSON file (overrides discovery)"
 )
 @click.option(
     "--db",
     type=click.Path(path_type=Path),
     help="Database path (default: .infon/kb.ddb)"
 )
-def init(schema: Path | None, db: Path | None):
+@click.option(
+    "--shallow",
+    is_flag=True,
+    help=(
+        "Skip schema discovery and text extraction (AST-only). "
+        "Faster (~10s vs ~minute) but conceptual queries won't work."
+    ),
+)
+def init(schema: Path | None, db: Path | None, shallow: bool):
     """
     Initialize infon knowledge base.
-    
-    Creates .infon/ directory with schema and database,
-    ingests the current repository, and writes .mcp.json
-    configuration file.
+
+    Default: runs schema discovery on the corpus, extracts code structure
+    (AST), extracts docstring + markdown text, and consolidates. Slow
+    on first invocation (downloads SPLADE model + per-line encoding) but
+    enables conceptual search like "how does X work".
+
+    Use --shallow for the fast AST-only path (matches v0.1.1 behaviour).
+    Use --schema to provide a hand-tuned schema (skips discovery).
     """
     click.echo("Initializing infon knowledge base...")
-    
+
     # Determine paths
     infon_dir = Path.cwd() / ".infon"
     schema_path = infon_dir / "schema.json"
     db_path = db if db else (infon_dir / "kb.ddb")
-    
+
     # Create .infon/ directory
     infon_dir.mkdir(exist_ok=True)
-    
-    # Load or create schema
+
+    # Load or create schema. Precedence:
+    #   --schema (user supplied)  >  shallow (static)  >  discovery (default)
     if schema:
         click.echo(f"Loading schema from {schema}")
         schema_obj = AnchorSchema.model_validate_json(schema.read_text())
-    else:
-        click.echo("Creating default code schema...")
-        # Create minimal schema with code relation anchors
+    elif shallow:
+        click.echo("Using static code schema (--shallow)")
         schema_obj = AnchorSchema(
-            version="0.1.0",
-            language="code",
-            anchors=CODE_RELATION_ANCHORS
+            version="0.1.0", language="code", anchors=CODE_RELATION_ANCHORS
         )
-    
+    else:
+        schema_obj = _discover_schema(Path.cwd())
+
     # Write schema
     schema_path.write_text(schema_obj.model_dump_json(indent=2))
-    click.echo(f"Schema written to {schema_path}")
-    
+    click.echo(f"Schema written to {schema_path} ({len(schema_obj.anchors)} anchors)")
+
     # Create store and ingest
     click.echo(f"Creating database at {db_path}")
     with InfonStore(str(db_path)) as store:
         try:
-            _run_full_ingest(Path.cwd(), store, schema_obj)
+            _run_full_ingest(Path.cwd(), store, schema_obj, shallow=shallow)
         except Exception as e:
             click.echo(f"Warning: Ingest failed: {e}", err=True)
 
@@ -128,6 +140,25 @@ def init(schema: Path | None, db: Path | None):
     # mismatch between extractor return-value and persisted count.
     with InfonStore(str(db_path)) as store:
         _print_stats(store, header="\nKnowledge base initialized!")
+
+
+def _discover_schema(repo_path: Path) -> AnchorSchema:
+    """Run Phase-6 schema discovery against the corpus, in code mode.
+
+    Discovery encodes every line through SPLADE and clusters the
+    co-activation matrix — slow on first run (~30-90s) but produces actor
+    anchors derived from the actual repo vocabulary, which is what makes
+    conceptual queries work later.
+    """
+    click.echo(
+        "Discovering schema from corpus (this may take 30-90s; "
+        "use --shallow to skip)..."
+    )
+    from infon.discovery import SchemaDiscovery
+
+    discovery = SchemaDiscovery()
+    schema = discovery.discover(str(repo_path), mode="code")
+    return schema
 
 
 @cli.command()
@@ -208,11 +239,7 @@ def _format_grounding(infon) -> str:
     return f"{g.doc_id} sent#{g.sent_id}: {snippet}"
 
 
-# Document file extensions that get registered in the documents table during
-# ingest. Triple extraction from these is gated on having actor anchors in the
-# schema (the default code-mode schema is relation-only), which is a v0.1.2
-# concern — for now we record them so `infon stats` Documents count reflects
-# what was actually discovered in the repo.
+# Document file extensions that get walked during ingest.
 _DOCUMENT_EXTENSIONS = (".md", ".rst", ".txt")
 
 # Directories the ingest walker skips. Mirrors the AST walker so doc counts
@@ -223,12 +250,27 @@ _SKIP_DIRS = {
 }
 
 
-def _run_full_ingest(repo_path: Path, store: InfonStore, schema: AnchorSchema) -> None:
-    """Run the full ingest pipeline: AST extraction → document registration →
-    consolidation. Used by both ``infon init`` and ``infon ingest``.
+def _run_full_ingest(
+    repo_path: Path,
+    store: InfonStore,
+    schema: AnchorSchema,
+    *,
+    shallow: bool = False,
+) -> None:
+    """Run the full ingest pipeline.
 
-    Errors are printed but do not abort the pipeline — partial ingest beats
-    no ingest, and bug-prone files are surfaced as warnings.
+    Always runs:
+        - AST extraction (tree-sitter Python/JS)
+        - Document registration (records .md/.rst/.txt in the documents table)
+        - Consolidation (NEXT edges, constraints)
+
+    Runs by default (skipped with ``shallow=True``):
+        - Python docstring text extraction
+        - Markdown/RST/TXT content text extraction
+
+    The text-extraction passes are slow (one SPLADE encode per sentence)
+    but they're what makes conceptual queries like "how does X work"
+    return docstring-grounded results instead of random AST infons.
     """
     from infon.ast.ingest import ingest_repo
     from infon.consolidate import consolidate
@@ -240,6 +282,15 @@ def _run_full_ingest(repo_path: Path, store: InfonStore, schema: AnchorSchema) -
     doc_count = _register_documents(repo_path, store)
     click.echo(f"  {doc_count} documents registered")
 
+    if not shallow:
+        click.echo("Extracting Python docstring text...")
+        ds_count = _extract_python_docstrings(repo_path, store, schema)
+        click.echo(f"  {ds_count} infons from docstrings")
+
+        click.echo("Extracting markdown/RST/TXT text...")
+        text_count = _extract_document_text(repo_path, store, schema)
+        click.echo(f"  {text_count} infons from documents")
+
     click.echo("Consolidating (NEXT edges, constraints)...")
     consolidate(store, schema)
 
@@ -247,11 +298,10 @@ def _run_full_ingest(repo_path: Path, store: InfonStore, schema: AnchorSchema) -
 def _register_documents(repo_path: Path, store: InfonStore) -> int:
     """Walk the repo for .md/.rst/.txt files and register each as a document.
 
-    Triple extraction is intentionally NOT run here — extract_text() requires
-    a schema with actor anchors, and the default code schema only ships the
-    eight built-in relation anchors. Document registration alone gives users
-    visibility into what's been discovered and is the foundation for richer
-    text extraction once schema discovery is wired up (v0.1.2).
+    Triple-extraction from the content runs separately in
+    ``_extract_document_text``; this function just records existence + token
+    count so ``infon stats`` Documents shows what was discovered, regardless
+    of whether the deep pass was skipped via ``--shallow``.
     """
     count = 0
     for path in _walk_for_documents(repo_path):
@@ -268,6 +318,122 @@ def _register_documents(repo_path: Path, store: InfonStore) -> int:
         )
         count += 1
     return count
+
+
+def _extract_python_docstrings(
+    repo_path: Path, store: InfonStore, schema: AnchorSchema
+) -> int:
+    """Walk .py files, extract module/class/function docstrings via Python's
+    stdlib ``ast``, and convert each docstring to text infons.
+
+    We use stdlib ``ast`` (not tree-sitter) here because ``ast.get_docstring``
+    handles the "first string literal in body" convention correctly across
+    classes, functions, and async functions, and we don't need the full
+    incremental parsing that tree-sitter provides for code structure.
+
+    Files that fail to parse (Python 2 syntax in fixtures, etc.) are
+    skipped with a warning — partial coverage beats no coverage.
+    """
+    import ast as _ast
+    from infon.extract import extract_text
+
+    count = 0
+    for py_path in _walk_python_files(repo_path):
+        try:
+            source = py_path.read_text(encoding="utf-8", errors="replace")
+            tree = _ast.parse(source, filename=str(py_path))
+        except (SyntaxError, ValueError) as e:
+            click.echo(f"  Warning: skipping {py_path}: {e}", err=True)
+            continue
+
+        rel = str(py_path.relative_to(repo_path))
+        # Module-level docstring
+        for node in [tree, *_ast.walk(tree)]:
+            if not isinstance(
+                node,
+                (_ast.Module, _ast.ClassDef, _ast.FunctionDef, _ast.AsyncFunctionDef),
+            ):
+                continue
+            doc = _ast.get_docstring(node)
+            if not doc:
+                continue
+            # Build a stable doc_id that points back at the source location.
+            node_name = (
+                "<module>"
+                if isinstance(node, _ast.Module)
+                else getattr(node, "name", "<unknown>")
+            )
+            doc_id = f"{rel}:{node_name}"
+            try:
+                infons = extract_text(doc, doc_id, schema)
+            except Exception as e:
+                click.echo(
+                    f"  Warning: docstring extraction failed for "
+                    f"{doc_id}: {e}",
+                    err=True,
+                )
+                continue
+            for infon in infons:
+                store.upsert(infon)
+                count += 1
+    return count
+
+
+def _extract_document_text(
+    repo_path: Path, store: InfonStore, schema: AnchorSchema
+) -> int:
+    """Read each .md/.rst/.txt file and run extract_text() over its content.
+
+    Document registration in ``_register_documents`` runs first and writes
+    the path/token_count metadata; this pass adds the actual content infons
+    grounded in those documents.
+    """
+    from infon.extract import extract_text
+
+    count = 0
+    for path in _walk_for_documents(repo_path):
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if not text.strip():
+            continue
+        doc_id = str(path.relative_to(repo_path))
+        try:
+            infons = extract_text(text, doc_id, schema)
+        except Exception as e:
+            click.echo(
+                f"  Warning: text extraction failed for {doc_id}: {e}",
+                err=True,
+            )
+            continue
+        for infon in infons:
+            store.upsert(infon)
+            count += 1
+    return count
+
+
+def _walk_python_files(repo_path: Path) -> list[Path]:
+    """Yield .py files under repo_path, honoring the same skip-dir set as the
+    AST and document walkers."""
+    out: list[Path] = []
+
+    def _walk(p: Path) -> None:
+        if not p.is_dir():
+            return
+        try:
+            for item in p.iterdir():
+                if item.name.startswith(".") or item.name in _SKIP_DIRS:
+                    continue
+                if item.is_file() and item.suffix == ".py":
+                    out.append(item)
+                elif item.is_dir():
+                    _walk(item)
+        except PermissionError:
+            pass
+
+    _walk(repo_path)
+    return out
 
 
 def _walk_for_documents(repo_path: Path) -> list[Path]:
@@ -343,12 +509,19 @@ def stats(db: Path | None):
     type=click.Path(path_type=Path),
     help="Database path (default: .infon/kb.ddb)"
 )
-def ingest(incremental: bool, db: Path | None):
+@click.option(
+    "--shallow",
+    is_flag=True,
+    help="Skip text extraction (AST + consolidation only). Faster for tight loops.",
+)
+def ingest(incremental: bool, db: Path | None, shallow: bool):
     """
     Ingest repository files into the knowledge base.
-    
-    With --incremental, only processes files that have changed
-    since the last ingest (requires git repository).
+
+    Default: extracts code structure, registers documents, extracts docstring
+    + markdown text, and consolidates. Use ``--shallow`` for the AST-only
+    fast path. ``--incremental`` is informational only today (always
+    re-ingests; selective re-ingest is a future task).
     """
     db_path = ensure_store_exists(db)
     
@@ -382,7 +555,7 @@ def ingest(incremental: bool, db: Path | None):
                 click.echo(f"Error: git command failed: {e}", err=True)
                 sys.exit(1)
 
-        _run_full_ingest(Path.cwd(), store, schema_obj)
+        _run_full_ingest(Path.cwd(), store, schema_obj, shallow=shallow)
         _print_stats(store, header="\nIngest complete.")
 
 
