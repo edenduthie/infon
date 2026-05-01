@@ -14,6 +14,7 @@ No mocks — real subprocess, real store, real JSON-RPC.
 
 import json
 import subprocess
+import sys
 import uuid
 from datetime import UTC, datetime
 
@@ -225,7 +226,7 @@ def test_mcp_server_tools_list(populated_store, tmp_path):
     # We need to create a simple runner script since we don't have the module yet
     # For now, we'll assume we can import and run it directly
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -271,7 +272,7 @@ def test_mcp_server_search_tool(populated_store, tmp_path):
     db_path, schema_path = populated_store
     
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -332,7 +333,7 @@ def test_mcp_server_store_observation_tool(populated_store, tmp_path):
     db_path, schema_path = populated_store
     
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -391,7 +392,7 @@ def test_mcp_server_query_ast_tool(populated_store, tmp_path):
     db_path, schema_path = populated_store
     
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -448,7 +449,7 @@ def test_mcp_server_error_handling_no_crash(populated_store, tmp_path):
     db_path, schema_path = populated_store
     
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -498,7 +499,7 @@ def test_mcp_server_stats_resource(populated_store, tmp_path):
     db_path, schema_path = populated_store
     
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -543,7 +544,7 @@ def test_mcp_server_schema_resource(populated_store, tmp_path):
     db_path, schema_path = populated_store
     
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -588,7 +589,7 @@ def test_mcp_server_recent_resource(populated_store, tmp_path):
     db_path, schema_path = populated_store
     
     proc = subprocess.Popen(
-        ["python", "-m", "infon.mcp.server", "--db", str(db_path)],
+        [sys.executable, "-m", "infon.mcp.server", "--db", str(db_path)],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,

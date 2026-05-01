@@ -177,7 +177,7 @@ def test_pyproject_dev_dependencies():
         "ruff": None,  # No specific version required beyond what's there
         "mypy": None,  # No specific version required beyond what's there
         "mkdocs-material": ">=9.0",
-        "python-build": None,  # No version constraint specified
+        "build": None,  # PEP 517 build frontend; no version pin needed
     }
     
     # Build a dictionary of actual dev dependencies from list
