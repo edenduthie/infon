@@ -110,6 +110,7 @@ def test_pyproject_runtime_dependencies():
         "torch": ">=2.0",
         "numpy": ">=1.24",
         "scipy": ">=1.11",
+        "pytz": ">=2023.3",
     }
     
     # Build a dictionary of actual dependencies from list
