@@ -3,15 +3,19 @@
 The retrieve() function implements a multi-stage retrieval pipeline:
 1. Query encoding: Encode query text to anchor space
 2. Anchor expansion: Expand activated anchors to descendants
-3. Candidate fetch: Retrieve all infons matching candidate anchors
-4. Valence scoring: Apply persona-specific valence weights
-5. Relevance scoring: Compute final score with overlap, confidence, importance, valence
-6. NEXT-edge context: Fetch temporal context for top candidates
-7. Ranking and deduplication: Sort by score, deduplicate, return top-K
+3. Candidate fetch: Retrieve all infons matching candidate anchors (subject,
+   object, OR predicate)
+4. Keyword fallback: If no SPLADE candidates, match query tokens against
+   subject/predicate/object columns directly
+5. Valence scoring: Apply persona-specific valence weights
+6. Relevance scoring: Compute final score with overlap, confidence, importance, valence
+7. NEXT-edge context: Fetch temporal context for top candidates
+8. Ranking and deduplication: Sort by score, deduplicate, return top-K
 
 All stages use real dependencies (no mocks): real encoder, real store, real schema.
 """
 
+import re
 from dataclasses import dataclass
 
 from infon.encoder import encode
@@ -19,6 +23,26 @@ from infon.infon import Infon
 from infon.personas import PersonaType, get_valence
 from infon.schema import AnchorSchema
 from infon.store import InfonStore
+
+# Words removed before keyword matching — they create noise without signal.
+_STOP_WORDS = frozenset(
+    {
+        "a", "an", "and", "are", "as", "at", "be", "by", "do", "does", "for",
+        "from", "how", "i", "in", "is", "it", "its", "of", "on", "or", "that",
+        "the", "this", "to", "was", "were", "what", "when", "where", "which",
+        "who", "why", "with", "you", "your",
+    }
+)
+
+
+def _query_tokens(query: str) -> list[str]:
+    """Extract significant tokens from a query: lower-cased, stop-words removed,
+    minimum length 2. Used by the keyword-fallback path."""
+    return [
+        t
+        for t in re.split(r"\W+", query.lower())
+        if t and len(t) > 1 and t not in _STOP_WORDS
+    ]
 
 
 @dataclass
@@ -67,70 +91,67 @@ def retrieve(
     # Stage 1: Query encoding
     # Encode query to anchor space (returns dict[anchor_key -> activation])
     query_anchors = encode(query, schema)
-    
-    if not query_anchors:
-        # No activated anchors, return empty
-        return []
-    
+
     # Stage 2: Anchor expansion
     # Expand each activated anchor to include all descendants
-    candidate_anchors = set(query_anchors.keys())
+    candidate_anchors: set[str] = set(query_anchors.keys())
     for anchor_key in list(query_anchors.keys()):
         descendants = schema.descendants(anchor_key)
         candidate_anchors.update(descendants)
-    
+
+    # If SPLADE produced no anchors (typical when the schema is relation-only
+    # and the query's content words don't match any relation tokens), skip the
+    # candidate fetch and go straight to the keyword fallback. We must NOT
+    # early-return here — that would defeat the fallback.
     if not candidate_anchors:
-        return []
+        return _keyword_fallback(query, store, limit=limit, persona=persona)
     
     # Stage 3: Candidate fetch
-    # Retrieve all infons where subject OR object is in candidate anchor set
-    # We'll query the store multiple times (once per candidate anchor)
-    # to build our candidate set
+    # Retrieve all infons where subject, object, OR predicate is in the
+    # candidate anchor set. The predicate fan-out matters for AST infons
+    # whose predicate is a relation anchor (e.g. ``calls``) — without it,
+    # a query like "what calls foo" would never surface AST call sites.
     candidate_infons: list[Infon] = []
     seen_ids = set()
-    
+
     for anchor_key in candidate_anchors:
-        # Query by subject
-        subject_matches = store.query(subject=anchor_key, limit=1000)
-        for infon in subject_matches:
-            if infon.id not in seen_ids:
-                candidate_infons.append(infon)
-                seen_ids.add(infon.id)
-        
-        # Query by object
-        object_matches = store.query(object=anchor_key, limit=1000)
-        for infon in object_matches:
-            if infon.id not in seen_ids:
-                candidate_infons.append(infon)
-                seen_ids.add(infon.id)
-    
+        for matches in (
+            store.query(subject=anchor_key, limit=1000),
+            store.query(object=anchor_key, limit=1000),
+            store.query(predicate=anchor_key, limit=1000),
+        ):
+            for infon in matches:
+                if infon.id not in seen_ids:
+                    candidate_infons.append(infon)
+                    seen_ids.add(infon.id)
+
+    # Stage 4: Keyword fallback
+    # If SPLADE + anchor expansion produced no candidates (typical when the
+    # schema has no actor anchors covering the user's free-text symbols),
+    # fall back to keyword matching against the existing infons. This keeps
+    # search useful with the default code schema, which only ships the eight
+    # built-in relation anchors.
     if not candidate_infons:
-        return []
+        return _keyword_fallback(query, store, limit=limit, persona=persona)
     
-    # Stage 4 & 5: Valence scoring and Relevance scoring
+    # Stage 5 & 6: Valence scoring and Relevance scoring
     scored_infons: list[tuple[Infon, float]] = []
-    
+
     for infon in candidate_infons:
         # Calculate anchor overlap (how many query anchors match this infon)
         overlap_score = 0.0
-        
-        # Count overlaps with expanded candidate set
-        if infon.subject in candidate_anchors:
-            # Weight by query activation if available
-            if infon.subject in query_anchors:
-                overlap_score += query_anchors[infon.subject]
-            else:
-                # It's a descendant, use lower weight
-                overlap_score += 0.5
-        
-        if infon.object in candidate_anchors:
-            if infon.object in query_anchors:
-                overlap_score += query_anchors[infon.object]
-            else:
-                overlap_score += 0.5
-        
-        # Normalize overlap (divide by max possible which is 2 for both subject and object)
-        overlap_score = overlap_score / 2.0
+
+        # Count overlaps with expanded candidate set across all three positions.
+        for position in (infon.subject, infon.object, infon.predicate):
+            if position in candidate_anchors:
+                if position in query_anchors:
+                    overlap_score += query_anchors[position]
+                else:
+                    # Descendant of an activated anchor — lower weight.
+                    overlap_score += 0.5
+
+        # Normalize overlap (3 positions × max activation 1.0 = 3.0)
+        overlap_score = overlap_score / 3.0
         
         # Get valence weight for predicate
         valence_weight = get_valence(persona, infon.predicate)
@@ -190,5 +211,63 @@ def retrieve(
                 context=context_infons,
             )
         )
-    
+
     return results
+
+
+def _keyword_fallback(
+    query: str,
+    store: InfonStore,
+    *,
+    limit: int,
+    persona: PersonaType | None,
+) -> list[ScoredInfon]:
+    """Substring-match query tokens against subject/predicate/object columns.
+
+    Used when SPLADE retrieval finds no candidates — typical when the schema
+    has no actor anchors covering the user's free-text symbols (the default
+    code-mode schema is relation-only). Returns the top ``limit`` matches
+    ranked by token overlap × confidence × reinforcement × persona valence.
+    """
+    tokens = _query_tokens(query)
+    if not tokens:
+        return []
+
+    # Pull infons in moderate batches; for typical kbs (<100k infons) one
+    # generous read is fine.
+    all_infons = store.query(limit=10000)
+    if not all_infons:
+        return []
+
+    scored: list[tuple[Infon, float]] = []
+    for infon in all_infons:
+        haystack = f"{infon.subject} {infon.predicate} {infon.object}".lower()
+        match_count = sum(1 for token in tokens if token in haystack)
+        if match_count == 0:
+            continue
+        valence_weight = get_valence(persona, infon.predicate)
+        score = (
+            match_count
+            * infon.confidence
+            * infon.importance.reinforcement
+            * (1.0 + valence_weight)
+        )
+        scored.append((infon, score))
+
+    if not scored:
+        return []
+
+    scored.sort(key=lambda x: x[1], reverse=True)
+
+    seen: set[tuple[str, str, str]] = set()
+    deduped: list[ScoredInfon] = []
+    for infon, score in scored:
+        triple = (infon.subject, infon.predicate, infon.object)
+        if triple in seen:
+            continue
+        seen.add(triple)
+        deduped.append(ScoredInfon(infon=infon, score=score, context=[]))
+        if len(deduped) >= limit:
+            break
+
+    return deduped

@@ -113,30 +113,21 @@ def init(schema: Path | None, db: Path | None):
     # Create store and ingest
     click.echo(f"Creating database at {db_path}")
     with InfonStore(str(db_path)) as store:
-        click.echo("Ingesting repository...")
-        
-        # Import here to avoid circular dependency
-        from infon.ast.ingest import ingest_repo
-        
         try:
-            infons = ingest_repo(Path.cwd(), store, schema_obj)
-            click.echo(f"Extracted {len(infons)} infons")
+            _run_full_ingest(Path.cwd(), store, schema_obj)
         except Exception as e:
             click.echo(f"Warning: Ingest failed: {e}", err=True)
-    
+
     # Write .mcp.json
     write_mcp_config(Path.cwd())
-    
+
     # Update .gitignore
     update_gitignore(Path.cwd())
-    
-    # Print stats
+
+    # Print stats — single source of truth (store.stats), avoids the historic
+    # mismatch between extractor return-value and persisted count.
     with InfonStore(str(db_path)) as store:
-        stats = store.stats()
-        click.echo("\nKnowledge base initialized!")
-        click.echo(f"  Infons: {stats.infon_count}")
-        click.echo(f"  Edges: {stats.edge_count}")
-        click.echo(f"  Documents: {stats.document_count}")
+        _print_stats(store, header="\nKnowledge base initialized!")
 
 
 @cli.command()
@@ -160,40 +151,155 @@ def init(schema: Path | None, db: Path | None):
 def search(query: str, db: Path | None, limit: int, persona: str | None):
     """
     Search the knowledge base.
-    
-    Returns infons matching the query, ranked by relevance.
+
+    Encodes the query to anchor space (SPLADE) and ranks infons by relevance,
+    falling back to keyword matching if the SPLADE path returns nothing.
+    Each result shows its grounding so you can jump to the source.
     """
+    from infon.retrieve import retrieve
+
     db_path = ensure_store_exists(db)
-    
-    # TODO: Implement actual retrieval once encoder is integrated
-    # For now, do simple triple matching
+    schema = _load_schema_for(db_path)
+
     with InfonStore(str(db_path)) as store:
-        # Query for infons matching the search term
-        results = store.query(
-            subject=query,
-            limit=limit
+        results = retrieve(query, store, schema, limit=limit, persona=persona)
+
+    if not results:
+        click.echo("No results found.")
+        return
+
+    click.echo(f"\nFound {len(results)} results:\n")
+    for i, scored in enumerate(results, 1):
+        infon = scored.infon
+        polarity = "" if infon.polarity else "  [NEGATED]"
+        click.echo(
+            f"{i}. {infon.subject} --[{infon.predicate}]--> {infon.object}"
+            f"  (score={scored.score:.3f}){polarity}"
         )
-        
-        # Also try predicate and object
-        if not results:
-            results = store.query(predicate=query, limit=limit)
-        if not results:
-            results = store.query(object=query, limit=limit)
-        
-        # Print results as table
-        if not results:
-            click.echo("No results found.")
-        else:
-            click.echo(f"\nFound {len(results)} results:\n")
-            click.echo(f"{'Subject':<30} {'Predicate':<20} {'Object':<30}")
-            click.echo("-" * 80)
-            
-            for infon in results[:limit]:
-                subject = infon.subject[:28] + ".." if len(infon.subject) > 30 else infon.subject
-                predicate = infon.predicate[:18] + ".." if len(infon.predicate) > 20 else infon.predicate
-                obj = infon.object[:28] + ".." if len(infon.object) > 30 else infon.object
-                
-                click.echo(f"{subject:<30} {predicate:<20} {obj:<30}")
+        click.echo(f"   {_format_grounding(infon)}")
+        if scored.context:
+            ctx_summary = ", ".join(
+                f"{c.subject}->{c.object}" for c in scored.context[:3]
+            )
+            click.echo(f"   next: {ctx_summary}")
+        click.echo()
+
+
+def _load_schema_for(db_path: Path) -> AnchorSchema:
+    """Read .infon/schema.json sitting next to ``db_path``.
+
+    Falls back to the built-in code schema if the file is missing so the
+    CLI keeps working on legacy stores created before init wrote a schema.
+    """
+    schema_path = db_path.parent / "schema.json"
+    if schema_path.exists():
+        return AnchorSchema.model_validate_json(schema_path.read_text())
+    return AnchorSchema(
+        version="0.1.0", language="code", anchors=CODE_RELATION_ANCHORS
+    )
+
+
+def _format_grounding(infon) -> str:
+    """One-line human-readable grounding (file:line for AST, doc for text)."""
+    g = infon.grounding.root
+    if g.grounding_type == "ast":
+        return f"{g.file_path}:{g.line_number} ({g.node_type})"
+    snippet = g.sentence_text[:80] + ("..." if len(g.sentence_text) > 80 else "")
+    return f"{g.doc_id} sent#{g.sent_id}: {snippet}"
+
+
+# Document file extensions that get registered in the documents table during
+# ingest. Triple extraction from these is gated on having actor anchors in the
+# schema (the default code-mode schema is relation-only), which is a v0.1.2
+# concern — for now we record them so `infon stats` Documents count reflects
+# what was actually discovered in the repo.
+_DOCUMENT_EXTENSIONS = (".md", ".rst", ".txt")
+
+# Directories the ingest walker skips. Mirrors the AST walker so doc counts
+# stay consistent with code counts.
+_SKIP_DIRS = {
+    ".git", "__pycache__", "node_modules", ".venv", "venv", "dist", "build",
+    ".pytest_cache", ".mypy_cache", ".ruff_cache", ".infon", "site",
+}
+
+
+def _run_full_ingest(repo_path: Path, store: InfonStore, schema: AnchorSchema) -> None:
+    """Run the full ingest pipeline: AST extraction → document registration →
+    consolidation. Used by both ``infon init`` and ``infon ingest``.
+
+    Errors are printed but do not abort the pipeline — partial ingest beats
+    no ingest, and bug-prone files are surfaced as warnings.
+    """
+    from infon.ast.ingest import ingest_repo
+    from infon.consolidate import consolidate
+
+    click.echo("Extracting code structure...")
+    ingest_repo(repo_path, store, schema)
+
+    click.echo("Registering documents...")
+    doc_count = _register_documents(repo_path, store)
+    click.echo(f"  {doc_count} documents registered")
+
+    click.echo("Consolidating (NEXT edges, constraints)...")
+    consolidate(store, schema)
+
+
+def _register_documents(repo_path: Path, store: InfonStore) -> int:
+    """Walk the repo for .md/.rst/.txt files and register each as a document.
+
+    Triple extraction is intentionally NOT run here — extract_text() requires
+    a schema with actor anchors, and the default code schema only ships the
+    eight built-in relation anchors. Document registration alone gives users
+    visibility into what's been discovered and is the foundation for richer
+    text extraction once schema discovery is wired up (v0.1.2).
+    """
+    count = 0
+    for path in _walk_for_documents(repo_path):
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        rel = str(path.relative_to(repo_path))
+        store.upsert_document(
+            doc_id=rel,
+            path=rel,
+            kind=path.suffix.lstrip("."),
+            token_count=len(text.split()),
+        )
+        count += 1
+    return count
+
+
+def _walk_for_documents(repo_path: Path) -> list[Path]:
+    """Recursive walk yielding ``_DOCUMENT_EXTENSIONS`` files under repo_path."""
+    out: list[Path] = []
+
+    def _walk(p: Path) -> None:
+        if not p.is_dir():
+            return
+        try:
+            for item in p.iterdir():
+                if item.name.startswith(".") or item.name in _SKIP_DIRS:
+                    continue
+                if item.is_file() and item.suffix.lower() in _DOCUMENT_EXTENSIONS:
+                    out.append(item)
+                elif item.is_dir():
+                    _walk(item)
+        except PermissionError:
+            pass
+
+    _walk(repo_path)
+    return out
+
+
+def _print_stats(store: InfonStore, *, header: str) -> None:
+    """Print the canonical stats block — single source of truth for counts."""
+    s = store.stats()
+    click.echo(header)
+    click.echo(f"  Infons:      {s.infon_count}")
+    click.echo(f"  Edges:       {s.edge_count}")
+    click.echo(f"  Constraints: {s.constraint_count}")
+    click.echo(f"  Documents:   {s.document_count}")
 
 
 @cli.command()
@@ -255,45 +361,29 @@ def ingest(incremental: bool, db: Path | None):
     schema_obj = AnchorSchema.model_validate_json(schema_path.read_text())
     
     with InfonStore(str(db_path)) as store:
-        click.echo("Ingesting repository...")
-        
-        from infon.ast.ingest import ingest_repo
-        
         if incremental:
-            # Get list of changed files from git
+            # NOTE: incremental currently re-ingests everything; the diff is
+            # informational. Selective re-ingest is a v0.1.2 task.
             import subprocess
-            
+
             try:
                 result = subprocess.run(
                     ["git", "diff", "--name-only", "HEAD~1", "HEAD"],
                     capture_output=True,
                     text=True,
                     check=True,
-                    cwd=Path.cwd()
+                    cwd=Path.cwd(),
                 )
-                
                 changed_files = [
                     Path(f.strip()) for f in result.stdout.splitlines() if f.strip()
                 ]
-                
                 click.echo(f"Processing {len(changed_files)} changed files...")
-                
-                # For now, just re-ingest everything
-                # TODO: Implement selective re-ingestion
-                infons = ingest_repo(Path.cwd(), store, schema_obj)
-                click.echo(f"Extracted {len(infons)} infons")
-                
             except subprocess.CalledProcessError as e:
                 click.echo(f"Error: git command failed: {e}", err=True)
                 sys.exit(1)
-        else:
-            # Full ingest
-            infons = ingest_repo(Path.cwd(), store, schema_obj)
-            click.echo(f"Extracted {len(infons)} infons")
-        
-        # Print updated stats
-        stats_obj = store.stats()
-        click.echo(f"\nTotal infons: {stats_obj.infon_count}")
+
+        _run_full_ingest(Path.cwd(), store, schema_obj)
+        _print_stats(store, header="\nIngest complete.")
 
 
 @cli.command()

@@ -149,26 +149,34 @@ def test_cli_init_creates_infon_directory(temp_repo):
 
 
 def test_cli_search_returns_results(temp_repo):
-    """Test that infon search returns results after init."""
+    """Test that infon search returns real ranked results after init.
+
+    The temp_repo fixture defines a `hello()` function and a `Greeter`
+    class. After init these should be queryable by name — anything less
+    means the CLI search command is not actually wired through to the
+    retrieval pipeline.
+    """
     runner = CliRunner()
-    
+
     import os
     original_cwd = os.getcwd()
     try:
         os.chdir(temp_repo)
-        
-        # First run init
+
         result = runner.invoke(cli, ["init"])
         assert result.exit_code == 0
-        
-        # Now run search
-        result = runner.invoke(cli, ["search", "hello"])
-        
-        # Should succeed
+
+        result = runner.invoke(cli, ["search", "Greeter"])
         assert result.exit_code == 0, f"Search failed: {result.output}"
-        
-        # Should contain table-like output
-        assert "subject" in result.output.lower() or "predicate" in result.output.lower()
+
+        # New search output uses an arrow format with a score and a grounding
+        # line — both must be present for a non-empty result set.
+        output = result.output
+        assert "Found" in output and "results" in output
+        assert "Greeter" in output
+        assert "score=" in output
+        # Grounding line must include a file path and line number.
+        assert "src/example.py:" in output
     finally:
         os.chdir(original_cwd)
 
