@@ -135,6 +135,12 @@ def retrieve(
         return _keyword_fallback(query, store, limit=limit, persona=persona)
     
     # Stage 5 & 6: Valence scoring and Relevance scoring
+    # Pre-compute keyword tokens once; we use them to bias ranking toward
+    # infons whose subject/predicate/object literally mention the user's
+    # query terms. Without this, queries like "what calls InfonStore" pull
+    # in every "calls" infon at uniform score regardless of whether
+    # InfonStore actually appears.
+    keyword_tokens = _query_tokens(query)
     scored_infons: list[tuple[Infon, float]] = []
 
     for infon in candidate_infons:
@@ -152,19 +158,32 @@ def retrieve(
 
         # Normalize overlap (3 positions × max activation 1.0 = 3.0)
         overlap_score = overlap_score / 3.0
+
+        # Keyword bonus: fraction of query tokens that appear in the infon's
+        # subject/predicate/object. Multiplies the score by (1 + bonus), so an
+        # infon matching every query token can get a 2× boost over one that
+        # matches only the predicate.
+        keyword_bonus = 0.0
+        if keyword_tokens:
+            haystack = (
+                f"{infon.subject} {infon.predicate} {infon.object}".lower()
+            )
+            matches = sum(1 for t in keyword_tokens if t in haystack)
+            keyword_bonus = matches / len(keyword_tokens)
         
         # Get valence weight for predicate
         valence_weight = get_valence(persona, infon.predicate)
         
         # Compute final relevance score
-        # score = overlap × confidence × reinforcement × (1 + valence)
+        # score = overlap × confidence × reinforcement × (1 + valence) × (1 + keyword_bonus)
         score = (
             overlap_score
             * infon.confidence
             * infon.importance.reinforcement
             * (1.0 + valence_weight)
+            * (1.0 + keyword_bonus)
         )
-        
+
         scored_infons.append((infon, score))
     
     # Stage 7a: Sort by score descending

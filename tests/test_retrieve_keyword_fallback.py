@@ -139,3 +139,28 @@ def test_retrieve_keyword_fallback_orders_by_relevance(
     # The top result must involve UserService (either as subject or object).
     top = results[0].infon
     assert "userservice" in (top.subject + top.object).lower()
+
+
+def test_retrieve_keyword_bonus_boosts_query_term_matches_in_splade_path(
+    ast_store: InfonStore, code_schema: AnchorSchema
+) -> None:
+    """When SPLADE activates a relation anchor (e.g. ``calls``), the predicate
+    fan-out gathers EVERY infon with that predicate. Without a keyword bonus
+    on top, "what calls InfonStore" returns calls infons unrelated to
+    InfonStore at the same score as the InfonStore-mentioning ones — that's
+    exactly the failure mode dog-fooding hit on the real repo.
+
+    This test verifies that the keyword bonus pushes InfonStore-mentioning
+    calls infons to the top of the ranking."""
+    results = retrieve("what calls InfonStore", ast_store, code_schema, limit=10)
+    assert results, "must return at least one result"
+
+    # The top result must involve InfonStore as subject or object — without
+    # the keyword bonus, the SPLADE-only path would rank Cache->redis or any
+    # other "calls" infon equally high.
+    top = results[0].infon
+    triple_text = f"{top.subject} {top.object}".lower()
+    assert "infonstore" in triple_text, (
+        f"top result must mention InfonStore; got "
+        f"{top.subject} -> {top.predicate} -> {top.object}"
+    )
