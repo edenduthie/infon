@@ -111,6 +111,50 @@ infon stats
 - Requires manual environment management
 - Must update manually to get new versions
 
+### How `infon init` writes `.mcp.json`
+
+`infon init` detects the interpreter it is running under and writes a
+`.mcp.json` that matches your install path, so Claude Code launches the
+MCP server the same way you launched the init command.
+
+- **Outside a virtualenv** (system Python or `uvx`): the generated
+  `.mcp.json` uses the `uvx` form. Claude Code will fetch the latest
+  published `infon` on demand:
+
+    ```json
+    {
+      "mcpServers": {
+        "infon": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": ["--from", "infon", "infon", "serve"]
+        }
+      }
+    }
+    ```
+
+- **Inside a virtualenv** (detected via `sys.prefix != sys.base_prefix`
+  or the `VIRTUAL_ENV` environment variable): the generated `.mcp.json`
+  pins to the absolute path of the venv's `infon` binary. The MCP server
+  is then locked to whatever version is installed in that venv and is
+  not silently upgraded by `uvx`:
+
+    ```json
+    {
+      "mcpServers": {
+        "infon": {
+          "type": "stdio",
+          "command": "/path/to/.venv/bin/infon",
+          "args": ["serve"]
+        }
+      }
+    }
+    ```
+
+If the detected venv does not actually contain an `infon` binary,
+`infon init` falls back to the `uvx` form and prints a warning rather
+than writing a config that cannot launch.
+
 ---
 
 ## Option 3: Install from Source
