@@ -23,9 +23,9 @@ from typing import Any
 from fastmcp import FastMCP
 
 from infon.consolidate import consolidate
-from infon.encoder import encode
 from infon.extract import extract_text
 from infon.infon import Infon
+from infon.retrieve import retrieve
 from infon.schema import AnchorSchema
 from infon.store import InfonStore
 
@@ -65,129 +65,95 @@ def _init_server(db_path: Path) -> tuple[InfonStore, AnchorSchema]:
     return store, schema
 
 
-def _infon_to_dict(infon: Infon, score: float | None = None) -> dict[str, Any]:
-    """
-    Convert an Infon to a JSON-serializable dict for MCP responses.
-    
-    Args:
-        infon: The Infon to convert
-        score: Optional relevance score
-        
-    Returns:
-        Dictionary representation
-    """
-    grounding_dict = {}
+def _grounding_dict(infon: Infon) -> dict[str, Any]:
+    """Serialize an Infon's grounding to a dict."""
     if infon.grounding.root.grounding_type == "ast":
-        grounding_dict = {
+        return {
             "type": "ast",
             "file_path": infon.grounding.root.file_path,
             "line_number": infon.grounding.root.line_number,
             "node_type": infon.grounding.root.node_type,
         }
-    else:  # text
-        grounding_dict = {
-            "type": "text",
-            "doc_id": infon.grounding.root.doc_id,
-            "sent_id": infon.grounding.root.sent_id,
-            "char_start": infon.grounding.root.char_start,
-            "char_end": infon.grounding.root.char_end,
-            "sentence_text": infon.grounding.root.sentence_text,
-        }
-    
-    result = {
+    return {
+        "type": "text",
+        "doc_id": infon.grounding.root.doc_id,
+        "sent_id": infon.grounding.root.sent_id,
+        "char_start": infon.grounding.root.char_start,
+        "char_end": infon.grounding.root.char_end,
+        "sentence_text": infon.grounding.root.sentence_text,
+    }
+
+
+def _infon_to_dict(
+    infon: Infon,
+    score: float | None = None,
+    context: list[Infon] | None = None,
+) -> dict[str, Any]:
+    """
+    Convert an Infon to a JSON-serializable dict for MCP responses.
+
+    Args:
+        infon: The Infon to convert
+        score: Optional relevance score
+        context: Optional list of NEXT-edge neighbor infons
+
+    Returns:
+        Dictionary representation
+    """
+    context_dicts: list[dict[str, Any]] = []
+    if context:
+        for neighbor in context:
+            context_dicts.append(
+                {
+                    "subject": neighbor.subject,
+                    "predicate": neighbor.predicate,
+                    "object": neighbor.object,
+                    "polarity": neighbor.polarity,
+                    "grounding": _grounding_dict(neighbor),
+                }
+            )
+
+    result: dict[str, Any] = {
         "subject": infon.subject,
         "predicate": infon.predicate,
         "object": infon.object,
         "polarity": infon.polarity,
         "confidence": infon.confidence,
-        "grounding": grounding_dict,
-        "context": [],  # TODO: Add NEXT-edge context in Phase 8
+        "grounding": _grounding_dict(infon),
+        "context": context_dicts,
     }
-    
+
     if score is not None:
         result["score"] = score
-    
+
     return result
-
-
-def _simple_retrieve(query: str, limit: int = 10) -> list[tuple[Infon, float]]:
-    """
-    Simple retrieval function (placeholder for Phase 8 full implementation).
-    
-    This is a minimal version that:
-    1. Encodes the query to anchor space
-    2. Finds infons matching any activated anchor
-    3. Scores by activation strength + reinforcement
-    4. Returns top-K ranked results
-    
-    Args:
-        query: Natural language query
-        limit: Maximum number of results
-        
-    Returns:
-        List of (Infon, score) tuples sorted by score descending
-    """
-    if _schema is None or _store is None:
-        return []
-    
-    # Encode query to anchor space
-    anchor_scores = encode(query, _schema)
-    
-    if not anchor_scores:
-        return []
-    
-    # Get top-K activated anchors
-    top_anchors = sorted(anchor_scores.items(), key=lambda x: x[1], reverse=True)[:5]
-    
-    # Query store for infons containing these anchors
-    results: list[tuple[Infon, float]] = []
-    
-    for anchor, activation in top_anchors:
-        # Query by subject
-        subject_matches = _store.query(subject=anchor, limit=limit)
-        for infon in subject_matches:
-            # Score = activation * (1 + reinforcement_count/10)
-            score = activation * (1.0 + infon.reinforcement_count / 10.0)
-            results.append((infon, score))
-        
-        # Query by object
-        object_matches = _store.query(object=anchor, limit=limit)
-        for infon in object_matches:
-            score = activation * (1.0 + infon.reinforcement_count / 10.0)
-            results.append((infon, score))
-    
-    # Deduplicate and sort by score
-    seen_ids = set()
-    unique_results = []
-    for infon, score in results:
-        if infon.id not in seen_ids:
-            seen_ids.add(infon.id)
-            unique_results.append((infon, score))
-    
-    unique_results.sort(key=lambda x: x[1], reverse=True)
-    
-    return unique_results[:limit]
 
 
 @mcp.tool()
 def search(query: str, limit: int = 10) -> list[dict[str, Any]]:
     """
     Search the knowledge base with semantic ranking.
-    
-    Encodes the query to anchor space and returns ranked infons.
-    
+
+    Encodes the query to anchor space and returns ranked infons with
+    NEXT-edge temporal context.
+
     Args:
         query: Natural language search query
         limit: Maximum number of results (default 10)
-        
+
     Returns:
-        List of ranked infon dicts with subject, predicate, object, score, grounding
+        List of ranked infon dicts with subject, predicate, object, score,
+        grounding, and context (NEXT-edge neighbors)
     """
     try:
-        results = _simple_retrieve(query, limit)
-        return [_infon_to_dict(infon, score) for infon, score in results]
+        if _schema is None or _store is None:
+            return [{"error": "Server not initialized", "query": query}]
+
+        scored = retrieve(query, _store, _schema, limit=limit)
+        return [
+            _infon_to_dict(s.infon, s.score, s.context) for s in scored
+        ]
     except Exception as e:
-        # Return error as dict (graceful handling)
         return [{"error": str(e), "query": query}]
 
 

@@ -290,17 +290,22 @@ def ingest(incremental: bool, db: Path | None):
 
 
 @cli.command()
-def serve():
+@click.option(
+    "--db",
+    type=click.Path(path_type=Path),
+    help="Database path (default: .infon/kb.ddb)"
+)
+def serve(db: Path | None):
     """
     Start MCP server for Claude Code integration.
-    
+
     Runs the FastMCP server on stdio for use with Claude Desktop.
     """
-    click.echo("Starting infon MCP server...")
-    
-    # TODO: Implement MCP server once Phase 9 is complete
-    click.echo("MCP server not yet implemented (Phase 9)")
-    click.echo("Run 'infon serve --help' for more information when available.")
+    db_path = ensure_store_exists(db)
+
+    from infon.mcp.server import run_server
+
+    run_server(str(db_path))
 
 
 def write_mcp_config(repo_path: Path):

@@ -95,7 +95,7 @@ This is a **hard rule**. All tests must use **real dependencies**:
 
 - ✅ **Use real DuckDB databases** (temporary files in tests)
 - ✅ **Use real file systems** (temporary directories via `tmp_path` fixture)
-- ✅ **Use real SPLADE models** (bundled with transformers)
+- ✅ **Use real SPLADE models** (fetched from the HuggingFace Hub on first run, then cached)
 - ✅ **Use real tree-sitter parsers**
 
 - ❌ **No `mock`, `MagicMock`, `stub`, or `patch`**
