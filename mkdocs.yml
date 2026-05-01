@@ -33,6 +33,7 @@ theme:
 nav:
   - Home: index.md
   - Getting Started:
+      - Quickstart (Claude Code): quickstart.md
       - Installation: installation.md
       - Concepts: concepts.md
   - Usage:
