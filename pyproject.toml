@@ -66,3 +66,9 @@ ignore = ["E501"]
 [tool.mypy]
 strict = true
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "smoke: end-to-end smoke tests; slow because they exercise the SPLADE encoder",
+]
