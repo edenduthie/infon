@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **CLI search no longer returns "No results found" for natural-language
+  queries.** `infon search` was a TODO stub doing literal triple matching;
+  now wired to `retrieve()` with file:line grounding output. (infon-84t.14)
+- **Ingest now runs consolidation.** `infon init` and `infon ingest` no
+  longer leave the Edges and Constraints tables empty — both call
+  `consolidate(store, schema)` after extraction. (infon-84t.15)
+- **Documents are registered during ingest.** `.md`/`.rst`/`.txt` files
+  walked by `_register_documents` populate the documents table so
+  `infon stats` reports a non-zero count. Triple extraction from doc
+  text remains gated on richer schemas (deferred to v0.1.2).
+  (infon-84t.16)
+- **Consistent infon counts.** `infon init` no longer prints two
+  different infon counts (the per-extractor count vs `store.stats()`);
+  a shared `_print_stats` helper is the single source of truth.
+  (infon-84t.17)
+- **DuckDB TIMESTAMPTZ no longer aborts ingest.** Added `pytz` to
+  runtime dependencies — without it `store.upsert()` failed mid-batch
+  with `ModuleNotFoundError: No module named 'pytz'`. (infon-84t.13)
+
+### Added
+
+- **Keyword fallback in `retrieve()`.** When SPLADE produces no anchor
+  candidates (typical with the relation-only default schema), retrieval
+  falls back to stop-word-filtered keyword matching against
+  subject/predicate/object so search is useful from day one without
+  schema discovery.
+- **Keyword bonus in SPLADE-path scoring.** Multiplies relevance score
+  by `(1 + fraction_of_query_tokens_matched)` so queries like
+  "what calls InfonStore" surface InfonStore-mentioning infons rather
+  than every "calls" infon at uniform score.
+- **End-to-end smoke tests.** `tests/test_cli_smoke.py` and
+  `tests/test_mcp_smoke.py` spawn the CLI and MCP server as subprocesses
+  against a real populated kb to catch regressions where commands
+  silently fall through to stubs.
+- **CLI search output format.** Each result shows score, the
+  `subject -> [predicate] -> object` triple, file:line grounding, and a
+  preview of NEXT-edge neighbors so users can navigate temporal
+  context.
+
 ## [0.1.0] - 2026-05-01
 
 Initial public release of infon, an information-network memory system that
