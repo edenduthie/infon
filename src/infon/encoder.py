@@ -216,24 +216,34 @@ def _get_encoder() -> SpladeEncoder:
 
 
 def encode(text: str, schema: AnchorSchema) -> dict[str, float]:
-    """Encode text to anchor space (end-to-end).
+    """Encode text to anchor space (end-to-end, single text).
 
-    Combines SPLADE encoding and anchor projection in a single call.
+    For pipelines that encode many texts (text-extraction over docstrings,
+    schema discovery), prefer ``encode_batch`` — batching collapses the
+    per-text Python + tokenizer overhead and is 5-10x faster on CPU.
+    """
+    return encode_batch([text], schema)[0]
+
+
+def encode_batch(
+    texts: list[str], schema: AnchorSchema, *, batch_size: int = 32
+) -> list[dict[str, float]]:
+    """Encode many texts to anchor space in batched forward passes.
+
+    Each text becomes a dict ``{anchor_key: activation}`` containing only
+    non-zero activations. Empty / whitespace-only inputs map to ``{}``.
 
     Args:
-        text: Input text to encode
-        schema: AnchorSchema defining the target anchor space
+        texts: List of input strings to encode.
+        schema: AnchorSchema defining the target anchor space.
+        batch_size: Texts per SPLADE forward pass (default 32; larger
+            helps on GPU but blows up CPU memory).
 
     Returns:
-        Dict mapping anchor_key -> activation (non-zero only)
+        List of anchor-space dicts, one per input, in input order.
     """
     encoder = _get_encoder()
     projector = AnchorProjector(encoder.tokenizer)
 
-    # Stage 1: Encode to SPLADE space
-    sparse_vector = encoder.encode_sparse(text)
-
-    # Stage 2: Project to anchor space
-    anchor_vector = projector.project(sparse_vector, schema)
-
-    return anchor_vector
+    sparse_vectors = encoder.encode_sparse_batch(texts, batch_size=batch_size)
+    return [projector.project(sv, schema) for sv in sparse_vectors]

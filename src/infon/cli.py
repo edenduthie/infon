@@ -320,24 +320,35 @@ def _register_documents(repo_path: Path, store: InfonStore) -> int:
     return count
 
 
+# Stricter SPLADE-extraction thresholds for code-mode (docstrings + repo
+# markdown). The spec defaults (threshold=0.1, top_k=5) target natural-
+# language paragraphs and produce a runaway cartesian product of triples
+# on docstring-style text — on the infon repo itself the relaxed defaults
+# yielded ~38k infons from docstrings alone, dominating the kb and
+# diluting search ranking. These tighter values cut the per-sentence
+# triple cap from 250 to 54 and require activations to be meaningful
+# rather than incidental.
+_CODE_MODE_EXTRACT_THRESHOLD: float = 0.3
+_CODE_MODE_EXTRACT_TOP_K: int = 3
+
+
 def _extract_python_docstrings(
     repo_path: Path, store: InfonStore, schema: AnchorSchema
 ) -> int:
-    """Walk .py files, extract module/class/function docstrings via Python's
-    stdlib ``ast``, and convert each docstring to text infons.
+    """Collect every module/class/function docstring across the repo, then
+    run them through ``extract_text_batch`` in one batched SPLADE pass.
 
-    We use stdlib ``ast`` (not tree-sitter) here because ``ast.get_docstring``
-    handles the "first string literal in body" convention correctly across
-    classes, functions, and async functions, and we don't need the full
-    incremental parsing that tree-sitter provides for code structure.
+    Using stdlib ``ast.get_docstring`` (not tree-sitter) because it handles
+    the "first string literal in body" convention correctly across classes,
+    functions, and async functions; we don't need incremental parsing here.
 
-    Files that fail to parse (Python 2 syntax in fixtures, etc.) are
-    skipped with a warning — partial coverage beats no coverage.
+    Files that fail to parse (Python 2 syntax in fixtures, weird encoding)
+    are skipped with a warning — partial coverage beats no coverage.
     """
     import ast as _ast
-    from infon.extract import extract_text
+    from infon.extract import extract_text_batch
 
-    count = 0
+    items: list[tuple[str, str]] = []
     for py_path in _walk_python_files(repo_path):
         try:
             source = py_path.read_text(encoding="utf-8", errors="replace")
@@ -347,7 +358,6 @@ def _extract_python_docstrings(
             continue
 
         rel = str(py_path.relative_to(repo_path))
-        # Module-level docstring
         for node in [tree, *_ast.walk(tree)]:
             if not isinstance(
                 node,
@@ -357,40 +367,45 @@ def _extract_python_docstrings(
             doc = _ast.get_docstring(node)
             if not doc:
                 continue
-            # Build a stable doc_id that points back at the source location.
             node_name = (
                 "<module>"
                 if isinstance(node, _ast.Module)
                 else getattr(node, "name", "<unknown>")
             )
-            doc_id = f"{rel}:{node_name}"
-            try:
-                infons = extract_text(doc, doc_id, schema)
-            except Exception as e:
-                click.echo(
-                    f"  Warning: docstring extraction failed for "
-                    f"{doc_id}: {e}",
-                    err=True,
-                )
-                continue
-            for infon in infons:
-                store.upsert(infon)
-                count += 1
-    return count
+            items.append((doc, f"{rel}:{node_name}"))
+
+    if not items:
+        return 0
+
+    try:
+        infons = extract_text_batch(
+            items,
+            schema,
+            threshold=_CODE_MODE_EXTRACT_THRESHOLD,
+            top_k=_CODE_MODE_EXTRACT_TOP_K,
+        )
+    except Exception as e:
+        click.echo(f"  Warning: batched docstring extraction failed: {e}", err=True)
+        return 0
+
+    for infon in infons:
+        store.upsert(infon)
+    return len(infons)
 
 
 def _extract_document_text(
     repo_path: Path, store: InfonStore, schema: AnchorSchema
 ) -> int:
-    """Read each .md/.rst/.txt file and run extract_text() over its content.
+    """Run ``extract_text_batch`` over every .md/.rst/.txt file's content,
+    using stricter code-mode thresholds.
 
     Document registration in ``_register_documents`` runs first and writes
     the path/token_count metadata; this pass adds the actual content infons
     grounded in those documents.
     """
-    from infon.extract import extract_text
+    from infon.extract import extract_text_batch
 
-    count = 0
+    items: list[tuple[str, str]] = []
     for path in _walk_for_documents(repo_path):
         try:
             text = path.read_text(encoding="utf-8", errors="replace")
@@ -399,18 +414,25 @@ def _extract_document_text(
         if not text.strip():
             continue
         doc_id = str(path.relative_to(repo_path))
-        try:
-            infons = extract_text(text, doc_id, schema)
-        except Exception as e:
-            click.echo(
-                f"  Warning: text extraction failed for {doc_id}: {e}",
-                err=True,
-            )
-            continue
-        for infon in infons:
-            store.upsert(infon)
-            count += 1
-    return count
+        items.append((text, doc_id))
+
+    if not items:
+        return 0
+
+    try:
+        infons = extract_text_batch(
+            items,
+            schema,
+            threshold=_CODE_MODE_EXTRACT_THRESHOLD,
+            top_k=_CODE_MODE_EXTRACT_TOP_K,
+        )
+    except Exception as e:
+        click.echo(f"  Warning: batched text extraction failed: {e}", err=True)
+        return 0
+
+    for infon in infons:
+        store.upsert(infon)
+    return len(infons)
 
 
 def _walk_python_files(repo_path: Path) -> list[Path]:

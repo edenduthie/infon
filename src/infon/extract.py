@@ -18,7 +18,7 @@ import uuid
 from datetime import UTC, datetime
 from itertools import product
 
-from infon.encoder import encode
+from infon.encoder import encode, encode_batch
 from infon.grounding import Grounding, TextGrounding
 from infon.infon import ImportanceScore, Infon
 from infon.schema import AnchorSchema
@@ -255,97 +255,138 @@ def _score_importance(
     )
 
 
-def extract_text(text: str, doc_id: str, schema: AnchorSchema) -> list[Infon]:
-    """Extract Infons from natural language text.
-    
-    Processes text through the full extraction pipeline:
-    1. Split into sentences
-    2. Encode each sentence to anchor space
-    3. Form triples from activated anchors
-    4. Find spans, detect negation, classify tense
-    5. Score importance
-    6. Construct Infon instances with TextGrounding
-    
+def extract_text(
+    text: str,
+    doc_id: str,
+    schema: AnchorSchema,
+    *,
+    threshold: float = DEFAULT_ACTIVATION_THRESHOLD,
+    top_k: int = DEFAULT_TOP_K,
+) -> list[Infon]:
+    """Extract Infons from a single text document.
+
+    For ingest pipelines that extract from many documents at once
+    (docstrings, markdown files), prefer :func:`extract_text_batch` —
+    batching the SPLADE encoder across sentences from all documents is
+    significantly faster on CPU.
+
     Args:
-        text: Natural language text to extract from
-        doc_id: Document identifier for grounding
-        schema: AnchorSchema defining the anchor vocabulary
-        
-    Returns:
-        List of extracted Infon instances (empty if no valid triples found)
+        text: Source text.
+        doc_id: Stable identifier for this document (used in grounding).
+        schema: Anchor schema.
+        threshold: Minimum SPLADE activation for an anchor to be considered
+            (default 0.1, the spec value). Pass a higher value (e.g. 0.3)
+            for code-mode ingest where the cartesian-product triple
+            formation otherwise produces too much noise.
+        top_k: Max anchors per type kept for triple formation (default 5).
+            Smaller values cap the explosion of triples per sentence.
     """
-    # Stage 1: Sentence splitting
-    sentences = _split_sentences(text)
-    
-    if not sentences:
+    return extract_text_batch(
+        [(text, doc_id)], schema, threshold=threshold, top_k=top_k
+    )
+
+
+def extract_text_batch(
+    items: list[tuple[str, str]],
+    schema: AnchorSchema,
+    *,
+    threshold: float = DEFAULT_ACTIVATION_THRESHOLD,
+    top_k: int = DEFAULT_TOP_K,
+) -> list[Infon]:
+    """Extract Infons from many ``(text, doc_id)`` pairs in one batched pass.
+
+    All sentences across all input documents are collected up-front and
+    encoded through SPLADE in batches. This collapses the per-sentence
+    Python + tokenizer overhead that dominated the per-document
+    ``extract_text`` path and is the single largest CPU win for the deep
+    init pipeline (docstring + markdown extraction).
+
+    Args:
+        items: List of ``(text, doc_id)`` pairs.
+        schema: Anchor schema.
+        threshold: Minimum SPLADE activation for an anchor to be retained.
+        top_k: Max anchors per type kept for triple formation.
+
+    Returns:
+        Flat list of Infon instances, in document-then-sentence order.
+    """
+    if not items:
         return []
-    
-    infons = []
-    
-    # Process each sentence
-    for sent_id, sentence in enumerate(sentences):
-        # Stage 2: SPLADE encoding to anchor space
-        anchor_activations = encode(sentence, schema)
-        
+
+    # 1) Split every document into sentences while remembering which doc
+    #    and which sentence-position each came from. We carry the total
+    #    sentence count per doc so importance scoring sees the right
+    #    "position in document" denominator.
+    flat_sentences: list[str] = []
+    flat_meta: list[tuple[str, int, int]] = []  # (doc_id, sent_id, total_sentences_in_doc)
+    for text, doc_id in items:
+        sentences = _split_sentences(text)
+        if not sentences:
+            continue
+        total = len(sentences)
+        for sent_id, sentence in enumerate(sentences):
+            flat_sentences.append(sentence)
+            flat_meta.append((doc_id, sent_id, total))
+
+    if not flat_sentences:
+        return []
+
+    # 2) Batched SPLADE → anchor-space activations for every sentence.
+    activations_list = encode_batch(flat_sentences, schema)
+
+    # 3) Per-sentence: form triples, build infons.
+    import math
+
+    infons: list[Infon] = []
+    for sentence, (doc_id, sent_id, total_sents), anchor_activations in zip(
+        flat_sentences, flat_meta, activations_list
+    ):
         if not anchor_activations:
             continue
-        
-        # Stage 3: Triple formation
-        triples = _form_triples(anchor_activations, schema)
-        
+
+        triples = _form_triples(
+            anchor_activations, schema, threshold=threshold, top_k=top_k
+        )
         if not triples:
             continue
-        
-        # Stage 4-8: Process each triple
+
         for subject, predicate, obj, min_activation in triples:
-            # Stage 4: Span finding
-            subj_span = _find_spans(sentence, subject, schema)
             pred_span = _find_spans(sentence, predicate, schema)
-            obj_span = _find_spans(sentence, obj, schema)
-            
-            # Stage 5: Negation detection
             is_negated = _detect_negation(sentence, pred_span)
-            polarity = not is_negated  # True = affirmative, False = negated
-            
-            # Stage 6: Tense/aspect classification
-            tense_info = _classify_tense(sentence)
-            
-            # Stage 7: Importance scoring
+            polarity = not is_negated
+
             importance = _score_importance(
                 activation=min_activation,
                 sentence_position=sent_id,
-                total_sentences=len(sentences),
+                total_sentences=total_sents,
             )
-            
-            # Stage 8: Infon construction
+
             text_grounding = TextGrounding(
                 grounding_type="text",
                 doc_id=doc_id,
                 sent_id=sent_id,
-                char_start=0,  # Use sentence start for now
-                char_end=len(sentence),  # Use sentence end for now
+                char_start=0,
+                char_end=len(sentence),
                 sentence_text=sentence,
             )
             grounding = Grounding(root=text_grounding)
-            
-            # Confidence is based on minimum activation, normalized to [0, 1]
-            import math
+
             confidence = min(1.0, max(0.0, math.tanh(min_activation / 2.0)))
-            
-            infon = Infon(
-                id=str(uuid.uuid4()),
-                subject=subject,
-                predicate=predicate,
-                object=obj,
-                polarity=polarity,
-                grounding=grounding,
-                confidence=confidence,
-                timestamp=datetime.now(UTC),
-                importance=importance,
-                kind="extracted",
-                reinforcement_count=1,
+
+            infons.append(
+                Infon(
+                    id=str(uuid.uuid4()),
+                    subject=subject,
+                    predicate=predicate,
+                    object=obj,
+                    polarity=polarity,
+                    grounding=grounding,
+                    confidence=confidence,
+                    timestamp=datetime.now(UTC),
+                    importance=importance,
+                    kind="extracted",
+                    reinforcement_count=1,
+                )
             )
-            
-            infons.append(infon)
-    
+
     return infons

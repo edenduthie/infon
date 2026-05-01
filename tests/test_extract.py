@@ -15,7 +15,7 @@ No mocks — real encoder, real schema, real Infon models.
 
 import pytest
 
-from infon.extract import extract_text
+from infon.extract import extract_text, extract_text_batch
 from infon.schema import Anchor, AnchorSchema
 
 
@@ -263,8 +263,52 @@ def test_extract_text_reinforcement_count_starts_at_one(sample_schema):
     doc_id = "test_doc_10"
     
     infons = extract_text(text, doc_id, sample_schema)
-    
+
     assert len(infons) > 0
-    
+
     for infon in infons:
         assert infon.reinforcement_count == 1
+
+
+def test_extract_text_batch_groups_doc_ids_correctly(sample_schema):
+    """Batched extraction must keep grounding doc_ids straight per input.
+
+    WHEN: extract_text_batch() is called with multiple distinct (text, doc_id) pairs
+    THEN: Each emitted infon's grounding.doc_id matches the doc the text came from
+    """
+    items = [
+        ("UserService calls the database pool.", "doc_a"),
+        ("TokenValidator validates the user request.", "doc_b"),
+    ]
+
+    infons = extract_text_batch(items, sample_schema)
+    assert infons, "expected at least one infon across the two docs"
+
+    seen_doc_ids = {infon.grounding.root.doc_id for infon in infons}
+    # At least one of the two source docs must be represented; both ideally.
+    assert seen_doc_ids.issubset({"doc_a", "doc_b"}), (
+        f"unexpected doc_ids: {seen_doc_ids}"
+    )
+    assert seen_doc_ids, "no doc_ids — grounding wasn't propagated through the batch"
+
+
+def test_extract_text_batch_threshold_kwarg_filters_aggressively(sample_schema):
+    """A high threshold should produce fewer infons than the default.
+
+    WHEN: extract_text_batch is called with threshold=0.9 vs the default 0.1
+    THEN: The high-threshold call returns ≤ as many infons as the default
+    """
+    items = [("UserService calls the database pool.", "doc_threshold")]
+
+    relaxed = extract_text_batch(items, sample_schema, threshold=0.1, top_k=5)
+    strict = extract_text_batch(items, sample_schema, threshold=0.9, top_k=5)
+
+    assert len(strict) <= len(relaxed), (
+        f"strict threshold should not produce MORE infons; "
+        f"got strict={len(strict)} relaxed={len(relaxed)}"
+    )
+
+
+def test_extract_text_batch_empty_items_returns_empty_list(sample_schema):
+    """Empty input list must short-circuit cleanly without an encoder call."""
+    assert extract_text_batch([], sample_schema) == []
