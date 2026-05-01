@@ -391,7 +391,7 @@ All development follows strict TDD with **no mocks** (real dependencies only).
 
 - ✅ Phase 1-11: Core implementation (infon model, storage, extraction, retrieval, MCP server)
 - ✅ Phase 12: Complete documentation site
-- 🚧 Phase 13: Production readiness (packaging, CI/CD, publishing to PyPI)
+- 🟡 Phase 13: Packaging code-complete (v0.1.0 wheel builds, installs, and serves MCP). PyPI publish + 5 CLI integration bugs (search stub, ingest doesn't call consolidate/extract_text) deferred to v0.1.1.
 - 🔮 Future: Rust, Go, Java extractors; graph visualization; distributed deployment
 
 ---
