@@ -89,23 +89,29 @@ For `language=code`, the `AnchorSchema` SHALL always include the eight built-in 
 
 The `infon` package SHALL implement a two-stage encoder that re-expresses text from BERT's 30,522-dimensional token vocabulary into the domain's anchor concept space.
 
-**Stage 1 — SpladeEncoder:** Uses the bundled `splade-tiny` model (4.4M params, Apache 2.0, bundled inside the wheel at `infon/models/splade-tiny/`). Given a string, it SHALL produce a sparse 30,522-dimensional vector via `log(1 + ReLU(MLM_logits))` max-pooled across token positions. The output SHALL be a dict mapping `{token_id: float}` containing only non-zero activations.
+**Stage 1 — SpladeEncoder:** Fetches a SPLADE model from the HuggingFace Hub on first use (default: `naver/splade-cocondenser-ensembledistil`) and caches it locally via the `transformers` library cache (default: `~/.cache/huggingface`). The model identifier is configurable via the `INFON_SPLADE_MODEL` environment variable or the `model_name` constructor argument to `SpladeEncoder`; either may be a Hub model ID or a local filesystem path to a pre-downloaded model directory. Loading is lazy — model and tokenizer weights are materialised on first encode call, not at import time. Given a string, the encoder SHALL produce a sparse 30,522-dimensional vector via `log(1 + ReLU(MLM_logits))` max-pooled across token positions. The output SHALL be a dict mapping `{token_id: float}` containing only non-zero activations.
 
 **Stage 2 — AnchorProjector:** Given a sparse SPLADE vector and an `AnchorSchema`, it SHALL produce a dense anchor-space vector by max-pooling SPLADE activations over each anchor's `tokens` list. The result is a dict mapping `{anchor_key: float}`.
 
 The combined encoder SHALL be accessible via `encode(text: str, schema: AnchorSchema) -> dict[str, float]`. Encoding SHALL be deterministic and stateless — the same text + schema always produces the same output.
 
-The encoder MUST NOT require network access at runtime. All model weights are loaded from the bundled path on first import and cached in memory.
+The first encode call requires network access to download the model unless the model is already present in the transformers cache or a local path is supplied. After the initial download, subsequent runs operate entirely from the local cache. **Air-gapped deployments** SHALL pre-populate the cache (e.g., `huggingface-cli download naver/splade-cocondenser-ensembledistil`) or pass a local model directory path via `INFON_SPLADE_MODEL=/path/to/model` (or the `model_name` kwarg); in either case the encoder operates without contacting any external service at runtime.
 
 #### Scenario: Text encoded to anchor space
 - **WHEN** `encode("UserService calls the database connection pool", schema)` is called on a schema with anchors `user_service` (tokens: ["userservice", "user_service"]) and `database_pool` (tokens: ["pool", "connection_pool", "database_pool"])
 - **THEN** the returned dict contains non-zero values for both `user_service` and `database_pool`; keys not in the schema are absent
 
-#### Scenario: Model loaded from bundle, not network
-- **WHEN** the encoder is initialised with no network access (e.g., `TRANSFORMERS_OFFLINE=1`)
-- **THEN** it loads successfully from the bundled model path and encodes text correctly; it SHALL NOT attempt to contact HuggingFace or any external service
+#### Scenario: Model loaded from HuggingFace Hub on first use, cached locally
+- **WHEN** `SpladeEncoder()` is instantiated for the first time on a machine with no prior transformers cache and `encode_sparse()` is invoked
+- **THEN** the default model (`naver/splade-cocondenser-ensembledistil`) is downloaded from the HuggingFace Hub and stored in the transformers cache; the encode call returns a non-empty sparse dict
+- **AND WHEN** a second `SpladeEncoder()` is instantiated and used in the same environment
+- **THEN** the model is loaded from the local transformers cache without re-downloading
+- **AND WHEN** `INFON_SPLADE_MODEL` is set to a different Hub ID before instantiation
+- **THEN** that alternate model is used in place of the default
+- **AND WHEN** `model_name` is set to a local filesystem path containing a pre-downloaded model
+- **THEN** the encoder loads weights from that path with no network access required
 
-**Testability:** A test sets `TRANSFORMERS_OFFLINE=1`, loads the model from the bundled path, calls `encode_sparse()` with real text and asserts the output is a non-empty sparse dict, calls `project()` with a real `AnchorSchema` and asserts anchor keys match, and calls the combined `encode()` and verifies output keys are a subset of the schema keys. No mocked model — real model loaded from the bundled files.
+**Testability:** A test instantiates a real `SpladeEncoder` (using the default model from the transformers cache, or a fixture-cached model directory passed via `model_name`), calls `encode_sparse()` with real text and asserts the output is a non-empty sparse dict, calls `project()` with a real `AnchorSchema` and asserts anchor keys match, and calls the combined `encode()` and verifies output keys are a subset of the schema keys. A second test sets `INFON_SPLADE_MODEL` to a local path and asserts the encoder uses it. No mocked model — real model loaded from the HuggingFace cache or a local directory.
 
 ---
 
@@ -441,7 +447,7 @@ The `infon` repository SHALL include GitHub Actions workflows for continuous int
 - Builds the wheel and sdist with `python -m build`
 - Publishes to PyPI using OIDC trusted publishing (no API token stored in secrets)
 
-All tests SHALL be integration tests — no unit tests with mocks. Tests run against a real DuckDB instance (ephemeral, created in a temp directory per test). Tests that require the SPLADE model SHALL use the bundled model. Tests that require a repo to ingest SHALL use the `tests/fixtures/` directory which contains a small synthetic Python + TypeScript codebase.
+All tests SHALL be integration tests — no unit tests with mocks. Tests run against a real DuckDB instance (ephemeral, created in a temp directory per test). Tests that require the SPLADE model SHALL load it from the HuggingFace transformers cache (the CI workflow pre-warms the cache so subsequent runs are offline). Tests that require a repo to ingest SHALL use the `tests/fixtures/` directory which contains a small synthetic Python + TypeScript codebase.
 
 #### Scenario: CI passes on a clean PR
 - **WHEN** a pull request is opened with no test failures and no lint errors
