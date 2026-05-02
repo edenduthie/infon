@@ -743,7 +743,8 @@ class HypergraphReasoner(nn.Module):
             sheaf_weight: float = 0.2,
             grad_clip: float = 1.0,
             patience: int = 8,
-            verbose: bool = False) -> dict:
+            verbose: bool = False,
+            seed: int | None = None) -> dict:
         """Transductive training: fit message passing + readout on this graph.
 
         Uses the existing DS heuristic masses (polarity, triple alignment,
@@ -761,6 +762,36 @@ class HypergraphReasoner(nn.Module):
         - Patience-based early stopping on loss plateau
         - Sheaf coherence as regularization term
 
+        Parameters
+        ----------
+        seed : int | None, default None
+            If provided, pin all relevant RNGs (Python ``random``, NumPy,
+            ``torch``, and CUDA when available) before any random state is
+            consumed in this call, and enable
+            ``torch.use_deterministic_algorithms(True, warn_only=True)``.
+            Two invocations of ``fit`` with the same ``seed`` (and otherwise
+            identical inputs) produce bit-identical loss traces and final
+            masses on CPU. ``seed=None`` is a no-op and preserves the
+            previous (unseeded) behavior exactly.
+
+            Determinism caveats
+            -------------------
+            - On CUDA, certain ops (e.g. atomicAdd accumulators, some pooling
+              layers) lack deterministic implementations.  ``warn_only=True``
+              makes those ops emit a warning instead of erroring; full
+              bit-determinism on GPU may not be achievable for all
+              configurations.  Epic 01 is CPU-only, where determinism is
+              substantially more reliable.
+            - cuBLAS workspace selection on CUDA can introduce
+              non-determinism across runs.  If running on CUDA, also set the
+              environment variable ``CUBLAS_WORKSPACE_CONFIG=:4096:8``
+              **before** the Python process starts.  We deliberately do not
+              mutate this env var from inside ``fit`` because PyTorch reads
+              it during cuBLAS initialization.
+            - The seed pins module-global RNG state (NumPy / torch / random
+              / ``PYTHONHASHSEED``).  Concurrent calls to ``fit`` in the
+              same process are therefore not isolated from each other.
+
         Returns training stats dict.
         """
         from .dempster_shafer import (
@@ -768,6 +799,42 @@ class HypergraphReasoner(nn.Module):
             mass_from_anchor_distance, mass_from_confidence,
         )
         from .category import SheafCoherence
+
+        # ── Seed pinning (must run BEFORE any RNG-consuming op) ────────
+        # This sits at the very top of fit() so it precedes graph
+        # construction, encoder calls (sheaf coherence observes encoder
+        # output), parameter access, optimizer construction, and the
+        # forward pass.  When seed is None this block is a no-op and
+        # production behavior is unchanged.
+        if seed is not None:
+            import os
+            import random
+            os.environ["PYTHONHASHSEED"] = str(seed)
+            random.seed(seed)
+            np.random.seed(seed)
+            torch.manual_seed(seed)
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(seed)
+            # warn_only=True: ops without a deterministic implementation
+            # warn rather than raise; required because some torch ops
+            # we transitively call do not have deterministic kernels.
+            torch.use_deterministic_algorithms(True, warn_only=True)
+
+            # The reasoner's parameters were initialized in __init__ under
+            # whatever ambient RNG state existed then.  For two seeded fits
+            # to be bit-identical the parameters at fit-start must also be
+            # identical, so re-initialize every submodule that exposes the
+            # standard ``reset_parameters`` hook AFTER seeding torch.  This
+            # only runs when seed is not None, so the unseeded path keeps
+            # the constructor's parameter values exactly.
+            def _reset(m: nn.Module) -> None:
+                if m is self:
+                    return
+                reset_fn = getattr(m, "reset_parameters", None)
+                if callable(reset_fn):
+                    reset_fn()
+
+            self.apply(_reset)
 
         if graph is None:
             graph = self.builder.build(max_infons=max_infons,
