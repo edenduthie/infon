@@ -9,6 +9,7 @@ transformers>=4.35
 torch>=2.0
 numpy>=1.24
 scipy>=1.11
+pytz>=2023.3
 
 [dev]
 pytest>=8.0
@@ -17,4 +18,4 @@ pytest-cov>=4.0
 ruff>=0.1
 mypy>=1.5
 mkdocs-material>=9.0
-python-build
+build

@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: cognition
+Version: 0.1.0
+Summary: Document → infon → temporal knowledge graph. SPLADE + schema projection. Local or AWS.
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: torch>=2.0
+Requires-Dist: transformers>=4.40
+Requires-Dist: numpy>=1.24
+Provides-Extra: aws
+Requires-Dist: boto3>=1.28; extra == "aws"
+Provides-Extra: all
+Requires-Dist: boto3>=1.28; extra == "all"

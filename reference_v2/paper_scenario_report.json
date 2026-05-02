@@ -1,0 +1,625 @@
+{
+  "runs": [
+    {
+      "seed": 42,
+      "fit_epochs": 30,
+      "corpus": {
+        "n_docs": 5,
+        "n_infons": 49,
+        "n_constraints": 39,
+        "n_anchors_active": 19,
+        "n_anchors_schema": 19
+      },
+      "graph": {
+        "n_nodes": 68,
+        "n_edges": 294,
+        "n_anchors": 19,
+        "n_infons": 49
+      },
+      "norms": {
+        "input_norm": 8.246211051940918,
+        "layer2_norm": 65.96629333496094,
+        "delta_norm": 66.17806243896484
+      },
+      "training": {
+        "epochs_run": 30,
+        "loss_initial": 0.867328405380249,
+        "loss_final": 0.06968680769205093,
+        "loss_best": 0.06968680769205093,
+        "fiedler": 0.22698528063667206,
+        "early_stopped": false,
+        "n_targets": 49
+      },
+      "queries": [
+        {
+          "query": "Did Toyota invest in battery technology?",
+          "verdict": "SUPPORTS",
+          "S": 0.9867,
+          "R": 0.0107,
+          "U": 0.0011,
+          "theta": 0.0015,
+          "n_relevant": 34
+        },
+        {
+          "query": "Did Honda delay its electric vehicles?",
+          "verdict": "SUPPORTS",
+          "S": 0.9787,
+          "R": 0.0171,
+          "U": 0.0018,
+          "theta": 0.0023,
+          "n_relevant": 28
+        },
+        {
+          "query": "Is Tesla expanding production?",
+          "verdict": "SUPPORTS",
+          "S": 0.9987,
+          "R": 0.0001,
+          "U": 0.0003,
+          "theta": 0.0009,
+          "n_relevant": 21
+        },
+        {
+          "query": "Does CATL produce batteries in China?",
+          "verdict": "SUPPORTS",
+          "S": 0.9996,
+          "R": 0.0,
+          "U": 0.0001,
+          "theta": 0.0003,
+          "n_relevant": 33
+        }
+      ],
+      "refinement": {
+        "infons_updated": 49,
+        "next_edges": 80,
+        "causes_edges": 124,
+        "contradicts_edges": 8,
+        "pairs_evaluated": 192
+      },
+      "discovery": {
+        "n_input_anchors": 19,
+        "n_clusters": 10,
+        "silhouette": 0.8163,
+        "cluster_sizes": [
+          2,
+          1,
+          1,
+          4,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "eigenvalues": [
+          -0.0,
+          0.3913,
+          0.4394,
+          0.6149,
+          0.667,
+          0.7954,
+          0.8367,
+          1.0186,
+          1.0498,
+          1.0807,
+          1.1708
+        ],
+        "clusters": [
+          {
+            "name": "cluster_partners",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "partners",
+              "expands"
+            ],
+            "coherence": 0.0876
+          },
+          {
+            "name": "cluster_supply_chain",
+            "type": "feature",
+            "size": 1,
+            "members": [
+              "supply_chain"
+            ],
+            "coherence": 0.0
+          },
+          {
+            "name": "cluster_tesla",
+            "type": "actor",
+            "size": 1,
+            "members": [
+              "tesla"
+            ],
+            "coherence": 0.0
+          },
+          {
+            "name": "cluster_factory",
+            "type": "market",
+            "size": 4,
+            "members": [
+              "factory",
+              "japan",
+              "north_america",
+              "china"
+            ],
+            "coherence": 0.2176
+          },
+          {
+            "name": "cluster_acquires",
+            "type": "relation",
+            "size": 1,
+            "members": [
+              "acquires"
+            ],
+            "coherence": 0.0
+          },
+          {
+            "name": "cluster_produces",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "produces",
+              "delays"
+            ],
+            "coherence": 0.1691
+          },
+          {
+            "name": "cluster_toyota",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "toyota",
+              "honda"
+            ],
+            "coherence": 0.4203
+          },
+          {
+            "name": "cluster_battery",
+            "type": "feature",
+            "size": 2,
+            "members": [
+              "battery",
+              "solid_state"
+            ],
+            "coherence": 0.1261
+          },
+          {
+            "name": "cluster_invests",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "invests",
+              "ev"
+            ],
+            "coherence": 0.131
+          },
+          {
+            "name": "cluster_panasonic",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "panasonic",
+              "catl"
+            ],
+            "coherence": 0.2902
+          }
+        ]
+      }
+    },
+    {
+      "seed": 0,
+      "fit_epochs": 30,
+      "corpus": {
+        "n_docs": 5,
+        "n_infons": 49,
+        "n_constraints": 39,
+        "n_anchors_active": 19,
+        "n_anchors_schema": 19
+      },
+      "graph": {
+        "n_nodes": 68,
+        "n_edges": 294,
+        "n_anchors": 19,
+        "n_infons": 49
+      },
+      "norms": {
+        "input_norm": 8.246211051940918,
+        "layer2_norm": 65.9666976928711,
+        "delta_norm": 66.45137786865234
+      },
+      "training": {
+        "epochs_run": 30,
+        "loss_initial": 0.8606948852539062,
+        "loss_final": 0.07186117023229599,
+        "loss_best": 0.07186117023229599,
+        "fiedler": 0.22698528063667206,
+        "early_stopped": false,
+        "n_targets": 49
+      },
+      "queries": [
+        {
+          "query": "Did Toyota invest in battery technology?",
+          "verdict": "SUPPORTS",
+          "S": 0.9824,
+          "R": 0.0145,
+          "U": 0.0014,
+          "theta": 0.0017,
+          "n_relevant": 34
+        },
+        {
+          "query": "Did Honda delay its electric vehicles?",
+          "verdict": "SUPPORTS",
+          "S": 0.9772,
+          "R": 0.019,
+          "U": 0.0018,
+          "theta": 0.002,
+          "n_relevant": 28
+        },
+        {
+          "query": "Is Tesla expanding production?",
+          "verdict": "SUPPORTS",
+          "S": 0.9982,
+          "R": 0.0001,
+          "U": 0.0004,
+          "theta": 0.0012,
+          "n_relevant": 21
+        },
+        {
+          "query": "Does CATL produce batteries in China?",
+          "verdict": "SUPPORTS",
+          "S": 0.9995,
+          "R": 0.0001,
+          "U": 0.0001,
+          "theta": 0.0003,
+          "n_relevant": 33
+        }
+      ],
+      "refinement": {
+        "infons_updated": 49,
+        "next_edges": 80,
+        "causes_edges": 124,
+        "contradicts_edges": 8,
+        "pairs_evaluated": 192
+      },
+      "discovery": {
+        "n_input_anchors": 19,
+        "n_clusters": 10,
+        "silhouette": 0.8087,
+        "cluster_sizes": [
+          2,
+          2,
+          2,
+          2,
+          3,
+          2,
+          1,
+          2,
+          1,
+          2
+        ],
+        "eigenvalues": [
+          0.0,
+          0.2772,
+          0.5421,
+          0.6868,
+          0.7148,
+          0.7954,
+          0.8555,
+          0.9449,
+          0.9876,
+          1.0923,
+          1.1355
+        ],
+        "clusters": [
+          {
+            "name": "cluster_honda",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "honda",
+              "partners"
+            ],
+            "coherence": 0.1985
+          },
+          {
+            "name": "cluster_factory",
+            "type": "feature",
+            "size": 2,
+            "members": [
+              "factory",
+              "supply_chain"
+            ],
+            "coherence": 0.1849
+          },
+          {
+            "name": "cluster_catl",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "catl",
+              "invests"
+            ],
+            "coherence": 0.1728
+          },
+          {
+            "name": "cluster_japan",
+            "type": "market",
+            "size": 2,
+            "members": [
+              "japan",
+              "china"
+            ],
+            "coherence": 0.206
+          },
+          {
+            "name": "cluster_battery",
+            "type": "feature",
+            "size": 3,
+            "members": [
+              "expands",
+              "battery",
+              "solid_state"
+            ],
+            "coherence": 0.0646
+          },
+          {
+            "name": "cluster_panasonic",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "panasonic",
+              "delays"
+            ],
+            "coherence": 0.1682
+          },
+          {
+            "name": "cluster_north_america",
+            "type": "market",
+            "size": 1,
+            "members": [
+              "north_america"
+            ],
+            "coherence": 0.0
+          },
+          {
+            "name": "cluster_acquires",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "acquires",
+              "ev"
+            ],
+            "coherence": 0.1678
+          },
+          {
+            "name": "cluster_produces",
+            "type": "relation",
+            "size": 1,
+            "members": [
+              "produces"
+            ],
+            "coherence": 0.0
+          },
+          {
+            "name": "cluster_toyota",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "toyota",
+              "tesla"
+            ],
+            "coherence": 0.2887
+          }
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "fit_epochs": 30,
+      "corpus": {
+        "n_docs": 5,
+        "n_infons": 49,
+        "n_constraints": 39,
+        "n_anchors_active": 19,
+        "n_anchors_schema": 19
+      },
+      "graph": {
+        "n_nodes": 68,
+        "n_edges": 294,
+        "n_anchors": 19,
+        "n_infons": 49
+      },
+      "norms": {
+        "input_norm": 8.246211051940918,
+        "layer2_norm": 65.96659088134766,
+        "delta_norm": 65.6239013671875
+      },
+      "training": {
+        "epochs_run": 30,
+        "loss_initial": 0.8650766611099243,
+        "loss_final": 0.06745554506778717,
+        "loss_best": 0.06745554506778717,
+        "fiedler": 0.22698528063667206,
+        "early_stopped": false,
+        "n_targets": 49
+      },
+      "queries": [
+        {
+          "query": "Did Toyota invest in battery technology?",
+          "verdict": "SUPPORTS",
+          "S": 0.9861,
+          "R": 0.0111,
+          "U": 0.0013,
+          "theta": 0.0015,
+          "n_relevant": 34
+        },
+        {
+          "query": "Did Honda delay its electric vehicles?",
+          "verdict": "SUPPORTS",
+          "S": 0.9797,
+          "R": 0.0163,
+          "U": 0.0019,
+          "theta": 0.0021,
+          "n_relevant": 28
+        },
+        {
+          "query": "Is Tesla expanding production?",
+          "verdict": "SUPPORTS",
+          "S": 0.999,
+          "R": 0.0,
+          "U": 0.0003,
+          "theta": 0.0007,
+          "n_relevant": 21
+        },
+        {
+          "query": "Does CATL produce batteries in China?",
+          "verdict": "SUPPORTS",
+          "S": 0.9996,
+          "R": 0.0,
+          "U": 0.0001,
+          "theta": 0.0003,
+          "n_relevant": 33
+        }
+      ],
+      "refinement": {
+        "infons_updated": 49,
+        "next_edges": 80,
+        "causes_edges": 124,
+        "contradicts_edges": 8,
+        "pairs_evaluated": 192
+      },
+      "discovery": {
+        "n_input_anchors": 19,
+        "n_clusters": 10,
+        "silhouette": 0.6526,
+        "cluster_sizes": [
+          2,
+          3,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "eigenvalues": [
+          0.0,
+          0.2563,
+          0.5657,
+          0.7201,
+          0.7959,
+          0.8951,
+          0.977,
+          1.0125,
+          1.1247,
+          1.1389,
+          1.1635
+        ],
+        "clusters": [
+          {
+            "name": "cluster_invests",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "invests",
+              "partners"
+            ],
+            "coherence": 0.0946
+          },
+          {
+            "name": "cluster_supply_chain",
+            "type": "feature",
+            "size": 3,
+            "members": [
+              "factory",
+              "supply_chain",
+              "china"
+            ],
+            "coherence": 0.1426
+          },
+          {
+            "name": "cluster_tesla",
+            "type": "actor",
+            "size": 1,
+            "members": [
+              "tesla"
+            ],
+            "coherence": 0.0
+          },
+          {
+            "name": "cluster_expands",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "expands",
+              "japan"
+            ],
+            "coherence": 0.174
+          },
+          {
+            "name": "cluster_acquires",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "acquires",
+              "ev"
+            ],
+            "coherence": 0.2083
+          },
+          {
+            "name": "cluster_produces",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "produces",
+              "battery"
+            ],
+            "coherence": 0.14
+          },
+          {
+            "name": "cluster_toyota",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "toyota",
+              "north_america"
+            ],
+            "coherence": 0.1019
+          },
+          {
+            "name": "cluster_delays",
+            "type": "relation",
+            "size": 2,
+            "members": [
+              "delays",
+              "solid_state"
+            ],
+            "coherence": 0.1082
+          },
+          {
+            "name": "cluster_honda",
+            "type": "actor",
+            "size": 2,
+            "members": [
+              "honda",
+              "catl"
+            ],
+            "coherence": 0.2299
+          },
+          {
+            "name": "cluster_panasonic",
+            "type": "actor",
+            "size": 1,
+            "members": [
+              "panasonic"
+            ],
+            "coherence": 0.0
+          }
+        ]
+      }
+    }
+  ]
+}
