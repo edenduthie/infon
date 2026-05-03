@@ -1,0 +1,38 @@
+# Baseline fixture for the A.6 red test (test_experiment_runner.py).
+#
+# This file IS the schema contract that A.7 must ship. It is intentionally
+# minimal but spec-aligned (one seed, default fusion, default cap) so that:
+#
+#   1. A.6's test_run_writes_json_report can fit a reasoner once and
+#      assert the JSON report shape on a single seed.
+#   2. A.7's experiments/configs/baseline.yaml can extend this file shape
+#      (same top-level keys + version metadata + rationale).
+#
+# Schema (locked by A.6 → consumed by A.6b → committed by A.7):
+#
+#   name: str                       — config identifier; output JSON is
+#                                     written to <output_dir>/<name>__seed=<seed>.json
+#   version: str                    — semver-style metadata
+#   rationale: str                  — one-line free text
+#   seeds: list[int]                — pinned seeds; the runner iterates
+#                                     these and writes one JSON per seed.
+#                                     Either `seeds:` or a single `seed:` is
+#                                     required; absent ⇒ ConfigError.
+#   coherence_weight: float         — sheaf regularizer weight (CognitionConfig)
+#   fusion_rule: str                — one of {dempster, yager, murphy, top1}
+#   decisive_top_k: int             — fusion cap (CognitionConfig, default 3 post-A.5b)
+#   activation_threshold: float     — CognitionConfig.activation_threshold
+#   log_per_infon_masses: bool      — toggles A.3b's diagnostic log
+#
+# Reference: openspec/changes/epic-01-stabilize-theta/spec.md
+#            Requirements: Configuration Sweeps, Canonical Configuration
+
+name: test_baseline
+version: "0.0.0"
+rationale: "Tiny fixture for A.6 red test"
+seeds: [42]
+coherence_weight: 0.2
+fusion_rule: dempster
+decisive_top_k: 3
+activation_threshold: 0.2
+log_per_infon_masses: true
