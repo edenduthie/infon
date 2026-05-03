@@ -41,6 +41,7 @@ from __future__ import annotations
 import json
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import numpy as np
 from pathlib import Path
 from dataclasses import dataclass
@@ -413,3 +414,92 @@ def _detect_relation_type(text: str) -> int:
         return 3
     # None
     return 4
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# ABLATION READOUT HEADS (Epic 02)
+# ═══════════════════════════════════════════════════════════════════════
+
+class SoftmaxTemperatureReadout(nn.Module):
+    """3-way softmax readout with post-hoc temperature scaling.
+
+    Reference: Guo et al. 2017 "On Calibration of Modern Neural Networks"
+
+    Produces a 4-element mass vector [m(S), m(R), m(U), m(Theta)].
+    m(U) and m(Theta) are zero by construction; temperature is fit on a
+    held-out 10% slice after training.
+    """
+
+    def __init__(self, hidden_dim: int):
+        super().__init__()
+        self.readout = nn.Linear(hidden_dim, 3)
+        self.temperature = nn.Parameter(torch.ones(1))  # learnable temperature
+
+    def forward(self, h: torch.Tensor) -> torch.Tensor:
+        """(batch, hidden) -> (batch, 4) mass values; m(U)=m(Theta)=0."""
+        logits = self.readout(h) / self.temperature.clamp(min=0.1)
+        probs_3 = F.softmax(logits, dim=-1)
+        # Pad with zeros for uncertain and theta channels
+        zeros = torch.zeros(h.shape[0], 1, device=h.device, dtype=h.dtype)
+        return torch.cat([probs_3, zeros], dim=-1)
+
+    def to_mass_functions(self, h: torch.Tensor) -> list:
+        """Convert embeddings to MassFunction objects."""
+        masses_tensor = self.forward(h)
+        return [
+            MassFunction(
+                supports=float(row[0]),
+                refutes=float(row[1]),
+                uncertain=float(row[2]),
+                theta=float(row[3]),
+            )
+            for row in masses_tensor.detach().cpu().numpy()
+        ]
+
+
+class DirichletEDLReadout(nn.Module):
+    """Evidential Dirichlet Learning (EDL) readout.
+
+    Reference: Sensoy, M., Kaplan, L., & Kandemir, M. (2018).
+    "Evidential Deep Learning to Quantify Classification Uncertainty."
+    NeurIPS 2018.
+
+    Produces a 4-element mass vector [m(S), m(R), m(U), m(Theta)]
+    where m(Theta) is the subjective logic uncertainty mass.
+    """
+
+    def __init__(self, hidden_dim: int):
+        super().__init__()
+        self.readout = nn.Linear(hidden_dim, 3)
+
+    def forward(self, h: torch.Tensor) -> torch.Tensor:
+        """(batch, hidden) -> (batch, 4) mass values with Dirichlet uncertainty."""
+        # Evidence = softplus(logits) to ensure positivity
+        evidence = F.softplus(self.readout(h))  # shape: (batch, 3)
+        alpha = evidence + 1.0  # Dirichlet concentration
+        S = alpha.sum(dim=-1, keepdim=True)  # strength
+        # Belief masses: b_k = e_k / S
+        beliefs = evidence / S  # (batch, 3)
+        # Uncertainty mass: u = 3 / S (subjective logic)
+        uncertainty = 3.0 / S  # (batch, 1)
+        # Map: supports=beliefs[0], refutes=beliefs[1], uncertain(NEI)=beliefs[2], theta=uncertainty
+        supports = beliefs[:, 0:1]
+        refutes = beliefs[:, 1:2]
+        uncertain = beliefs[:, 2:3]
+        theta = uncertainty
+        # Renormalize to exactly sum to 1
+        total = supports + refutes + uncertain + theta
+        return torch.cat([supports, refutes, uncertain, theta], dim=-1) / total
+
+    def to_mass_functions(self, h: torch.Tensor) -> list:
+        """Convert embeddings to MassFunction objects."""
+        masses_tensor = self.forward(h)
+        return [
+            MassFunction(
+                supports=float(row[0]),
+                refutes=float(row[1]),
+                uncertain=float(row[2]),
+                theta=float(row[3]),
+            )
+            for row in masses_tensor.detach().cpu().numpy()
+        ]

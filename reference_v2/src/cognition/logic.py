@@ -43,6 +43,7 @@ import numpy as np
 
 from .infon import Infon, Edge
 from .dempster_shafer import MassFunction, combine_dempster, combine_multiple
+from .heads import SoftmaxTemperatureReadout, DirichletEDLReadout
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -815,8 +816,10 @@ class HypergraphReasoner(nn.Module):
 
         # Resolve settings from config if provided
         self._aggregator = "typed_ikl"
+        _readout_type = "ds_4mass"
         if config is not None:
             self._aggregator = getattr(config, "aggregator", "typed_ikl")
+            _readout_type = getattr(config, "readout", "ds_4mass")
             log_per_infon_masses = getattr(
                 config, "log_per_infon_masses", log_per_infon_masses
             )
@@ -840,8 +843,13 @@ class HypergraphReasoner(nn.Module):
                                             situation_dim=situation_dim)
                 )
 
-        # Mass readout
-        self.mass_readout = MassReadout(hidden_dim)
+        # Mass readout — selectable via config.readout for Epic 02 ablation
+        if _readout_type == "softmax_temperature":
+            self.mass_readout = SoftmaxTemperatureReadout(hidden_dim)
+        elif _readout_type == "dirichlet_edl":
+            self.mass_readout = DirichletEDLReadout(hidden_dim)
+        else:  # "ds_4mass" (default)
+            self.mass_readout = MassReadout(hidden_dim)
 
         # IKL operators for compound queries
         self.ikl_that = IKLThat(hidden_dim)

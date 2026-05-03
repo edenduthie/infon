@@ -114,6 +114,12 @@ class CognitionConfig:
     # "uniform_mean" = R-GCN-style uniform mean with single W_self
     aggregator: str = "typed_ikl"
 
+    # Readout head for ablation (Epic 02)
+    # "ds_4mass" = current 4-element DS mass head (default)
+    # "softmax_temperature" = 3-way softmax + post-hoc temperature scaling
+    # "dirichlet_edl" = evidential Dirichlet (Sensoy et al. 2018)
+    readout: str = "ds_4mass"
+
     @classmethod
     def local(cls, model_dir: str, db_path: str = "cognition.db",
               schema_path: str | None = None, **kw) -> CognitionConfig:
