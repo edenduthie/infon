@@ -165,14 +165,214 @@ def combine_dempster(m1: MassFunction, m2: MassFunction) -> MassFunction:
     )
 
 
-def combine_multiple(masses: list[MassFunction]) -> MassFunction:
-    """Combine multiple mass functions via iterative Dempster combination."""
+def combine_yager(m1: MassFunction, m2: MassFunction) -> MassFunction:
+    """Yager's rule of combination for two independent mass functions.
+
+    Like Dempster's rule but conflict mass ``K`` (the total mass on
+    pairs ``(B, C)`` with ``B ∩ C = ∅``) is added to ``m(Θ)`` instead of
+    being renormalized away. Captures the intuition: when sources
+    disagree we are MORE ignorant, not more certain.
+
+    Reference:
+        Yager, R.R. (1987). "On the Dempster-Shafer framework and new
+        combination rules." Information Sciences 41(2): 93–137.
+
+    Examples:
+        >>> a = MassFunction(supports=0.9, theta=0.1)
+        >>> b = MassFunction(refutes=0.9, theta=0.1)
+        >>> r = combine_yager(a, b)
+        >>> round(r.theta, 4)  # K = 0.81 + small Θ-products → mostly Θ
+        0.82
+        >>> round(r.supports + r.refutes + r.uncertain + r.theta, 6)
+        1.0
+
+    The intersection table mirrors ``combine_dempster``: in this frame
+    the three singletons SUPPORTS / REFUTES / UNCERTAIN are pairwise
+    disjoint, and Θ acts as the identity (Θ ∩ X = X for every focal X).
+    """
+    combined = {"supports": 0.0, "refutes": 0.0, "uncertain": 0.0, "theta": 0.0}
+    conflict = 0.0
+
+    m1_masses = [
+        (SUPPORTS, m1.supports),
+        (REFUTES, m1.refutes),
+        (UNCERTAIN, m1.uncertain),
+        (THETA, m1.theta),
+    ]
+    m2_masses = [
+        (SUPPORTS, m2.supports),
+        (REFUTES, m2.refutes),
+        (UNCERTAIN, m2.uncertain),
+        (THETA, m2.theta),
+    ]
+
+    for A, a_mass in m1_masses:
+        for B, b_mass in m2_masses:
+            product = a_mass * b_mass
+            if product == 0:
+                continue
+
+            intersection = A & B
+            if not intersection:
+                # Empty intersection → conflict mass routed to Θ (Yager).
+                conflict += product
+            elif intersection == SUPPORTS:
+                combined["supports"] += product
+            elif intersection == REFUTES:
+                combined["refutes"] += product
+            elif intersection == UNCERTAIN:
+                combined["uncertain"] += product
+            elif intersection == THETA:
+                combined["theta"] += product
+            else:
+                # Mirror combine_dempster's partial-overlap routing so the
+                # two rules differ ONLY in conflict handling.
+                if SUPPORTS.issubset(intersection) and len(intersection) < len(THETA):
+                    if REFUTES.issubset(intersection):
+                        combined["theta"] += product
+                    else:
+                        combined["supports"] += product
+                elif REFUTES.issubset(intersection):
+                    combined["refutes"] += product
+                else:
+                    combined["theta"] += product
+
+    # No normalization — conflict mass is added to Θ.
+    return MassFunction(
+        supports=combined["supports"],
+        refutes=combined["refutes"],
+        uncertain=combined["uncertain"],
+        theta=combined["theta"] + conflict,
+    )
+
+
+def combine_murphy(masses: list[MassFunction]) -> MassFunction:
+    """Murphy's averaging rule for multiple mass functions.
+
+    Computes ``m_avg`` as the elementwise mean of ``masses``, then
+    Dempster-combines ``m_avg`` with itself ``n − 1`` times. Empirical
+    workhorse that avoids Zadeh's counter-example by smoothing
+    disagreement before fusion.
+
+    Reference:
+        Murphy, C.K. (2000). "Combining belief functions when evidence
+        conflicts." Decision Support Systems 29(1): 1–9.
+
+    Edge cases:
+        n == 0: raises ``ValueError`` (no mass to average).
+        n == 1: returns the input mass unchanged.
+
+    Examples:
+        >>> ms = [MassFunction(supports=0.95, theta=0.05) for _ in range(3)]
+        >>> r = combine_murphy(ms)
+        >>> r.supports > r.refutes and r.supports > r.uncertain
+        True
+        >>> round(r.supports + r.refutes + r.uncertain + r.theta, 6)
+        1.0
+    """
+    n = len(masses)
+    if n == 0:
+        raise ValueError("combine_murphy requires at least one mass function")
+
+    avg = MassFunction(
+        supports=sum(m.supports for m in masses) / n,
+        refutes=sum(m.refutes for m in masses) / n,
+        uncertain=sum(m.uncertain for m in masses) / n,
+        theta=sum(m.theta for m in masses) / n,
+    )
+    if n == 1:
+        return avg
+
+    result = avg
+    for _ in range(n - 1):
+        result = combine_dempster(result, avg)
+    return result
+
+
+def combine_top1(masses: list[MassFunction]) -> MassFunction:
+    """Cautious-floor rule: return the single most-decisive input mass.
+
+    "Most decisive" is defined as the smallest ``m(Θ)`` (least
+    ignorance). Ties are broken by the largest singleton focal mass
+    ``max(m_S, m_R, m_U)``; further ties fall back to first-occurrence
+    order. No fusion is performed — this rule is the textbook
+    no-collapse baseline used to bound the effect of repeated
+    Dempster combinations.
+
+    Edge cases:
+        n == 0: raises ``ValueError``.
+        n == 1: returns the input unchanged.
+
+    Examples:
+        >>> ms = [
+        ...     MassFunction(supports=0.40, theta=0.60),
+        ...     MassFunction(supports=0.80, theta=0.20),
+        ...     MassFunction(supports=0.30, theta=0.70),
+        ... ]
+        >>> r = combine_top1(ms)
+        >>> round(r.supports, 6), round(r.theta, 6)
+        (0.8, 0.2)
+    """
+    if not masses:
+        raise ValueError("combine_top1 requires at least one mass function")
+    if len(masses) == 1:
+        return masses[0]
+
+    def key(item: tuple[int, MassFunction]) -> tuple[float, float, int]:
+        idx, m = item
+        decisiveness = max(m.supports, m.refutes, m.uncertain)
+        # Sort key: smallest theta first; on ties, largest singleton first
+        # (negate to invert sort); on further ties, smallest index first.
+        return (m.theta, -decisiveness, idx)
+
+    _, winner = min(enumerate(masses), key=key)
+    return winner
+
+
+def combine_multiple(
+    masses: list[MassFunction], rule: str = "dempster"
+) -> MassFunction:
+    """Combine multiple mass functions via the named fusion ``rule``.
+
+    Supported rules:
+        - ``"dempster"`` (default): iterative pairwise Dempster's rule
+          (Shafer 1976). Conflict mass is renormalized away.
+        - ``"yager"``: iterative pairwise Yager's rule (Yager 1987).
+          Conflict mass is added to ``m(Θ)``.
+        - ``"murphy"``: average then Dempster-combine ``n − 1`` times
+          (Murphy 2000).
+        - ``"top1"``: return the most-decisive input without fusion.
+
+    The default ``rule="dempster"`` reproduces the prior no-kwarg
+    behaviour bit-identically — this is the regression guard.
+
+    Empty input always returns the vacuous mass ``MassFunction(theta=1.0)``
+    for backward compatibility (the prior implementation did the same);
+    Murphy and top1 both delegate to this branch via the explicit empty
+    check below rather than raising, so the dispatcher itself is total.
+
+    Raises:
+        ValueError: if ``rule`` is not a known fusion rule.
+    """
     if not masses:
         return MassFunction(theta=1.0)
-    result = masses[0]
-    for m in masses[1:]:
-        result = combine_dempster(result, m)
-    return result
+
+    if rule == "dempster":
+        result = masses[0]
+        for m in masses[1:]:
+            result = combine_dempster(result, m)
+        return result
+    if rule == "yager":
+        result = masses[0]
+        for m in masses[1:]:
+            result = combine_yager(result, m)
+        return result
+    if rule == "murphy":
+        return combine_murphy(masses)
+    if rule == "top1":
+        return combine_top1(masses)
+
+    raise ValueError(f"Unknown fusion rule: {rule!r}")
 
 
 # ═══════════════════════════════════════════════════════════════════════
