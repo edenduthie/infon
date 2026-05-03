@@ -120,6 +120,19 @@ class CognitionConfig:
     # "dirichlet_edl" = evidential Dirichlet (Sensoy et al. 2018)
     readout: str = "ds_4mass"
 
+    # Teacher sources for LOO ablation (Epic 02)
+    # Selects which DS teacher signals contribute to the combined teacher mass
+    # during ``HypergraphReasoner.fit()``. Any subset of the four canonical
+    # source names ``{"polarity", "alignment", "distance", "confidence"}`` is
+    # valid. Default includes all four to reproduce prior behaviour exactly.
+    # Passing a single source (e.g. ``["polarity"]``) holds out the other
+    # three, enabling leave-one-out attribution of each signal's contribution.
+    # See: openspec/changes/epic-02-synthetic-stress/spec.md
+    #      Requirement: Config.teacher_sources
+    teacher_sources: list[str] = field(
+        default_factory=lambda: ["polarity", "alignment", "distance", "confidence"]
+    )
+
     @classmethod
     def local(cls, model_dir: str, db_path: str = "cognition.db",
               schema_path: str | None = None, **kw) -> CognitionConfig:

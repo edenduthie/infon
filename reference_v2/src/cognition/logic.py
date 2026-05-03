@@ -878,7 +878,8 @@ class HypergraphReasoner(nn.Module):
             grad_clip: float = 1.0,
             patience: int = 8,
             verbose: bool = False,
-            seed: int | None = None) -> dict:
+            seed: int | None = None,
+            teacher_sources: list[str] | None = None) -> dict:
         """Transductive training: fit message passing + readout on this graph.
 
         Uses the existing DS heuristic masses (polarity, triple alignment,
@@ -926,6 +927,15 @@ class HypergraphReasoner(nn.Module):
               / ``PYTHONHASHSEED``).  Concurrent calls to ``fit`` in the
               same process are therefore not isolated from each other.
 
+        teacher_sources : list[str] | None, default None
+            Which of the four canonical DS teacher signals to include when
+            building the combined teacher mass for each infon. Valid names are
+            ``"polarity"``, ``"alignment"``, ``"distance"``, ``"confidence"``.
+            ``None`` (the default) falls back to ``self.config.teacher_sources``
+            when a config is available, or to all four sources otherwise —
+            preserving backward-compatible behaviour for callers that do not
+            pass this argument.
+
         Returns training stats dict.
         """
         from .dempster_shafer import (
@@ -933,6 +943,34 @@ class HypergraphReasoner(nn.Module):
             mass_from_anchor_distance, mass_from_confidence,
         )
         from .category import SheafCoherence
+
+        # Resolve which teacher sources to use.  Precedence:
+        #   1. Explicit ``teacher_sources`` kwarg passed to this call.
+        #   2. ``self.config.teacher_sources`` when a config is attached.
+        #   3. All four sources (backward-compatible default).
+        _all_sources = ["polarity", "alignment", "distance", "confidence"]
+        if teacher_sources is None:
+            cfg_sources = getattr(getattr(self, "config", None), "teacher_sources", None)
+            teacher_sources = cfg_sources if cfg_sources is not None else _all_sources
+
+        # Map canonical source names to the functions that build their masses.
+        # The functions are keyed before the per-infon loop for clarity.
+        _source_builders: dict[str, object] = {
+            "polarity": mass_from_polarity,
+            "alignment": mass_from_triple_alignment,
+            "distance": mass_from_anchor_distance,
+            "confidence": mass_from_confidence,
+        }
+        unknown = set(teacher_sources) - set(_all_sources)
+        if unknown:
+            raise ValueError(
+                f"Unknown teacher_sources: {sorted(unknown)!r}. "
+                f"Valid names are {_all_sources!r}."
+            )
+        if not teacher_sources:
+            raise ValueError(
+                "teacher_sources must contain at least one source name."
+            )
 
         # ── Seed pinning (must run BEFORE any RNG-consuming op) ────────
         # This sits at the very top of fit() so it precedes graph
@@ -990,13 +1028,21 @@ class HypergraphReasoner(nn.Module):
             for role in [infon.subject, infon.predicate, infon.object]:
                 claim_anchors[role] = infon.confidence
 
-            sources = [
-                mass_from_polarity(infon),
-                mass_from_triple_alignment(claim_anchors, infon, self.schema.types),
-                mass_from_anchor_distance(claim_anchors, infon, self.schema.types),
-                mass_from_confidence(infon),
-            ]
-            combined = combine_multiple(sources)
+            # Build only the sources selected by teacher_sources.
+            # Functions that require claim_anchors and schema types receive them
+            # via the per-source dispatch below; simpler functions receive only
+            # the infon. The order matches the original (polarity → alignment →
+            # distance → confidence) so that default behaviour is bit-identical.
+            selected_sources = []
+            for src_name in _all_sources:
+                if src_name not in teacher_sources:
+                    continue
+                fn = _source_builders[src_name]
+                if src_name in ("alignment", "distance"):
+                    selected_sources.append(fn(claim_anchors, infon, self.schema.types))
+                else:
+                    selected_sources.append(fn(infon))
+            combined = combine_multiple(selected_sources)
             teacher_masses.append(combined)
             infon_node_indices.append(idx)
             infon_objects.append(infon)
