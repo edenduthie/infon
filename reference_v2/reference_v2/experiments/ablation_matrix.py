@@ -1,17 +1,18 @@
 """Ablation matrix runner for synthetic pilot scenarios.
 
 CLI: python -m reference_v2.experiments.ablation_matrix \
-        --config <yaml> --seeds <csv> --data <dir> --out <dir>
+        --config <yaml> --seeds <csv> --data <dir> --out <dir> \
+        [--max-train INT] [--checkpoint]
 
 For each cell in the YAML ``cells`` list:
-1. Load all scenarios from train.json / dev.json / test.json.
-2. Build a dynamic schema covering all entity IDs in the corpus (0-99).
+1. Load scenarios from train.jsonl / dev.jsonl / test.jsonl.
+2. Build a dynamic schema covering all entity IDs in the corpus.
 3. Create one Cognition instance with all scenario documents in a tempdir.
 4. Ingest every scenario's sentences as a single document per scenario.
 5. Build the hypergraph and (unless no_training=True) fit the reasoner.
 6. Evaluate on test scenarios: run reason() per scenario or fall back to
    the raw DS teacher mass for the ``teacher_only`` cell.
-7. Compute all 6 metrics and write one JSON per cell.
+7. Compute all 6 metrics and write one JSON per (cell, seed).
 
 Entity numbering
 ----------------
@@ -21,6 +22,18 @@ The schema created by make_synthetic_schema(100) maps entity56 → tokens
 ["entity 56", "Entity 56"], so querying with "entity 56" activates the
 right anchor. The positional index of a scenario within a split (e.g.,
 scenario_idx=0) is different from the global entity ID (e.g., 56).
+
+Memory management
+-----------------
+With 10k scenarios, a 10k-entity schema produces a graph too large for
+RAM. ``--max-train`` caps training to N scenarios (default 500). The test
+set is always used in full for evaluation. After each (cell, seed) run the
+Cognition instance and tempdir are released.
+
+Checkpointing
+-------------
+``--checkpoint`` skips any (cell, seed) pair whose output JSON already
+exists, allowing interrupted runs to be resumed.
 """
 
 from __future__ import annotations
@@ -29,11 +42,13 @@ import argparse
 import json
 import os
 import re
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
 
 import numpy as np
+import torch
 import yaml
 
 from reference_v2.experiments.metrics import (
@@ -52,6 +67,17 @@ PLANTED_TO_LABEL: dict[str, int] = {
     "REFUTES": 1,
     "NEI": 2,
 }
+
+
+def _load_jsonl(path: Path) -> list[dict]:
+    """Load all JSON objects from a JSONL file (one JSON object per line)."""
+    scenarios = []
+    with path.open("r", encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if line:
+                scenarios.append(json.loads(line))
+    return scenarios
 
 
 def _extract_entity_num(text: str) -> int | None:
@@ -282,7 +308,9 @@ def run_cell(
     seed: int,
     data_dir: Path,
     out_dir: Path,
-) -> Path:
+    max_train: int = 500,
+    checkpoint: bool = False,
+) -> Path | None:
     """Run one ablation cell for one seed and write a JSON result file.
 
     Parameters
@@ -292,19 +320,30 @@ def run_cell(
     seed:
         The random seed to use for this run.
     data_dir:
-        Directory containing train.json / dev.json / test.json.
+        Directory containing train.jsonl / dev.jsonl / test.jsonl.
     out_dir:
         Output directory for result JSON files.
+    max_train:
+        Maximum number of training scenarios to load (to control RAM usage).
+    checkpoint:
+        If True, skip this (cell, seed) if the output JSON already exists.
 
     Returns
     -------
-    Path
-        Path to the written JSON file.
+    Path | None
+        Path to the written JSON file, or None if the cell was skipped.
     """
     from cognition import Cognition, CognitionConfig
     from cognition.logic import HypergraphReasoner
 
     cell_name = cell_cfg["name"]
+    out_path = out_dir / f"{cell_name}__seed={seed}.json"
+
+    # Checkpointing: skip if output already exists
+    if checkpoint and out_path.exists():
+        print(f"[{cell_name}] seed={seed} SKIPPING (checkpoint found: {out_path})")
+        return out_path
+
     no_training = bool(cell_cfg.get("no_training", False))
     n_layers = int(cell_cfg.get("n_layers", 2))
     hidden_dim = 64
@@ -317,17 +356,41 @@ def run_cell(
         "polarity", "alignment", "distance", "confidence"
     ]))
 
-    print(f"[{cell_name}] seed={seed} loading scenarios …")
+    print(f"[{cell_name}] seed={seed} loading scenarios …", flush=True)
 
-    # Load all three splits; test scenarios are evaluated, rest only help build graph
-    train_scenarios = json.loads((data_dir / "train.json").read_text())
-    dev_scenarios = json.loads((data_dir / "dev.json").read_text())
-    test_scenarios = json.loads((data_dir / "test.json").read_text())
+    # Load splits. Support both .jsonl and .json filenames.
+    def _load_split(name: str) -> list[dict]:
+        jsonl_path = data_dir / f"{name}.jsonl"
+        json_path = data_dir / f"{name}.json"
+        if jsonl_path.exists():
+            return _load_jsonl(jsonl_path)
+        elif json_path.exists():
+            return json.loads(json_path.read_text())
+        else:
+            raise FileNotFoundError(
+                f"Neither {jsonl_path} nor {json_path} found."
+            )
 
-    all_scenarios = train_scenarios + dev_scenarios + test_scenarios
+    # Cap training scenarios to control RAM usage.
+    # Dev split is intentionally skipped: including 1000 dev scenarios would
+    # expand the entity schema from ~1500 to ~2500, doubling graph size and RAM.
+    all_train = _load_split("train")
+    train_scenarios = all_train[:max_train]
+    # Always use the full test set for evaluation
+    test_scenarios = _load_split("test")
+
+    print(
+        f"[{cell_name}] loaded {len(train_scenarios)} train "
+        f"(capped from {len(all_train)}), {len(test_scenarios)} test "
+        f"(dev skipped for RAM efficiency)",
+        flush=True,
+    )
+
+    # Combine for schema building: only the scenarios we'll actually ingest
+    all_scenarios = train_scenarios + test_scenarios
 
     # Determine all entity IDs in the corpus so we can build a complete schema.
-    # Entity IDs are global (0-99), not positional within the split.
+    # Entity IDs are global (not positional within the split).
     all_entity_nums: set[int] = set()
     for sc in all_scenarios:
         n = _get_scenario_entity_num(sc)
@@ -337,14 +400,16 @@ def run_cell(
     max_entity_num = max(all_entity_nums) if all_entity_nums else 99
     schema = make_synthetic_schema(max_entity_num + 1)
 
-    # Build a mapping from scenario to its entity num and scenario index
-    # (the global scenario_idx = position in the original all_scenarios list).
+    # Build a mapping from scenario to its entity num
     scenario_entity_nums: list[int | None] = [
         _get_scenario_entity_num(sc) for sc in all_scenarios
     ]
 
-    print(f"[{cell_name}] {len(all_scenarios)} total scenarios, "
-          f"schema covers entity0–entity{max_entity_num}")
+    print(
+        f"[{cell_name}] {len(all_scenarios)} total scenarios, "
+        f"schema covers entity0–entity{max_entity_num}",
+        flush=True,
+    )
 
     with tempfile.TemporaryDirectory(prefix=f"ablation_{cell_name}_") as tmpdir:
         db_path = os.path.join(tmpdir, "store.db")
@@ -368,7 +433,7 @@ def run_cell(
         try:
             # Ingest each scenario as one document keyed by its global entity ID.
             # Doc IDs use the global entity number so the store stays consistent.
-            print(f"[{cell_name}] ingesting {len(all_scenarios)} documents …")
+            print(f"[{cell_name}] ingesting {len(all_scenarios)} documents …", flush=True)
             for global_idx, (sc, ent_num) in enumerate(
                 zip(all_scenarios, scenario_entity_nums)
             ):
@@ -394,10 +459,10 @@ def run_cell(
                 config=cog_config,
             )
             graph = reasoner.builder.build(feature_dim=hidden_dim)
-            print(f"[{cell_name}] graph: {graph.n_nodes} nodes, {graph.n_edges} edges")
+            print(f"[{cell_name}] graph: {graph.n_nodes} nodes, {graph.n_edges} edges", flush=True)
 
             if not no_training:
-                print(f"[{cell_name}] fitting (seed={seed}) …")
+                print(f"[{cell_name}] fitting (seed={seed}) …", flush=True)
                 fit_stats = reasoner.fit(
                     graph=graph,
                     epochs=30,
@@ -408,80 +473,173 @@ def run_cell(
                     seed=seed,
                     teacher_sources=teacher_sources,
                 )
-                print(f"[{cell_name}] fit done: "
-                      f"best_loss={fit_stats.get('best_loss', '?'):.4f}")
+                print(
+                    f"[{cell_name}] fit done: "
+                    f"best_loss={fit_stats.get('best_loss', '?'):.4f}",
+                    flush=True,
+                )
             else:
-                print(f"[{cell_name}] skipping fit (no_training=True)")
+                print(f"[{cell_name}] skipping fit (no_training=True)", flush=True)
 
             # ── Evaluate on test scenarios ───────────────────────────────
-            # test_scenarios are at the end of all_scenarios
-            test_start_idx = len(train_scenarios) + len(dev_scenarios)
+            # test_scenarios are at the end of all_scenarios (after train only;
+            # dev is not loaded to keep entity schema and graph size manageable).
+            test_start_idx = len(train_scenarios)
             per_scenario: list[dict] = []
 
             schema_types = {k: v.get("type", "") for k, v in schema.items()}
 
-            for test_local_idx, sc in enumerate(test_scenarios):
-                global_idx = test_start_idx + test_local_idx
-                ent_num = scenario_entity_nums[global_idx]
-
-                oracle_verdict = sc["planted_verdict"]
-                planted_thinness = int(sc.get("planted_thinness", 0))
-
-                # Determine the doc_id for this test scenario
-                if ent_num is None:
-                    test_doc_id = f"scenario_{global_idx:04d}"
-                else:
-                    test_doc_id = f"scenario_{ent_num:04d}"
-
-                if ent_num is None:
-                    # Cannot query without an entity number; emit vacuous mass
-                    mass_tuple = (0.0, 0.0, 0.0, 1.0)
-                    predicted_verdict = "NOT ENOUGH INFO"
-                elif no_training:
-                    # teacher_only cell: use raw DS mass from store.
-                    # Query by doc_id (not entity anchor key) because the SPLADE
-                    # encoder conflates all entity{N} anchors via the shared
-                    # "entity" token — get_infons_for_anchor('entity56') would
-                    # return the wrong infons. Doc-level retrieval is reliable.
-                    mass_tuple = _compute_teacher_mass(
-                        cog.store, schema_types, test_doc_id
-                    )
-                    predicted_verdict = _verdict_from_mass(mass_tuple)
-                else:
-                    # Standard GNN evaluation: query with entity token text
-                    # The schema token is "entity {N}" (lowercase); encoding
-                    # this text will activate the entity{N} anchor.
-                    query_text = f"entity {ent_num}"
-                    try:
-                        result = reasoner.reason(
-                            query_text,
-                            decisive_top_k=decisive_top_k,
-                            fusion_rule=fusion_rule,
-                        )
-                        m = result.mass
-                        mass_tuple = (
-                            float(m.supports),
-                            float(m.refutes),
-                            float(m.uncertain),
-                            float(m.theta),
-                        )
-                        predicted_verdict = result.verdict
-                    except Exception as exc:
-                        print(f"[{cell_name}] reason() failed for entity {ent_num}: {exc}")
-                        # Fall back to vacuous mass
+            if no_training:
+                # teacher_only cell: compute raw DS mass per test scenario
+                for test_local_idx, sc in enumerate(test_scenarios):
+                    global_idx = test_start_idx + test_local_idx
+                    ent_num = scenario_entity_nums[global_idx]
+                    oracle_verdict = sc["planted_verdict"]
+                    planted_thinness = int(sc.get("planted_thinness", 0))
+                    if ent_num is None:
+                        test_doc_id = f"scenario_{global_idx:04d}"
+                    else:
+                        test_doc_id = f"scenario_{ent_num:04d}"
+                    if ent_num is None:
                         mass_tuple = (0.0, 0.0, 0.0, 1.0)
                         predicted_verdict = "NOT ENOUGH INFO"
+                    else:
+                        # Query by doc_id: the SPLADE encoder conflates all
+                        # entity{N} anchors via the shared "entity" token, so
+                        # entity-key queries don't reliably retrieve the right
+                        # infons for a specific scenario.
+                        mass_tuple = _compute_teacher_mass(
+                            cog.store, schema_types, test_doc_id
+                        )
+                        predicted_verdict = _verdict_from_mass(mass_tuple)
+                    per_scenario.append({
+                        "scenario_idx": global_idx,
+                        "oracle_verdict": oracle_verdict,
+                        "predicted_verdict": predicted_verdict,
+                        "planted_thinness": planted_thinness,
+                        "mass": list(mass_tuple),
+                    })
+            else:
+                # GNN evaluation: run forward pass ONCE, then score all queries.
+                #
+                # Calling reasoner.reason() per test scenario is O(n_test) graph
+                # rebuilds (each ~0.2 s). Instead we:
+                #   1. Pre-compute h = forward(graph) once (the already-trained
+                #      graph is in memory from the fit phase above).
+                #   2. Pre-cache infon role tokens from the store.
+                #   3. For each test scenario, encode the query with SPLADE,
+                #      look up relevant infons by anchor overlap, and fuse
+                #      masses — same logic as reason() but O(1) graph rebuilds.
+                print(f"[{cell_name}] running batch evaluation on {len(test_scenarios)} "
+                      f"test scenarios …", flush=True)
 
-                per_scenario.append({
-                    "scenario_idx": global_idx,
-                    "oracle_verdict": oracle_verdict,
-                    "predicted_verdict": predicted_verdict,
-                    "planted_thinness": planted_thinness,
-                    "mass": list(mass_tuple),
-                })
+                from cognition.dempster_shafer import MassFunction, combine_multiple
+
+                # Pre-compute node embeddings on the trained graph
+                with torch.no_grad():
+                    h = reasoner.forward(graph)  # shape (n_nodes, hidden_dim)
+
+                # Pre-cache infon roles from the store (avoids 1000 × DB reads)
+                infon_roles: dict[str, tuple[str, str, str]] = {}
+                for inf_id in graph.infon_map:
+                    infon = cog.store.get_infon(inf_id)
+                    if infon is not None:
+                        infon_roles[inf_id] = (
+                            infon.subject, infon.predicate, infon.object
+                        )
+
+                for test_local_idx, sc in enumerate(test_scenarios):
+                    global_idx = test_start_idx + test_local_idx
+                    ent_num = scenario_entity_nums[global_idx]
+                    oracle_verdict = sc["planted_verdict"]
+                    planted_thinness = int(sc.get("planted_thinness", 0))
+
+                    if ent_num is None:
+                        mass_tuple = (0.0, 0.0, 0.0, 1.0)
+                        predicted_verdict = "NOT ENOUGH INFO"
+                    else:
+                        query_text = f"entity {ent_num}"
+                        try:
+                            # Encode query with SPLADE (token → float weights)
+                            query_activations = cog.encoder.encode_single(query_text)
+
+                            # Score each infon by anchor overlap with query
+                            relevant_indices: list[int] = []
+                            relevant_weights: list[float] = []
+                            for inf_id, node_idx in graph.infon_map.items():
+                                roles = infon_roles.get(inf_id)
+                                if roles is None:
+                                    continue
+                                score = max(
+                                    query_activations.get(role, 0.0)
+                                    for role in roles
+                                )
+                                if score > 0.05:
+                                    relevant_indices.append(node_idx)
+                                    relevant_weights.append(score)
+
+                            if not relevant_indices:
+                                mass_tuple = (0.0, 0.0, 0.0, 1.0)
+                                predicted_verdict = "NOT ENOUGH INFO"
+                            else:
+                                # Read out masses from cached h
+                                relevant_h = h[relevant_indices]
+                                masses = reasoner.mass_readout.to_mass_functions(
+                                    relevant_h
+                                )
+
+                                # Fuse top-k decisive masses (mirrors reason())
+                                if decisive_top_k == 1:
+                                    combined = (
+                                        combine_multiple(masses, rule="top1")
+                                        if masses else MassFunction(theta=1.0)
+                                    )
+                                else:
+                                    weighted = sorted(
+                                        zip(masses, relevant_weights),
+                                        key=lambda x: x[1], reverse=True,
+                                    )[:10]
+                                    decisive = [
+                                        m for m, w in weighted if m.theta < 0.95
+                                    ][:decisive_top_k]
+                                    combined = (
+                                        combine_multiple(decisive, rule=fusion_rule)
+                                        if decisive else MassFunction(theta=1.0)
+                                    )
+
+                                mass_tuple = (
+                                    float(combined.supports),
+                                    float(combined.refutes),
+                                    float(combined.uncertain),
+                                    float(combined.theta),
+                                )
+                                predicted_verdict = _verdict_from_mass(mass_tuple)
+
+                        except Exception as exc:
+                            print(
+                                f"[{cell_name}] eval failed for entity {ent_num}: {exc}",
+                                flush=True,
+                            )
+                            mass_tuple = (0.0, 0.0, 0.0, 1.0)
+                            predicted_verdict = "NOT ENOUGH INFO"
+
+                    per_scenario.append({
+                        "scenario_idx": global_idx,
+                        "oracle_verdict": oracle_verdict,
+                        "predicted_verdict": predicted_verdict,
+                        "planted_thinness": planted_thinness,
+                        "mass": list(mass_tuple),
+                    })
+
+                print(
+                    f"[{cell_name}] batch evaluation done "
+                    f"({len(per_scenario)} scenarios)",
+                    flush=True,
+                )
 
         finally:
             cog.close()
+        # tempdir is cleaned up here (after cog.close())
 
     # Compute metrics
     metrics = _compute_metrics(per_scenario)
@@ -504,9 +662,8 @@ def run_cell(
         "per_scenario": per_scenario,
     }
 
-    out_path = out_dir / f"{cell_name}__seed={seed}.json"
     out_path.write_text(json.dumps(result_dict, indent=2, sort_keys=True))
-    print(f"[{cell_name}] wrote {out_path}")
+    print(f"[{cell_name}] wrote {out_path}", flush=True)
     return out_path
 
 
@@ -515,6 +672,8 @@ def run_matrix(
     seeds_override: list[int] | None,
     data_dir: Path,
     out_dir: Path,
+    max_train: int = 500,
+    checkpoint: bool = False,
 ) -> list[Path]:
     """Run all cells in the ablation matrix YAML.
 
@@ -525,9 +684,13 @@ def run_matrix(
     seeds_override:
         If provided, overrides the ``seeds`` field for every cell.
     data_dir:
-        Directory containing train.json / dev.json / test.json.
+        Directory containing train.jsonl / dev.jsonl / test.jsonl.
     out_dir:
         Output directory for result JSON files.
+    max_train:
+        Maximum training scenarios to load per cell (RAM cap).
+    checkpoint:
+        If True, skip (cell, seed) pairs whose output JSON already exists.
 
     Returns
     -------
@@ -542,13 +705,36 @@ def run_matrix(
         raise ValueError(f"No cells found in {config_path}")
 
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    # Build list of (cell_cfg, seed) pairs for progress reporting
+    runs: list[tuple[dict, int]] = []
+    for cell_cfg in cells:
+        seeds = seeds_override if seeds_override is not None else cell_cfg.get("seeds", [42])
+        for seed in seeds:
+            runs.append((cell_cfg, seed))
+
+    total = len(runs)
     written: list[Path] = []
 
-    for cell_cfg in cells:
-        seeds = seeds_override if seeds_override else cell_cfg.get("seeds", [42])
-        for seed in seeds:
-            path = run_cell(cell_cfg, seed, data_dir, out_dir)
-            written.append(path)
+    for run_idx, (cell_cfg, seed) in enumerate(runs, start=1):
+        cell_name = cell_cfg["name"]
+        print(f"\nRunning cell={cell_name} seed={seed} ({run_idx} of {total})…", flush=True)
+        try:
+            path = run_cell(
+                cell_cfg,
+                seed,
+                data_dir,
+                out_dir,
+                max_train=max_train,
+                checkpoint=checkpoint,
+            )
+            if path is not None:
+                written.append(path)
+        except Exception as exc:
+            print(f"ERROR in cell={cell_name} seed={seed}: {exc}")
+            import traceback
+            traceback.print_exc()
+            print(f"Continuing with next cell…")
 
     return written
 
@@ -567,11 +753,19 @@ def main() -> None:
     )
     parser.add_argument(
         "--data", required=True, type=Path,
-        help="Directory containing train.json / dev.json / test.json",
+        help="Directory containing train.jsonl / dev.jsonl / test.jsonl",
     )
     parser.add_argument(
         "--out", required=True, type=Path,
         help="Output directory for per-cell result JSON files",
+    )
+    parser.add_argument(
+        "--max-train", type=int, default=500,
+        help="Maximum number of training scenarios to load (default: 500)",
+    )
+    parser.add_argument(
+        "--checkpoint", action="store_true",
+        help="Skip (cell, seed) pairs whose output JSON already exists",
     )
     args = parser.parse_args()
 
@@ -579,7 +773,14 @@ def main() -> None:
     if args.seeds:
         seeds_override = [int(s.strip()) for s in args.seeds.split(",")]
 
-    written = run_matrix(args.config, seeds_override, args.data, args.out)
+    written = run_matrix(
+        args.config,
+        seeds_override,
+        args.data,
+        args.out,
+        max_train=args.max_train,
+        checkpoint=args.checkpoint,
+    )
     print(f"\nDone. Wrote {len(written)} result file(s):")
     for p in written:
         print(f"  {p}")

@@ -1,6 +1,6 @@
 cells:
   - name: canonical
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 1.0
     fusion_rule: top1
     decisive_top_k: 2
@@ -9,7 +9,7 @@ cells:
     teacher_sources: [polarity, alignment, distance, confidence]
 
   - name: uniform_aggregator
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 1.0
     fusion_rule: top1
     decisive_top_k: 2
@@ -18,7 +18,7 @@ cells:
     teacher_sources: [polarity, alignment, distance, confidence]
 
   - name: softmax_readout
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 0.0      # no coherence regularizer
     fusion_rule: top1
     decisive_top_k: 2
@@ -27,7 +27,7 @@ cells:
     teacher_sources: [polarity, alignment, distance, confidence]
 
   - name: dirichlet_edl_readout
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 1.0
     fusion_rule: top1
     decisive_top_k: 2
@@ -36,7 +36,7 @@ cells:
     teacher_sources: [polarity, alignment, distance, confidence]
 
   - name: coherence_off
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 0.0      # ablation: disable sheaf coherence regularizer
     fusion_rule: top1
     decisive_top_k: 2
@@ -45,7 +45,7 @@ cells:
     teacher_sources: [polarity, alignment, distance, confidence]
 
   - name: teacher_only
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 1.0
     fusion_rule: top1
     decisive_top_k: 2
@@ -55,7 +55,7 @@ cells:
     no_training: true          # special flag: skip fit(), use teacher mass directly
 
   - name: top1_fusion
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 1.0
     fusion_rule: top1
     decisive_top_k: 1          # ablation: top-1 fusion (no beam)
@@ -64,7 +64,7 @@ cells:
     teacher_sources: [polarity, alignment, distance, confidence]
 
   - name: single_layer
-    seeds: [42]
+    seeds: [42, 0, 1]
     coherence_weight: 1.0
     fusion_rule: top1
     decisive_top_k: 2

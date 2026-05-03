@@ -1,0 +1,258 @@
+[
+  {
+    "aurc": 0.28984235695458244,
+    "brier": 0.9226777283176485,
+    "cell": "canonical",
+    "config": {
+      "aggregator": "typed_ikl",
+      "coherence_weight": 1.0,
+      "decisive_top_k": 2,
+      "fusion_rule": "top1",
+      "n_layers": 2,
+      "no_training": false,
+      "readout": "ds_4mass",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.3778675105559734,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.332,
+    "sel_acc_at_70": 0.33285714285714285,
+    "sel_acc_at_90": 0.33,
+    "spearman_thinness": 0.0,
+    "spearman_thinness_ci_high": 0.0,
+    "spearman_thinness_ci_low": 0.0
+  },
+  {
+    "aurc": 0.18813534348060967,
+    "brier": 1.0293016987429167,
+    "cell": "coherence_off",
+    "config": {
+      "aggregator": "typed_ikl",
+      "coherence_weight": 0.0,
+      "decisive_top_k": 2,
+      "fusion_rule": "top1",
+      "n_layers": 2,
+      "no_training": false,
+      "readout": "ds_4mass",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.4796763328522426,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.332,
+    "sel_acc_at_70": 0.33285714285714285,
+    "sel_acc_at_90": 0.33,
+    "spearman_thinness": 0.0,
+    "spearman_thinness_ci_high": 0.0,
+    "spearman_thinness_ci_low": 0.0
+  },
+  {
+    "aurc": 0.39844232895962944,
+    "brier": 0.8499064056922795,
+    "cell": "dirichlet_edl_readout",
+    "config": {
+      "aggregator": "typed_ikl",
+      "coherence_weight": 1.0,
+      "decisive_top_k": 2,
+      "fusion_rule": "top1",
+      "n_layers": 2,
+      "no_training": false,
+      "readout": "dirichlet_edl",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.2691588298702409,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.332,
+    "sel_acc_at_70": 0.33285714285714285,
+    "sel_acc_at_90": 0.33,
+    "spearman_thinness": 0.0,
+    "spearman_thinness_ci_high": 0.0,
+    "spearman_thinness_ci_low": 0.0
+  },
+  {
+    "aurc": 0.26921354059668845,
+    "brier": 0.9414344363375341,
+    "cell": "single_layer",
+    "config": {
+      "aggregator": "typed_ikl",
+      "coherence_weight": 1.0,
+      "decisive_top_k": 2,
+      "fusion_rule": "top1",
+      "n_layers": 1,
+      "no_training": false,
+      "readout": "ds_4mass",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.39851697637969125,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.332,
+    "sel_acc_at_70": 0.33285714285714285,
+    "sel_acc_at_90": 0.33,
+    "spearman_thinness": 0.0,
+    "spearman_thinness_ci_high": 0.0,
+    "spearman_thinness_ci_low": 0.0
+  },
+  {
+    "aurc": 0.012008087003123369,
+    "brier": 1.3121922119534812,
+    "cell": "softmax_readout",
+    "config": {
+      "aggregator": "typed_ikl",
+      "coherence_weight": 0.0,
+      "decisive_top_k": 2,
+      "fusion_rule": "top1",
+      "n_layers": 2,
+      "no_training": false,
+      "readout": "softmax_temperature",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.6559798928897664,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.332,
+    "sel_acc_at_70": 0.33285714285714285,
+    "sel_acc_at_90": 0.33,
+    "spearman_thinness": 0.0,
+    "spearman_thinness_ci_high": 0.0,
+    "spearman_thinness_ci_low": 0.0
+  },
+  {
+    "aurc": 0.014635290844269918,
+    "brier": 0.6732942451582279,
+    "cell": "teacher_only",
+    "config": {
+      "aggregator": "typed_ikl",
+      "coherence_weight": 1.0,
+      "decisive_top_k": 2,
+      "fusion_rule": "top1",
+      "n_layers": 2,
+      "no_training": true,
+      "readout": "ds_4mass",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.3213424264130258,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.664,
+    "polarity_acc_ci_low": 0.664,
+    "polarity_acc_mean": 0.664,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.498,
+    "sel_acc_at_70": 0.52,
+    "sel_acc_at_90": 0.6266666666666667,
+    "spearman_thinness": -0.738965574965575,
+    "spearman_thinness_ci_high": -0.738965574965575,
+    "spearman_thinness_ci_low": -0.738965574965575
+  },
+  {
+    "aurc": 0.25617727000617085,
+    "brier": 0.953198245153328,
+    "cell": "top1_fusion",
+    "config": {
+      "aggregator": "typed_ikl",
+      "coherence_weight": 1.0,
+      "decisive_top_k": 1,
+      "fusion_rule": "top1",
+      "n_layers": 2,
+      "no_training": false,
+      "readout": "ds_4mass",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.41156629629011937,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.332,
+    "sel_acc_at_70": 0.33285714285714285,
+    "sel_acc_at_90": 0.33,
+    "spearman_thinness": 0.0,
+    "spearman_thinness_ci_high": 0.0,
+    "spearman_thinness_ci_low": 0.0
+  },
+  {
+    "aurc": 0.28531678436119673,
+    "brier": 0.9268995342179736,
+    "cell": "uniform_aggregator",
+    "config": {
+      "aggregator": "uniform_mean",
+      "coherence_weight": 1.0,
+      "decisive_top_k": 2,
+      "fusion_rule": "top1",
+      "n_layers": 2,
+      "no_training": false,
+      "readout": "ds_4mass",
+      "teacher_sources": [
+        "polarity",
+        "alignment",
+        "distance",
+        "confidence"
+      ]
+    },
+    "ece": 0.3823976132520553,
+    "n_seeds": 3,
+    "polarity_acc_ci_high": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.332,
+    "sel_acc_at_70": 0.33285714285714285,
+    "sel_acc_at_90": 0.33,
+    "spearman_thinness": 0.0,
+    "spearman_thinness_ci_high": 0.0,
+    "spearman_thinness_ci_low": 0.0
+  }
+]
