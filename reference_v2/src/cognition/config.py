@@ -78,6 +78,22 @@ class CognitionConfig:
     #      Requirement: Per-Infon Mass Logging
     log_per_infon_masses: bool = False
 
+    # Fusion cap
+    # Maximum number of decisive per-infon masses fused via
+    # ``combine_multiple`` inside ``HypergraphReasoner.reason()``. Default
+    # 3, reduced from the previous hardcoded 5 (logic.py:1085 literal
+    # ``[:5]``) per the audit's §Path 2.4 finding that with 5 confident
+    # agreeing supports Dempster's rule mathematically drives m(Θ) → 0.
+    # Capping at 3 (or lower) is the cheapest mechanical lever to preserve
+    # some Θ. Setting ``decisive_top_k=1`` is equivalent to fusion
+    # ``rule="top1"`` for any rule.
+    # Trade-off: smaller top_k preserves more m(Θ) but reduces polarity
+    # certainty (focal mass on S or R shrinks).
+    # See: openspec/changes/epic-01-stabilize-theta/spec.md
+    #      Requirement: Configurable Fusion Cap
+    #      docs/publication/reproduction_audit.md §Path 2.4
+    decisive_top_k: int = 3
+
     @classmethod
     def local(cls, model_dir: str, db_path: str = "cognition.db",
               schema_path: str | None = None, **kw) -> CognitionConfig:

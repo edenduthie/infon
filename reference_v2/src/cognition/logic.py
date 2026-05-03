@@ -989,12 +989,39 @@ class HypergraphReasoner(nn.Module):
     def reason(self, query: str,
                max_infons: int = 500,
                fit_epochs: int = 30,
-               verbose: bool = False) -> ReasoningResult:
+               verbose: bool = False,
+               decisive_top_k: int = 3) -> ReasoningResult:
         """Full reasoning pipeline: query → graph → fit → message passing → verdict.
 
         Auto-fits on first call (transductive: trains on the graph it will
         reason over, using DS heuristic masses as teacher signal).
+
+        Parameters
+        ----------
+        query : str
+            The natural-language query whose verdict we want.
+        max_infons : int, default 500
+            Cap on the number of infons pulled into the graph.
+        fit_epochs : int, default 30
+            Epochs of auto-fit on first call.
+        verbose : bool, default False
+            Print per-step diagnostics.
+        decisive_top_k : int, default 3
+            Maximum number of decisive (m(Θ) < 0.95) per-infon masses
+            passed to ``combine_multiple``. Default 3 is reduced from
+            the prior hardcoded 5 per Epic 01 spec.md Requirement:
+            Configurable Fusion Cap and audit §Path 2.4 — with 5
+            confident agreeing supports Dempster's rule drives m(Θ) → 0,
+            so capping at 3 is the cheapest mechanical lever to preserve
+            some Θ. ``decisive_top_k=1`` is equivalent to fusion
+            ``rule="top1"`` for any rule (combine of a 1-element list
+            returns that element). Trade-off: smaller top_k preserves
+            more m(Θ) but reduces focal-mass magnitude.
         """
+        if decisive_top_k < 1:
+            raise ValueError(
+                f"decisive_top_k must be >= 1; got {decisive_top_k!r}"
+            )
         # Encode query
         query_activations = self.encoder.encode_single(query)
 
@@ -1058,7 +1085,7 @@ class HypergraphReasoner(nn.Module):
 
         if verbose:
             print(f"  Relevant infons: {len(masses)}")
-            for i, m in enumerate(masses[:5]):
+            for i, m in enumerate(masses[:decisive_top_k]):
                 print(f"    [{i}] S={m.supports:.3f} R={m.refutes:.3f} "
                       f"U={m.uncertain:.3f} θ={m.theta:.3f}")
 
@@ -1077,13 +1104,38 @@ class HypergraphReasoner(nn.Module):
             )
         ]
 
-        # Weight by relevance and combine top-k
-        weighted_masses = sorted(
-            zip(masses, relevant_weights),
-            key=lambda x: x[1], reverse=True,
-        )[:10]
-        decisive = [m for m, w in weighted_masses if m.theta < 0.95][:5]
-        combined = combine_multiple(decisive) if decisive else MassFunction(theta=1.0)
+        # Weight by relevance and combine top-k.
+        #
+        # Contract (spec.md Requirement: Configurable Fusion Cap):
+        # ``decisive_top_k=1`` SHALL produce identical behaviour to
+        # ``rule="top1"`` for any fusion rule. The literal reading of
+        # this contract is that capping at 1 picks the single most-
+        # decisive (smallest m(Θ)) mass — not the highest-relevance one
+        # — so the k=1 branch dispatches directly to ``rule="top1"``
+        # over the full relevant-mass pool (the same pool the per-infon
+        # mass logger emits). For k > 1 the prior weighted-top-10 +
+        # theta < 0.95 filter is retained and Dempster-fused as before.
+        if decisive_top_k == 1:
+            # Literal top1 over the full relevant-mass pool — matches
+            # the per-infon mass logger's record set so that
+            # ``combine_multiple(result.per_infon_masses, rule="top1")``
+            # reproduces the fused mass exactly (1e-6 tolerance).
+            combined = (
+                combine_multiple(masses, rule="top1")
+                if masses else MassFunction(theta=1.0)
+            )
+        else:
+            weighted_masses = sorted(
+                zip(masses, relevant_weights),
+                key=lambda x: x[1], reverse=True,
+            )[:10]
+            decisive = [
+                m for m, w in weighted_masses if m.theta < 0.95
+            ][:decisive_top_k]
+            combined = (
+                combine_multiple(decisive) if decisive
+                else MassFunction(theta=1.0)
+            )
 
         # Verdict via pignistic transform
         total_focal = combined.supports + combined.refutes + combined.uncertain

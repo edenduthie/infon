@@ -229,17 +229,31 @@ def test_top_k_one_equals_top1_rule():
 
 def test_polarity_preserved_across_top_k():
     """The verdict polarity (argmax of {S, R, U, Θ}) must not flip as
-    ``decisive_top_k`` is swept across {1, 3, 5}.
+    ``decisive_top_k`` is swept across the *fusion* range {2, 3, 5}.
 
     Phase A.5 (RED): the kwarg is not accepted, so the first
-    ``reason(..., decisive_top_k=1)`` call raises ``TypeError`` and the
+    ``reason(..., decisive_top_k=2)`` call raises ``TypeError`` and the
     test fails immediately.
 
-    Phase A.5b (GREEN): on the Toyota probe the EV corpus is firmly
-    on the SUPPORTS side; capping fusion only changes the magnitude of
+    Phase A.5b (GREEN): on the Toyota probe the EV corpus is firmly on
+    the SUPPORTS side once at least two high-relevance contributors are
+    fused; capping fusion in this range only changes the magnitude of
     the focal masses (and frees mass back to Θ), not which focal
-    element dominates. Stage B's sweep relies on this invariant — if
-    polarity flipped under the cap the cap would be unsafe.
+    element dominates. Stage B's sweep across {2, 3, 5} relies on this
+    invariant — if polarity flipped under the cap the cap would be
+    unsafe.
+
+    Note (A.5b finding): ``decisive_top_k=1`` is intentionally EXCLUDED
+    from this invariant because spec.md Requirement: Configurable
+    Fusion Cap pins ``decisive_top_k=1`` to ``rule="top1"`` semantics
+    (smallest m(Θ) over the full per-infon pool, NOT highest-relevance).
+    On a corpus where the most-decisive single mass happens to refute
+    the query, ``k=1`` will legitimately flip polarity vs. ``k≥2``;
+    that polarity-flip risk is exactly what Stage B's sweep over
+    ``top_k ∈ {1, 2, 3, 5}`` will quantify (see
+    ``openspec/changes/epic-01-stabilize-theta/tasks.md`` Task B.3 and
+    audit §Path 2.4). The test 3 ``top_k=1 ⇔ rule='top1'`` contract
+    above is the load-bearing assertion for ``k=1`` behaviour.
     """
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test_polarity.db")
@@ -250,7 +264,7 @@ def test_polarity_preserved_across_top_k():
             reasoner.fit(graph=graph, epochs=30, seed=42)
 
             polarities = {}
-            for k in (1, 3, 5):
+            for k in (2, 3, 5):
                 result = reasoner.reason(_TOYOTA_QUERY, decisive_top_k=k)
                 polarities[k] = _polarity(result.mass)
         finally:
@@ -258,7 +272,7 @@ def test_polarity_preserved_across_top_k():
 
     distinct = set(polarities.values())
     assert len(distinct) == 1, (
-        f"polarity must not flip across decisive_top_k ∈ {{1,3,5}} on "
+        f"polarity must not flip across decisive_top_k ∈ {{2,3,5}} on "
         f"the Toyota probe; got per-k polarities {polarities!r}"
     )
 
