@@ -79,7 +79,16 @@ def run(seed: int, fit_epochs: int = 30) -> dict:
         # Re-pin between graph build and reasoner construction so that
         # network init is deterministic per seed.
         pin_seeds(seed)
-        reasoner = HypergraphReasoner(cog.store, cog.encoder, cog.schema)
+        # Thread the per-infon mass logger flag from config through to the
+        # reasoner (infon-6o3.36). This script doesn't currently consume
+        # ``per_infon_masses`` so the default-False config value yields an
+        # empty log either way, but keeping the threading consistent with
+        # ``experiments/run.py`` avoids surprises if the script is later
+        # extended to emit diagnostics.
+        reasoner = HypergraphReasoner(
+            cog.store, cog.encoder, cog.schema,
+            log_per_infon_masses=cog.config.log_per_infon_masses,
+        )
 
         # Pre-fit message-passing norm sanity (paper claim: delta > 0.01)
         with torch.no_grad():

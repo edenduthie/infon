@@ -711,14 +711,17 @@ class HypergraphReasoner(nn.Module):
             ``reason()`` populates ``ReasoningResult.per_infon_masses`` with
             structured ``PerInfonMassRecord`` entries (query_id, infon_id,
             mass, relevance_score) for every relevant pre-fusion contributor.
+            When False (the default) ``reason()`` returns an empty list
+            ``[]`` for that field — production callers that don't opt in
+            pay zero record-construction cost, which matters for Epic 02's
+            10k-scenario ablation matrix.
+
+            Threaded through ``CognitionConfig.log_per_infon_masses`` by
+            callers that build a reasoner from a config (see
+            ``experiments/run.py``).
+
             See `openspec/changes/epic-01-stabilize-theta/spec.md`
             Requirement: Per-Infon Mass Logging.
-
-            In this implementation the records are emitted unconditionally
-            because their cost is negligible and downstream diagnostics
-            (Epic 01 B.2, Epic 02 ablations) require them; the flag is
-            preserved as the documented API contract surface so future
-            callers can disable the records explicitly.
         """
         super().__init__()
         self.store = store
@@ -1104,18 +1107,27 @@ class HypergraphReasoner(nn.Module):
 
         # Build the per-infon mass log (pre-fusion, structured records).
         # See PerInfonMassRecord docstring for the schema and rationale.
-        per_infon_log = [
-            PerInfonMassRecord(
-                query_id=query,
-                infon_id=inf_id,
-                mass=(float(m.supports), float(m.refutes),
-                      float(m.uncertain), float(m.theta)),
-                relevance_score=float(weight),
-            )
-            for inf_id, m, weight in zip(
-                relevant_infon_ids, masses, relevant_weights,
-            )
-        ]
+        #
+        # Emission is gated on ``self.log_per_infon_masses`` (default False)
+        # per infon-6o3.36 — A.3b documented the flag but emitted records
+        # unconditionally. Production callers (Epic 02 ablation matrix)
+        # don't need diagnostic records on every cell, so we skip the
+        # construction work entirely when the flag is False.
+        if self.log_per_infon_masses:
+            per_infon_log = [
+                PerInfonMassRecord(
+                    query_id=query,
+                    infon_id=inf_id,
+                    mass=(float(m.supports), float(m.refutes),
+                          float(m.uncertain), float(m.theta)),
+                    relevance_score=float(weight),
+                )
+                for inf_id, m, weight in zip(
+                    relevant_infon_ids, masses, relevant_weights,
+                )
+            ]
+        else:
+            per_infon_log = []
 
         # Weight by relevance and combine top-k.
         #
@@ -1733,9 +1745,11 @@ class PerInfonMassRecord:
     ``HypergraphReasoner(log_per_infon_masses=True)``. The records are
     intentionally permanent (per design.md Open Question, recommendation:
     permanent) — they will be reused by Epic 02's ablation analysis and the
-    paper's reproducibility supplement. Cost is one small dataclass per
-    relevant infon per query, so the records are emitted unconditionally;
-    the flag is kept as the documented API contract surface.
+    paper's reproducibility supplement. Emission is gated on the flag
+    (per infon-6o3.36): default False yields an empty list ``[]`` on the
+    ``ReasoningResult``, sparing Epic 02's 10k-scenario ablation matrix
+    the per-record construction cost on cells that aren't doing
+    diagnostic analysis.
 
     Reference
     ---------
@@ -1761,13 +1775,16 @@ class ReasoningResult:
         Structured pre-fusion per-infon mass log. Each entry carries
         ``query_id``, ``infon_id``, the four-vector ``(m_S, m_R, m_U, m_Θ)``,
         and the ``relevance_score`` used to rank the contributor for fusion.
-        Always populated when ``reason()`` finds at least one relevant infon;
-        empty otherwise.
+        Populated only when ``reason()`` is invoked on a reasoner built with
+        ``log_per_infon_masses=True`` (or when the caller threads
+        ``CognitionConfig.log_per_infon_masses=True`` into the reasoner
+        constructor); empty list ``[]`` otherwise.
 
         See ``PerInfonMassRecord`` for the full schema and design notes.
-        Opt-in toggle: ``CognitionConfig.log_per_infon_masses`` (kept as the
-        API contract surface; records are emitted unconditionally because
-        their cost is negligible and downstream diagnostics require them).
+        Opt-in toggle: ``CognitionConfig.log_per_infon_masses`` /
+        ``HypergraphReasoner(log_per_infon_masses=True)``. Default is off
+        so production callers (Epic 02 ablation matrix) don't pay the
+        record-construction cost on cells that aren't doing diagnostics.
     """
 
     query: str = ""

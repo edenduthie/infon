@@ -52,12 +52,20 @@ def _build_and_ingest(db_path: str):
 
 
 def _build_reasoner(cog):
-    """Construct a fresh HypergraphReasoner over an already-ingested store."""
+    """Construct a fresh HypergraphReasoner over an already-ingested store.
+
+    ``log_per_infon_masses=True`` is required by ``test_top_k_one_equals_top1_rule``
+    which inspects ``result.per_infon_masses`` to drive the Path-B
+    direct-DS-algebra comparison. After infon-6o3.36 the flag defaults to
+    False, so tests that rely on the diagnostic output must opt in
+    explicitly.
+    """
     from cognition.logic import HypergraphReasoner
 
     return HypergraphReasoner(
         cog.store, cog.encoder, cog.schema,
         hidden_dim=64, n_layers=2,
+        log_per_infon_masses=True,
     )
 
 

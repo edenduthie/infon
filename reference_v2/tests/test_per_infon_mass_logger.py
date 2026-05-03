@@ -70,12 +70,19 @@ def _build_and_ingest_with_logger(db_path: str):
 
 
 def _build_reasoner(cog):
-    """Construct a HypergraphReasoner over an already-ingested store."""
+    """Construct a HypergraphReasoner over an already-ingested store.
+
+    ``log_per_infon_masses=True`` is required after infon-6o3.36 — the
+    flag now actually gates emission inside ``reason()``, so this opt-in
+    test must explicitly enable the diagnostic. (A.3b emitted records
+    unconditionally; .36 made the flag actually do its job.)
+    """
     from cognition.logic import HypergraphReasoner
 
     return HypergraphReasoner(
         cog.store, cog.encoder, cog.schema,
         hidden_dim=64, n_layers=2,
+        log_per_infon_masses=True,
     )
 
 
