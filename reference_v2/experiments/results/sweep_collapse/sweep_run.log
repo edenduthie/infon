@@ -1,0 +1,483 @@
+B.3 sweep starting at 2026-05-03 01:47:35
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8131.12it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26931.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11570.49it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26780.29it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44996.36it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14383.99it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13660.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27798.76it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22809.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 38337.49it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27917.71it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27633.06it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22329.92it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46431.41it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45923.04it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43432.14it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46615.71it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24191.26it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10354.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8113.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44084.28it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46541.81it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 52444.41it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 21705.37it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26707.21it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9060.37it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8371.47it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46677.47it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12654.32it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11636.22it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25883.16it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46726.99it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46913.65it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 17511.01it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10101.54it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44451.37it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28037.68it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10155.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43208.43it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 32786.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14389.87it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25928.87it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 37055.27it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47688.35it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45425.68it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27290.59it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43550.25it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 39016.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 23550.90it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27290.59it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44361.82it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25886.96it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9664.29it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 23661.62it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28203.77it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25867.95it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26194.91it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24828.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14989.85it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12718.27it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45578.47it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26051.58it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26691.03it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9074.84it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46236.42it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28113.75it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11142.36it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27913.29it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12283.72it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47177.50it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26960.63it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 21021.57it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25623.38it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28068.96it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27746.22it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47895.80it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27650.41it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26312.29it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14273.28it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45531.34it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12386.50it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44530.02it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10671.88it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22639.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26606.37it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11169.21it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 18619.68it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 15285.10it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27550.95it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28440.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11070.24it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27637.40it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13640.01it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28546.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45053.90it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22889.91it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13451.49it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 40210.17it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26956.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 19497.59it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27542.33it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47740.05it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8253.80it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28010.93it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10490.13it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 20426.81it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27332.94it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24731.26it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27904.45it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26747.76it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45215.80it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26923.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8857.20it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27164.34it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 37149.04it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25325.01it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11334.50it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24538.34it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22634.04it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27829.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47001.27it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28068.96it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48838.58it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44473.81it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 21347.65it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27900.03it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11941.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27315.98it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9694.08it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 19997.82it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 15228.28it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 15225.65it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 15867.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 23127.32it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13297.16it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26474.42it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27781.23it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11830.81it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10675.12it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24291.34it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24118.40it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46175.82it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27948.72it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27953.15it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46200.04it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8171.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13711.14it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27654.75it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27503.63it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26923.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 33948.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28100.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45661.16it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 37377.63it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25486.22it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47533.94it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 41187.93it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26304.43it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46492.68it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47329.60it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27685.17it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 57606.53it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27456.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26682.94it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27214.70it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27581.14it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 7447.71it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44710.85it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9485.80it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27151.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27733.12it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 42571.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27908.87it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27447.92it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27948.72it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 50116.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28158.69it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27680.82it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 52885.25it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45899.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11007.98it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44117.40it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27332.94it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26878.36it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27358.40it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26931.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48690.10it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11753.45it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27667.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9027.87it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 49946.35it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46504.95it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 40608.75it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26606.37it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12461.85it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28454.33it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26040.02it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25990.08it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9945.28it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 18712.64it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11821.28it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27589.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26391.13it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13044.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27477.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27594.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47740.05it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10534.67it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12074.90it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13615.77it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26043.87it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46200.04it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27273.69it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27366.91it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25848.98it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8772.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28086.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13507.19it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25303.18it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27383.92it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24480.37it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26218.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 16956.47it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 16589.21it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26751.83it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12923.54it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14360.54it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26841.50it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45887.15it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9509.87it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28064.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 15746.92it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46640.39it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24766.03it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27685.17it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27633.06it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47701.26it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26654.68it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11841.15it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27097.49it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28131.71it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12207.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48250.00it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27693.88it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27135.05it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48369.24it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11565.94it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27520.82it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13800.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 19050.59it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26610.39it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27093.32it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48838.58it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26454.54it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 16391.62it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27913.29it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26829.24it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24790.43it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26956.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26406.95it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25165.82it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 7885.79it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27882.36it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26829.24it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45297.19it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 21970.66it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27512.22it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26985.41it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28317.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26339.83it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43282.74it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13815.45it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25867.95it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27202.10it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26237.83it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25245.17it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45181.01it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27637.40it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27659.09it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12664.33it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25701.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10313.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 19665.19it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 6030.84it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8979.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9845.23it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10740.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 21004.03it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11807.81it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27607.08it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27602.75it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27341.42it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24026.29it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27155.97it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27663.44it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27838.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25705.64it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26105.63it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43050.04it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27750.59it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44496.28it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 21748.24it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46813.92it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27768.09it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27286.36it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27864.72it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46566.42it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24368.62it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 6030.22it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26853.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25586.17it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27672.13it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10749.38it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26764.02it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48236.79it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25058.43it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13020.01it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43240.25it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27235.74it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27922.14it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 17061.58it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22892.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 15876.06it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27193.70it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8646.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13160.08it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26502.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28042.15it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27235.74it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26218.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43734.05it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22108.53it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24026.29it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28620.76it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28308.01it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 20047.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48838.58it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28015.39it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25970.92it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10404.63it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27354.16it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24892.01it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 13959.96it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44272.62it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26402.99it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10882.18it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45007.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 18380.71it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24227.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26935.90it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 39321.60it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26890.67it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26964.76it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8637.87it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28440.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27877.95it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27122.52it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27197.90it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47431.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27035.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44893.16it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27366.91it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27698.23it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27181.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 16519.20it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8678.30it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28037.68it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26940.02it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27904.45it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47316.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26013.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11082.08it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8041.67it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 19689.37it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27807.54it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 20951.57it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 38023.05it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24453.19it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47778.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12527.43it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24314.81it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 49819.22it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26940.02it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27043.41it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9904.46it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26964.76it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26727.47it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26530.24it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27151.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12375.19it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8049.38it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28394.71it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10487.63it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27477.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27507.93it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27030.96it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27507.93it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27851.50it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26686.98it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27667.78it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43432.14it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27953.15it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26878.36it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27611.41it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28546.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8338.97it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25270.52it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 45649.33it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26132.74it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 28728.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27010.24it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22327.09it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27602.75it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27563.88it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48236.79it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44836.03it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26179.34it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46554.11it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10192.72it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 18984.89it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27060.03it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27772.47it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8938.09it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 10915.22it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25133.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27311.75it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 44790.43it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 47164.86it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 49179.44it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 11462.83it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24955.48it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9789.97it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14541.92it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27855.91it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26206.60it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12917.85it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27572.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25936.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43810.19it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27001.96it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26288.73it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27122.52it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 7419.79it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46309.35it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27452.20it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8615.90it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27803.15it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26518.26it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 18451.95it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27693.88it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 12584.71it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9732.64it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14997.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46988.74it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26964.76it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27864.72it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 23491.23it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 14788.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26973.02it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26927.66it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 9441.57it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 18095.61it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 48422.42it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 46309.35it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 49960.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25818.67it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 43701.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25630.84it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25936.51it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 8047.55it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 22704.06it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26618.43it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27089.15it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27261.03it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 17038.47it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 38354.18it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 26024.64it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 24214.54it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 27507.93it/s]
+Loading weights:   0%|          | 0/42 [00:00<?, ?it/s]Loading weights: 100%|██████████| 42/42 [00:00<00:00, 25974.75it/s]
+B.3 sweep COMPLETE in 22.3 min
+aggregate written to: experiments/results/sweep_collapse/aggregate.json
