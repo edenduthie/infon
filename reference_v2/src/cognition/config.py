@@ -94,6 +94,21 @@ class CognitionConfig:
     #      docs/publication/reproduction_audit.md §Path 2.4
     decisive_top_k: int = 3
 
+    # Fusion rule
+    # Selects which Dempster-Shafer combination rule
+    # ``HypergraphReasoner.reason()`` uses to fuse the top-k decisive
+    # per-infon masses. One of {``"dempster"``, ``"yager"``, ``"murphy"``,
+    # ``"top1"``} — see ``cognition.dempster_shafer.combine_multiple`` for
+    # the dispatcher. Default ``"dempster"`` reproduces the prior
+    # no-kwarg behaviour bit-identically. Stage B's collapse sweep
+    # iterates over all four rules; Yager and Murphy preserve more m(Θ)
+    # by construction (Yager dumps conflict mass to Θ; Murphy averages
+    # before fusing).
+    # See: openspec/changes/epic-01-stabilize-theta/spec.md
+    #      Requirement: Alternative Fusion Rules
+    #      docs/publication/reproduction_audit.md §Path 2.4
+    fusion_rule: str = "dempster"
+
     @classmethod
     def local(cls, model_dir: str, db_path: str = "cognition.db",
               schema_path: str | None = None, **kw) -> CognitionConfig:

@@ -3,6 +3,13 @@
 Ingests a small geopolitical/trade scenario, builds the hypergraph,
 runs typed message passing, and verifies the IKL operators produce
 coherent DS masses.
+
+Note: ``SCHEMA_DEFS``, ``DOCUMENTS``, and ``setup_cognition`` are now
+sourced from ``experiments.ev_corpus`` so the experiment runner
+(experiments/run.py) and these tests share a single literal — see
+infon-6o3.11 / A.6b learnings. The re-export below preserves the
+import paths used by ``test_decisive_top_k.py`` and the other epic-01
+red tests (``from tests.test_logic import DOCUMENTS, setup_cognition``).
 """
 
 from __future__ import annotations
@@ -11,112 +18,9 @@ import sys
 import os
 import tempfile
 
-# ── Synthetic schema: actors, relations, features, markets ────────────
+from experiments.ev_corpus import DOCUMENTS, SCHEMA_DEFS, setup_cognition
 
-SCHEMA_DEFS = {
-    # Actors
-    "toyota": {"type": "actor", "tokens": ["toyota"], "country_code": "JP",
-               "organisation_type": "private-sector"},
-    "honda": {"type": "actor", "tokens": ["honda"], "country_code": "JP",
-              "organisation_type": "private-sector"},
-    "tesla": {"type": "actor", "tokens": ["tesla"], "country_code": "US",
-              "organisation_type": "private-sector"},
-    "panasonic": {"type": "actor", "tokens": ["panasonic"], "country_code": "JP",
-                  "organisation_type": "private-sector"},
-    "catl": {"type": "actor", "tokens": ["catl"], "country_code": "CN",
-             "organisation_type": "private-sector"},
-
-    # Relations
-    "invests": {"type": "relation", "tokens": ["invest", "invests", "invested", "investment"]},
-    "partners": {"type": "relation", "tokens": ["partner", "partners", "partnered", "partnership"]},
-    "produces": {"type": "relation", "tokens": ["produce", "produces", "produced", "production"]},
-    "expands": {"type": "relation", "tokens": ["expand", "expands", "expanded", "expansion"]},
-    "delays": {"type": "relation", "tokens": ["delay", "delays", "delayed"]},
-    "acquires": {"type": "relation", "tokens": ["acquire", "acquires", "acquired", "acquisition"]},
-
-    # Features
-    "battery": {"type": "feature", "tokens": ["battery", "batteries"]},
-    "solid_state": {"type": "feature", "tokens": ["solid-state", "solid state"],
-                    "parent": "battery"},
-    "ev": {"type": "feature", "tokens": ["ev", "electric vehicle", "electric vehicles"]},
-    "factory": {"type": "feature", "tokens": ["factory", "plant", "facility"]},
-    "supply_chain": {"type": "feature", "tokens": ["supply chain", "supply"]},
-
-    # Markets
-    "japan": {"type": "market", "tokens": ["japan", "japanese"], "country_code": "JP",
-              "macro_region": "asia_pacific"},
-    "north_america": {"type": "market", "tokens": ["north america", "us", "united states"],
-                      "macro_region": "americas"},
-    "china": {"type": "market", "tokens": ["china", "chinese"], "country_code": "CN",
-              "macro_region": "asia_pacific"},
-}
-
-# ── Synthetic documents: a coherent EV battery scenario ───────────────
-
-DOCUMENTS = [
-    {
-        "id": "doc1",
-        "text": (
-            "Toyota invests heavily in solid-state battery technology. "
-            "The company announced a $13.6 billion investment in battery production. "
-            "Toyota partners with Panasonic on battery development in Japan."
-        ),
-    },
-    {
-        "id": "doc2",
-        "text": (
-            "Tesla expands its battery factory in North America. "
-            "Tesla produces batteries at its Gigafactory facility. "
-            "Tesla acquires battery supply chain assets to reduce costs."
-        ),
-    },
-    {
-        "id": "doc3",
-        "text": (
-            "Honda delays its electric vehicle production timeline. "
-            "Honda partners with CATL for battery supply in China. "
-            "Honda invests in solid-state battery research but has not produced results."
-        ),
-    },
-    {
-        "id": "doc4",
-        "text": (
-            "CATL expands battery production capacity in China. "
-            "CATL produces batteries for multiple Japanese automakers. "
-            "Panasonic invests in new battery factory in Japan."
-        ),
-    },
-    {
-        "id": "doc5",
-        "text": (
-            "Toyota's solid-state battery investment leads to a breakthrough. "
-            "Toyota produces prototype solid-state batteries ahead of schedule. "
-            "If Toyota succeeds in solid-state batteries, it could reshape the EV market."
-        ),
-    },
-]
-
-
-def setup_cognition(db_path: str):
-    """Create a Cognition instance with synthetic schema and ingest documents."""
-    import json
-    from cognition import Cognition, CognitionConfig
-    from cognition.schema import AnchorSchema
-
-    # Write schema to temp file
-    schema_path = db_path.replace(".db", "_schema.json")
-    with open(schema_path, "w") as f:
-        json.dump(SCHEMA_DEFS, f)
-
-    config = CognitionConfig(
-        schema_path=schema_path,
-        db_path=db_path,
-        activation_threshold=0.2,
-        min_confidence=0.02,
-        top_k_per_role=3,
-    )
-    cog = Cognition(config)
-    return cog
+__all__ = ["DOCUMENTS", "SCHEMA_DEFS", "setup_cognition"]
 
 
 def test_ingest_and_build_graph():

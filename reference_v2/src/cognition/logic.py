@@ -990,7 +990,8 @@ class HypergraphReasoner(nn.Module):
                max_infons: int = 500,
                fit_epochs: int = 30,
                verbose: bool = False,
-               decisive_top_k: int = 3) -> ReasoningResult:
+               decisive_top_k: int = 3,
+               fusion_rule: str = "dempster") -> ReasoningResult:
         """Full reasoning pipeline: query → graph → fit → message passing → verdict.
 
         Auto-fits on first call (transductive: trains on the graph it will
@@ -1017,6 +1018,18 @@ class HypergraphReasoner(nn.Module):
             ``rule="top1"`` for any rule (combine of a 1-element list
             returns that element). Trade-off: smaller top_k preserves
             more m(Θ) but reduces focal-mass magnitude.
+        fusion_rule : str, default "dempster"
+            Which DS combination rule ``combine_multiple`` applies to the
+            top-k decisive masses. One of {``"dempster"``, ``"yager"``,
+            ``"murphy"``, ``"top1"``} — see
+            ``cognition.dempster_shafer.combine_multiple`` for the
+            dispatcher. Default ``"dempster"`` reproduces the prior
+            no-kwarg behaviour bit-identically. ``decisive_top_k=1`` is a
+            literal top1 selection over the full relevant-mass pool and
+            ignores ``fusion_rule`` (k=1 is the rule-independent corner
+            of the spec.md Requirement: Configurable Fusion Cap contract).
+            See: openspec/changes/epic-01-stabilize-theta/spec.md
+                 Requirement: Alternative Fusion Rules
         """
         if decisive_top_k < 1:
             raise ValueError(
@@ -1120,6 +1133,10 @@ class HypergraphReasoner(nn.Module):
             # the per-infon mass logger's record set so that
             # ``combine_multiple(result.per_infon_masses, rule="top1")``
             # reproduces the fused mass exactly (1e-6 tolerance).
+            # Per spec.md Requirement: Configurable Fusion Cap, k=1 is
+            # rule-independent (combine_multiple of a 1-element pick
+            # returns that pick under every rule), so ``fusion_rule`` is
+            # intentionally not threaded into this branch.
             combined = (
                 combine_multiple(masses, rule="top1")
                 if masses else MassFunction(theta=1.0)
@@ -1132,8 +1149,14 @@ class HypergraphReasoner(nn.Module):
             decisive = [
                 m for m, w in weighted_masses if m.theta < 0.95
             ][:decisive_top_k]
+            # ``rule`` is passed through to combine_multiple's
+            # dispatcher so Stage B's sweep over
+            # {dempster, yager, murphy, top1} actually reaches the
+            # alternative-rule code paths. Default ``"dempster"`` keeps
+            # the regression guard bit-identical (verified by
+            # test_fusion_rules.test_dispatch_combine_multiple).
             combined = (
-                combine_multiple(decisive) if decisive
+                combine_multiple(decisive, rule=fusion_rule) if decisive
                 else MassFunction(theta=1.0)
             )
 
