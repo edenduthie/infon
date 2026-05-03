@@ -43,6 +43,39 @@ Total wall-clock ~17 seconds on a single CPU; outputs five JSON
 reports at `experiments/results/canonical_v0_2/canonical_v0_2__seed=*.json`.
 The runner is byte-deterministic for a fixed seed.
 
+## Synthetic Stress Test
+
+The `synthetic_v1` dataset (10 000 scenarios) and the eight-cell ablation matrix exercise the
+cognition stack on oracle-labelled template corpora. The generator is deterministic, LLM-free,
+and produces exact oracle labels for three axes: H1 (compositional depth / hop count), H2
+(evidence thinness / `evidence_redundancy`), and a contradiction-density confound. Full design
+rationale and findings are in
+[`docs/publication/phase2_synthetic_ablations.md`](../docs/publication/phase2_synthetic_ablations.md).
+
+### Generator CLI
+
+```bash
+cd reference_v2
+PYTHONPATH=src .venv/bin/python -m reference_v2.synthetic.generate \
+  --train 8000 --dev 1000 --test 1000 --seed 42 \
+  --out experiments/data/synthetic_v1/
+```
+
+### Ablation matrix CLI
+
+```bash
+cd reference_v2
+PYTHONPATH=src .venv/bin/python -m reference_v2.experiments.ablation_matrix \
+  --config experiments/configs/ablation_matrix.yaml \
+  --seeds 42,0,1 \
+  --data experiments/data/synthetic_v1 \
+  --out experiments/results/ablation_matrix/ \
+  --max-train 500 --checkpoint
+```
+
+Paper headline numbers (8 cells × 5 seeds) are at
+`experiments/results/canonical_cells/aggregate.json`.
+
 ## Test suite
 
 ```bash
