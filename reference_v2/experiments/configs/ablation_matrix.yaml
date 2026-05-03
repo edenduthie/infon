@@ -1,0 +1,74 @@
+cells:
+  - name: canonical
+    seeds: [42]
+    coherence_weight: 1.0
+    fusion_rule: top1
+    decisive_top_k: 2
+    aggregator: typed_ikl
+    readout: ds_4mass
+    teacher_sources: [polarity, alignment, distance, confidence]
+
+  - name: uniform_aggregator
+    seeds: [42]
+    coherence_weight: 1.0
+    fusion_rule: top1
+    decisive_top_k: 2
+    aggregator: uniform_mean   # ablation: replace typed-IKL with R-GCN-style
+    readout: ds_4mass
+    teacher_sources: [polarity, alignment, distance, confidence]
+
+  - name: softmax_readout
+    seeds: [42]
+    coherence_weight: 0.0      # no coherence regularizer
+    fusion_rule: top1
+    decisive_top_k: 2
+    aggregator: typed_ikl
+    readout: softmax_temperature
+    teacher_sources: [polarity, alignment, distance, confidence]
+
+  - name: dirichlet_edl_readout
+    seeds: [42]
+    coherence_weight: 1.0
+    fusion_rule: top1
+    decisive_top_k: 2
+    aggregator: typed_ikl
+    readout: dirichlet_edl
+    teacher_sources: [polarity, alignment, distance, confidence]
+
+  - name: coherence_off
+    seeds: [42]
+    coherence_weight: 0.0      # ablation: disable sheaf coherence regularizer
+    fusion_rule: top1
+    decisive_top_k: 2
+    aggregator: typed_ikl
+    readout: ds_4mass
+    teacher_sources: [polarity, alignment, distance, confidence]
+
+  - name: teacher_only
+    seeds: [42]
+    coherence_weight: 1.0
+    fusion_rule: top1
+    decisive_top_k: 2
+    aggregator: typed_ikl
+    readout: ds_4mass
+    teacher_sources: [polarity, alignment, distance, confidence]
+    no_training: true          # special flag: skip fit(), use teacher mass directly
+
+  - name: top1_fusion
+    seeds: [42]
+    coherence_weight: 1.0
+    fusion_rule: top1
+    decisive_top_k: 1          # ablation: top-1 fusion (no beam)
+    aggregator: typed_ikl
+    readout: ds_4mass
+    teacher_sources: [polarity, alignment, distance, confidence]
+
+  - name: single_layer
+    seeds: [42]
+    coherence_weight: 1.0
+    fusion_rule: top1
+    decisive_top_k: 2
+    aggregator: typed_ikl
+    readout: ds_4mass
+    teacher_sources: [polarity, alignment, distance, confidence]
+    n_layers: 1                # ablation: one message-passing layer instead of two

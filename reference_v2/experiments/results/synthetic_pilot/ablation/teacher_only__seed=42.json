@@ -1,0 +1,157 @@
+{
+  "cell": "teacher_only",
+  "config": {
+    "aggregator": "typed_ikl",
+    "coherence_weight": 1.0,
+    "decisive_top_k": 2,
+    "fusion_rule": "top1",
+    "n_layers": 2,
+    "no_training": true,
+    "readout": "ds_4mass",
+    "teacher_sources": [
+      "polarity",
+      "alignment",
+      "distance",
+      "confidence"
+    ]
+  },
+  "metrics": {
+    "aurc": 0.00662163642317352,
+    "brier": 1.0007794856697012,
+    "ece": 0.4911711514357687,
+    "polarity_acc_ci_high": 0.5,
+    "polarity_acc_ci_low": 0.5,
+    "polarity_acc_mean": 0.5,
+    "polarity_acc_std": 0.0,
+    "sel_acc_at_50": 0.6,
+    "sel_acc_at_70": 0.42857142857142855,
+    "sel_acc_at_90": 0.4444444444444444,
+    "spearman_thinness": -0.018181818181818077,
+    "spearman_thinness_ci_high": -0.018181818181818077,
+    "spearman_thinness_ci_low": -0.018181818181818077
+  },
+  "n_test": 10,
+  "per_scenario": [
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "REFUTES",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 90
+    },
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "REFUTES",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 91
+    },
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "REFUTES",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 92
+    },
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "REFUTES",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 93
+    },
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "NEI",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 94
+    },
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "NEI",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 95
+    },
+    {
+      "mass": [
+        0.9558557571788427,
+        0.0,
+        0.009986269225774443,
+        0.034157973595382335
+      ],
+      "oracle_verdict": "SUPPORTS",
+      "planted_thinness": 4,
+      "predicted_verdict": "SUPPORTS",
+      "scenario_idx": 96
+    },
+    {
+      "mass": [
+        0.9558557571788427,
+        0.0,
+        0.009986269225774443,
+        0.034157973595382335
+      ],
+      "oracle_verdict": "SUPPORTS",
+      "planted_thinness": 4,
+      "predicted_verdict": "SUPPORTS",
+      "scenario_idx": 97
+    },
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "REFUTES",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 98
+    },
+    {
+      "mass": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "oracle_verdict": "NEI",
+      "planted_thinness": 0,
+      "predicted_verdict": "NOT ENOUGH INFO",
+      "scenario_idx": 99
+    }
+  ],
+  "seed": 42
+}
