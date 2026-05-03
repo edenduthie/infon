@@ -1,0 +1,1778 @@
+[
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 5 distractor 0: unrelated context 261140.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 5 distractor 1: unrelated context 716890.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 76 hop 0 witness 0: fact 76 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 76 hop 0 witness 1: fact 76 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 76 hop 1 witness 0: fact 76 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 76 hop 1 witness 1: fact 76 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 76 distractor 0: unrelated context 298797.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 76 distractor 1: unrelated context 435097.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 86 distractor 0: unrelated context 410219.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 86 distractor 1: unrelated context 373657.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 81: fact 81 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 81 distractor 0: unrelated context 223417.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 81 distractor 1: unrelated context 893446.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 95: fact 95 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 95 distractor 0: unrelated context 746739.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 95 distractor 1: unrelated context 179268.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 75 hop 0 witness 0: fact 75 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 75 hop 0 witness 1: fact 75 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 75 hop 1 witness 0: fact 75 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 75 hop 1 witness 1: fact 75 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 75 distractor 0: unrelated context 533156.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 75 distractor 1: unrelated context 44910.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 83 hop 0 witness 0: fact 83 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 83 hop 0 witness 1: fact 83 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 83 hop 1 witness 0: fact 83 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 83 hop 1 witness 1: fact 83 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 83 distractor 0: unrelated context 469545.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 83 distractor 1: unrelated context 315929.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 6 distractor 0: unrelated context 789006.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 6 distractor 1: unrelated context 449361.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 36 hop 0 witness 0: fact 36 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 36 hop 0 witness 1: fact 36 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 36 hop 1 witness 0: fact 36 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 36 hop 1 witness 1: fact 36 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 36 distractor 0: unrelated context 151498.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 36 distractor 1: unrelated context 958559.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 91 distractor 0: unrelated context 947731.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 91 distractor 1: unrelated context 240970.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 99 distractor 0: unrelated context 280508.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 99 distractor 1: unrelated context 310323.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 65: fact 65 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 65 distractor 0: unrelated context 546803.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 65 distractor 1: unrelated context 370922.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 84 hop 0 witness 0: fact 84 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 84 hop 0 witness 1: fact 84 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 84 hop 1 witness 0: fact 84 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 84 hop 1 witness 1: fact 84 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 84 distractor 0: unrelated context 22114.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 84 distractor 1: unrelated context 772012.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 66: fact 66 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 66 distractor 0: unrelated context 309955.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 66 distractor 1: unrelated context 829789.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 74 hop 0 witness 0: fact 74 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 74 hop 0 witness 1: fact 74 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 74 hop 1 witness 0: fact 74 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 74 hop 1 witness 1: fact 74 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 74 distractor 0: unrelated context 180701.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 74 distractor 1: unrelated context 164607.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 79 distractor 0: unrelated context 90928.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 79 distractor 1: unrelated context 748608.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 7 distractor 0: unrelated context 736919.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 7 distractor 1: unrelated context 272241.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 10: fact 10 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 10 distractor 0: unrelated context 127576.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 10 distractor 1: unrelated context 455776.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 90 hop 0 witness 0: fact 90 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 90 hop 0 witness 1: fact 90 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 90 hop 1 witness 0: fact 90 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 90 hop 1 witness 1: fact 90 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 90 distractor 0: unrelated context 5307.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 90 distractor 1: unrelated context 936813.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 80: fact 80 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 80 distractor 0: unrelated context 845642.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 80 distractor 1: unrelated context 890792.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 46: fact 46 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 46 distractor 0: unrelated context 953772.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 46 distractor 1: unrelated context 331568.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 30 distractor 0: unrelated context 793483.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 30 distractor 1: unrelated context 170592.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 41 distractor 0: unrelated context 671124.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 41 distractor 1: unrelated context 490706.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 87: fact 87 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 87 distractor 0: unrelated context 886295.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 87 distractor 1: unrelated context 94466.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 34: fact 34 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 34 distractor 0: unrelated context 612451.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 34 distractor 1: unrelated context 590915.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 49 hop 0 witness 0: fact 49 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 49 hop 0 witness 1: fact 49 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 49 hop 1 witness 0: fact 49 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 49 hop 1 witness 1: fact 49 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 49 distractor 0: unrelated context 284558.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 49 distractor 1: unrelated context 21612.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 88 hop 0 witness 0: fact 88 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 88 hop 0 witness 1: fact 88 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 88 hop 1 witness 0: fact 88 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 88 hop 1 witness 1: fact 88 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 88 distractor 0: unrelated context 736617.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 88 distractor 1: unrelated context 746789.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 0 distractor 0: unrelated context 366263.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 0 distractor 1: unrelated context 908580.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 61: fact 61 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 61 distractor 0: unrelated context 614642.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 61 distractor 1: unrelated context 916011.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 20 distractor 0: unrelated context 140224.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 20 distractor 1: unrelated context 584097.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 60: fact 60 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 60 distractor 0: unrelated context 320679.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 60 distractor 1: unrelated context 107740.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 15 hop 0 witness 0: fact 15 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 15 hop 0 witness 1: fact 15 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 15 hop 1 witness 0: fact 15 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 15 hop 1 witness 1: fact 15 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 15 distractor 0: unrelated context 463205.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 15 distractor 1: unrelated context 856614.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 1: fact 1 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 1 distractor 0: unrelated context 495065.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 1 distractor 1: unrelated context 699707.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 89: fact 89 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 89 distractor 0: unrelated context 379991.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 89 distractor 1: unrelated context 262460.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 25 hop 0 witness 0: fact 25 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 25 hop 0 witness 1: fact 25 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 25 hop 1 witness 0: fact 25 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 25 hop 1 witness 1: fact 25 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 25 distractor 0: unrelated context 179456.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 25 distractor 1: unrelated context 493990.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 45 distractor 0: unrelated context 807597.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 45 distractor 1: unrelated context 266975.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 17 hop 0 witness 0: fact 17 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 17 hop 0 witness 1: fact 17 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 17 hop 1 witness 0: fact 17 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 17 hop 1 witness 1: fact 17 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 17 distractor 0: unrelated context 492762.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 17 distractor 1: unrelated context 719462.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 32 hop 0 witness 0: fact 32 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 32 hop 0 witness 1: fact 32 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 32 hop 1 witness 0: fact 32 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 32 hop 1 witness 1: fact 32 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 32 distractor 0: unrelated context 989683.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 32 distractor 1: unrelated context 581061.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 19: fact 19 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 19 distractor 0: unrelated context 308667.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 19 distractor 1: unrelated context 627308.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 51 hop 0 witness 0: fact 51 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 51 hop 0 witness 1: fact 51 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 51 hop 1 witness 0: fact 51 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 51 hop 1 witness 1: fact 51 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 51 distractor 0: unrelated context 9916.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 51 distractor 1: unrelated context 896160.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 73 hop 0 witness 0: fact 73 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 73 hop 0 witness 1: fact 73 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 73 hop 1 witness 0: fact 73 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 73 hop 1 witness 1: fact 73 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 73 distractor 0: unrelated context 991382.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 73 distractor 1: unrelated context 936043.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 35 hop 0 witness 0: fact 35 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 35 hop 0 witness 1: fact 35 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 35 hop 1 witness 0: fact 35 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 35 hop 1 witness 1: fact 35 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 35 distractor 0: unrelated context 294753.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 35 distractor 1: unrelated context 22803.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 62: fact 62 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 62 distractor 0: unrelated context 975155.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 62 distractor 1: unrelated context 230213.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 55 distractor 0: unrelated context 665988.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 55 distractor 1: unrelated context 672240.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 29 distractor 0: unrelated context 175185.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 29 distractor 1: unrelated context 587644.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 12: fact 12 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 12 distractor 0: unrelated context 721616.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 12 distractor 1: unrelated context 305956.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 98 hop 0 witness 0: fact 98 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 98 hop 0 witness 1: fact 98 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 98 hop 1 witness 0: fact 98 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 98 hop 1 witness 1: fact 98 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 98 distractor 0: unrelated context 44784.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 98 distractor 1: unrelated context 196434.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 68 hop 0 witness 0: fact 68 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 68 hop 0 witness 1: fact 68 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 68 hop 1 witness 0: fact 68 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 68 hop 1 witness 1: fact 68 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 68 distractor 0: unrelated context 963211.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 68 distractor 1: unrelated context 317138.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 53: fact 53 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 53 distractor 0: unrelated context 302179.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 53 distractor 1: unrelated context 554036.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 47 hop 0 witness 0: fact 47 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 47 hop 0 witness 1: fact 47 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 47 hop 1 witness 0: fact 47 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 47 hop 1 witness 1: fact 47 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 47 distractor 0: unrelated context 545004.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 47 distractor 1: unrelated context 520672.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 40: fact 40 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 40 distractor 0: unrelated context 275847.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 40 distractor 1: unrelated context 486658.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 24 distractor 0: unrelated context 786886.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 24 distractor 1: unrelated context 41614.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 57: fact 57 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 57 distractor 0: unrelated context 243873.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 57 distractor 1: unrelated context 659422.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 31 distractor 0: unrelated context 299992.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 31 distractor 1: unrelated context 925120.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 77: fact 77 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 77 distractor 0: unrelated context 969373.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 77 distractor 1: unrelated context 992375.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 14: fact 14 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 14 distractor 0: unrelated context 546907.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 14 distractor 1: unrelated context 176772.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 69: fact 69 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 69 distractor 0: unrelated context 202738.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 69 distractor 1: unrelated context 952899.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 9: fact 9 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 9 distractor 0: unrelated context 447023.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 9 distractor 1: unrelated context 902602.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 93: fact 93 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 93 distractor 0: unrelated context 67642.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 93 distractor 1: unrelated context 831112.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 2 distractor 0: unrelated context 457417.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 2 distractor 1: unrelated context 265869.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 48 distractor 0: unrelated context 849777.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 48 distractor 1: unrelated context 438911.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 54 distractor 0: unrelated context 315692.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 54 distractor 1: unrelated context 108575.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 8 hop 0 witness 0: fact 8 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 8 hop 0 witness 1: fact 8 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 8 hop 1 witness 0: fact 8 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 8 hop 1 witness 1: fact 8 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 8 distractor 0: unrelated context 79253.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 8 distractor 1: unrelated context 96390.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 70 hop 0 witness 0: fact 70 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 70 hop 0 witness 1: fact 70 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 70 hop 1 witness 0: fact 70 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 70 hop 1 witness 1: fact 70 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 70 distractor 0: unrelated context 634831.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 70 distractor 1: unrelated context 290917.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 97 hop 0 witness 0: fact 97 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 97 hop 0 witness 1: fact 97 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 97 hop 1 witness 0: fact 97 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 97 hop 1 witness 1: fact 97 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 97 distractor 0: unrelated context 719926.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 97 distractor 1: unrelated context 874562.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 94 hop 0 witness 0: fact 94 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 94 hop 0 witness 1: fact 94 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 94 hop 1 witness 0: fact 94 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 94 hop 1 witness 1: fact 94 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 94 distractor 0: unrelated context 891911.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 94 distractor 1: unrelated context 153284.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 28 hop 0 witness 0: fact 28 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 28 hop 0 witness 1: fact 28 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 28 hop 1 witness 0: fact 28 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 28 hop 1 witness 1: fact 28 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 28 distractor 0: unrelated context 677702.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 28 distractor 1: unrelated context 103402.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 78: fact 78 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 78 distractor 0: unrelated context 151539.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 78 distractor 1: unrelated context 891677.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 50 hop 0 witness 0: fact 50 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 50 hop 0 witness 1: fact 50 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 50 hop 1 witness 0: fact 50 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 50 hop 1 witness 1: fact 50 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 50 distractor 0: unrelated context 363678.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 50 distractor 1: unrelated context 826291.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 4 hop 0 witness 0: fact 4 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 4 hop 0 witness 1: fact 4 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 4 hop 1 witness 0: fact 4 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 4 hop 1 witness 1: fact 4 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 4 distractor 0: unrelated context 263524.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 4 distractor 1: unrelated context 778750.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 64: fact 64 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 64 distractor 0: unrelated context 141262.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 64 distractor 1: unrelated context 554852.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 67 hop 0 witness 0: fact 67 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 67 hop 0 witness 1: fact 67 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 67 hop 1 witness 0: fact 67 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 67 hop 1 witness 1: fact 67 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 67 distractor 0: unrelated context 460033.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 67 distractor 1: unrelated context 808251.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 13 distractor 0: unrelated context 808660.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 13 distractor 1: unrelated context 579219.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 85 hop 0 witness 0: fact 85 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 85 hop 0 witness 1: fact 85 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 85 hop 1 witness 0: fact 85 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 85 hop 1 witness 1: fact 85 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 85 distractor 0: unrelated context 335583.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 85 distractor 1: unrelated context 661661.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 3 distractor 0: unrelated context 764229.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 3 distractor 1: unrelated context 969176.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 58 hop 0 witness 0: fact 58 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 58 hop 0 witness 1: fact 58 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 58 hop 1 witness 0: fact 58 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 58 hop 1 witness 1: fact 58 is confirmed true.",
+        "supports_query": true
+      },
+      {
+        "text": "Entity 58 distractor 0: unrelated context 730295.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 58 distractor 1: unrelated context 726994.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "SUPPORTS",
+    "planted_thinness": 4,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 44 distractor 0: unrelated context 542244.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 44 distractor 1: unrelated context 473489.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 26: fact 26 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 26 distractor 0: unrelated context 188225.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 26 distractor 1: unrelated context 329861.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 37: fact 37 is demonstrably false.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 37 distractor 0: unrelated context 418154.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 37 distractor 1: unrelated context 482303.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "REFUTES",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  },
+  {
+    "corpus_sentences": [
+      {
+        "text": "Entity 82 distractor 0: unrelated context 115980.",
+        "supports_query": false
+      },
+      {
+        "text": "Entity 82 distractor 1: unrelated context 518858.",
+        "supports_query": false
+      }
+    ],
+    "planted_verdict": "NEI",
+    "planted_thinness": 0,
+    "planted_hop_count": 2
+  }
+]
