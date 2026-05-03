@@ -1,0 +1,385 @@
+{
+  "bimodality": {
+    "decisive": {
+      "count": 28,
+      "mean_theta": 0.2261881780411516
+    },
+    "threshold": 0.5,
+    "uncertain": {
+      "count": 0,
+      "mean_theta": null
+    }
+  },
+  "config": {
+    "activation_threshold": 0.2,
+    "coherence_weight": 0.2,
+    "decisive_top_k": 5,
+    "fusion_rule": "dempster",
+    "name": "baseline"
+  },
+  "cross_check_baseline_match": {
+    "baseline_mass": [
+      0.9787283910217071,
+      0.017137050544260523,
+      0.0017894312403671825,
+      0.0023451271936652325
+    ],
+    "diagnostic_mass": [
+      0.9787283910217071,
+      0.017137050544260523,
+      0.0017894312403671825,
+      0.0023451271936652325
+    ],
+    "matches": true,
+    "max_abs_delta": 0.0,
+    "tolerance": 1e-09
+  },
+  "fused_mass": [
+    0.9787283910217071,
+    0.017137050544260523,
+    0.0017894312403671825,
+    0.0023451271936652325
+  ],
+  "n_per_infon_contributors": 28,
+  "per_infon_records": [
+    {
+      "infon_id": "inf_f08c6ba42974",
+      "mass": [
+        0.7910439968109131,
+        0.006012197118252516,
+        0.014125410467386246,
+        0.1888183355331421
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 2.0892322063446045
+    },
+    {
+      "infon_id": "inf_f69d67369fc7",
+      "mass": [
+        0.7877763509750366,
+        0.006011343095451593,
+        0.014409017749130726,
+        0.1918032169342041
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.9328937530517578
+    },
+    {
+      "infon_id": "inf_2f0bd8ac2e1f",
+      "mass": [
+        0.790442168712616,
+        0.0031994578894227743,
+        0.009875834919512272,
+        0.19648253917694092
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_bb83bf96beb5",
+      "mass": [
+        0.016348427161574364,
+        0.8201611042022705,
+        0.036300212144851685,
+        0.12719011306762695
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_b93a5805297f",
+      "mass": [
+        0.7809261083602905,
+        0.0026290658861398697,
+        0.02666565030813217,
+        0.18977925181388855
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_c73fd8e778c8",
+      "mass": [
+        0.7484280467033386,
+        0.00485587352886796,
+        0.021300945430994034,
+        0.22541524469852448
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_034ce4f683da",
+      "mass": [
+        0.7798390984535217,
+        0.002633517375215888,
+        0.026839585974812508,
+        0.190687894821167
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_4047286656d3",
+      "mass": [
+        0.01564505323767662,
+        0.8223939538002014,
+        0.03629068657755852,
+        0.1256704330444336
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_57084417508d",
+      "mass": [
+        0.7898756265640259,
+        0.0032126607839018106,
+        0.009881790727376938,
+        0.1970299482345581
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_12060b0390fd",
+      "mass": [
+        0.01612914353609085,
+        0.8208871483802795,
+        0.03629065304994583,
+        0.1266930252313614
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_f345b3d70aaf",
+      "mass": [
+        0.7472115755081177,
+        0.004847779870033264,
+        0.021436940878629684,
+        0.2265036553144455
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_5471700ee548",
+      "mass": [
+        0.015446541830897331,
+        0.822945773601532,
+        0.036296296864748,
+        0.12531141936779022
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_c1f3a34d4524",
+      "mass": [
+        0.7444756031036377,
+        0.004831172060221434,
+        0.021746300160884857,
+        0.22894690930843353
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_339c6ab9dd56",
+      "mass": [
+        0.017822585999965668,
+        0.790311872959137,
+        0.04203583672642708,
+        0.14982973039150238
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_429082c3b1fd",
+      "mass": [
+        0.7128190994262695,
+        0.006169111002236605,
+        0.023223228752613068,
+        0.2577885091304779
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 2.0892322063446045
+    },
+    {
+      "infon_id": "inf_963a97a76624",
+      "mass": [
+        0.017733978107571602,
+        0.7887349128723145,
+        0.04237279295921326,
+        0.15115831792354584
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_1b356319a2cc",
+      "mass": [
+        0.7389951944351196,
+        0.004658037796616554,
+        0.018815014511346817,
+        0.23753178119659424
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_009e86d85c9d",
+      "mass": [
+        0.017793593928217888,
+        0.7898348569869995,
+        0.04213771969079971,
+        0.15023371577262878
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_6fe9e191bb1a",
+      "mass": [
+        0.7042834162712097,
+        0.004216192290186882,
+        0.020446334034204483,
+        0.27105408906936646
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_954ded249182",
+      "mass": [
+        0.7042229771614075,
+        0.004217324312776327,
+        0.020452557131648064,
+        0.2711072266101837
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_108e60716635",
+      "mass": [
+        0.017672251909971237,
+        0.7887876629829407,
+        0.042328160256147385,
+        0.1512119024991989
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_840e584aa46a",
+      "mass": [
+        0.709333062171936,
+        0.0061646318063139915,
+        0.023218369111418724,
+        0.2612839937210083
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.9328937530517578
+    },
+    {
+      "infon_id": "inf_53f3c39d5075",
+      "mass": [
+        0.7393592000007629,
+        0.004660598933696747,
+        0.018784519284963608,
+        0.2371957153081894
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_2b1588c6f967",
+      "mass": [
+        0.6446300745010376,
+        0.004375274758785963,
+        0.02992132678627968,
+        0.3210732936859131
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_9b45e959d31d",
+      "mass": [
+        0.6443228125572205,
+        0.004374311771243811,
+        0.030020862817764282,
+        0.3212819993495941
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_1acd15bf8f26",
+      "mass": [
+        0.6435657143592834,
+        0.004374718759208918,
+        0.030250828713178635,
+        0.32180872559547424
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 0.28774410486221313
+    },
+    {
+      "infon_id": "inf_170d6967827d",
+      "mass": [
+        0.47521719336509705,
+        0.0069654760882258415,
+        0.07267645746469498,
+        0.44514092803001404
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    },
+    {
+      "infon_id": "inf_d742d07bdbb9",
+      "mass": [
+        0.47507795691490173,
+        0.006977531593292952,
+        0.072707399725914,
+        0.44523707032203674
+      ],
+      "query_id": "Did Honda delay electric vehicles?",
+      "relevance_score": 1.702126145362854
+    }
+  ],
+  "per_infon_theta_distribution": {
+    "count": 28,
+    "max": 0.44523707032203674,
+    "mean": 0.2261881780411516,
+    "median": 0.2112225964665413,
+    "min": 0.12531141936779022,
+    "p25": 0.15119850635528564,
+    "p75": 0.26372651755809784
+  },
+  "polarity_diversity": {
+    "argmax_counts": {
+      "REFUTES": 8,
+      "SUPPORTS": 20,
+      "THETA": 0,
+      "UNCERTAIN": 0
+    },
+    "most_decisive_contributor": {
+      "infon_id": "inf_5471700ee548",
+      "mass": [
+        0.015446541830897331,
+        0.822945773601532,
+        0.036296296864748,
+        0.12531141936779022
+      ],
+      "polarity": "REFUTES",
+      "relevance_score": 1.702126145362854
+    }
+  },
+  "query_name": "honda",
+  "seed": 42,
+  "verdict": "SUPPORTS"
+}

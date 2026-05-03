@@ -1,0 +1,451 @@
+{
+  "bimodality": {
+    "decisive": {
+      "count": 34,
+      "mean_theta": 0.24042047384907217
+    },
+    "threshold": 0.5,
+    "uncertain": {
+      "count": 0,
+      "mean_theta": null
+    }
+  },
+  "config": {
+    "activation_threshold": 0.2,
+    "coherence_weight": 0.2,
+    "decisive_top_k": 5,
+    "fusion_rule": "dempster",
+    "name": "baseline"
+  },
+  "cross_check_baseline_match": {
+    "baseline_mass": [
+      0.9860770130405867,
+      0.011067583447993766,
+      0.001349523158649353,
+      0.0015061993798166618
+    ],
+    "diagnostic_mass": [
+      0.9860770130405867,
+      0.011067583447993766,
+      0.001349523158649353,
+      0.0015061993798166618
+    ],
+    "matches": true,
+    "max_abs_delta": 0.0,
+    "tolerance": 1e-09
+  },
+  "fused_mass": [
+    0.9860770130405867,
+    0.011067583447993766,
+    0.001349523158649353,
+    0.0015061993798166618
+  ],
+  "n_per_infon_contributors": 34,
+  "per_infon_records": [
+    {
+      "infon_id": "inf_d5532eeffad7",
+      "mass": [
+        0.7878338098526001,
+        0.0027231404092162848,
+        0.012415268458425999,
+        0.1970277577638626
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_2f0bd8ac2e1f",
+      "mass": [
+        0.796892523765564,
+        0.0015341041143983603,
+        0.02058374136686325,
+        0.1809895932674408
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_b93a5805297f",
+      "mass": [
+        0.7908573150634766,
+        0.0017388989217579365,
+        0.015247328206896782,
+        0.19215647876262665
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_034ce4f683da",
+      "mass": [
+        0.7898479700088501,
+        0.0017433671746402979,
+        0.015285566449165344,
+        0.19312316179275513
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_4047286656d3",
+      "mass": [
+        0.007290874607861042,
+        0.8317639231681824,
+        0.045287299901247025,
+        0.11565783619880676
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 1.4512425661087036
+    },
+    {
+      "infon_id": "inf_57084417508d",
+      "mass": [
+        0.7962679266929626,
+        0.0015408176695927978,
+        0.020591292530298233,
+        0.18159997463226318
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_12060b0390fd",
+      "mass": [
+        0.007826732471585274,
+        0.8290362358093262,
+        0.04474208876490593,
+        0.11839496344327927
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_faa6a45dc31b",
+      "mass": [
+        0.7610683441162109,
+        0.0024532442912459373,
+        0.016933124512434006,
+        0.2195453643798828
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_f345b3d70aaf",
+      "mass": [
+        0.7468845248222351,
+        0.0026956843212246895,
+        0.01812295988202095,
+        0.232296884059906
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_5471700ee548",
+      "mass": [
+        0.0071073006838560104,
+        0.8327892422676086,
+        0.04546404257416725,
+        0.11463937908411026
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_a44b0a2da406",
+      "mass": [
+        0.7915453910827637,
+        0.0024567064829170704,
+        0.010465746745467186,
+        0.19553212821483612
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_a9660040095c",
+      "mass": [
+        0.7882307171821594,
+        0.0024745697155594826,
+        0.01077551580965519,
+        0.1985192447900772
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_abed76226670",
+      "mass": [
+        0.6966795325279236,
+        0.0027582088951021433,
+        0.013018932193517685,
+        0.28754329681396484
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 1.4512425661087036
+    },
+    {
+      "infon_id": "inf_339c6ab9dd56",
+      "mass": [
+        0.00677300663664937,
+        0.7805517911911011,
+        0.04337560012936592,
+        0.16929954290390015
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_eae99d1182f9",
+      "mass": [
+        0.6990634799003601,
+        0.002742943586781621,
+        0.012902050279080868,
+        0.28529152274131775
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 1.4512425661087036
+    },
+    {
+      "infon_id": "inf_652a8b6bb9d6",
+      "mass": [
+        0.7735853791236877,
+        0.0028853174299001694,
+        0.016671841964125633,
+        0.20685753226280212
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_429082c3b1fd",
+      "mass": [
+        0.6936064958572388,
+        0.0075570098124444485,
+        0.023209841921925545,
+        0.27562665939331055
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_963a97a76624",
+      "mass": [
+        0.006715646479278803,
+        0.7844927310943604,
+        0.0432451032102108,
+        0.16554652154445648
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_bed2bc6a1c0f",
+      "mass": [
+        0.6985457539558411,
+        0.0027461773715913296,
+        0.012927170842885971,
+        0.28578096628189087
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_1b356319a2cc",
+      "mass": [
+        0.7181257605552673,
+        0.004969662055373192,
+        0.011616635136306286,
+        0.2652878761291504
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_2f4c89e11743",
+      "mass": [
+        0.7219840884208679,
+        0.0037337348330765963,
+        0.0180413369089365,
+        0.2562408745288849
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_009e86d85c9d",
+      "mass": [
+        0.006753846071660519,
+        0.7817917466163635,
+        0.04333040490746498,
+        0.16812404990196228
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_6fe9e191bb1a",
+      "mass": [
+        0.711277425289154,
+        0.004415103700011969,
+        0.019187917932868004,
+        0.2651195228099823
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_c0b506504e09",
+      "mass": [
+        0.7173473238945007,
+        0.0025971282739192247,
+        0.01906426064670086,
+        0.2609912157058716
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_954ded249182",
+      "mass": [
+        0.711227297782898,
+        0.0044169193133711815,
+        0.019191520288586617,
+        0.26516425609588623
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_257cc4b5fc12",
+      "mass": [
+        0.726616382598877,
+        0.0030516539700329304,
+        0.0175339225679636,
+        0.25279802083969116
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_108e60716635",
+      "mass": [
+        0.006701900623738766,
+        0.7855675220489502,
+        0.04321661964058876,
+        0.16451387107372284
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_840e584aa46a",
+      "mass": [
+        0.6956577897071838,
+        0.007517425809055567,
+        0.023000456392765045,
+        0.2738243043422699
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_53f3c39d5075",
+      "mass": [
+        0.7185789346694946,
+        0.004959360230714083,
+        0.011603879742324352,
+        0.26485782861709595
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_2b1588c6f967",
+      "mass": [
+        0.6285932660102844,
+        0.00354295433498919,
+        0.021836675703525543,
+        0.346027135848999
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_9b45e959d31d",
+      "mass": [
+        0.6296873092651367,
+        0.0035145075526088476,
+        0.02190408669412136,
+        0.3448941111564636
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_1acd15bf8f26",
+      "mass": [
+        0.6316693425178528,
+        0.0034590645227581263,
+        0.022077860310673714,
+        0.34279370307922363
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.2931880950927734
+    },
+    {
+      "infon_id": "inf_170d6967827d",
+      "mass": [
+        0.48744428157806396,
+        0.010279878973960876,
+        0.05827757716178894,
+        0.443998247385025
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 2.3649682998657227
+    },
+    {
+      "infon_id": "inf_d742d07bdbb9",
+      "mass": [
+        0.4873921573162079,
+        0.010261802934110165,
+        0.05811367928981781,
+        0.4442322850227356
+      ],
+      "query_id": "Did Toyota invest in battery technology?",
+      "relevance_score": 1.4512425661087036
+    }
+  ],
+  "per_infon_theta_distribution": {
+    "count": 34,
+    "max": 0.4442322850227356,
+    "mean": 0.24042047384907217,
+    "median": 0.24254745244979858,
+    "min": 0.11463937908411026,
+    "p25": 0.18423910066485405,
+    "p75": 0.2751760706305504
+  },
+  "polarity_diversity": {
+    "argmax_counts": {
+      "REFUTES": 7,
+      "SUPPORTS": 27,
+      "THETA": 0,
+      "UNCERTAIN": 0
+    },
+    "most_decisive_contributor": {
+      "infon_id": "inf_5471700ee548",
+      "mass": [
+        0.0071073006838560104,
+        0.8327892422676086,
+        0.04546404257416725,
+        0.11463937908411026
+      ],
+      "polarity": "REFUTES",
+      "relevance_score": 2.3649682998657227
+    }
+  },
+  "query_name": "toyota",
+  "seed": 1,
+  "verdict": "SUPPORTS"
+}
