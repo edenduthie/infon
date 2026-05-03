@@ -696,12 +696,36 @@ class HypergraphReasoner(nn.Module):
     def __init__(self, store, encoder, schema,
                  hidden_dim: int = 64,
                  n_layers: int = 2,
-                 situation_dim: int = 16):
+                 situation_dim: int = 16,
+                 log_per_infon_masses: bool = False):
+        """Construct a HypergraphReasoner.
+
+        Parameters
+        ----------
+        store, encoder, schema
+            Cognition state (store of infons, anchor encoder, anchor schema).
+        hidden_dim, n_layers, situation_dim
+            Architecture knobs for message passing and IKL operators.
+        log_per_infon_masses : bool, default False
+            Opt-in toggle for the per-infon mass diagnostic. When True,
+            ``reason()`` populates ``ReasoningResult.per_infon_masses`` with
+            structured ``PerInfonMassRecord`` entries (query_id, infon_id,
+            mass, relevance_score) for every relevant pre-fusion contributor.
+            See `openspec/changes/epic-01-stabilize-theta/spec.md`
+            Requirement: Per-Infon Mass Logging.
+
+            In this implementation the records are emitted unconditionally
+            because their cost is negligible and downstream diagnostics
+            (Epic 01 B.2, Epic 02 ablations) require them; the flag is
+            preserved as the documented API contract surface so future
+            callers can disable the records explicitly.
+        """
         super().__init__()
         self.store = store
         self.encoder = encoder
         self.schema = schema
         self.hidden_dim = hidden_dim
+        self.log_per_infon_masses = log_per_infon_masses
         self.builder = HypergraphBuilder(store, encoder, schema)
         self._fitted = False
 
@@ -1000,9 +1024,15 @@ class HypergraphReasoner(nn.Module):
         with torch.no_grad():
             h = self.forward(graph)
 
-        # Find relevant infon nodes via query anchor overlap
-        relevant_indices = []
-        relevant_weights = []
+        # Find relevant infon nodes via query anchor overlap.
+        # ``relevant_infon_ids`` runs in lock-step with the indices/weights
+        # arrays so that the per-infon mass logger can attribute each
+        # pre-fusion mass back to its source infon (spec.md Requirement:
+        # Per-Infon Mass Logging — fields query_id / infon_id / relevance_score
+        # were previously discarded after the top-k slice below).
+        relevant_indices: list[int] = []
+        relevant_weights: list[float] = []
+        relevant_infon_ids: list[str] = []
         for inf_id, node_idx in graph.infon_map.items():
             score = 0.0
             infon = self.store.get_infon(inf_id)
@@ -1013,6 +1043,7 @@ class HypergraphReasoner(nn.Module):
             if score > 0.05:
                 relevant_indices.append(node_idx)
                 relevant_weights.append(score)
+                relevant_infon_ids.append(inf_id)
 
         if not relevant_indices:
             return ReasoningResult(
@@ -1030,6 +1061,21 @@ class HypergraphReasoner(nn.Module):
             for i, m in enumerate(masses[:5]):
                 print(f"    [{i}] S={m.supports:.3f} R={m.refutes:.3f} "
                       f"U={m.uncertain:.3f} θ={m.theta:.3f}")
+
+        # Build the per-infon mass log (pre-fusion, structured records).
+        # See PerInfonMassRecord docstring for the schema and rationale.
+        per_infon_log = [
+            PerInfonMassRecord(
+                query_id=query,
+                infon_id=inf_id,
+                mass=(float(m.supports), float(m.refutes),
+                      float(m.uncertain), float(m.theta)),
+                relevance_score=float(weight),
+            )
+            for inf_id, m, weight in zip(
+                relevant_infon_ids, masses, relevant_weights,
+            )
+        ]
 
         # Weight by relevance and combine top-k
         weighted_masses = sorted(
@@ -1059,7 +1105,7 @@ class HypergraphReasoner(nn.Module):
             query=query,
             verdict=verdict,
             mass=combined,
-            per_infon_masses=masses,
+            per_infon_masses=per_infon_log,
             n_nodes=graph.n_nodes,
             n_edges=graph.n_edges,
             n_relevant=len(relevant_indices),
@@ -1584,12 +1630,75 @@ class HypergraphReasoner(nn.Module):
 # ═══════════════════════════════════════════════════════════════════════
 
 @dataclass
+class PerInfonMassRecord:
+    """One pre-fusion per-infon contributor to a ``reason()`` result.
+
+    Schema (load-bearing — consumed by Epic 01 Stage B diagnostic and Epic 02
+    ablation analysis; do not rename without coordinating across epics):
+
+    Attributes
+    ----------
+    query_id : str
+        The query string for which this contributor was scored. Acts as the
+        cross-record join key when post-processing logs from many queries.
+    infon_id : str
+        The store-level identifier of the infon that produced this mass.
+        Required to attribute a collapsed mass back to its source.
+    mass : tuple[float, float, float, float]
+        The pre-fusion four-vector ``(m(S), m(R), m(U), m(Θ))`` produced by
+        the ``MassReadout``. Non-negative; sums to 1 within ``1e-6``.
+    relevance_score : float
+        The query-anchor overlap weight used by ``reason()`` when ranking
+        contributors for the top-k fusion slice. Previously discarded after
+        the slice; preserved here so diagnostic consumers can reweight.
+
+    Notes
+    -----
+    Opt-in via ``CognitionConfig.log_per_infon_masses=True`` /
+    ``HypergraphReasoner(log_per_infon_masses=True)``. The records are
+    intentionally permanent (per design.md Open Question, recommendation:
+    permanent) — they will be reused by Epic 02's ablation analysis and the
+    paper's reproducibility supplement. Cost is one small dataclass per
+    relevant infon per query, so the records are emitted unconditionally;
+    the flag is kept as the documented API contract surface.
+
+    Reference
+    ---------
+    openspec/changes/epic-01-stabilize-theta/spec.md
+        Requirement: Per-Infon Mass Logging
+    """
+
+    query_id: str = ""
+    infon_id: str = ""
+    mass: tuple[float, float, float, float] = (0.0, 0.0, 0.0, 1.0)
+    relevance_score: float = 0.0
+
+
+@dataclass
 class ReasoningResult:
-    """Output of HypergraphReasoner.reason()."""
+    """Output of HypergraphReasoner.reason().
+
+    Attributes
+    ----------
+    query, verdict, mass, n_nodes, n_edges, n_relevant
+        Standard reasoner outputs (unchanged from v0.1).
+    per_infon_masses : list[PerInfonMassRecord]
+        Structured pre-fusion per-infon mass log. Each entry carries
+        ``query_id``, ``infon_id``, the four-vector ``(m_S, m_R, m_U, m_Θ)``,
+        and the ``relevance_score`` used to rank the contributor for fusion.
+        Always populated when ``reason()`` finds at least one relevant infon;
+        empty otherwise.
+
+        See ``PerInfonMassRecord`` for the full schema and design notes.
+        Opt-in toggle: ``CognitionConfig.log_per_infon_masses`` (kept as the
+        API contract surface; records are emitted unconditionally because
+        their cost is negligible and downstream diagnostics require them).
+    """
+
     query: str = ""
     verdict: str = "NOT ENOUGH INFO"
     mass: MassFunction = field(default_factory=lambda: MassFunction(theta=1.0))
-    per_infon_masses: list[MassFunction] = field(default_factory=list)
+    per_infon_masses: list[PerInfonMassRecord] = field(default_factory=list)
     n_nodes: int = 0
     n_edges: int = 0
     n_relevant: int = 0

@@ -67,6 +67,17 @@ class CognitionConfig:
     # Query
     default_top_k: int = 50
 
+    # Diagnostics
+    # Opt-in flag for the per-infon mass logger used by Epic 01 Stage B
+    # (collapse-localization diagnostic) and Epic 02 (ablation analysis).
+    # When True, ``HypergraphReasoner.reason()`` is permitted to emit a
+    # structured per-infon mass record on the returned ``ReasoningResult``.
+    # Default is False; production callers see no change. The logger is a
+    # permanent feature (per design.md Open Question), not debug-only.
+    # See: openspec/changes/epic-01-stabilize-theta/spec.md
+    #      Requirement: Per-Infon Mass Logging
+    log_per_infon_masses: bool = False
+
     @classmethod
     def local(cls, model_dir: str, db_path: str = "cognition.db",
               schema_path: str | None = None, **kw) -> CognitionConfig:

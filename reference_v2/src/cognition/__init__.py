@@ -54,7 +54,7 @@ from .heads import CognitionHeads, NLIHead, RelevanceHead, PolarityHead, Relatio
 from .graph_mcts import GraphMCTS, MCTSResult, format_mcts_result
 from .logic import (
     HypergraphReasoner, HypergraphBuilder, HyperGraph,
-    ReasoningResult, RefinementResult,
+    ReasoningResult, RefinementResult, PerInfonMassRecord,
     TypedMessagePassingLayer, MassReadout,
     IKLThat, IKLAnd, IKLOr, IKLNot, IKLIf, IKLIff,
     IKLForall, IKLExists, IKLIst,
