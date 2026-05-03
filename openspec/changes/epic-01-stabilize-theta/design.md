@@ -71,9 +71,21 @@ The memo `docs/publication/phase1_collapse_fix.md` is for internal navigation an
 
 **Why:** Premature drafting against an unreviewed code change locks the paper to whatever the first run looked like. The memo is the audit trail; the paper is the synthesis.
 
+## Iteration discipline
+
+This epic commits to *solving* the collapse rather than to *bounding effort* on the attempt. If the initial sweep grid (coherence weight × fusion rule × decisive top-k × seed) does not yield a config meeting the acceptance criterion, the search expands along these dimensions, in roughly the order listed:
+
+1. **Regularizer redesign.** The current `(1 − m(Θ)) · (1 − coherence)` may be the wrong functional form. Try an explicit Θ-floor penalty `max(0, τ − m(Θ))²`, or a KL-to-uninformative-prior term that pushes mass toward `[¼, ¼, ¼, ¼]` proportional to evidence thinness.
+2. **Teacher reconstruction** (audit §Path 3.2). The four-source DS teacher may be biasing too hard toward certainty before training even starts. Try (a) a fifth source explicitly modeling evidence-thinness, (b) a temperature on each source mass before fusion, (c) replacing `confidence` with a thinness-aware variant.
+3. **Readout-architecture revisions.** If the readout itself collapses no matter what is fed in, replace the linear-then-softmax head with an explicit Dirichlet head whose evidence parameters are bounded above (the cap forces residual Θ).
+4. **Encoder / projection revisions.** SPLADE-tiny's 64-dim projection may be losing the thinness signal upstream of the network. Try a higher-dim projection or a frozen-BERT alternative.
+5. **Training-schedule revisions.** Early-stopping on `m(Θ)` rather than loss; warmup that holds the network at uniform mass for the first epochs; gradient masking on Θ-collapse-prone outputs.
+
+After each expansion, the code → run → review cycle repeats from `tasks.md` Stage A. Each expansion is documented in the phase-1 memo with what was tried and what it changed. Iteration ends when criteria 1–4 from `proposal.md` are met — not before.
+
 ## Risks / Trade-offs
 
-- **No configuration recovers Θ.** The contingency is documented in `proposal.md` Acceptance Criterion: H2 is retracted, Epics 2–4 are rescoped to an H1-only story. We pre-commit to that contingency rather than overfitting a config.
+- **The fix may take longer than 3–5 days.** Accepted. The cost of an unfixed collapse — an unsupported flagship claim — is much higher than the cost of an additional iteration round. We track iteration cost in beads and surface it weekly.
 - **Yager + low coherence regularizer accidentally puts mass on Θ that is not "ignorance" but "conflict".** The two are formally the same in DS but reviewers will call out the conflation. Mitigation: report `m(Θ)` decomposed into "Θ from no-evidence" vs "Θ from conflict" using the coherence score as a proxy in the phase-1 memo.
 - **Capping fusion at top-k=3 hurts polarity accuracy.** Mitigation: report polarity accuracy alongside `m(Θ)` for every config; only configs that preserve polarity advance.
 - **Coherence weight ≥ 2.0 destabilizes training.** Mitigation: include a runtime sanity check (loss must decrease over first 5 epochs) and log warnings; record the failed configs in the memo.

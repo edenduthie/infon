@@ -35,11 +35,24 @@
 
 ## Stage C — Review and iterate on the unexpected
 
-- [ ] C.1 Identify all configurations that satisfy acceptance criterion 1–3 from `proposal.md`. If zero satisfy, file a `decision-record.md` recommending H2 retraction; close epic with that recommendation; STOP.
+- [ ] C.1 Identify all configurations that satisfy acceptance criterion 1–4 from `proposal.md`. **If zero satisfy, do not close the epic — proceed to Stage E (Expanded Search) and iterate.** The diluted-claim path (close with H2 retraction, proceed with H1 only) is explicitly off the table per `proposal.md`.
 - [ ] C.2 If multiple satisfy, rank by: (i) polarity accuracy, (ii) `m(Θ)` stability across seeds, (iii) loss convergence speed, (iv) simplicity (prefer `dempster` + low `decisive_top_k` over `yager` + high coherence weight if both work).
-- [ ] C.3 For the top candidate, run on the 14-test regression suite (`pytest reference_v2/tests/test_logic.py -v`); fix any failures. If a fix requires reverting a knob, re-rank.
+- [ ] C.3 For the top candidate, run on the 14-test regression suite (`pytest reference_v2/tests/test_logic.py -v`); fix any failures. If a fix requires reverting a knob, re-rank. If no candidate survives the regression, proceed to Stage E.
 - [ ] C.4 Capture three plots for the memo: per-infon mass distribution before/after fusion; `m(Θ)` vs coherence weight under chosen fusion rule; loss curves under each fusion rule.
 - [ ] C.5 If unexpected behaviour appears (e.g. Yager produces high `m(Θ)` purely from conflict), file follow-up beads tickets — do not paper over in the canonical config.
+
+## Stage E — Expanded search (only if Stage C produced no acceptance-passing config)
+
+> **Entered iff Stage C concludes with zero configurations passing acceptance criteria 1–4.** This stage is repeated as many rounds as needed; each round picks one expansion axis from `design.md` § *Iteration discipline*, returns to Stage A to implement the change, then to Stage B/C to re-evaluate. The epic only progresses to Stage D once a configuration passes acceptance.
+
+- [ ] E.0 At the start of every Expanded Search round, append a `phase1_iteration_log.md` entry: round number, hypothesis being tested, expansion axis chosen, prediction.
+- [ ] E.1 **Round 1 — regularizer redesign.** Implement an alternative regularizer form (Θ-floor `max(0, τ − m(Θ))²` with `τ ∈ {0.10, 0.20, 0.30}`, or KL-to-uninformative). Test-first per Stage A protocol. Re-run sweep; re-check acceptance.
+- [ ] E.2 **Round 2 — teacher reconstruction** (audit §Path 3.2). Add a fifth teacher source modelling evidence thinness; or temperature each source mass before fusion; or replace the `confidence` source with a thinness-aware variant. Test-first; re-run; re-check.
+- [ ] E.3 **Round 3 — readout-architecture revision.** Replace the linear → softmax-over-4 head with an explicit Dirichlet head whose evidence parameters are bounded above. Test-first; re-run; re-check.
+- [ ] E.4 **Round 4 — encoder/projection revision.** Move from SPLADE-tiny 64-dim to a larger projection or a frozen-BERT alternative. Test-first; re-run; re-check.
+- [ ] E.5 **Round 5 — training-schedule revisions.** Early-stop on `m(Θ)` rather than loss; warmup that holds masses uniform for early epochs; gradient masking on Θ-collapse-prone outputs. Test-first; re-run; re-check.
+- [ ] E.N **Subsequent rounds.** If rounds 1–5 do not solve it, hypothesise the next axis (e.g. compositional revision of the teacher's Dempster combination, joint training of teacher and network, anchor-discovery feedback loop), document the rationale in `phase1_iteration_log.md`, and continue. This list is not exhaustive — the rule is "iterate until acceptance," not "iterate up to a budget."
+- [ ] E-EXIT When a round produces a configuration passing acceptance criteria 1–4, return to Stage C.2 to rank, then proceed to Stage D. The round at which acceptance was achieved is recorded in `docs/publication/phase1_collapse_fix.md`.
 
 ## Stage D — Finalize and produce phase-1 deliverable
 

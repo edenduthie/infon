@@ -92,9 +92,27 @@ The experiment runner SHALL support a YAML `sweep:` block listing axes (e.g. `co
 
 ---
 
+### Requirement: Iteration Until Acceptance
+
+This epic SHALL NOT close until a configuration meets the acceptance criterion in `proposal.md`. If Stage C of `tasks.md` produces zero passing configurations, Stage E (Expanded Search) SHALL be entered and SHALL iterate — across regularizer redesign, teacher reconstruction, readout-architecture revisions, encoder/projection revisions, training-schedule revisions, and any further axes hypothesized — until acceptance is achieved. Closing this epic with H2 retracted or with a "diluted claim" (H1-only) story is explicitly forbidden by this requirement.
+
+#### Scenario: Stage C fails, Stage E entered
+- **GIVEN** Stage C concludes with no acceptance-passing configuration
+- **WHEN** the epic is reviewed for closure
+- **THEN** the epic remains open and Stage E begins; `docs/publication/phase1_iteration_log.md` records the entry into Stage E
+
+#### Scenario: Acceptance only on later iteration
+- **GIVEN** Stage E rounds 1–3 fail and round 4 succeeds
+- **WHEN** the canonical configuration is committed
+- **THEN** `phase1_collapse_fix.md` documents that round 4 produced the fix and what changed across rounds 1–3
+
+**Testability:** the iteration log is a runnable check (CI confirms it exists when `phase1_collapse_fix.md` is present and references rounds beyond zero); closure of the epic in beads is gated on the existence of an acceptance-passing config recorded in the canonical YAML.
+
+---
+
 ### Requirement: Canonical Configuration
 
-After Stage C of `tasks.md`, exactly one named configuration `experiments/configs/canonical_v0_2.yaml` SHALL exist and SHALL satisfy the acceptance criterion in `proposal.md`. The file SHALL include version metadata, the random-seed list, a one-line rationale referencing the phase-1 memo, and explicit `coherence_weight`, `fusion_rule`, `decisive_top_k`, and `activation_threshold` settings.
+After acceptance is achieved (Stage C, or any successful round of Stage E), exactly one named configuration `experiments/configs/canonical_v0_2.yaml` SHALL exist and SHALL satisfy the acceptance criterion in `proposal.md`. The file SHALL include version metadata, the random-seed list, a one-line rationale referencing the phase-1 memo, and explicit `coherence_weight`, `fusion_rule`, `decisive_top_k`, `activation_threshold`, and (if applicable) the regularizer-form, teacher-source, readout-architecture, and projection-dimension settings introduced during expanded search.
 
 This configuration SHALL be the only one referenced by Epics 02–04. Any subsequent paper figure or table that depends on Epic-01 outputs SHALL cite this configuration by file path.
 
