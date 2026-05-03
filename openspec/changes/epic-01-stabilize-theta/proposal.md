@@ -46,3 +46,8 @@ If no configuration meets criteria 1–4, the epic is closed with a `decision-re
 - Adds `docs/publication/phase1_collapse_fix.md`.
 - No public API removed. No dependency added (sweep configs are plain YAML; existing PyYAML transitive dep is sufficient).
 - Approximate effort: 3–5 working days of engineering + 1 day of writing.
+
+## Learnings
+
+- B.4 (sweep summary figures): Toyota and Honda diverge on `yager + k=5` — Honda shows the conflict-mass pathology (Θ≈0.83, polarity REFUTES) while Toyota holds Θ in the acceptance band with polarity correct, so "Yager-k=5 is broken" is query-specific, not universal.
+
