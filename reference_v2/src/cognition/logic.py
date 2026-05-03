@@ -635,6 +635,82 @@ class TypedMessagePassingLayer(nn.Module):
         return self.norm(F.relu(out))
 
 
+class UniformMeanLayer(nn.Module):
+    """Ablation variant: uniform mean aggregation (R-GCN-style).
+
+    Uses a single shared relation weight ``W_rel`` (uniform across all
+    relation types) and weighted-mean over neighbour embeddings instead of
+    the per-relation IKL kernel used by ``TypedMessagePassingLayer``.
+    An internal FFN brings the parameter count to within 5% of
+    ``TypedMessagePassingLayer`` at the same ``hidden_dim`` so that any
+    accuracy difference is attributable to the aggregation strategy, not
+    to model capacity.
+
+    Parameter count (hidden_dim=64): ~55 856 vs TypedMessagePassingLayer's
+    54 592 — within the 5% tolerance required by the Epic 02 ablation spec.
+
+    This class isolates hypothesis H1: "typed-IKL aggregation matters at
+    high hop counts."
+    """
+
+    # Intermediate MLP width chosen so total params ≈ TypedMessagePassingLayer
+    _FFN_INNER = 368
+
+    def __init__(self, in_dim: int, out_dim: int,
+                 n_relations: int = NUM_RELATIONS,
+                 situation_dim: int = 16):
+        super().__init__()
+        self.in_dim = in_dim
+        self.out_dim = out_dim
+        # Single shared relation matrix (replaces per-relation W_rel list)
+        self.W_rel = nn.Linear(in_dim, out_dim, bias=False)
+        # Self-loop
+        self.W_self = nn.Linear(in_dim, out_dim, bias=False)
+        # Parameter-matching FFN applied after aggregation
+        self.ffn = nn.Sequential(
+            nn.Linear(out_dim, self._FFN_INNER),
+            nn.ReLU(),
+            nn.Linear(self._FFN_INNER, out_dim),
+        )
+        self.norm = nn.LayerNorm(out_dim)
+
+    def forward(self, h: torch.Tensor, edge_index: torch.Tensor,
+                edge_types: torch.Tensor, edge_weights: torch.Tensor,
+                situation_features: torch.Tensor | None = None) -> torch.Tensor:
+        """
+        Args:
+            h: (n_nodes, in_dim) node features
+            edge_index: (2, n_edges) source, target
+            edge_types: (n_edges,) relation type indices (ignored — uniform)
+            edge_weights: (n_edges,) confidence weights
+            situation_features: unused (kept for interface compatibility)
+
+        Returns:
+            h_new: (n_nodes, out_dim) updated features
+        """
+        n_nodes = h.shape[0]
+        self_out = self.W_self(h)
+
+        if edge_index.numel() == 0:
+            return self.norm(F.relu(self.ffn(self_out) + self_out))
+
+        src, dst = edge_index[0], edge_index[1]
+        msgs = self.W_rel(h[src]) * edge_weights.unsqueeze(-1)
+
+        agg = torch.zeros(n_nodes, self.out_dim, device=h.device, dtype=h.dtype)
+        agg.scatter_add_(0, dst.unsqueeze(-1).expand_as(msgs), msgs)
+
+        # Normalize by weighted in-degree
+        deg = torch.zeros(n_nodes, device=h.device, dtype=h.dtype)
+        deg.scatter_add_(0, dst, edge_weights)
+        deg = deg.clamp(min=1.0).unsqueeze(-1)
+        agg = agg / deg
+
+        combined = self_out + agg
+        out = self.norm(F.relu(self.ffn(combined) + combined))
+        return out
+
+
 # ═══════════════════════════════════════════════════════════════════════
 # 4. MASS READOUT — EMBEDDINGS → DS MASS FUNCTIONS
 # ═══════════════════════════════════════════════════════════════════════
@@ -697,7 +773,8 @@ class HypergraphReasoner(nn.Module):
                  hidden_dim: int = 64,
                  n_layers: int = 2,
                  situation_dim: int = 16,
-                 log_per_infon_masses: bool = False):
+                 log_per_infon_masses: bool = False,
+                 config=None):
         """Construct a HypergraphReasoner.
 
         Parameters
@@ -722,12 +799,28 @@ class HypergraphReasoner(nn.Module):
 
             See `openspec/changes/epic-01-stabilize-theta/spec.md`
             Requirement: Per-Infon Mass Logging.
+        config : CognitionConfig | None, default None
+            Optional config object. When provided, ``config.aggregator``
+            selects the message-passing variant:
+              - ``"typed_ikl"`` (default): ``TypedMessagePassingLayer``
+              - ``"uniform_mean"``: ``UniformMeanLayer`` (ablation)
+            ``config.log_per_infon_masses`` overrides ``log_per_infon_masses``
+            when config is supplied.
         """
         super().__init__()
         self.store = store
         self.encoder = encoder
         self.schema = schema
         self.hidden_dim = hidden_dim
+
+        # Resolve settings from config if provided
+        self._aggregator = "typed_ikl"
+        if config is not None:
+            self._aggregator = getattr(config, "aggregator", "typed_ikl")
+            log_per_infon_masses = getattr(
+                config, "log_per_infon_masses", log_per_infon_masses
+            )
+
         self.log_per_infon_masses = log_per_infon_masses
         self.builder = HypergraphBuilder(store, encoder, schema)
         self._fitted = False
@@ -736,10 +829,16 @@ class HypergraphReasoner(nn.Module):
         self.layers = nn.ModuleList()
         for i in range(n_layers):
             in_d = hidden_dim
-            self.layers.append(
-                TypedMessagePassingLayer(in_d, hidden_dim,
-                                        situation_dim=situation_dim)
-            )
+            if self._aggregator == "uniform_mean":
+                self.layers.append(
+                    UniformMeanLayer(in_d, hidden_dim,
+                                    situation_dim=situation_dim)
+                )
+            else:
+                self.layers.append(
+                    TypedMessagePassingLayer(in_d, hidden_dim,
+                                            situation_dim=situation_dim)
+                )
 
         # Mass readout
         self.mass_readout = MassReadout(hidden_dim)

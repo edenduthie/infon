@@ -109,6 +109,11 @@ class CognitionConfig:
     #      docs/publication/reproduction_audit.md §Path 2.4
     fusion_rule: str = "dempster"
 
+    # Aggregator for ablation (Epic 02)
+    # "typed_ikl" = current TypedMessagePassingLayer (default)
+    # "uniform_mean" = R-GCN-style uniform mean with single W_self
+    aggregator: str = "typed_ikl"
+
     @classmethod
     def local(cls, model_dir: str, db_path: str = "cognition.db",
               schema_path: str | None = None, **kw) -> CognitionConfig:
