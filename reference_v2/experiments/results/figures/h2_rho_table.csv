@@ -1,0 +1,9 @@
+cell,spearman_thinness_mean,spearman_thinness_ci_low,spearman_thinness_ci_high
+canonical,0.0,0.0,0.0
+coherence_off,0.0,0.0,0.0
+dirichlet_edl_readout,0.0,0.0,0.0
+single_layer,0.0,0.0,0.0
+softmax_readout,0.0,0.0,0.0
+teacher_only,-0.738965574965575,-0.738965574965575,-0.738965574965575
+top1_fusion,0.0,0.0,0.0
+uniform_aggregator,0.0,0.0,0.0

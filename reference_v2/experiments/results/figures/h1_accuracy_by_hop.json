@@ -1,0 +1,18 @@
+[
+  {
+    "aggregator": "typed_ikl",
+    "hop_count": 2,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_ci_high": 0.332,
+    "note": "single hop_count=2 (full range pending)"
+  },
+  {
+    "aggregator": "uniform_mean",
+    "hop_count": 2,
+    "polarity_acc_mean": 0.332,
+    "polarity_acc_ci_low": 0.332,
+    "polarity_acc_ci_high": 0.332,
+    "note": "single hop_count=2 (full range pending)"
+  }
+]

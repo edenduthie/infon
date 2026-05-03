@@ -1,0 +1,50 @@
+[
+  {
+    "cell": "canonical",
+    "spearman_thinness_mean": 0.0,
+    "spearman_thinness_ci_low": 0.0,
+    "spearman_thinness_ci_high": 0.0
+  },
+  {
+    "cell": "coherence_off",
+    "spearman_thinness_mean": 0.0,
+    "spearman_thinness_ci_low": 0.0,
+    "spearman_thinness_ci_high": 0.0
+  },
+  {
+    "cell": "dirichlet_edl_readout",
+    "spearman_thinness_mean": 0.0,
+    "spearman_thinness_ci_low": 0.0,
+    "spearman_thinness_ci_high": 0.0
+  },
+  {
+    "cell": "single_layer",
+    "spearman_thinness_mean": 0.0,
+    "spearman_thinness_ci_low": 0.0,
+    "spearman_thinness_ci_high": 0.0
+  },
+  {
+    "cell": "softmax_readout",
+    "spearman_thinness_mean": 0.0,
+    "spearman_thinness_ci_low": 0.0,
+    "spearman_thinness_ci_high": 0.0
+  },
+  {
+    "cell": "teacher_only",
+    "spearman_thinness_mean": -0.738965574965575,
+    "spearman_thinness_ci_low": -0.738965574965575,
+    "spearman_thinness_ci_high": -0.738965574965575
+  },
+  {
+    "cell": "top1_fusion",
+    "spearman_thinness_mean": 0.0,
+    "spearman_thinness_ci_low": 0.0,
+    "spearman_thinness_ci_high": 0.0
+  },
+  {
+    "cell": "uniform_aggregator",
+    "spearman_thinness_mean": 0.0,
+    "spearman_thinness_ci_low": 0.0,
+    "spearman_thinness_ci_high": 0.0
+  }
+]

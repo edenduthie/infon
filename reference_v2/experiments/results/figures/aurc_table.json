@@ -1,0 +1,23 @@
+[
+  {
+    "cell": "canonical",
+    "readout": "ds_4mass",
+    "aurc_mean": 0.286842885318542,
+    "aurc_std": 0.010208580989418103,
+    "n_seeds": 5
+  },
+  {
+    "cell": "softmax_readout",
+    "readout": "softmax_temperature",
+    "aurc_mean": 0.011511636096789943,
+    "aurc_std": 0.0014625764265169207,
+    "n_seeds": 5
+  },
+  {
+    "cell": "dirichlet_edl_readout",
+    "readout": "dirichlet_edl",
+    "aurc_mean": 0.3928805967843507,
+    "aurc_std": 0.029605733983865273,
+    "n_seeds": 5
+  }
+]

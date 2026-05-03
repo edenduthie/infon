@@ -1,0 +1,4 @@
+cell,readout,aurc_mean,aurc_std,n_seeds
+canonical,ds_4mass,0.286842885318542,0.010208580989418103,5
+softmax_readout,softmax_temperature,0.011511636096789943,0.0014625764265169207,5
+dirichlet_edl_readout,dirichlet_edl,0.3928805967843507,0.029605733983865273,5

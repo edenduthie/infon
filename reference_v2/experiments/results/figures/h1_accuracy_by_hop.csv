@@ -1,0 +1,3 @@
+aggregator,hop_count,polarity_acc_mean,polarity_acc_ci_low,polarity_acc_ci_high,note
+typed_ikl,2,0.332,0.332,0.332,single hop_count=2 (full range pending)
+uniform_mean,2,0.332,0.332,0.332,single hop_count=2 (full range pending)
