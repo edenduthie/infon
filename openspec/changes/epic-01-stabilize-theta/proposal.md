@@ -51,4 +51,5 @@ If no configuration meets criteria 1–4, the epic is closed with a `decision-re
 
 - B.4 (sweep summary figures): Toyota and Honda diverge on `yager + k=5` — Honda shows the conflict-mass pathology (Θ≈0.83, polarity REFUTES) while Toyota holds Θ in the acceptance band with polarity correct, so "Yager-k=5 is broken" is query-specific, not universal.
 - C.1 (acceptance gate): 10 / 96 sweep cells satisfy criteria 1–3 (polarity, Θ ∈ [0.20, 0.40], std ≤ 0.05) on both Toyota and Honda — Stage C unblocked, proceeding to C.2 ranking; Stage E not entered. All passing cells have `coherence_weight ≥ 1.0`; `top1` contributes 5 passes, Dempster/Murphy 2 each, Yager 1 (all at cw=5.0); `cw=0` and `tk=1` produce zero passes.
+- C.2 (winner pick): `top1, decisive_top_k=2, coherence_weight=1.0` chosen as canonical — wins on stability (lowest std on Toyota 0.0082 / Honda 0.0092), loss convergence (mean final loss 0.30 vs 1.09 for cw=5.0 cells), and simplicity (cautious fusion at the lowest passing cw); all four diagnostic queries SUPPORTS-correct on every seed.
 
