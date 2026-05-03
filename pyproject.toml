@@ -69,6 +69,7 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["reference_v2"]
 markers = [
     "smoke: end-to-end smoke tests; slow because they exercise the SPLADE encoder",
 ]
