@@ -1,0 +1,32 @@
+# Stage B collapse sweep — the central experiment of Epic 01.
+#
+# Iterates the four primary axes identified in design.md as the
+# load-bearing knobs for the readout/fusion Θ-collapse:
+#   coherence_weight  — sheaf coherence regulariser strength
+#   fusion_rule       — Dempster / Yager / Murphy / top1
+#   decisive_top_k    — fusion cap (1 ⇔ top1 selection by spec.md)
+#   seed              — replication axis (Stage A acceptance gate uses 5)
+#
+# Cell count: 6 × 4 × 4 × 5 = 480.
+#
+# `seed` is INSIDE the `sweep:` block per A.6's contract: each cell
+# pins exactly one seed (singular `seed:` here, not `seeds:`). The
+# runner converts this to `seeds: [<int>]` per cell internally.
+#
+# The 480-cell run itself is Stage B's B.3 task (infon-6o3.16); A.7
+# only commits the YAML.
+#
+# Schema authority: experiments/sweep.py.
+# Reference:        openspec/changes/epic-01-stabilize-theta/tasks.md (B.3),
+#                   openspec/changes/epic-01-stabilize-theta/design.md.
+
+name: sweep_collapse
+version: "0.2.0"
+rationale: "Stage B collapse sweep across coherence × fusion_rule × top_k × seed. See openspec/changes/epic-01-stabilize-theta/tasks.md (B.3)."
+activation_threshold: 0.2
+log_per_infon_masses: true
+sweep:
+  coherence_weight: [0.0, 0.2, 0.5, 1.0, 2.0, 5.0]
+  fusion_rule: [dempster, yager, murphy, top1]
+  decisive_top_k: [1, 2, 3, 5]
+  seed: [42, 0, 1, 7, 13]

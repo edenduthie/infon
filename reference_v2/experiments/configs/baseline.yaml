@@ -1,0 +1,28 @@
+# Baseline ("before-state") reproducer for Epic 01.
+#
+# This config is the audit anchor: it pins the configuration that
+# `docs/publication/reproduction_audit.md` reports as collapsing
+# m(Θ) ≈ 0.002 on the Toyota and Honda diagnostic queries. Stage B
+# uses this as the verified before-fix reference; subsequent named
+# configurations (canonical_v0_2.yaml, etc.) are evaluated by how
+# much they recover from this baseline.
+#
+# IMPORTANT — `decisive_top_k: 5` is intentional:
+#   The CognitionConfig default was changed to 3 in A.5b. This YAML
+#   deliberately uses 5 (the audit-time default) so the audit values
+#   reproduce verbatim. Do NOT "fix" this to 3 — that would silently
+#   change the meaning of "baseline" and detach it from the audit.
+#
+# Schema authority: experiments/run.py + tests/fixtures/runner_baseline.yaml.
+# Reference:        openspec/changes/epic-01-stabilize-theta/proposal.md,
+#                   docs/publication/reproduction_audit.md.
+
+name: baseline
+version: "0.2.0"
+rationale: "Audit reproducer; expected Θ ≈ 0.002 collapse on Toyota/Honda. See docs/publication/reproduction_audit.md."
+seeds: [42, 0, 1]
+coherence_weight: 0.2     # current (pre-fix) default
+fusion_rule: dempster
+decisive_top_k: 5         # AUDIT default (pre-A.5b); deliberate — see comment above
+activation_threshold: 0.2
+log_per_infon_masses: true
