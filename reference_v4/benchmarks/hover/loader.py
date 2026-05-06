@@ -7,6 +7,12 @@ HoVer real schema (hover-nlp/hover dev_release_v1.1.json):
 Label mapping:
   "SUPPORTED"     -> "SUPPORTS"
   "NOT_SUPPORTED" -> "NEI"  (HoVer has no REFUTES)
+
+Evidence strategy: fetch the Wikipedia introduction section for each
+supporting_facts page via the MediaWiki API and cache locally. Page titles
+alone (the previous approach) produce zero SPLADE activations and are
+useless as evidence. The introduction text gives the CognitionSystem
+enough context to extract infons.
 """
 
 from __future__ import annotations
@@ -18,6 +24,7 @@ from pathlib import Path
 import requests
 
 from reference_v4.benchmarks.types import EvalClaim
+from reference_v4.benchmarks.hover.wiki_fetcher import fetch_wiki_texts
 
 _HOVER_DEV_URL = (
     "https://raw.githubusercontent.com/hover-nlp/hover/main/data/hover/"
@@ -45,6 +52,7 @@ def load_hover(
     split: str = "dev",
     limit: int | None = None,
     data_path: str | None = None,
+    fetch_wiki: bool = True,
 ) -> list[EvalClaim]:
     """Load HoVer claims and return as EvalClaim objects.
 
@@ -53,6 +61,9 @@ def load_hover(
         split: Dataset split (only 'dev' supported for now).
         limit: If set, return at most this many claims.
         data_path: Direct path to a JSON file (overrides data_dir; used for fixtures).
+        fetch_wiki: If True, fetch Wikipedia intro text for evidence pages
+                    and cache locally. If False, use raw page titles only
+                    (useful for unit tests that supply fixture data).
 
     Returns:
         List of EvalClaim with metadata["num_hops"] set.
@@ -71,6 +82,19 @@ def load_hover(
     if limit is not None:
         records = records[:limit]
 
+    # Collect unique page titles across the batch for bulk Wikipedia fetch
+    all_page_titles: set[str] = set()
+    for rec in records:
+        for sf in rec.get("supporting_facts", []):
+            if sf:
+                all_page_titles.add(sf[0])
+
+    wiki_texts: dict[str, str] = {}
+    if fetch_wiki and all_page_titles and data_path is None:
+        # Use the data_dir-relative cache path
+        cache_path = str(Path(data_dir) / "wiki_cache.json")
+        wiki_texts = fetch_wiki_texts(list(all_page_titles), cache_path=cache_path)
+
     claims: list[EvalClaim] = []
     for rec in records:
         uid = str(rec["uid"])
@@ -79,9 +103,19 @@ def load_hover(
         ground_truth = _LABEL_MAP.get(label_raw, "NEI")
         num_hops = int(rec.get("num_hops", 2))
 
-        # Supporting facts are [[page_title, sent_id], ...] — use page titles as evidence docs
         supporting_facts = rec.get("supporting_facts", [])
-        evidence_docs = list({sf[0] for sf in supporting_facts if sf})
+        unique_pages = list({sf[0] for sf in supporting_facts if sf})
+
+        if wiki_texts:
+            # Use Wikipedia intro text as evidence; skip pages with no text
+            evidence_docs = [
+                wiki_texts[page]
+                for page in unique_pages
+                if wiki_texts.get(page)
+            ]
+        else:
+            # Fallback: page titles only (unit tests / fixture mode)
+            evidence_docs = unique_pages
 
         claims.append(
             EvalClaim(

@@ -114,9 +114,15 @@ def run_cell(
     system = systems[system_name]
     claims = loaders[dataset_name]()
 
+    from reference_v4.baselines._llm_cache import LLMCacheMissError
+
     results = []
     for claim in claims:
-        mass = system.evaluate(claim)
+        try:
+            mass = system.evaluate(claim)
+        except LLMCacheMissError:
+            # LLM cache miss in replay_only mode — treat as vacuous
+            mass = MassFunction(m_s=0.0, m_r=0.0, m_u=0.0, m_theta=1.0)
         results.append({
             "claim_id": claim.claim_id,
             "ground_truth": claim.ground_truth,
@@ -139,13 +145,19 @@ def run_cell(
     return "completed"
 
 
-def _build_systems(system_names: list[str], llm_cache_path: str, max_input_tokens: int) -> dict:
+def _build_systems(
+    system_names: list[str],
+    llm_cache_path: str,
+    max_input_tokens: int,
+    llm_mode: str = "replay_only",
+) -> dict:
     """Instantiate all requested systems by name.
 
     Args:
         system_names:      List of system names to instantiate.
         llm_cache_path:    Path to LLM cache (only used by llm_zeroshot).
         max_input_tokens:  Token budget (passed to llm_zeroshot).
+        llm_mode:          LLM cache mode: "replay_only" (CI) or "record" (live calls).
 
     Returns:
         Dict mapping system_name -> system instance.
@@ -159,11 +171,11 @@ def _build_systems(system_names: list[str], llm_cache_path: str, max_input_token
         "symbolic_floor": lambda: SymbolicFloor(),
         "cognition_symbolic": lambda: CognitionSystem("symbolic"),
         "cognition_gnn": lambda: CognitionSystem("gnn"),
-        "flat_retrieval": lambda: CognitionSystem("symbolic"),  # alias for flat retrieval
+        "flat_retrieval": lambda: CognitionSystem("symbolic"),
         "nli_classifier": lambda: NLIClassifier(),
         "llm_zeroshot": lambda: LLMZeroShot(
             cache_path=llm_cache_path,
-            mode="replay_only",
+            mode=llm_mode,
             max_input_tokens=max_input_tokens,
         ),
     }
@@ -176,20 +188,27 @@ def _build_systems(system_names: list[str], llm_cache_path: str, max_input_token
     return systems
 
 
-def _build_loaders(dataset_names: list[str]) -> dict:
+def _build_loaders(dataset_names: list[str], limit: int | None = None) -> dict:
     """Build dataset loader callables for each requested dataset.
+
+    Args:
+        dataset_names: Dataset names to load.
+        limit: If set, each dataset is capped at this many claims.
 
     Returns:
         Dict mapping dataset_name -> zero-argument callable returning list[EvalClaim].
     """
-    from reference_v4.benchmarks.hover import load_hover
+    from reference_v4.benchmarks.hover.loader import load_hover
     from reference_v4.benchmarks.averitec import load_averitec
     from reference_v4.benchmarks.scifact import load_scifact
 
-    all_loaders = {
-        "hover": load_hover,
-        "averitec": load_averitec,
-        "scifact": load_scifact,
+    all_loaders: dict[str, object] = {
+        # HoVer: dev split, fetch Wikipedia text for evidence
+        "hover": lambda: load_hover(limit=limit),
+        # AVeriTeC: dev split, 500 claims
+        "averitec": lambda: load_averitec(limit=limit),
+        # SciFact: dev split (has evidence labels; test split does not)
+        "scifact": lambda: load_scifact(split="dev", limit=limit),
     }
 
     loaders = {}
@@ -231,10 +250,21 @@ def main() -> None:
         "--max-input-tokens", type=int, default=4_000_000,
         help="Maximum total input tokens for LLM systems (budget guard).",
     )
+    parser.add_argument(
+        "--limit", type=int, default=None,
+        help="Cap each dataset at this many claims. Default: None (use full dataset). "
+             "Recommended: 500 for the full benchmark run to keep wall-time under 2 hours.",
+    )
+    parser.add_argument(
+        "--llm-mode", default="replay_only", choices=["replay_only", "record"],
+        help="LLM cache mode: 'replay_only' (CI, raises on miss) or 'record' (live Bedrock calls).",
+    )
     args = parser.parse_args()
 
-    systems = _build_systems(args.systems, args.llm_cache, args.max_input_tokens)
-    loaders = _build_loaders(args.datasets)
+    systems = _build_systems(
+        args.systems, args.llm_cache, args.max_input_tokens, llm_mode=args.llm_mode
+    )
+    loaders = _build_loaders(args.datasets, limit=args.limit)
 
     total = len(args.datasets) * len(args.systems) * len(args.seeds)
     done = 0

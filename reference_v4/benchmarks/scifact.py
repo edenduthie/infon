@@ -202,7 +202,7 @@ def _build_eval_claims(
 
 def load_scifact(
     data_dir: str = "reference_v4/experiments/data/scifact",
-    split: str = "test",
+    split: str = "dev",
     limit: int | None = None,
     data_path: str | None = None,
 ) -> list[EvalClaim]:
@@ -210,7 +210,9 @@ def load_scifact(
 
     Args:
         data_dir: Directory where downloaded data files are stored.
-        split: Dataset split ('test' by default, uses claims_test.jsonl).
+        split: Dataset split ('dev' by default; dev has labeled evidence).
+               The test split has no evidence labels and cannot be used
+               for evaluation.
         limit: If set, return at most this many claims.
         data_path: Direct path to a combined fixture JSON file (overrides data_dir).
 
