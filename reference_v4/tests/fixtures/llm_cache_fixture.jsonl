@@ -1,0 +1,5 @@
+{"key": "1e6872a59bec04e803418908494482e354841dc703db7aab1ba54769e99424e1", "response_text": "{\"verdict\": \"SUPPORTS\", \"confidence\": 0.82}", "input_tokens": 120, "output_tokens": 20}
+{"key": "544915d3e572a459cb28315b582d6f22429f7ebd47318c45e2393b657730ecc7", "response_text": "{\"verdict\": \"REFUTES\", \"confidence\": 0.71}", "input_tokens": 115, "output_tokens": 18}
+{"key": "17cea24871c2de8e66c10ef50ea353e149ca39446d87abbd8ebf231bbdee93d8", "response_text": "{\"verdict\": \"NEI\", \"confidence\": 1.0}", "input_tokens": 98, "output_tokens": 12}
+not valid json
+{"key": "d8500669a90481bf3a142edfb7c28a0e19fb8b8bfd590513c6458e5c44d35beb", "response_text": "{\"verdict\": \"NEI\", \"confidence\": 0.30}", "input_tokens": 102, "output_tokens": 14}
