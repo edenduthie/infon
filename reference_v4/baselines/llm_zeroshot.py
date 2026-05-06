@@ -128,7 +128,7 @@ class LLMZeroShot:
     """
 
     name = "llm_zeroshot"
-    MODEL_ID = "us.anthropic.claude-sonnet-4-6-20251001-v1:0"
+    MODEL_ID = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 
     def __init__(
         self,
