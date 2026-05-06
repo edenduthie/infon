@@ -1,2 +1,78 @@
 \section{Introduction}
-% TODO
+\label{sec:introduction}
+
+Fact-checking over document corpora is a central task in applied NLP: given a
+claim and a collection of source documents, a system must decide whether the
+corpus supports the claim, refutes it, or provides no relevant evidence.
+Current approaches fall into two failure modes. Retrieval-augmented generation
+(RAG) systems retrieve supporting passages and feed them to a language model,
+which can \emph{hallucinate} verdicts on claims the corpus does not speak
+to~\cite{lewis2020rag}. Knowledge-graph pipelines that extract structured
+triples achieve better grounding but require rigid, hand-curated schemas and
+cannot express that a question simply lacks an answer in the available
+evidence~\cite{hogan2021kg}.
+
+Neither class of system handles \emph{multi-hop} reasoning with
+\emph{calibrated uncertainty}: the ability to chain intermediate facts across
+documents while simultaneously signalling when the chain is absent or
+incomplete. This gap is consequential. A compliance analyst who asks whether
+company A indirectly supplies component B via an intermediate supplier needs
+both the chain and an honest ``the corpus does not say'' when the chain is
+missing.
+
+\paragraph{This paper.}
+We present \textbf{Cognition}, a deployable knowledge graph reasoner that
+fills this gap. Cognition is not a neural language model; it is a symbolic
+reasoner augmented by a learned prior. Its design is guided by five
+engineering properties:
+
+\begin{enumerate}
+  \item \textbf{Cassette-native storage.}  Documents are stored as immutable,
+    content-addressed \texttt{.inf} files that can live on S3 or a local
+    filesystem via \texttt{fsspec}. Delta ingests append; nothing is rewritten.
+    A manifest pruner skips cassettes that cannot contain the query anchor,
+    cutting Parquet opens by 7--16$\times$ at scale and 278$\times$ on cache
+    misses.
+
+  \item \textbf{Schema-free operation.}  Plain-English questions are encoded
+    with SPLADE-tiny~\cite{formal2021splade} (17~MB, Apache~2.0, no GPU)
+    to an anchor vocabulary. Connective predicates are auto-inferred from the
+    data: no ontology annotation is required. A Strands-powered \texttt{Analyst}
+    agent routes natural-language questions to the appropriate retrieval
+    primitive, citing every source it uses.
+
+  \item \textbf{Dempster--Shafer mass with first-class} $\boldsymbol{m(\Theta)}$.
+    Every verdict is a four-part mass $(m_S, m_R, m_U, m_\Theta)$ over the
+    frame $\{S, R, U, \Theta\}$ (Supports, Refutes, Uncertain, Vacuous).
+    When the corpus provides no evidence, $m(\Theta) \to 1.0$ instead of a
+    confident wrong answer~\cite{shafer1976mathematical}.
+
+  \item \textbf{MCTS and sheaf GNN multi-hop reasoning.}  A Monte Carlo Tree
+    Search traverses the infon hypergraph, with a 140k-parameter frozen sheaf
+    graph neural network~\cite{bodnar2022sheaf} serving as the terminal scorer.
+    The GNN provides the MCTS prior that guides search toward high-confidence
+    chains.
+
+  \item \textbf{Schema evolution without reingestion.}  A categorical
+    \texttt{SchemaFunctor} rewrites existing cassettes under a new ontology
+    via a Kan pushforward. Old snapshots remain queryable; the migration is
+    62$\times$ faster than re-extraction.
+\end{enumerate}
+
+\paragraph{Roadmap.}
+Section~\ref{sec:background} establishes the formal background: Dempster--Shafer
+theory, situation semantics and infons, SPLADE sparse retrieval, and sheaf
+graph neural networks.
+Section~\ref{sec:architecture} describes Cognition's four-layer architecture
+(cassette substrate, query DSL, reasoner, and conversational analyst).
+Section~\ref{sec:implementation} details the implementation, including the
+synthgen corpus, GNN training, and manifest pruner benchmarks.
+Section~\ref{sec:experiments} reports experimental results on synthetic and
+real-world evaluations (HoVer~\cite{jiang2020hover},
+AVeriTeC~\cite{schlichtkrull2023averitec},
+SciFact~\cite{wadden2020scifact}).
+Section~\ref{sec:discussion} discusses limitations and future work.
+Section~\ref{sec:related_work} surveys related work.
+Section~\ref{sec:conclusion} concludes.
+Section~\ref{sec:reproducibility} provides a system card and reproducibility
+statement.

@@ -1,1 +1,12 @@
-% TODO: write abstract
+Cognition is a knowledge graph reasoner that performs fact-checking over
+document corpora with calibrated uncertainty. Three properties distinguish it
+from prior systems: \emph{cassette-native storage} (immutable,
+content-addressed, S3-native documents with manifest pruning), \emph{honest
+uncertainty} via a first-class Dempster--Shafer vacuous element~$m(\Theta)$
+that rises to $1.0$ on unsupported claims rather than fabricating confident
+answers, and \emph{MCTS multi-hop reasoning} guided by a frozen sheaf graph
+neural network as a terminal scorer. On the actor-to-actor real-data
+evaluation, the symbolic pipeline scores $80\%$ accuracy; adding the sheaf
+GNN raises this to $100\%$. On synthetic held-out data the GNN reaches
+$99.2\%$ overall accuracy. The system operates on a laptop CPU without GPU or
+API keys. Code is released under the repository tag \texttt{v0.4.0-paper}.

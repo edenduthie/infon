@@ -1,2 +1,155 @@
 \section{Background}
-% TODO
+\label{sec:background}
+
+This section establishes notation and reviews the four theoretical foundations
+that Cognition builds on.
+
+% -----------------------------------------------------------------------
+\subsection{Dempster--Shafer Theory}
+\label{sec:background:ds}
+
+Dempster--Shafer (DS) theory~\cite{dempster1967upper,shafer1976mathematical}
+generalises Bayesian probability by allowing belief to be assigned to
+\emph{sets} of hypotheses rather than individual hypotheses, thereby
+distinguishing \emph{uncertainty} (evidence spread over possibilities) from
+\emph{ignorance} (absence of evidence).
+
+\paragraph{Frame of discernment.}
+Let $\Omega$ be a finite, mutually exclusive, exhaustive set of hypotheses
+called the \emph{frame of discernment}.  Cognition uses
+\[
+  \Omega = \{S,\, R,\, U\},
+\]
+where $S$ = Supports, $R$ = Refutes, and $U$ = Uncertain/mixed.
+
+\paragraph{Basic probability assignment.}
+A \emph{basic probability assignment} (bpa) is a function
+$m \colon 2^{\Omega} \to [0,1]$ satisfying
+\[
+  m(\emptyset) = 0 \qquad \text{and} \qquad \sum_{A \subseteq \Omega} m(A) = 1.
+\]
+Each focal element $A$ with $m(A) > 0$ represents a portion of belief
+committed to ``the truth lies somewhere in $A$'' without further
+discrimination.
+
+\paragraph{Vacuous element.}
+The \emph{vacuous} bpa commits all mass to the full frame:
+\[
+  m(\Theta) = 1, \quad m(A) = 0 \text{ for all } A \subsetneq \Omega.
+\]
+Here $\Theta$ denotes $\Omega$ itself when used as a focal element; the
+notation $m(\Theta)$ refers to the mass on this total-ignorance element.
+It is the \emph{correct} encoding for ``No Evidence Identified'' (NEI): it
+expresses that the available evidence does not constrain the hypothesis at all,
+as opposed to $m(U) > 0$, which would assert that conflicting evidence
+\emph{was} observed.
+
+\paragraph{Dempster's combination rule.}
+Given two independent bpas $m_1$ and $m_2$ over the same frame, their
+\emph{orthogonal sum} $m = m_1 \oplus m_2$ is defined for all $A \neq
+\emptyset$ as
+\[
+  m(A) = \frac{1}{1 - K} \sum_{\substack{B \cap C = A \\ B,\,C \subseteq \Omega}} m_1(B)\, m_2(C),
+\]
+where the normalisation constant $K = \sum_{B \cap C = \emptyset} m_1(B)\, m_2(C)$
+accounts for conflicting evidence.  Combination is commutative and associative,
+so evidence from multiple infons can be fused incrementally.
+
+\paragraph{Four-part mass in Cognition.}
+Throughout this paper, a verdict mass is written as the tuple
+$(m_S,\, m_R,\, m_U,\, m_\Theta)$, where
+\[
+  m_S = m(\{S\}), \quad
+  m_R = m(\{R\}), \quad
+  m_U = m(\{U\}), \quad
+  m_\Theta = m(\Theta),
+\]
+and $m_S + m_R + m_U + m_\Theta = 1$.
+An \emph{unsupported} claim has $m_\Theta \approx 1$ (no focal evidence);
+a \emph{supported} claim has $m_S \approx 1$; a \emph{refuted} claim has
+$m_R \approx 1$.  The chain-mass accumulation and GNN scoring described in
+Sections~\ref{sec:architecture} and~\ref{sec:implementation} produce masses
+in this form.
+
+% -----------------------------------------------------------------------
+\subsection{Situation Semantics and Infons}
+\label{sec:background:infons}
+
+Cognition's unit of extracted knowledge is the \emph{infon}, drawn from
+Barwise and Perry's situation semantics~\cite{barwise1983situations}.
+
+\paragraph{Infon triple.}
+An infon is a typed quadruple
+\[
+  \langle\!\langle \mathit{pred},\; \mathit{subj},\; \mathit{obj};\; \mathit{pol} \rangle\!\rangle,
+\]
+where $\mathit{pred}$ is a predicate label, $\mathit{subj}$ and $\mathit{obj}$
+are entity anchors, and $\mathit{pol} \in \{+1, -1\}$ records whether the
+predicate holds ($+1$, affirmed) or is negated ($-1$).
+
+\paragraph{Grounding.}
+Each infon is grounded to its source: a \emph{cassette} identifier (the SHA-256
+content hash of the document), a byte \emph{offset} into the cassette's record
+stream, and an extraction \emph{timestamp}.  This grounding lets Cognition cite
+the exact passage that generated each mass contribution and supports
+time-travel queries over snapshot manifests.
+
+\paragraph{Why infons?}
+Infons are the natural unit for two reasons.  First, their polarity field
+directly encodes negation, so refuting evidence is represented symmetrically
+with supporting evidence.  Second, the triple structure $(\mathit{pred},
+\mathit{subj}, \mathit{obj})$ maps cleanly onto a hypergraph edge, enabling
+MCTS traversal along predicate-typed chains.
+
+% -----------------------------------------------------------------------
+\subsection{SPLADE Sparse Retrieval}
+\label{sec:background:splade}
+
+SPLADE~\cite{formal2021splade} (Sparse Lexical and Expansion model) trains a
+BERT-family encoder to produce high-dimensional \emph{sparse} activations over
+a fixed vocabulary.  For a text sequence $t$, the SPLADE encoder produces a
+vector $\mathbf{s} \in \mathbb{R}^{|\mathcal{V}|}$ whose $k$-th component is
+\[
+  s_k = \log\!\bigl(1 + \mathrm{ReLU}(h_k)\bigr),
+\]
+where $h_k$ is the aggregated BERT hidden state for vocabulary token $k$.
+Only a small fraction of dimensions are non-zero, so $\mathbf{s}$ can be
+stored and intersected efficiently with an inverted index.
+
+\paragraph{SPLADE-tiny in Cognition.}
+Cognition uses the \texttt{naver/splade-v3-lexical} distilled variant
+(17~MB, Apache~2.0 licence).  It runs on CPU in under 2~seconds cold-start
+and requires no GPU or external API.  Each ingested document is encoded into a
+sparse anchor vector; at query time, the query anchor is matched against
+cassette-level bounding boxes in the manifest pruner, and the top-scoring
+cassettes are hydrated for full scoring.  This design keeps retrieval
+complexity proportional to the number of \emph{relevant} cassettes rather than
+the total corpus size.
+
+% -----------------------------------------------------------------------
+\subsection{Sheaf Graph Neural Networks}
+\label{sec:background:sheaf_gnn}
+
+A sheaf graph neural network~\cite{bodnar2022sheaf} augments a standard message-passing
+GNN with \emph{restriction maps}: for each edge $(u, v)$ in the graph, a
+learnable linear map $F_{u \trianglelefteq e} \colon \mathbb{R}^d \to
+\mathbb{R}^k$ projects node $u$'s feature vector onto a shared
+\emph{edge stalk}.  The sheaf Laplacian $\Delta_F$ is defined as
+\[
+  \Delta_F = B_F^\top B_F,
+\]
+where $B_F$ is the coboundary operator constructed from the restriction maps.
+Its first cohomology group $H^1$ captures the degree to which adjacent node
+representations are \emph{inconsistent} with the restriction maps --- a
+natural anomaly signal for relational data.
+
+\paragraph{Use in Cognition.}
+Cognition's 140k-parameter sheaf GNN (\texttt{SheafHypergraphEncoder}) uses
+per-relation-kind restriction maps, so different predicate types carry
+different geometric transformations.  The encoder's chain-verdict head
+produces a logit over $\{S, R, U, \Theta\}$ that serves as the MCTS terminal
+scorer.  The $H^1$ discrepancy is separately exposed as an anomaly signal on
+reportive edges.  The GNN is trained once on the synthetic corpus
+(\S\ref{sec:implementation}) with known ground-truth verdicts, then frozen and
+shipped with the package.  At inference time it adds no training overhead; it
+functions as a learned heuristic within the MCTS search.
