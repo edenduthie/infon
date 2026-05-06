@@ -1,0 +1,10 @@
+{
+  "systems": [
+    {"name": "cognition_gnn", "accuracy": 0.70, "aurc": 0.15, "ece": 0.05},
+    {"name": "cognition_symbolic", "accuracy": 0.65, "aurc": 0.20, "ece": 0.08},
+    {"name": "nli_classifier", "accuracy": 0.60, "aurc": 0.30, "ece": 0.12},
+    {"name": "flat_retrieval", "accuracy": 0.55, "aurc": 0.35, "ece": 0.15},
+    {"name": "symbolic_floor", "accuracy": 0.45, "aurc": 0.45, "ece": 0.20},
+    {"name": "llm_zeroshot", "accuracy": 0.62, "aurc": 0.28, "ece": 0.18}
+  ]
+}

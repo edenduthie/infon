@@ -1,0 +1,9 @@
+{
+  "hypothesis": "H1",
+  "systems": ["cognition_symbolic", "cognition_gnn", "flat_retrieval", "symbolic_floor"],
+  "depth_results": [
+    {"num_hops": 2, "cognition_symbolic": 0.72, "cognition_gnn": 0.74, "flat_retrieval": 0.68, "symbolic_floor": 0.45},
+    {"num_hops": 3, "cognition_symbolic": 0.65, "cognition_gnn": 0.70, "flat_retrieval": 0.55, "symbolic_floor": 0.40},
+    {"num_hops": 4, "cognition_symbolic": 0.58, "cognition_gnn": 0.66, "flat_retrieval": 0.42, "symbolic_floor": 0.35}
+  ]
+}

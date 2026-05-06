@@ -1,0 +1,9 @@
+{
+  "hypothesis": "H2",
+  "systems": ["cognition_symbolic", "cognition_gnn", "llm_zeroshot"],
+  "theta_by_class": {
+    "cognition_symbolic": {"SUPPORTS": [0.1, 0.2, 0.15], "REFUTES": [0.1, 0.25, 0.2], "NEI": [0.85, 0.90, 0.88]},
+    "cognition_gnn": {"SUPPORTS": [0.08, 0.18, 0.12], "REFUTES": [0.12, 0.22, 0.18], "NEI": [0.88, 0.92, 0.90]},
+    "llm_zeroshot": {"SUPPORTS": [0.3, 0.4, 0.35], "REFUTES": [0.25, 0.45, 0.38], "NEI": [0.55, 0.65, 0.60]}
+  }
+}
