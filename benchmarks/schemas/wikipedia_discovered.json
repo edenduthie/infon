@@ -1,0 +1,752 @@
+{
+  "dunn": {
+    "type": "feature",
+    "tokens": [
+      "dunn",
+      "barr"
+    ]
+  },
+  "milford": {
+    "type": "feature",
+    "tokens": [
+      "milford",
+      "cooper",
+      "home",
+      "borough",
+      "camden"
+    ]
+  },
+  "heaven": {
+    "type": "feature",
+    "tokens": [
+      "heaven",
+      "top",
+      "darkness",
+      "vampire",
+      "sequel"
+    ]
+  },
+  "same": {
+    "type": "feature",
+    "tokens": [
+      "same",
+      "short",
+      "blackwell"
+    ]
+  },
+  "dem": {
+    "type": "feature",
+    "tokens": [
+      "dem",
+      "found",
+      "discovery",
+      "gilbert"
+    ]
+  },
+  "dog": {
+    "type": "feature",
+    "tokens": [
+      "dog",
+      "hunter",
+      "bail",
+      "bond",
+      "duane"
+    ]
+  },
+  "considered": {
+    "type": "market",
+    "tokens": [
+      "considered",
+      "international",
+      "earth",
+      "change",
+      "increase"
+    ]
+  },
+  "war": {
+    "type": "feature",
+    "tokens": [
+      "war",
+      "period",
+      "commonly",
+      "stage",
+      "peace"
+    ]
+  },
+  "faust": {
+    "type": "feature",
+    "tokens": [
+      "faust"
+    ]
+  },
+  "parker": {
+    "type": "relation",
+    "tokens": [
+      "parker",
+      "michael",
+      "john",
+      "mystery",
+      "published"
+    ]
+  },
+  "alan": {
+    "type": "relation",
+    "tokens": [
+      "alan",
+      "j",
+      "parsons",
+      "adapted",
+      "novel"
+    ]
+  },
+  "sarah": {
+    "type": "feature",
+    "tokens": [
+      "sarah",
+      "ge",
+      "erin",
+      "sc",
+      "amy"
+    ]
+  },
+  "lee": {
+    "type": "feature",
+    "tokens": [
+      "lee",
+      "boo",
+      "sherman"
+    ]
+  },
+  "feature": {
+    "type": "feature",
+    "tokens": [
+      "feature",
+      "service",
+      "sports"
+    ]
+  },
+  "jamaica": {
+    "type": "feature",
+    "tokens": [
+      "jamaica",
+      "island",
+      "sea",
+      "ocean"
+    ]
+  },
+  "cold": {
+    "type": "feature",
+    "tokens": [
+      "cold",
+      "devil",
+      "re"
+    ]
+  },
+  "earl": {
+    "type": "relation",
+    "tokens": [
+      "earl",
+      "derived",
+      "from",
+      "duke",
+      "hart"
+    ]
+  },
+  "set": {
+    "type": "feature",
+    "tokens": [
+      "set",
+      "oregon",
+      "richard",
+      "portland",
+      "sacramento"
+    ]
+  },
+  "who": {
+    "type": "actor",
+    "tokens": [
+      "who",
+      "when",
+      "brothers",
+      "rr",
+      "l"
+    ]
+  },
+  "songwriter": {
+    "type": "feature",
+    "tokens": [
+      "songwriter",
+      "green",
+      "greens",
+      "anderson",
+      "sean"
+    ]
+  },
+  "hall": {
+    "type": "feature",
+    "tokens": [
+      "hall",
+      "roll",
+      "fog",
+      "cc",
+      "fame"
+    ]
+  },
+  "supporting": {
+    "type": "relation",
+    "tokens": [
+      "supporting",
+      "saturday",
+      "with",
+      "blind"
+    ]
+  },
+  "indian": {
+    "type": "feature",
+    "tokens": [
+      "indian",
+      "tamil",
+      "kun"
+    ]
+  },
+  "queen": {
+    "type": "actor",
+    "tokens": [
+      "queen",
+      "un",
+      "my",
+      "arts"
+    ]
+  },
+  "ohio": {
+    "type": "feature",
+    "tokens": [
+      "ohio",
+      "public",
+      "chicago",
+      "cai"
+    ]
+  },
+  "tom": {
+    "type": "feature",
+    "tokens": [
+      "tom",
+      "inc",
+      "praise",
+      "anita"
+    ]
+  },
+  "me": {
+    "type": "feature",
+    "tokens": [
+      "me",
+      "r",
+      "lead",
+      "singles",
+      "drummer"
+    ]
+  },
+  "acts": {
+    "type": "feature",
+    "tokens": [
+      "acts",
+      "noel",
+      "coward",
+      "private",
+      "po"
+    ]
+  },
+  "katherine": {
+    "type": "feature",
+    "tokens": [
+      "katherine",
+      "matilda",
+      "til"
+    ]
+  },
+  "mark": {
+    "type": "feature",
+    "tokens": [
+      "mark",
+      "term",
+      "independence",
+      "secretary",
+      "committee"
+    ]
+  },
+  "pakistan": {
+    "type": "feature",
+    "tokens": [
+      "pakistan",
+      "afghanistan",
+      "pas",
+      "pakistani"
+    ]
+  },
+  "track": {
+    "type": "feature",
+    "tokens": [
+      "track",
+      "duo",
+      "monroe",
+      "marilyn",
+      "wind"
+    ]
+  },
+  "wrestling": {
+    "type": "relation",
+    "tokens": [
+      "wrestling",
+      "mcmahon",
+      "t",
+      "match",
+      "boxing"
+    ]
+  },
+  "century": {
+    "type": "feature",
+    "tokens": [
+      "century",
+      "atlantic",
+      "continental",
+      "al"
+    ]
+  },
+  "kate": {
+    "type": "relation",
+    "tokens": [
+      "kate",
+      "olsen",
+      "emma",
+      "viking",
+      "jensen"
+    ]
+  },
+  "direct": {
+    "type": "feature",
+    "tokens": [
+      "direct",
+      "de",
+      "twenty",
+      "law"
+    ]
+  },
+  "girls": {
+    "type": "feature",
+    "tokens": [
+      "girls",
+      "karen",
+      "crystal",
+      "glee",
+      "pink"
+    ]
+  },
+  "married": {
+    "type": "relation",
+    "tokens": [
+      "married",
+      "influenced",
+      "influence"
+    ]
+  },
+  "polar": {
+    "type": "feature",
+    "tokens": [
+      "polar",
+      "meteor",
+      "link",
+      "ice"
+    ]
+  },
+  "office": {
+    "type": "relation",
+    "tokens": [
+      "office",
+      "inauguration",
+      "centennial",
+      "obama",
+      "mayor"
+    ]
+  },
+  "billboard": {
+    "type": "feature",
+    "tokens": [
+      "billboard",
+      "label",
+      "warner",
+      "love",
+      "hit"
+    ]
+  },
+  "culture": {
+    "type": "relation",
+    "tokens": [
+      "culture",
+      "tales",
+      "tradition",
+      "such",
+      "include"
+    ]
+  },
+  "marvel": {
+    "type": "feature",
+    "tokens": [
+      "marvel",
+      "batman",
+      "games",
+      "ultra",
+      "robots"
+    ]
+  },
+  "passion": {
+    "type": "feature",
+    "tokens": [
+      "passion",
+      "true",
+      "surfer",
+      "freeway",
+      "mcqueen"
+    ]
+  },
+  "bill": {
+    "type": "feature",
+    "tokens": [
+      "bill",
+      "d",
+      "bills",
+      "front"
+    ]
+  },
+  "televised": {
+    "type": "relation",
+    "tokens": [
+      "televised",
+      "schedule",
+      "announced",
+      "general",
+      "daily"
+    ]
+  },
+  "david": {
+    "type": "feature",
+    "tokens": [
+      "david",
+      "canadian",
+      "mckenna",
+      "albert",
+      "1930"
+    ]
+  },
+  "japanese": {
+    "type": "market",
+    "tokens": [
+      "japanese",
+      "pirate",
+      "japan",
+      "franchise",
+      "tokyo"
+    ]
+  },
+  "media": {
+    "type": "feature",
+    "tokens": [
+      "media",
+      "image"
+    ]
+  },
+  "cats": {
+    "type": "feature",
+    "tokens": [
+      "cats",
+      "since",
+      "put",
+      "own"
+    ]
+  },
+  "rage": {
+    "type": "feature",
+    "tokens": [
+      "rage",
+      "fury",
+      "jaw",
+      "fist",
+      "anger"
+    ]
+  },
+  "action": {
+    "type": "relation",
+    "tokens": [
+      "action",
+      "dev",
+      "stunt"
+    ]
+  },
+  "league": {
+    "type": "feature",
+    "tokens": [
+      "league",
+      "division",
+      "teams",
+      "champions"
+    ]
+  },
+  "exclusively": {
+    "type": "market",
+    "tokens": [
+      "exclusively",
+      "primarily",
+      "blood",
+      "africa",
+      "flesh"
+    ]
+  },
+  "fa": {
+    "type": "feature",
+    "tokens": [
+      "fa",
+      "kamal",
+      "singh",
+      "violence"
+    ]
+  },
+  "australia": {
+    "type": "feature",
+    "tokens": [
+      "australia",
+      "romantic",
+      "australian",
+      "sam"
+    ]
+  },
+  "candy": {
+    "type": "feature",
+    "tokens": [
+      "candy",
+      "positive",
+      "cheers",
+      "roles",
+      "down"
+    ]
+  },
+  "nominated": {
+    "type": "relation",
+    "tokens": [
+      "nominated",
+      "motion",
+      "globe",
+      "reward",
+      "fringe"
+    ]
+  },
+  "center": {
+    "type": "feature",
+    "tokens": [
+      "center",
+      "september",
+      "centre",
+      "crash"
+    ]
+  },
+  "van": {
+    "type": "feature",
+    "tokens": [
+      "van",
+      "germany",
+      "dad",
+      "holy",
+      "otto"
+    ]
+  },
+  "korea": {
+    "type": "market",
+    "tokens": [
+      "korea",
+      "da",
+      "def",
+      "hee"
+    ]
+  },
+  "knowledge": {
+    "type": "relation",
+    "tokens": [
+      "knowledge",
+      "electrical",
+      "field",
+      "fields",
+      "engineering"
+    ]
+  },
+  "columbia": {
+    "type": "feature",
+    "tokens": [
+      "columbia",
+      "river",
+      "super",
+      "along",
+      "rivers"
+    ]
+  },
+  "professional": {
+    "type": "feature",
+    "tokens": [
+      "professional",
+      "cole",
+      "doctor",
+      "better",
+      "left"
+    ]
+  },
+  "jail": {
+    "type": "feature",
+    "tokens": [
+      "jail",
+      "justice",
+      "sir",
+      "henry",
+      "stephen"
+    ]
+  },
+  "high": {
+    "type": "relation",
+    "tokens": [
+      "high",
+      "following",
+      "closed",
+      "penn"
+    ]
+  },
+  "san": {
+    "type": "feature",
+    "tokens": [
+      "san",
+      "range",
+      "mountain",
+      "phoenix",
+      "francisco"
+    ]
+  },
+  "area": {
+    "type": "feature",
+    "tokens": [
+      "area",
+      "basil",
+      "town",
+      "2010"
+    ]
+  },
+  "moor": {
+    "type": "market",
+    "tokens": [
+      "moor",
+      "east",
+      "sussex",
+      "cbs",
+      "ho"
+    ]
+  },
+  "owner": {
+    "type": "feature",
+    "tokens": [
+      "owner",
+      "entertainment",
+      "ceo",
+      "epic",
+      "cabinet"
+    ]
+  },
+  "model": {
+    "type": "feature",
+    "tokens": [
+      "model",
+      "british",
+      "actress",
+      "fashion",
+      "november"
+    ]
+  },
+  "italian": {
+    "type": "actor",
+    "tokens": [
+      "italian",
+      "sergio",
+      "minister",
+      "roberto",
+      "prime"
+    ]
+  },
+  "2011": {
+    "type": "feature",
+    "tokens": [
+      "2011",
+      "charlotte",
+      "thriller"
+    ]
+  },
+  "metal": {
+    "type": "feature",
+    "tokens": [
+      "metal",
+      "stone",
+      "last",
+      "heavy"
+    ]
+  },
+  "qb": {
+    "type": "feature",
+    "tokens": [
+      "qb",
+      "quarterback",
+      "bryant",
+      "afc",
+      "bowl"
+    ]
+  },
+  "research": {
+    "type": "relation",
+    "tokens": [
+      "research",
+      "development",
+      "generation",
+      "currently",
+      "scientific"
+    ]
+  },
+  "west": {
+    "type": "market",
+    "tokens": [
+      "west",
+      "angeles",
+      "stanley",
+      "iii",
+      "gang"
+    ]
+  },
+  "e": {
+    "type": "market",
+    "tokens": [
+      "e",
+      "croatian",
+      "republic",
+      "turkey",
+      "kali"
+    ]
+  },
+  "dinosaur": {
+    "type": "relation",
+    "tokens": [
+      "dinosaur",
+      "cretaceous",
+      "extinction",
+      "jurassic",
+      "brain"
+    ]
+  },
+  "sp": {
+    "type": "feature",
+    "tokens": [
+      "sp",
+      "sk",
+      "bee"
+    ]
+  }
+}

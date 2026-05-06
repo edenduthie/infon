@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+*.jsonl.tmp
+experiments/data/averitec/
+experiments/data/scifact/
+experiments/data/hover/hover_dev_release_v1.1.json

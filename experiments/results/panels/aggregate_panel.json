@@ -1,0 +1,60 @@
+{
+  "systems": [
+    {
+      "name": "cognition_gnn",
+      "accuracy": 0.4716,
+      "aurc": 0.5764,
+      "ece": 0.2102
+    },
+    {
+      "name": "cognition_symbolic",
+      "accuracy": 0.4716,
+      "aurc": 0.5764,
+      "ece": 0.2102
+    },
+    {
+      "name": "nli_classifier",
+      "accuracy": 0.5033,
+      "aurc": 0.3951,
+      "ece": 0.3927
+    },
+    {
+      "name": "flat_retrieval",
+      "accuracy": 0.4716,
+      "aurc": 0.0,
+      "ece": 0.0
+    },
+    {
+      "name": "symbolic_floor",
+      "accuracy": 0.4236,
+      "aurc": 0.0,
+      "ece": 0.0
+    },
+    {
+      "name": "llm_zeroshot",
+      "accuracy": 0.0,
+      "aurc": 0.0,
+      "ece": 0.0
+    }
+  ],
+  "summary": {
+    "cognition_gnn_accuracy": 0.4716,
+    "cognition_gnn_aurc": 0.5764,
+    "cognition_gnn_ece": 0.2102,
+    "cognition_symbolic_accuracy": 0.4716,
+    "cognition_symbolic_aurc": 0.5764,
+    "cognition_symbolic_ece": 0.2102,
+    "nli_classifier_accuracy": 0.5033,
+    "nli_classifier_aurc": 0.3951,
+    "nli_classifier_ece": 0.3927,
+    "flat_retrieval_accuracy": 0.4716,
+    "flat_retrieval_aurc": 0.0,
+    "flat_retrieval_ece": 0.0,
+    "symbolic_floor_accuracy": 0.4236,
+    "symbolic_floor_aurc": 0.0,
+    "symbolic_floor_ece": 0.0,
+    "llm_zeroshot_accuracy": 0.0,
+    "llm_zeroshot_aurc": 0.0,
+    "llm_zeroshot_ece": 0.0
+  }
+}

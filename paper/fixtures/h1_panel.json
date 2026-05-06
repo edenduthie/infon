@@ -1,0 +1,46 @@
+{
+  "hypothesis": "H1",
+  "systems": [
+    "cognition_symbolic",
+    "cognition_gnn",
+    "flat_retrieval",
+    "symbolic_floor"
+  ],
+  "depth_results": [
+    {
+      "num_hops": 2,
+      "cognition_symbolic": 0.5357142857142857,
+      "cognition_gnn": 0.5357142857142857,
+      "flat_retrieval": 0.5357142857142857,
+      "symbolic_floor": 0.35714285714285715
+    },
+    {
+      "num_hops": 3,
+      "cognition_symbolic": 0.47161572052401746,
+      "cognition_gnn": 0.47161572052401746,
+      "flat_retrieval": 0.47161572052401746,
+      "symbolic_floor": 0.42358078602620086
+    },
+    {
+      "num_hops": 4,
+      "cognition_symbolic": 0.5116279069767442,
+      "cognition_gnn": 0.5116279069767442,
+      "flat_retrieval": 0.5116279069767442,
+      "symbolic_floor": 0.3643410852713178
+    }
+  ],
+  "summary": {
+    "cognition_symbolic_2hop": 0.5357142857142857,
+    "cognition_symbolic_3hop": 0.47161572052401746,
+    "cognition_symbolic_4hop": 0.5116279069767442,
+    "cognition_gnn_2hop": 0.5357142857142857,
+    "cognition_gnn_3hop": 0.47161572052401746,
+    "cognition_gnn_4hop": 0.5116279069767442,
+    "flat_retrieval_2hop": 0.5357142857142857,
+    "flat_retrieval_3hop": 0.47161572052401746,
+    "flat_retrieval_4hop": 0.5116279069767442,
+    "symbolic_floor_2hop": 0.35714285714285715,
+    "symbolic_floor_3hop": 0.42358078602620086,
+    "symbolic_floor_4hop": 0.3643410852713178
+  }
+}

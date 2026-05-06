@@ -1,0 +1,158 @@
+{
+  "toyota": {
+    "type": "actor",
+    "tokens": [
+      "toyota"
+    ]
+  },
+  "tesla": {
+    "type": "actor",
+    "tokens": [
+      "tesla"
+    ]
+  },
+  "ford": {
+    "type": "actor",
+    "tokens": [
+      "ford"
+    ]
+  },
+  "bmw": {
+    "type": "actor",
+    "tokens": [
+      "bmw"
+    ]
+  },
+  "invest": {
+    "type": "relation",
+    "tokens": [
+      "invest",
+      "investment",
+      "investing"
+    ]
+  },
+  "launch": {
+    "type": "relation",
+    "tokens": [
+      "launch",
+      "unveil",
+      "introduce",
+      "release"
+    ]
+  },
+  "partner": {
+    "type": "relation",
+    "tokens": [
+      "partner",
+      "partnership",
+      "collaborate",
+      "alliance"
+    ]
+  },
+  "expand": {
+    "type": "relation",
+    "tokens": [
+      "expand",
+      "expansion",
+      "grow",
+      "growth"
+    ]
+  },
+  "battery": {
+    "type": "feature",
+    "tokens": [
+      "battery",
+      "batteries"
+    ]
+  },
+  "ev": {
+    "type": "feature",
+    "tokens": [
+      "ev",
+      "electric vehicle",
+      "electric"
+    ]
+  },
+  "autonomous": {
+    "type": "feature",
+    "tokens": [
+      "autonomous",
+      "self-driving",
+      "autopilot"
+    ]
+  },
+  "solid_state": {
+    "type": "feature",
+    "tokens": [
+      "solid-state",
+      "solid state"
+    ]
+  },
+  "us": {
+    "type": "market",
+    "tokens": [
+      "us",
+      "united states",
+      "america"
+    ]
+  },
+  "europe": {
+    "type": "market",
+    "tokens": [
+      "europe",
+      "eu",
+      "european"
+    ]
+  },
+  "china": {
+    "type": "market",
+    "tokens": [
+      "china",
+      "chinese"
+    ]
+  },
+  "market_share": {
+    "type": "feature",
+    "tokens": [
+      "market share",
+      "share"
+    ]
+  },
+  "production": {
+    "type": "feature",
+    "tokens": [
+      "production",
+      "manufacturing",
+      "factory",
+      "gigafactory",
+      "plant"
+    ]
+  },
+  "profit": {
+    "type": "feature",
+    "tokens": [
+      "profit",
+      "revenue",
+      "earnings",
+      "sales"
+    ]
+  },
+  "recall": {
+    "type": "relation",
+    "tokens": [
+      "recall",
+      "recalled",
+      "halt",
+      "halting"
+    ]
+  },
+  "delay": {
+    "type": "relation",
+    "tokens": [
+      "delay",
+      "delayed",
+      "postpone",
+      "postponed"
+    ]
+  }
+}
