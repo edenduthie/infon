@@ -1,0 +1,4747 @@
+{
+  "dataset": "scifact",
+  "system": "cognition_gnn",
+  "seed": 0,
+  "results": [
+    {
+      "claim_id": "1",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.11039745802927917,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8896025419707208
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "3",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06414888196477157,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9358511180352285
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          5,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "5",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.3132840420753429,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6867159579246573
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "13",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1322707684663509,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8677292315336489
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "36",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.30740261490149323,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6925973850985069
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "42",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06818083413807383,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9318191658619261
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "48",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.3132840420753429,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6867159579246573
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "49",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1955301347251462,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8044698652748539
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "50",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1824300214809382,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.817569978519062
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "51",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03634387259118419,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9636561274088158
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "53",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03634387259118419,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9636561274088158
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "54",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15829754797773185,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8417024520222682
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "56",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.036238080322287466,
+        "m_u": 0.0,
+        "m_theta": 0.9637619196777124
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "57",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.036238080322287466,
+        "m_u": 0.0,
+        "m_theta": 0.9637619196777124
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "70",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.30775204386274563,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6922479561372545
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "72",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.29272448935911366,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7072755106408861
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "75",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19707403951237698,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.802925960487623
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "94",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3010776835946616,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6989223164053384
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "99",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2895002960046908,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7104997039953093
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "100",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15825255511061534,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8417474448893847
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "113",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.07752884183505289,
+        "m_r": 0.034800062284038154,
+        "m_u": 0.0,
+        "m_theta": 0.8876710958809089
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "115",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2905366142552989,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7094633857447009
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "118",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.11317064303191912,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8868293569680807
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "124",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.029823812950767914,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.970176187049232
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "127",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.30402386821571153,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6959761317842885
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "128",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.30341256734877026,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6965874326512298
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "129",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1314151057962736,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8685848942037263
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          10,
+          11,
+          40
+        ]
+      }
+    },
+    {
+      "claim_id": "130",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1314151057962736,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8685848942037263
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          10,
+          11,
+          40
+        ]
+      }
+    },
+    {
+      "claim_id": "132",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2737915033790647,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7262084966209353
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "133",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06350062506932434,
+        "m_r": 0.01944336093771293,
+        "m_u": 0.0,
+        "m_theta": 0.9170560139929627
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "137",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06285517444871266,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9371448255512873
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          9
+        ]
+      }
+    },
+    {
+      "claim_id": "141",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04227602723037194,
+        "m_u": 0.0,
+        "m_theta": 0.9577239727696281
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0,
+          1,
+          6,
+          8,
+          9,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "142",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1810529942876959,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8189470057123042
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "143",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03474540779534945,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9652545922046506
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "146",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1810529942876959,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8189470057123042
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "148",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.09908828648531354,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9009117135146866
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "163",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06635092070967251,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9336490792903275
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          9,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "171",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.30927835765626105,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.690721642343739
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "179",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.16667712920161898,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8333228707983811
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          4,
+          5,
+          6,
+          9,
+          11
+        ]
+      }
+    },
+    {
+      "claim_id": "180",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.30375523836466667,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6962447616353333
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "183",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1885544584899161,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.811445541510084
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "185",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18938401093607127,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8106159890639287
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "198",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19622010969839415,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8037798903016058
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "208",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1965597033267597,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8034402966732405
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "212",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.20352848286769948,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7964715171323007
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          3,
+          4,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "213",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.12079991164013626,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8792000883598637
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "216",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06639892525488073,
+        "m_r": 0.03284404672289283,
+        "m_u": 0.0,
+        "m_theta": 0.9007570280222265
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "217",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06865379366160637,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9313462063383936
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "218",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1962312798128935,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8037687201871064
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "219",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.01704752160995761,
+        "m_u": 0.0,
+        "m_theta": 0.9829524783900424
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "230",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.10759540512454438,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8924045948754558
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "232",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03621340650605753,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9637865934939425
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "233",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.031086534785956434,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9689134652140435
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "236",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.031086534785956434,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9689134652140435
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "237",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03383225019898764,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9661677498010124
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "238",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.18476729697264319,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8152327030273568
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "239",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.29259555648375424,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7074044435162458
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "claim_id": "248",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06098122025657782,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9390187797434222
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "249",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06098122025657782,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9390187797434222
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "261",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.30906628080518206,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6909337191948179
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5,
+          10,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "268",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.12915073666789756,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8708492633321024
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "269",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1208679249310757,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8791320750689243
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "274",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03558150087116394,
+        "m_u": 0.0,
+        "m_theta": 0.964418499128836
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "275",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.3082528292575492,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6917471707424508
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          8,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "279",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06284741894179385,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9371525810582062
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "294",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0642785824818109,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9357214175181892
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "295",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.24035729373952416,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7596427062604759
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "298",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06480047234381758,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9351995276561825
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0
+        ]
+      }
+    },
+    {
+      "claim_id": "300",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.15318184761290884,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8468181523870912
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "303",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.031086534785956434,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9689134652140435
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "312",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.16163474992891222,
+        "m_u": 0.0,
+        "m_theta": 0.8383652500710879
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "314",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0350867196400797,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9649132803599203
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "324",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06682854888017681,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9331714511198232
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "327",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.17874464296515918,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8212553570348409
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "338",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09620036391150528,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9037996360884947
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10,
+          11,
+          12,
+          15
+        ]
+      }
+    },
+    {
+      "claim_id": "343",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03366459415347905,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.966335405846521
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "350",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19327956358500153,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8067204364149985
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "354",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.18951298386315793,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.810487016136842
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "362",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06161149610546937,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9383885038945307
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "380",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.13397581048978885,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.866024189510211
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "384",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1806199246280003,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8193800753719996
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "385",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03544849359155077,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9645515064084492
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "386",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.032277282982675584,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9677227170173244
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8,
+          11
+        ]
+      }
+    },
+    {
+      "claim_id": "388",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.10073651084102665,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8992634891589734
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "399",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06751130604157879,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9324886939584213
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          11
+        ]
+      }
+    },
+    {
+      "claim_id": "410",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.23236301981280116,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7676369801871987
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "411",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.23236301981280116,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7676369801871987
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "415",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.08909292043414142,
+        "m_r": 0.03470743085589903,
+        "m_u": 0.0,
+        "m_theta": 0.8761996487099595
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "421",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.12613906149901877,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8738609385009812
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "431",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.30617125627641684,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.693828743723583
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "436",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.3157354739553702,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6842645260446298
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "437",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3027221337095308,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6972778662904693
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "439",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2857839830101274,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7142160169898724
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "440",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2836158555410473,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7163841444589527
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "443",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1853246692353411,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.814675330764659
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "452",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.28368318228021144,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7163168177197887
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0
+        ]
+      }
+    },
+    {
+      "claim_id": "475",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.28768489478587533,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7123151052141249
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "478",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.29054434386279765,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7094556561372025
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "491",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1930913560319914,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8069086439680085
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "501",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.20384676519861003,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7961532348013898
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "502",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19873883444584323,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8012611655541567
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "507",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19376223379712834,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8062377662028718
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "508",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1914626816392016,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8085373183607986
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "513",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03198300657098445,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9680169934290156
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          11
+        ]
+      }
+    },
+    {
+      "claim_id": "514",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.20284733422702633,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7971526657729737
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "516",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2957339350867971,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7042660649132028
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "517",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2972011877793857,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7027988122206144
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "521",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.030166059624982797,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9698339403750172
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          14
+        ]
+      }
+    },
+    {
+      "claim_id": "525",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.10101615303993738,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8989838469600627
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "527",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.28239246843589316,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7176075315641071
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "528",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.11556666734765138,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8844333326523486
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "532",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2966235612566212,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.703376438743379
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5,
+          9,
+          11,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "533",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2966235612566212,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.703376438743379
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5,
+          9,
+          11,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "535",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3056144066816742,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6943855933183257
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "536",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2418669195132816,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7581330804867183
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "539",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06199155445903089,
+        "m_r": 0.03668187374807688,
+        "m_u": 0.0,
+        "m_theta": 0.9013265717928923
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          11
+        ]
+      }
+    },
+    {
+      "claim_id": "540",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.31103262755858097,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.688967372441419
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "544",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.27098568734708894,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7290143126529112
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "549",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.13828303316114277,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8617169668388572
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "551",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03205637619959733,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9679436238004027
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "552",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06673053490656002,
+        "m_r": 0.015352294946937798,
+        "m_u": 0.0,
+        "m_theta": 0.9179171701465021
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "554",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.26248107053057457,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7375189294694254
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "560",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.16275253025765388,
+        "m_u": 0.0,
+        "m_theta": 0.8372474697423462
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "569",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2915489512996707,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7084510487003294
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "575",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.18517000716661602,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.814829992833384
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "577",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2586089666825551,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7413910333174448
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "578",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.28754304747005127,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7124569525299488
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "587",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.024154579027906475,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9758454209720935
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "589",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03739531317423665,
+        "m_u": 0.0,
+        "m_theta": 0.9626046868257633
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          9,
+          10,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "593",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.026810799788453386,
+        "m_r": 0.07519227799581421,
+        "m_u": 0.0,
+        "m_theta": 0.8979969222157325
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "597",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1344296989776489,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8655703010223512
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "598",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18312320770017182,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8168767922998282
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6,
+          9
+        ]
+      }
+    },
+    {
+      "claim_id": "613",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06463363077823703,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.935366369221763
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "619",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05745973459597674,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9425402654040232
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "623",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.09244019333023344,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9075598066697667
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "628",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06362984299498457,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9363701570050155
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "636",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2924518424127151,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7075481575872851
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "637",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.29030690479509236,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7096930952049076
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "641",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2809994081246686,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7190005918753314
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          9,
+          10,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "644",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.09007213781942489,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9099278621805752
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "649",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.036558836634147274,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9634411633658527
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "659",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3010776835946616,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6989223164053384
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "660",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3010776835946616,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6989223164053384
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "674",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2985570450919115,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7014429549080884
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0
+        ]
+      }
+    },
+    {
+      "claim_id": "684",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.031287091608224384,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9687129083917756
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "690",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2904382789718797,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7095617210281203
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "691",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.07014590591176692,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.929854094088233
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "692",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.20514993483903232,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7948500651609676
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "693",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.23049513622682474,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7695048637731752
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "700",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.035590630947548496,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9644093690524516
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "702",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.035590630947548496,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9644093690524516
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "715",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.11845710345420056,
+        "m_r": 0.017780484341550228,
+        "m_u": 0.0,
+        "m_theta": 0.8637624122042492
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "716",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.11845710345420056,
+        "m_r": 0.017780484341550228,
+        "m_u": 0.0,
+        "m_theta": 0.8637624122042492
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "718",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.3104067350160522,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6895932649839478
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "721",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.02879309573121984,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9712069042687802
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "723",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03267829971007341,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9673217002899266
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "727",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1810021518580677,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8189978481419323
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "728",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2428479308887146,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7571520691112855
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "729",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0599340191184868,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9400659808815132
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "742",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2604826441106236,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7395173558893764
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "743",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2238615215479923,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7761384784520077
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "744",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.14822083153325286,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8517791684667472
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "756",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.20063653550075095,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.799363464499249
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0
+        ]
+      }
+    },
+    {
+      "claim_id": "759",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.11745591259673047,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8825440874032694
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "768",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19874019515637106,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.801259804843629
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "770",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03538445235688094,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9646155476431191
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          16
+        ]
+      }
+    },
+    {
+      "claim_id": "775",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.14999021459835785,
+        "m_u": 0.0,
+        "m_theta": 0.8500097854016422
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "781",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12182110498269533,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8781788950173047
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "783",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06658839468387302,
+        "m_r": 0.015376706363486215,
+        "m_u": 0.0,
+        "m_theta": 0.9180348989526408
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "784",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.29621366228850626,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7037863377114937
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "785",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2800427617481976,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7199572382518024
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "793",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.08864544563534564,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9113545543646543
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "800",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.08892672969408551,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9110732703059146
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "805",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03397300054049408,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9660269994595059
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "808",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.19463018787272368,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8053698121272763
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "811",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.11521020930029292,
+        "m_r": 0.014643067991544556,
+        "m_u": 0.0,
+        "m_theta": 0.8701467227081625
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "814",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.22556505829247248,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7744349417075276
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "820",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2574242095353961,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7425757904646038
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "821",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2574242095353961,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7425757904646038
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "823",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.14125050780001927,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8587494921999806
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          14
+        ]
+      }
+    },
+    {
+      "claim_id": "830",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.15495493357152518,
+        "m_r": 0.09387463471500543,
+        "m_u": 0.0,
+        "m_theta": 0.7511704317134692
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "831",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.15495493357152518,
+        "m_r": 0.09387463471500543,
+        "m_u": 0.0,
+        "m_theta": 0.7511704317134692
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "832",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.3089818310225949,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6910181689774051
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "834",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3054096741471408,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6945903258528593
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "837",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.29689871819510366,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7031012818048965
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "839",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.31164331909342635,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6883566809065738
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "845",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1940650265466779,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.805934973453322
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1
+        ]
+      }
+    },
+    {
+      "claim_id": "847",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19803562518395607,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8019643748160439
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "852",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0992649545191098,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9007350454808903
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "859",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07007771733234586,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9299222826676541
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "870",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2755227506699354,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7244772493300645
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "873",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2956804083787286,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7043195916212714
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "879",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1655012336745884,
+        "m_r": 0.0833294111150587,
+        "m_u": 0.0,
+        "m_theta": 0.751169355210353
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "880",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1878944142706419,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8121055857293582
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "882",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.041423706460676904,
+        "m_u": 0.0,
+        "m_theta": 0.9585762935393232
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "887",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.30429771966623975,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.69570228033376
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "903",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19336343239427536,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8066365676057247
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "904",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.31295755837283556,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6870424416271643
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "907",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03406518809567925,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9659348119043207
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "911",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.054540641919710094,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9454593580802899
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          9
+        ]
+      }
+    },
+    {
+      "claim_id": "913",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.09625559583764245,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9037444041623576
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "914",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.18703164378797316,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8129683562120269
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "921",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.027899644729429435,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9721003552705706
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          9,
+          10,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "922",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.11825278718140944,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8817472128185906
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          9
+        ]
+      }
+    },
+    {
+      "claim_id": "936",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.3054096741471408,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6945903258528593
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "956",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3106429278828774,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6893570721171224
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "957",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.18992296712985715,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8100770328701429
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "960",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2977170731100421,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7022829268899581
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "967",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2027525306412489,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7972474693587511
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "971",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15499367454092844,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8450063254590716
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0,
+          8,
+          9,
+          13,
+          15,
+          21
+        ]
+      }
+    },
+    {
+      "claim_id": "975",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2932652201189291,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7067347798810709
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "982",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.026910121134204712,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9730898788657953
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "985",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2890426089579619,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7109573910420383
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "993",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1964872513563979,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8035127486436021
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1012",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15035886719750563,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8496411328024943
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "1014",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3054393627707773,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6945606372292226
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1019",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03466462475287891,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9653353752471211
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "1020",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.16993141807115958,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8300685819288404
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1021",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.23757510870444673,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7624248912955531
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1024",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06318207045464325,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9368179295453567
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1029",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.08560488733639804,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.914395112663602
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "1041",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04259864253558777,
+        "m_u": 0.0,
+        "m_theta": 0.9574013574644122
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1049",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2953260304708948,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7046739695291052
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "1062",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.09837982436639493,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.901620175633605
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "1086",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.028411746112032524,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9715882538879674
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6,
+          7,
+          9
+        ]
+      }
+    },
+    {
+      "claim_id": "1088",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.20295394049699822,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7970460595030018
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1089",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.05929185474951733,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9407081452504827
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "1099",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19722168963495876,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8027783103650411
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1100",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19722168963495876,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8027783103650411
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1104",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1266708193457184,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8733291806542817
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8,
+          9,
+          10,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "1107",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06710017200971397,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.932899827990286
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1110",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1806199246280003,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8193800753719996
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "1121",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06377190354843945,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9362280964515606
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "1130",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0319302322261698,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9680697677738302
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1132",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.30174323705049705,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.698256762949503
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1137",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09697469638462268,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9030253036153773
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6,
+          9
+        ]
+      }
+    },
+    {
+      "claim_id": "1140",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03593493470972638,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9640650652902736
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          9,
+          14
+        ]
+      }
+    },
+    {
+      "claim_id": "1144",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.034598329387572124,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9654016706124279
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4,
+          5,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "1146",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1977229004360083,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8022770995639917
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          6,
+          12,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "1150",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.27705062419585963,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7229493758041403
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4,
+          5,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "1163",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.040289643375684914,
+        "m_u": 0.0,
+        "m_theta": 0.959710356624315
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "1175",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.28334454276830756,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7166554572316923
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1179",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03400703194024688,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9659929680597531
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1180",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03400703194024688,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9659929680597531
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0
+        ]
+      }
+    },
+    {
+      "claim_id": "1185",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.14845923259320343,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8515407674067964
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "1187",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.11837733880539719,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8816226611946028
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1191",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06353767373291767,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9364623262670824
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1194",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.3066033735305749,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6933966264694251
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1196",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.29030690479509236,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7096930952049076
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1197",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.29030690479509236,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7096930952049076
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1199",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.27967575158862307,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7203242484113769
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1200",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.28770366413727644,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7122963358627237
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1202",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.034232184937450526,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9657678150625495
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1204",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.034616222294153134,
+        "m_r": 0.019453553978922435,
+        "m_u": 0.0,
+        "m_theta": 0.9459302237269244
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1207",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1856119863916756,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8143880136083244
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1213",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.24889591258306565,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7511040874169344
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1216",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.034456417546983586,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9655435824530164
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1221",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03398516794583378,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9660148320541662
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "1225",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.3131475223355977,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6868524776644024
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1226",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.28999802028779775,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7100019797122022
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1232",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06203240966062648,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9379675903393735
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1241",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06545723023656176,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9345427697634383
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          0,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1245",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.28161236342903173,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7183876365709682
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1259",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.031481076644242954,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9685189233557571
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          11,
+          12,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "1262",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1588339827856854,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8411660172143144
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1266",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15210431147192138,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8478956885280785
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "1270",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.046139670743290076,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9538603292567099
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "1271",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.19470234736550915,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8052976526344908
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          11
+        ]
+      }
+    },
+    {
+      "claim_id": "1272",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.05790204472831213,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9420979552716878
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1273",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.08567483743020135,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9143251625697987
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "1274",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.032675016302712134,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9673249836972879
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4,
+          5,
+          7
+        ]
+      }
+    },
+    {
+      "claim_id": "1278",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2566329819318542,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7433670180681458
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1279",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2566329819318542,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7433670180681458
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1280",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.20407603186019402,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7959239681398061
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1281",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19501951728697203,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8049804827130279
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1282",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1290",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06612191116254444,
+        "m_r": 0.027124966021963563,
+        "m_u": 0.0,
+        "m_theta": 0.906753122815492
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          9,
+          10,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "1292",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1930913560319914,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8069086439680085
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1298",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03469753707971628,
+        "m_r": 0.020431947758919235,
+        "m_u": 0.0,
+        "m_theta": 0.9448705151613644
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          11,
+          13
+        ]
+      }
+    },
+    {
+      "claim_id": "1303",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06522999386054651,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9347700061394535
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "1316",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2786756652633939,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7213243347366062
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1319",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.20372669558640988,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7962733044135901
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2
+        ]
+      }
+    },
+    {
+      "claim_id": "1320",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0346851474217999,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9653148525782
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1332",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2932652201189291,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7067347798810709
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1335",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.062362141263812086,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9376378587361879
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1336",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.20782590235810755,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7921740976418925
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1337",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.10956910284395054,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8904308971560494
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1339",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15749841833007838,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8425015816699216
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "claim_id": "1344",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03220555547889152,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9677944445211085
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1352",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.033589527695998066,
+        "m_u": 0.0,
+        "m_theta": 0.9664104723040019
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "1359",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03698272828521028,
+        "m_u": 0.0,
+        "m_theta": 0.9630172717147898
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          8
+        ]
+      }
+    },
+    {
+      "claim_id": "1362",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.30341256734877026,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6965874326512298
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1363",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.30341256734877026,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6965874326512298
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    },
+    {
+      "claim_id": "1368",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.20279978082434524,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7972002191756549
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "1370",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.20279978082434524,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7972002191756549
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          10,
+          12
+        ]
+      }
+    },
+    {
+      "claim_id": "1379",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.16667712920161898,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8333228707983811
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "claim_id": "1382",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0335283459097076,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9664716540902925
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "claim_id": "1385",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2620709667804422,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7379290332195577
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          4
+        ]
+      }
+    },
+    {
+      "claim_id": "1389",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.026870375992289797,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9731296240077102
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "claim_id": "1395",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.10011266080926713,
+        "m_r": 0.03428327134528029,
+        "m_u": 0.0,
+        "m_theta": 0.8656040678454527
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "rationales": []
+      }
+    }
+  ]
+}

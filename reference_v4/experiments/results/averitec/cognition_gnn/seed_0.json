@@ -1,0 +1,7007 @@
+{
+  "dataset": "averitec",
+  "system": "cognition_gnn",
+  "seed": 0,
+  "results": [
+    {
+      "claim_id": "0",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1925214861938304,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8074785138061696
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "1",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.08936581656317405,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9106341834368259
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "2",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09929293616934359,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9007070638306566
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "3",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.058247072442418,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.941752927557582
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "4",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03425224034905054,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9657477596509495
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "5",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "6",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2956017210963696,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7043982789036304
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "7",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.05577776896552709,
+        "m_r": 0.04728346540541403,
+        "m_u": 0.0,
+        "m_theta": 0.8969387656290587
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "8",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.19819515441884206,
+        "m_u": 0.0,
+        "m_theta": 0.8018048455811579
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "9",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "10",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.08813946915336268,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9118605308466373
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "11",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06404534301771261,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9359546569822874
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "12",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03209910798198836,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9679008920180117
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "13",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06408290512740347,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9359170948725964
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "14",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06253783466638872,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9374621653336114
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "15",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.13161442565454767,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8683855743454523
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "16",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12430755694366932,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8756924430563306
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "17",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06454501429465752,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9354549857053425
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "18",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.033091212726681245,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9669087872733187
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "19",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09946085384140535,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9005391461585946
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "20",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04265906639343211,
+        "m_u": 0.0,
+        "m_theta": 0.9573409336065679
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "21",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07212165219299328,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9278783478070067
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "22",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03661594810901422,
+        "m_u": 0.0,
+        "m_theta": 0.9633840518909859
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "23",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.1433178417122575,
+        "m_u": 0.0,
+        "m_theta": 0.8566821582877425
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "24",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.05137394867406676,
+        "m_u": 0.0,
+        "m_theta": 0.9486260513259331
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "25",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06218663484255235,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9378133651574476
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "26",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.19918516703144246,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8008148329685576
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "27",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06041872463281148,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9395812753671886
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "28",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.033785411544968884,
+        "m_r": 0.019612891894985076,
+        "m_u": 0.0,
+        "m_theta": 0.9466016965600461
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "29",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03447696282435715,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9655230371756428
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "30",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06701358549472242,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9329864145052775
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "31",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.07157410224518065,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9284258977548193
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "32",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.25216374134945396,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.747836258650546
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "33",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.14530064880113897,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8546993511988611
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "34",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.09638629140450054,
+        "m_u": 0.0,
+        "m_theta": 0.9036137085954995
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "35",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03442729459116518,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9655727054088348
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "36",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.14583629578199603,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8541637042180041
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "37",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06491992951262701,
+        "m_r": 0.03885194678798052,
+        "m_u": 0.0,
+        "m_theta": 0.8962281236993923
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "38",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.037303780415257476,
+        "m_u": 0.0,
+        "m_theta": 0.9626962195847425
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "39",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.05752697377612214,
+        "m_u": 0.0,
+        "m_theta": 0.9424730262238779
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "40",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03242410674927888,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9675758932507211
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "41",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09297039470968443,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9070296052903156
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "42",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1134315465122647,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8865684534877352
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "43",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.056464072442699714,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9435359275573003
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "44",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2982698745546705,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7017301254453296
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "45",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.02016024192534089,
+        "m_u": 0.0,
+        "m_theta": 0.9798397580746591
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "46",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19213783910914894,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.807862160890851
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "47",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.17594671483642288,
+        "m_r": 0.09027726253177916,
+        "m_u": 0.0,
+        "m_theta": 0.733776022631798
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "48",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0264455839096945,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9735544160903055
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "49",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06301252224707327,
+        "m_r": 0.0165257310451556,
+        "m_u": 0.0,
+        "m_theta": 0.920461746707771
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "50",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1864073863410054,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8135926136589947
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "51",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06817917072233608,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.931820829277664
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "52",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06950744307367535,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9304925569263245
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "53",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "54",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.1031462266502234,
+        "m_u": 0.0,
+        "m_theta": 0.8968537733497767
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "55",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.29977801709401597,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7002219829059841
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "56",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05936355365804012,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.94063644634196
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "57",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.16002908371961966,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8399709162803802
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "58",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0682851008129925,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9317148991870075
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "59",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.1430308848988656,
+        "m_u": 0.0,
+        "m_theta": 0.8569691151011344
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "60",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06799590154437127,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9320040984556287
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "61",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.020045120539984078,
+        "m_u": 0.0,
+        "m_theta": 0.9799548794600159
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "62",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18314756412671662,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8168524358732834
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "63",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06208516613034375,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9379148338696562
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "64",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.06430622753237666,
+        "m_u": 0.0,
+        "m_theta": 0.9356937724676235
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "65",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.14993582053892585,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8500641794610743
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "66",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03334536649386429,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9666546335061357
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "67",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.16460864161000166,
+        "m_u": 0.0,
+        "m_theta": 0.8353913583899985
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "68",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1995993194859808,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8004006805140192
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "69",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03846030301885801,
+        "m_u": 0.0,
+        "m_theta": 0.9615396969811421
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "70",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1531444695726336,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8468555304273663
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "71",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.11763299318659595,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.882367006813404
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "72",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.04988139200004517,
+        "m_r": 0.01855260130009405,
+        "m_u": 0.0,
+        "m_theta": 0.9315660066998608
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "73",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.14192585252101525,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8580741474789847
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "74",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.10816719073359324,
+        "m_r": 0.018404981746478092,
+        "m_u": 0.0,
+        "m_theta": 0.8734278275199288
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "75",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15866002628782988,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8413399737121702
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "76",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06746523527002178,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9325347647299782
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "77",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12118403570133315,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8788159642986668
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "78",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15463599272115064,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8453640072788493
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "79",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07038168911205599,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9296183108879441
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "80",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.10621278441838099,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.893787215581619
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "81",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03280427480716876,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9671957251928313
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "82",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1641199129867309,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8358800870132689
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "83",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.021099488241462006,
+        "m_u": 0.0,
+        "m_theta": 0.978900511758538
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "84",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05695133200214225,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9430486679978578
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "85",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05303769097229759,
+        "m_r": 0.027847362819296177,
+        "m_u": 0.0,
+        "m_theta": 0.9191149462084062
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "86",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03269663152618997,
+        "m_r": 0.03401517249411007,
+        "m_u": 0.0,
+        "m_theta": 0.9332881959797
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "87",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0656370796198556,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9343629203801445
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "88",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04122697804301187,
+        "m_u": 0.0,
+        "m_theta": 0.9587730219569882
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "89",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03810666331566139,
+        "m_u": 0.0,
+        "m_theta": 0.9618933366843387
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "90",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18812155206657163,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8118784479334283
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "91",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03110849487576917,
+        "m_r": 0.019104153047910473,
+        "m_u": 0.0,
+        "m_theta": 0.9497873520763204
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "92",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.036485200882420146,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9635147991175799
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "93",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06373273209475491,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9362672679052452
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "94",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.061743124302846564,
+        "m_r": 0.03791036726671516,
+        "m_u": 0.0,
+        "m_theta": 0.9003465084304383
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "95",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15979509901502478,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8402049009849752
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "96",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19255942626216926,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8074405737378306
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "97",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.060282832964765,
+        "m_r": 0.03434801528811169,
+        "m_u": 0.0,
+        "m_theta": 0.9053691517471233
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "98",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.15536735992747464,
+        "m_u": 0.0,
+        "m_theta": 0.8446326400725254
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "99",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.10014753356404774,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8998524664359523
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "100",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.09826101131106517,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9017389886889349
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "101",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06681910989384608,
+        "m_r": 0.03979608108914293,
+        "m_u": 0.0,
+        "m_theta": 0.893384809017011
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "102",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06927425096844769,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9307257490315524
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "103",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15070280431126654,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8492971956887333
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "104",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03461577860993044,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9653842213900695
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "105",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04126350136619554,
+        "m_u": 0.0,
+        "m_theta": 0.9587364986338044
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "106",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.031142585465033037,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.968857414534967
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "107",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03931628471474809,
+        "m_u": 0.0,
+        "m_theta": 0.960683715285252
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "108",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.08884853998073594,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9111514600192642
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "109",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.039837739961122616,
+        "m_u": 0.0,
+        "m_theta": 0.9601622600388774
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "110",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.14679787778506967,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8532021222149303
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "111",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.034253637358878895,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9657463626411211
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "112",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.02862241877469463,
+        "m_r": 0.020157101885444218,
+        "m_u": 0.0,
+        "m_theta": 0.9512204793398613
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "113",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.060085104703912616,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9399148952960874
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "114",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06485958161221045,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9351404183877895
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "115",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06811815516082459,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9318818448391754
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "116",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.29708112789677804,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.702918872103222
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "117",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09215852643421592,
+        "m_r": 0.03222448941390571,
+        "m_u": 0.0,
+        "m_theta": 0.8756169841518783
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "118",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09795795028564944,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9020420497143505
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "119",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06429029256760514,
+        "m_r": 0.03518494046363014,
+        "m_u": 0.0,
+        "m_theta": 0.9005247669687648
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "120",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.10275633399138093,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.897243666008619
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "121",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15765429525784988,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8423457047421502
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "122",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06617850930750618,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9338214906924939
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "123",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1796953933997075,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8203046066002925
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "124",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "125",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12448603687698298,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8755139631230169
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "126",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.19405586036626044,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8059441396337396
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "127",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.018396948988908753,
+        "m_u": 0.0,
+        "m_theta": 0.9816030510110912
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "128",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04416049661895126,
+        "m_u": 0.0,
+        "m_theta": 0.9558395033810487
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "129",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.10441008653103703,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8955899134689629
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "130",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06980077765646989,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9301992223435301
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "131",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03542231852042923,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9645776814795708
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "132",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06583086061625278,
+        "m_r": 0.03239492478087143,
+        "m_u": 0.0,
+        "m_theta": 0.9017742146028755
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "133",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.025842570526319105,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9741574294736809
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "134",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0611491594892372,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9388508405107628
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "135",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0275772628640983,
+        "m_r": 0.021463791123967065,
+        "m_u": 0.0,
+        "m_theta": 0.9509589460119348
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "136",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06823267074815358,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9317673292518465
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "137",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.035448861152964764,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9645511388470352
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "138",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "139",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.141702253390249,
+        "m_u": 0.0,
+        "m_theta": 0.8582977466097511
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "140",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "141",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.08810259005875708,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9118974099412429
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "142",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.16016411209566772,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8398358879043323
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "143",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.13302368311535898,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.866976316884641
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "144",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.07140075861831044,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9285992413816896
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "145",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.2969143349165001,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7030856650834998
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "146",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1937571182306813,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8062428817693187
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "147",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06802394980632134,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9319760501936787
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "148",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.12443802782391217,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8755619721760879
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "149",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.01908715678431216,
+        "m_u": 0.0,
+        "m_theta": 0.9809128432156878
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "150",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.025498004293116563,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9745019957068835
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "151",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2924842113791895,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7075157886208105
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "152",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.05471252252658884,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9452874774734112
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "153",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0578267013526282,
+        "m_u": 0.0,
+        "m_theta": 0.9421732986473718
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "154",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18519073490346885,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8148092650965312
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "155",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.05306868611582925,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9469313138841707
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "156",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.08866553874049579,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9113344612595041
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "157",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.060588076276681974,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.939411923723318
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "158",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.055775292171290486,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9442247078287096
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "159",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.29212594134468733,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7078740586553126
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "160",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.11554204229457997,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.88445795770542
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "161",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.14593692537178,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.85406307462822
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "162",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.05795344941022172,
+        "m_u": 0.0,
+        "m_theta": 0.9420465505897783
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "163",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15510599059173907,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8448940094082608
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "164",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19229870405260213,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8077012959473978
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "165",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03473592077489936,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9652640792251006
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "166",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.030931298592960756,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9690687014070393
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "167",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "168",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0880458270771061,
+        "m_r": 0.03626133817778656,
+        "m_u": 0.0,
+        "m_theta": 0.8756928347451073
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "169",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03183269857083043,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9681673014291696
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "170",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06320820951688579,
+        "m_r": 0.032268566443531016,
+        "m_u": 0.0,
+        "m_theta": 0.9045232240395833
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "171",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07121317359300802,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.928786826406992
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "172",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.033354000740431426,
+        "m_r": 0.055444625609649904,
+        "m_u": 0.0,
+        "m_theta": 0.9112013736499186
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "173",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.15743642871442573,
+        "m_u": 0.0,
+        "m_theta": 0.8425635712855744
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "174",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07044617362666063,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9295538263733394
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "175",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06257008500432419,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9374299149956757
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "176",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09299245566460218,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9070075443353979
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "177",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.11595526843290631,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8840447315670938
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "178",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.035312917335429336,
+        "m_u": 0.0,
+        "m_theta": 0.9646870826645707
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "179",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2661737661463524,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7338262338536478
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "180",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05970770255518545,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9402922974448146
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "181",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.18303516168167644,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8169648383183237
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "182",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06307714168489592,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.936922858315104
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "183",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.02052085024614229,
+        "m_u": 0.0,
+        "m_theta": 0.9794791497538577
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "184",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.036647376080443016,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.963352623919557
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "185",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1531908488552747,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8468091511447253
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "186",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.01892119270690703,
+        "m_u": 0.0,
+        "m_theta": 0.9810788072930929
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "187",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.08123135803285791,
+        "m_r": 0.03500244641887642,
+        "m_u": 0.0,
+        "m_theta": 0.8837661955482657
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "188",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09574094699925412,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9042590530007459
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "189",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06774611890962509,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9322538810903749
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "190",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04933143388084528,
+        "m_u": 0.0,
+        "m_theta": 0.9506685661191548
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "191",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.019004537398135863,
+        "m_u": 0.0,
+        "m_theta": 0.9809954626018641
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "192",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03332614225852468,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9666738577414753
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "193",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06693402906035623,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9330659709396437
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "194",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.05486689515502681,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9451331048449731
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "195",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06459309656152809,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9354069034384719
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "196",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.30277551900362953,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6972244809963706
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "197",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1313449122750524,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8686550877249476
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "198",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "199",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "200",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.23753977895434678,
+        "m_u": 0.0,
+        "m_theta": 0.7624602210456533
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "201",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12373876273148138,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8762612372685186
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "202",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.16483059041864523,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8351694095813548
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "203",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06548620396145913,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9345137960385409
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "204",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.053134119670382826,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9468658803296172
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "205",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12939222820521246,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8706077717947877
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "206",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.015136043742366873,
+        "m_u": 0.0,
+        "m_theta": 0.9848639562576331
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "207",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12041080640857649,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8795891935914235
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "208",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.055993099673885424,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9440069003261146
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "209",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.027073378313371668,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9729266216866284
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "210",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.11770164647786922,
+        "m_r": 0.018139066177810297,
+        "m_u": 0.0,
+        "m_theta": 0.8641592873443205
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "211",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.04973388208438442,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9502661179156155
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "212",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.033343273359940286,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9666567266400597
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "213",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.08855353294897907,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.911446467051021
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "214",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.14779997667735698,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.852200023322643
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "215",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15026289206242355,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8497371079375764
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "216",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "217",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "218",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1341298724255887,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8658701275744113
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "219",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0667479080030268,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9332520919969733
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "220",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.061271553625208995,
+        "m_r": 0.03526899073424745,
+        "m_u": 0.0,
+        "m_theta": 0.9034594556405436
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "221",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12228966212951006,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8777103378704898
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "222",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06847740672838473,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9315225932716154
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "223",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06539991704965414,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9346000829503458
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "224",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.025980328198538807,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9740196718014612
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "225",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06457687319884214,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9354231268011579
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "226",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1677124601810055,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8322875398189945
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "227",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.030616812811148864,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9693831871888512
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "228",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.087328452879638,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9126715471203619
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "229",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.15671215131019825,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8432878486898014
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "230",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05622820307137819,
+        "m_r": 0.03642235998147395,
+        "m_u": 0.0,
+        "m_theta": 0.9073494369471478
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "231",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06398593746941336,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9360140625305867
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "232",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.3074579697912152,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6925420302087849
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "233",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0633235938731325,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9366764061268675
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "234",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.02043007818052764,
+        "m_u": 0.0,
+        "m_theta": 0.9795699218194723
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "235",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.036725457054722146,
+        "m_u": 0.0,
+        "m_theta": 0.9632745429452779
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "236",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06996838278965879,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9300316172103412
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "237",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.12983886799540773,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8701611320045922
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "238",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15387931886185172,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8461206811381483
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "239",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09980528068814415,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9001947193118558
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "240",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03391477414286031,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9660852258571397
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "241",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.031702574131543516,
+        "m_u": 0.0,
+        "m_theta": 0.9682974258684564
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "242",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1108634694179714,
+        "m_r": 0.014013015705783812,
+        "m_u": 0.0,
+        "m_theta": 0.8751235148762448
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "243",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.17853573485361585,
+        "m_r": 0.08833258577962362,
+        "m_u": 0.0,
+        "m_theta": 0.7331316793667603
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "244",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0924594728176831,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9075405271823169
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "245",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1679599122009759,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.832040087799024
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "246",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06756486694341465,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9324351330565853
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "247",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05738413476816705,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.942615865231833
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "248",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1320094958109466,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8679905041890533
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "249",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.021474097013375198,
+        "m_u": 0.0,
+        "m_theta": 0.9785259029866248
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "250",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.02051150137256089,
+        "m_u": 0.0,
+        "m_theta": 0.9794884986274391
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "251",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05131158810546002,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9486884118945399
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "252",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.058388609898682234,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9416113901013178
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "253",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04017028111440786,
+        "m_u": 0.0,
+        "m_theta": 0.9598297188855921
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "254",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0577981656921146,
+        "m_u": 0.0,
+        "m_theta": 0.9422018343078854
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "255",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.09007603368002248,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9099239663199775
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "256",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.20181786794386458,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7981821320561354
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "257",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.09612061543151114,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9038793845684888
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "258",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06615818565725251,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9338418143427475
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "259",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06319082415271536,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9368091758472846
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "260",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.29397613917815785,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7060238608218422
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "261",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03124969058610927,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9687503094138907
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "262",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12775742575028973,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8722425742497102
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "263",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15647302978258246,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8435269702174175
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "264",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12206162252662298,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8779383774733771
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "265",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15994410208199433,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8400558979180056
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "266",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1773408395601923,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8226591604398077
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "267",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.021690978283704747,
+        "m_u": 0.0,
+        "m_theta": 0.9783090217162953
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "268",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12315790562874851,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8768420943712515
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "269",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.15471839975705426,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8452816002429457
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "270",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05816474175374298,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.941835258246257
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "271",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0693391176496307,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9306608823503693
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "272",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09701280131306773,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9029871986869321
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "273",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.061815602888684984,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.938184397111315
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "274",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1807564023076701,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8192435976923298
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "275",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19516567878473937,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8048343212152607
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "276",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.017699529438948865,
+        "m_u": 0.0,
+        "m_theta": 0.9823004705610512
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "277",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06719622606267829,
+        "m_r": 0.03167017525434373,
+        "m_u": 0.0,
+        "m_theta": 0.9011335986829779
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "278",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.05881390022666035,
+        "m_u": 0.0,
+        "m_theta": 0.9411860997733397
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "279",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.039376799511973815,
+        "m_u": 0.0,
+        "m_theta": 0.9606232004880261
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "280",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12332138929934487,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8766786107006551
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "281",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03295153519260847,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9670484648073915
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "282",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.13027365578934083,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8697263442106592
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "283",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.24281977259980483,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7571802274001951
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "284",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.16126494673889905,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8387350532611011
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "285",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0854979564412425,
+        "m_r": 0.03724021870011255,
+        "m_u": 0.0,
+        "m_theta": 0.8772618248586451
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "286",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06584511834875659,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9341548816512434
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "287",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.14668410630987372,
+        "m_u": 0.0,
+        "m_theta": 0.8533158936901263
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "288",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0879177756356492,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9120822243643509
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "289",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04022149351855881,
+        "m_u": 0.0,
+        "m_theta": 0.9597785064814413
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "290",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.09995356892105808,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9000464310789419
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "291",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09810155543038594,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9018984445696141
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "292",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.3061910792281285,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6938089207718715
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "293",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "294",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.13919408688394636,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8608059131160537
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "295",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09485407608625127,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9051459239137487
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "296",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.030573595335915995,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.969426404664084
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "297",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1595886793892612,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8404113206107388
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "298",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.034424620423020816,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9655753795769791
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "299",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.034296994306955896,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9657030056930441
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "300",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.036705986758592005,
+        "m_u": 0.0,
+        "m_theta": 0.9632940132414081
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "301",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03573008848685542,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9642699115131446
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "302",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.066734249758603,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.933265750241397
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "303",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.08901515006890431,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9109848499310957
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "304",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19331998130333755,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8066800186966625
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "305",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.05626765615398644,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9437323438460136
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "306",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.2921360595740169,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7078639404259833
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "307",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.019134085445978777,
+        "m_u": 0.0,
+        "m_theta": 0.9808659145540213
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "308",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06674989249602298,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.933250107503977
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "309",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03269259493091627,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9673074050690837
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "310",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0939923507099258,
+        "m_r": 0.035130748527130606,
+        "m_u": 0.0,
+        "m_theta": 0.8708769007629437
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "311",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06486092213696781,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9351390778630322
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "312",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.019795719301047357,
+        "m_u": 0.0,
+        "m_theta": 0.9802042806989526
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "313",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.019178450104994558,
+        "m_u": 0.0,
+        "m_theta": 0.9808215498950055
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "314",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.028878402522077375,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9711215974779226
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "315",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.10111136493220639,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8988886350677936
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "316",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.16193145792606545,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8380685420739347
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "317",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.01745586826236188,
+        "m_u": 0.0,
+        "m_theta": 0.9825441317376381
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "318",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.041569343319607835,
+        "m_u": 0.0,
+        "m_theta": 0.9584306566803922
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "319",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.05849118031285011,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.94150881968715
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "320",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.07248182994210298,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.927518170057897
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "321",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.031137063403182265,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9688629365968178
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "322",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.14839878909379497,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.851601210906205
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "323",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0967700390100876,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9032299609899124
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "324",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.031901675044559576,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9680983249554405
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "325",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.16369507395498262,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8363049260450174
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "326",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1953457889087847,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8046542110912154
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "327",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0709594791703671,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.929040520829633
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "328",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06372317804002887,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9362768219599712
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "329",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "330",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.07050263461791412,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9294973653820858
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "331",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1913341535864626,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8086658464135373
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "332",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.14146783147176115,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8585321685282389
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "333",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.040193794234532204,
+        "m_u": 0.0,
+        "m_theta": 0.9598062057654678
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "334",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04062959225676377,
+        "m_u": 0.0,
+        "m_theta": 0.9593704077432362
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "335",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1835528445601774,
+        "m_r": 0.09363229939261053,
+        "m_u": 0.0,
+        "m_theta": 0.7228148560472122
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "336",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.06129772748325733,
+        "m_u": 0.0,
+        "m_theta": 0.9387022725167425
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "337",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1458992047582145,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8541007952417855
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "338",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03074864599954926,
+        "m_r": 0.0391065335807695,
+        "m_u": 0.0,
+        "m_theta": 0.930144820419681
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "339",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.1554972219108432,
+        "m_u": 0.0,
+        "m_theta": 0.8445027780891567
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "340",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06941961768159001,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.93058038231841
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "341",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.02987284212600196,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9701271578739981
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "342",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.021054175604198894,
+        "m_u": 0.0,
+        "m_theta": 0.9789458243958011
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "343",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.038007054158375915,
+        "m_u": 0.0,
+        "m_theta": 0.9619929458416242
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "344",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.16603565894712227,
+        "m_r": 0.08918152029208488,
+        "m_u": 0.0,
+        "m_theta": 0.744782820760793
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "345",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1706097495355688,
+        "m_r": 0.08688974747225466,
+        "m_u": 0.0,
+        "m_theta": 0.7425005029921765
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "346",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15231517686462043,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8476848231353794
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "347",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03313507883920104,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9668649211607989
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "348",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03452855351092781,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9654714464890722
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "349",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06443735653666831,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9355626434633316
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "350",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03370649994140212,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9662935000585979
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "351",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05671317783306456,
+        "m_r": 0.04284287948243598,
+        "m_u": 0.0,
+        "m_theta": 0.9004439426844996
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "352",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15426563021541984,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8457343697845803
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "353",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04022822555465977,
+        "m_u": 0.0,
+        "m_theta": 0.9597717744453402
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "354",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03415838502031793,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.965841614979682
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "355",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06400742689687552,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9359925731031244
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "356",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12299058659261332,
+        "m_r": 0.016132593866830115,
+        "m_u": 0.0,
+        "m_theta": 0.8608768195405565
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "357",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06642201099268519,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9335779890073148
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "358",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.06120272086315545,
+        "m_u": 0.0,
+        "m_theta": 0.9387972791368446
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "359",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.019475281558516702,
+        "m_u": 0.0,
+        "m_theta": 0.9805247184414833
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "360",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.1682193356092276,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8317806643907724
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "361",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15022085423556708,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8497791457644329
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "362",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.041236572688568146,
+        "m_u": 0.0,
+        "m_theta": 0.9587634273114319
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "363",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18222869209659884,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8177713079034012
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "364",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.040598043734015474,
+        "m_u": 0.0,
+        "m_theta": 0.9594019562659846
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "365",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.14152649930326855,
+        "m_u": 0.0,
+        "m_theta": 0.8584735006967315
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "366",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.18772491763917432,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8122750823608256
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "367",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18392390270646553,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8160760972935344
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "368",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04082376985258668,
+        "m_u": 0.0,
+        "m_theta": 0.9591762301474134
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "369",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06714619922910518,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9328538007708949
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "370",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03556184782961045,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9644381521703895
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "371",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.030464967859999997,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.96953503214
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "372",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.17117080737957666,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8288291926204234
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "373",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.30317512918881123,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6968248708111887
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "374",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03568734310402011,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9643126568959799
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "375",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03313880498136992,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9668611950186301
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "376",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0657377721814883,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9342622278185116
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "377",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.04104358325178873,
+        "m_u": 0.0,
+        "m_theta": 0.9589564167482113
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "378",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.3001965910243619,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.6998034089756382
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "379",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0649560627116921,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9350439372883079
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "380",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "381",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.14385841182808273,
+        "m_u": 0.0,
+        "m_theta": 0.8561415881719173
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "382",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.07806480118245011,
+        "m_u": 0.0,
+        "m_theta": 0.9219351988175499
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "383",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1761156444857249,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.823884355514275
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "384",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.14089713285835714,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8591028671416429
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "385",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1732328164039828,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8267671835960172
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "386",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09579297254899115,
+        "m_r": 0.03768985959492361,
+        "m_u": 0.0,
+        "m_theta": 0.866517167856085
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "387",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.12706694991001571,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8729330500899843
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "388",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.13005014869676043,
+        "m_u": 0.0,
+        "m_theta": 0.8699498513032395
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "389",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.030406636541903773,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9695933634580962
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "390",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "391",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.11692244254864938,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8830775574513506
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "392",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1602274992254784,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8397725007745217
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "393",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.17427067750116645,
+        "m_r": 0.09290058931598216,
+        "m_u": 0.0,
+        "m_theta": 0.7328287331828516
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "394",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.14044740248986512,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8595525975101348
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "395",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05936821672107183,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9406317832789283
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "396",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1540004328672726,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8459995671327274
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "397",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03805607316541426,
+        "m_u": 0.0,
+        "m_theta": 0.9619439268345857
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "398",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06363235192030485,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9363676480796951
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "399",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06629859746718467,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9337014025328153
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "400",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.031938613902390056,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9680613860976099
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "401",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.17300964441728606,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.826990355582714
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "402",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.018816807905739974,
+        "m_u": 0.0,
+        "m_theta": 0.98118319209426
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "403",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12322858336093773,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8767714166390622
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "404",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03681142960943047,
+        "m_u": 0.0,
+        "m_theta": 0.9631885703905695
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "405",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.17708964188407658,
+        "m_r": 0.08966406343425928,
+        "m_u": 0.0,
+        "m_theta": 0.7332462946816641
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "406",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.19673341509354625,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8032665849064538
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "407",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "408",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09602981202256881,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9039701879774311
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "409",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07041218535235515,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.929587814647645
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "410",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18772523912183225,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8122747608781679
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "411",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09267852044093769,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9073214795590623
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "412",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.18633567277710894,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.813664327222891
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "413",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "414",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "415",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19902224360813842,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8009777563918618
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "416",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15058079198041951,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8494192080195805
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "417",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09266522960874687,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9073347703912532
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "418",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15148314424545134,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8485168557545488
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "419",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.29799683691826767,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7020031630817322
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "420",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12564978562533138,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8743502143746688
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "421",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06565368219181536,
+        "m_r": 0.0139379059127267,
+        "m_u": 0.0,
+        "m_theta": 0.9204084118954579
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "422",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06743970120095766,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9325602987990425
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "423",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.16297459575417458,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8370254042458255
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "424",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06188982432836696,
+        "m_r": 0.02014998663984797,
+        "m_u": 0.0,
+        "m_theta": 0.9179601890317851
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "425",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1353704573716472,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.864629542628353
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "426",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.037734855246329496,
+        "m_u": 0.0,
+        "m_theta": 0.9622651447536705
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "427",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.11174106868924581,
+        "m_r": 0.1367863304936903,
+        "m_u": 0.0,
+        "m_theta": 0.7514726008170637
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "428",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.07190914442245175,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9280908555775483
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "429",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.11872379274741174,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8812762072525884
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "430",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06414125856144047,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9358587414385595
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "431",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0376921165808896,
+        "m_u": 0.0,
+        "m_theta": 0.9623078834191104
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "432",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.057137768486754135,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9428622315132458
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "433",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0914586675443497,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9085413324556503
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "434",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.08881132209022319,
+        "m_u": 0.0,
+        "m_theta": 0.9111886779097768
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "435",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.038131672133120374,
+        "m_u": 0.0,
+        "m_theta": 0.9618683278668796
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "436",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06214295897912488,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9378570410208752
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "437",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.2696290765865619,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7303709234134381
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "438",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.06117381959559928,
+        "m_u": 0.0,
+        "m_theta": 0.9388261804044007
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "439",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.15941377231421092,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8405862276857892
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "440",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.08875390505406629,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9112460949459336
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "441",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09276869860316111,
+        "m_r": 0.030104406999208223,
+        "m_u": 0.0,
+        "m_theta": 0.8771268943976306
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "442",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03285236229001245,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9671476377099876
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "443",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03265950318680949,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9673404968131905
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "444",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.156003711555631,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8439962884443689
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "445",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.14142019928456762,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8585798007154323
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "446",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.05163102339753005,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.94836897660247
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "447",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.035747472866125334,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9642525271338747
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "448",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.03602639850698881,
+        "m_r": 0.014502067299109961,
+        "m_u": 0.0,
+        "m_theta": 0.9494715341939013
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "449",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.1565580452161964,
+        "m_r": 0.08688385342530842,
+        "m_u": 0.0,
+        "m_theta": 0.7565581013584952
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "450",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.09750537700096903,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9024946229990309
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "451",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.23941259200040022,
+        "m_u": 0.0,
+        "m_theta": 0.7605874079995999
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "452",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09092971813650791,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.909070281863492
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "453",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.08620499142947946,
+        "m_r": 0.03214670009307588,
+        "m_u": 0.0,
+        "m_theta": 0.8816483084774446
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "454",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06549067443614229,
+        "m_r": 0.055890018439139134,
+        "m_u": 0.0,
+        "m_theta": 0.8786193071247185
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "455",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07061200827728262,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9293879917227175
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "456",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06505359105788895,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9349464089421111
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "457",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.05509830462020786,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9449016953797922
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "458",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06207869851047562,
+        "m_r": 0.03838663106397586,
+        "m_u": 0.0,
+        "m_theta": 0.8995346704255484
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "459",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 1.0
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "460",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0942240048334807,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9057759951665194
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "461",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06658800977003845,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9334119902299616
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "462",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06869067481727928,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9313093251827208
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "463",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.09914798443046152,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9008520155695383
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "464",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12509416011046465,
+        "m_r": 0.01806187295798877,
+        "m_u": 0.0,
+        "m_theta": 0.8568439669315467
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "465",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.09713449629826332,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9028655037017367
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "466",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.12203085001522276,
+        "m_r": 0.017916096482093528,
+        "m_u": 0.0,
+        "m_theta": 0.8600530535026836
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "467",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.03297376295414208,
+        "m_u": 0.0,
+        "m_theta": 0.9670262370458579
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "468",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.020685928700199245,
+        "m_u": 0.0,
+        "m_theta": 0.9793140712998007
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "469",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06902186832429871,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9309781316757012
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "470",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.1558248981077821,
+        "m_u": 0.0,
+        "m_theta": 0.8441751018922179
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "471",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03143892475704129,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9685610752429588
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "472",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06038909368976891,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9396109063102311
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "473",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.04615821126451421,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9538417887354858
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "474",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.29756177717571336,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7024382228242866
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "475",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.03167463158995861,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9683253684100414
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "476",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.01812584271219889,
+        "m_u": 0.0,
+        "m_theta": 0.9818741572878011
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "477",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1265953859041321,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.873404614095868
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "478",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.29631782002930274,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.7036821799706974
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "479",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0927203669892999,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9072796330107
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "480",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.12208692673254529,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8779130732674546
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "481",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.19703732971648028,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8029626702835199
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "482",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.027073895797769976,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.97292610420223
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "483",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.13314101452745558,
+        "m_u": 0.0,
+        "m_theta": 0.8668589854725445
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "484",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.1632090214164249,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8367909785835752
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "485",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.15422328088300022,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8457767191169998
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "486",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06107899078069994,
+        "m_r": 0.018326193669300068,
+        "m_u": 0.0,
+        "m_theta": 0.92059481555
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "487",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.0405153104069345,
+        "m_u": 0.0,
+        "m_theta": 0.9594846895930655
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "488",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.030744146765656757,
+        "m_u": 0.0,
+        "m_theta": 0.9692558532343433
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "489",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.061990214938028795,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9380097850619713
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "490",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.03461284244592721,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9653871575540728
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "491",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06925662861241068,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9307433713875893
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "492",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.0,
+        "m_r": 0.02063682650746823,
+        "m_u": 0.0,
+        "m_theta": 0.9793631734925318
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "493",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.06868442254261524,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9313155774573847
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "494",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.07197404697472318,
+        "m_r": 0.0324451619692354,
+        "m_u": 0.0,
+        "m_theta": 0.8955807910560414
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "495",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.14616552807555855,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.8538344719244415
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    },
+    {
+      "claim_id": "496",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.09828561135884212,
+        "m_r": 0.03725835012794156,
+        "m_u": 0.0,
+        "m_theta": 0.8644560385132165
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Conflicting Evidence/Cherrypicking"
+      }
+    },
+    {
+      "claim_id": "497",
+      "ground_truth": "SUPPORTS",
+      "mass": {
+        "m_s": 0.06579457482186127,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.9342054251781386
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Supported"
+      }
+    },
+    {
+      "claim_id": "498",
+      "ground_truth": "NEI",
+      "mass": {
+        "m_s": 0.06750299417619218,
+        "m_r": 0.035876528519313666,
+        "m_u": 0.0,
+        "m_theta": 0.8966204773044941
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Not Enough Evidence"
+      }
+    },
+    {
+      "claim_id": "499",
+      "ground_truth": "REFUTES",
+      "mass": {
+        "m_s": 0.13463695856673094,
+        "m_r": 0.0,
+        "m_u": 0.0,
+        "m_theta": 0.865363041433269
+      },
+      "predicted_label": "NEI",
+      "metadata": {
+        "original_label": "Refuted"
+      }
+    }
+  ]
+}
