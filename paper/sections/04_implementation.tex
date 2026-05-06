@@ -1,2 +1,178 @@
 \section{Implementation}
-% TODO
+\label{sec:implementation}
+
+This section describes the four components that translate the architecture of
+Section~\ref{sec:architecture} into running code: the SPLADE-tiny encoder,
+the extraction pipeline, the executor variants, and the Strands Analyst.
+
+% -----------------------------------------------------------------------
+\subsection{SPLADE-tiny Encoder}
+\label{sec:implementation:encoder}
+
+Cognition uses \texttt{naver/splade-v3-lexical}, a distilled SPLADE variant
+with a 17\,MB footprint, Apache~2.0 licence, and no GPU requirement.  The
+model weights are frozen; Cognition does not fine-tune them.
+
+\paragraph{Sparse activations as anchor vocabulary.}
+For an input text sequence $t$, the encoder produces a sparse vector
+$\mathbf{s} \in \mathbb{R}^{|\mathcal{V}|}$ following the standard SPLADE
+activation formula (Section~\ref{sec:background:splade}).  Dimensions whose
+activation exceeds a threshold $\tau$ become \emph{anchor vocabulary entries}.
+These entries form the anchor space in which infon triples are represented and
+over which the manifest pruner's bounding boxes are computed.
+
+\paragraph{Anchor type system.}
+Anchor entries are classified into four types:
+\begin{itemize}
+  \item \textbf{Actor} --- named entities, organisations, and products.
+  \item \textbf{Relation} --- predicate labels.
+  \item \textbf{Feature} --- properties and scalar attributes.
+  \item \textbf{Market} --- domain-specific concept labels.
+\end{itemize}
+The type annotation is used by the extractor's role-assignment heuristic
+(Section~\ref{sec:implementation:extraction}) and by the connective-predicate
+auto-inference in the reasoner
+(Section~\ref{sec:architecture:reasoner}).
+
+% -----------------------------------------------------------------------
+\subsection{Extraction Pipeline}
+\label{sec:implementation:extraction}
+
+\paragraph{Role assignment.}
+Given a sentence and its SPLADE anchor vector, the extractor assigns each
+activated anchor to a subject, predicate, or object role.  Role assignment
+combines the anchor-type prior (actors favour subject/object positions;
+relations favour predicate positions) with a lightweight dependency heuristic
+that parses head--modifier relationships in the token sequence.
+
+\paragraph{Dual-partition actor reranking.}
+A known failure mode in simple actor extraction is direction inversion: the
+extractor may emit \texttt{nvidia/partner/b200} (treating a product as the
+object partner) instead of \texttt{nvidia/partner/tsmc} (the correct
+actor-to-actor link).  This arises because actors and non-actor objects are
+drawn from the same activation pool, and activation magnitude does not encode
+syntactic direction.
+
+The dual-partition fix separates the candidate pool into two subsets:
+\emph{actors as subjects} and \emph{actors as objects}.  A word-order penalty
+is then applied to each subset independently, preferring anchors whose surface
+position in the sentence is consistent with the role being filled.  After this
+fix, the extraction pipeline correctly produces \texttt{nvidia/partner/tsmc},
+and the actor-to-actor real-data evaluation accuracy increases from 80\% to
+100\%.
+
+\paragraph{Coverage diagnostics.}
+\texttt{extraction\_report()} analyses the cassettes in a store and flags:
+missing anchors (schema entries that appear in no extracted infon), overfit
+objects (anchors that appear as objects far more frequently than as subjects
+or predicates, suggesting role confusion), and sparse cassettes (documents
+from which fewer infons were extracted than expected given document length).
+The report is computed within 1\,second of ingest and is automatically
+returned by the \texttt{Analyst}'s \texttt{ingest} tool.
+
+% -----------------------------------------------------------------------
+\subsection{Executor Variants}
+\label{sec:implementation:executors}
+
+\paragraph{SyncExecutor.}
+A single-threaded executor that processes documents sequentially.  Intended
+for testing, small corpora, and interactive use.  Measured: ingesting 48
+documents with \texttt{SyncExecutor} completes in approximately 0.5\,seconds.
+
+\paragraph{ProcessExecutor.}
+A multi-process executor that fans out ingest across a pool of workers, each
+running an independent SPLADE-tiny instance.  Intended for production
+workloads of 100 or more documents.  Workers are stateless; the cassette
+format's idempotency guarantee means that any worker crash can be retried
+without coordination.
+
+\paragraph{Lambda-compatible container.}
+The same \texttt{InfonStore} API operates in an AWS Lambda container.
+\texttt{fsspec} routes S3 URIs transparently, so the only code difference
+between a local run and a Lambda deployment is the store path:
+\texttt{InfonStore(``s3://bucket/prefix'')} instead of
+\texttt{InfonStore(``./local/path'')}.  Because the PyTorch dependency
+exceeds the Lambda layer limit of 250\,MB, a container image is provided
+(\texttt{lambda\_container.py}) that packages the full dependency set into an
+ECR-deployable image.
+
+% -----------------------------------------------------------------------
+\subsection{Strands Analyst}
+\label{sec:implementation:analyst}
+
+The \texttt{Analyst} is a Strands-powered agent that wraps an
+\texttt{InfonStore} and exposes it to conversational queries.  It provides
+9 tools:
+
+\begin{itemize}
+  \item \texttt{set\_schema(ontology\_json)} --- activate an ontology
+    definition, passed as a dict; no temporary files.
+  \item \texttt{ingest(documents\_json)} --- delta ingest, followed by an
+    automatic \texttt{extraction\_report} that surfaces coverage issues.
+  \item \texttt{reingest()} --- re-extract all documents under the currently
+    active schema.
+  \item \texttt{extraction\_report()} --- return coverage diagnostics, dead
+    anchors, and overfit objects for the current store.
+  \item \texttt{ask(s, p, o, polarity)} --- single-claim verdict with cited
+    source infons.
+  \item \texttt{connect(source, target, max\_hops)} --- multi-hop MCTS chain
+    verdict (\textsc{supports} / \textsc{refutes} / \textsc{nei}).
+  \item \texttt{any\_of(source, targets\_json)} --- one tree walk, $N$ targets,
+    ranked verdicts.
+  \item \texttt{record\_finding(title, body, tags)} --- persist a finding to
+    \texttt{<root>/findings/} for cross-session memory.
+  \item \texttt{list\_findings(tag, limit)} --- retrieve prior findings by
+    tag.
+\end{itemize}
+
+\paragraph{System prompt constraints.}
+The agent's system prompt enforces four non-negotiables: (1)~never output a
+verdict without citing the \texttt{ask()} sources that produced it;
+(2)~when $m_\Theta > 0.7$, explicitly report that the corpus does not answer
+the question; (3)~call \texttt{list\_findings} at the start of each session
+so that prior investigations are visible; (4)~run \texttt{extraction\_report}
+before answering on any newly ingested store.
+
+\paragraph{Schema bootstrap loop.}
+On a cold-start corpus with no prior schema, the \texttt{Analyst} can propose
+an initial ontology, ingest the documents, inspect the extraction report, and
+refine the schema iteratively.  On a 15-document AI-chip corpus starting from
+no schema, this loop reaches 100\% document coverage in 2 iterations.
+
+\paragraph{One-minute start.}
+The following code snippet illustrates the full API: ingest, single-claim
+query, multi-hop connectivity, one-of-many reachability, and conversational
+use.
+
+\begin{lstlisting}[language=Python]
+from cognition.cassette import InfonStore, Query, Analyst
+
+store = InfonStore("./data/chips", schema_path="schemas/auto.json")
+
+store.ingest(documents)               # delta append; idempotent
+report = store.extraction_report()    # coverage diagnostics
+print(report.summary())               # flags missing anchors, overfit objects
+
+v = store.ask(Query().where(subject="toyota",
+                             predicate="invest",
+                             object="solid_state"))
+print(v.label, v.mass.supports, v.mass.theta)  # SUPPORTS 0.53 0.29
+
+# Multi-hop:
+v = store.connect("toyota", "catl")   # chain -> SUPPORTS via panasonic
+vs = store.any_of(
+    "toyota",
+    {"catl", "lg", "samsung"},        # one tree walk, N verdicts
+)
+
+# Conversational:
+a = Analyst(store)
+print(a("Does Toyota partner with Panasonic?"))  # agent translates, cites
+\end{lstlisting}
+
+For S3 deployment, only the store path changes:
+
+\begin{lstlisting}[language=Python]
+store = InfonStore("s3://acme/chips", schema_path="schemas/auto.json")
+# same API, fsspec handles the rest
+\end{lstlisting}

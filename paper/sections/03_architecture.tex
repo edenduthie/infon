@@ -1,2 +1,223 @@
 \section{System Architecture}
-% TODO
+\label{sec:architecture}
+
+Cognition is built from four layers that compose without coupling: a cassette
+substrate that stores infons as immutable, content-addressed files; a query DSL
+that composes retrieval primitives over those files; a reasoner that converts
+retrieved infons into calibrated Dempster--Shafer verdicts; and a schema
+migration mechanism that evolves the ontology without reingesting documents.
+Each design choice was validated by a reproducible probe; the key decisions
+are described in the subsections below.
+
+% -----------------------------------------------------------------------
+\subsection{Cassette Substrate}
+\label{sec:architecture:cassette}
+
+\paragraph{File format.}
+Each document is stored as a single \texttt{.inf} cassette.  The binary
+layout is: an 8-byte magic number identifying the file type; a JSON header
+containing metadata (schema reference, content hash, ingest timestamp); a
+sequence of gzip-compressed record frames, one per infon; a Parquet index
+footer; and a 16-byte trailer encoding the footer offset, allowing the index
+to be retrieved with a single tail \texttt{GET} on S3.  Content identity is
+defined by $\mathrm{sha256}(\text{text} \;\Vert\; \text{schema\_ref})$; two
+ingests of the same document under the same schema produce identical cassette
+identifiers, making delta ingest naturally idempotent.
+
+\paragraph{Split indexes.}
+Alongside each cassette, three Parquet shards are written:
+\texttt{by\_triple}, \texttt{by\_time}, and \texttt{by\_anchor}.  These
+indexes are never rewritten; appending new infons produces new shards that the
+manifest accumulates.
+
+\paragraph{Manifest pruner.}
+The manifest maintains a cassette-level bounding box on anchor sets and time
+ranges.  When a query arrives, the pruner eliminates cassettes whose bounding
+box cannot intersect the query's anchor set or time window before any Parquet
+file is opened.  Table~\ref{tab:pruner} summarises the measured result.
+
+\begin{table}[ht]
+  \centering
+  \caption{Manifest pruner performance at 300 cassettes.}
+  \label{tab:pruner}
+  \begin{tabular}{ll}
+    \toprule
+    Mechanism & Result \\
+    \midrule
+    Parquet opens skipped (real workloads) & 7--16$\times$ fewer \\
+    Parquet opens skipped (cache misses)   & 278$\times$ fewer \\
+    Range gets per MCTS query (pruner + MCTS) & 1.4 average \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Time-travel via snapshot chain.}
+Every ingest creates a new snapshot node in an append-only parent chain.
+Calling \texttt{Manifest.load\_at(S)} returns a HEAD-as-of-snapshot-$S$ view
+of the store, so historical queries are resolved without modifying any
+cassette.  Post-migration time-travel is preserved: the snapshot chain holds
+the pre-migration view at any prior snapshot identifier.
+
+\paragraph{Delta ingest.}
+\texttt{InfonStore.ingest()} is content-addressed by
+$\mathrm{sha256}(\text{text} \;\Vert\; \text{schema\_ref})$.  If the cassette
+already exists, ingest is a no-op; re-running the pipeline over the same
+corpus costs nothing.
+
+\paragraph{Schema migration.}
+\texttt{SchemaFunctor(rename, merge, delete)} implements a Kan pushforward
+(Section~\ref{sec:architecture:migration}).  Existing cassettes are rewritten
+under the new ontology; old cassettes remain on disk and remain queryable at
+their original snapshot identifiers.  Measured: migrating a 10-cassette,
+600-infon store to a new schema takes 20\,ms, compared to re-extracting from
+source documents, which takes on the order of seconds.  This is a 62$\times$
+speedup.
+
+% -----------------------------------------------------------------------
+\subsection{Query DSL}
+\label{sec:architecture:dsl}
+
+The query DSL provides composable primitives over the cassette substrate.
+Primitives are designed so that the manifest pruner and Parquet index pushdown
+eliminate I/O before any infon is hydrated.
+
+\paragraph{Triple-role filters.}
+\texttt{where(s, p, o)} pins any combination of subject, predicate, and object;
+unset arguments are treated as wildcards.  \texttt{mentioning(*a)} matches any
+infon that contains anchor~$a$ in any role.
+
+\paragraph{Polarity filters.}
+\texttt{affirmed()} restricts to infons with polarity $+1$; \texttt{negated()}
+restricts to polarity $-1$.  \texttt{contradicting()} constructs the
+polarity-flipped counterpart of a retrieved infon, enabling direct refuter
+lookup.
+
+\paragraph{Temporal filters.}
+\texttt{between(t\textsubscript{0}, t\textsubscript{1})}, \texttt{before(t)},
+and \texttt{after(t)} filter on the ingest or publication timestamp stored in
+the cassette header.  The manifest pruner intersects these windows against its
+cassette-level time bounding boxes before opening any shard.
+
+\paragraph{Schema-aware expansion.}
+\texttt{expand\_hierarchy(schema)} rewrites an anchor query to include all
+descendant entities in the ontology.  \texttt{run\_any([q\textsubscript{1},
+\ldots, q\textsubscript{n}])} is logical OR across a list of queries, executed
+as a single pass over the manifest.
+
+\paragraph{Trajectory and aggregate primitives.}
+\texttt{trajectory(anchor)} returns the time-ordered sequence of infons
+involving an anchor, with NEXT edges derived at read time from the snapshot
+chain.  \texttt{constraint(s, p, o)} computes corpus-level aggregates ---
+\texttt{count\_by}, \texttt{first\_seen}, \texttt{last\_seen} --- via
+aggregate pushdown: no infon records are hydrated, only the index shards are
+read.
+
+\paragraph{Pushdown efficiency.}
+A representative compliance workload --- a 500-infon contradiction search ---
+resolves to zero range gets: the query is answered entirely from index scans.
+Time-travel snapshot resolution costs one additional file read regardless of
+corpus size.
+
+% -----------------------------------------------------------------------
+\subsection{Reasoner}
+\label{sec:architecture:reasoner}
+
+The reasoner converts a set of retrieved infons into a calibrated
+Dempster--Shafer mass $(m_S, m_R, m_U, m_\Theta)$ for a query triple.
+
+\paragraph{Per-infon mass construction.}
+Each infon contributes a base mass drawn from four sources:
+
+\begin{enumerate}
+  \item \textbf{Polarity.}  An affirmed infon ($\mathit{pol} = +1$) contributes
+    mass to $m_S$; a negated infon ($\mathit{pol} = -1$) contributes mass to
+    $m_R$.
+
+  \item \textbf{Alignment.}  The SPLADE similarity score between the infon's
+    anchor vector and the query anchor vector scales the committed mass; lower
+    similarity shifts mass toward $m_\Theta$.
+
+  \item \textbf{Distance.}  Infons reachable via longer hop-count chains
+    contribute less committed mass; the remainder is added to $m_\Theta$,
+    encoding greater ignorance for longer chains.
+
+  \item \textbf{Confidence.}  The extractor's certainty score, derived from
+    the SPLADE activation magnitude, further scales the committed mass.
+\end{enumerate}
+
+The canonical configuration used in all evaluations is \emph{top-1 cautious
+fusion}: the single highest-scoring infon per claim is fused with $k = 2$
+nearest neighbours and a cautious-weight parameter $c_w = 1.0$.  This
+configuration was selected from an internal sweep over fusion parameters on
+the synthetic held-out set.
+
+\paragraph{Chain mass: conjunctive min/max (not Dempster's rule).}
+When the reasoner traverses a multi-hop chain
+$e_1 \to e_2 \to \cdots \to e_n$, it must aggregate the per-edge masses into
+a single chain mass.  Dempster's combination rule is \emph{not} used for this
+purpose.  The reason is fundamental: Dempster's rule amplifies $m_S$ as
+additional edges are combined, because each combination renormalises away
+conflict.  For a chain of assertions, the correct semantics is conjunctive ---
+``all hops must hold'' --- which is naturally expressed by taking the
+\emph{minimum} of supporting masses and the \emph{maximum} of refuting masses
+along the chain:
+
+\[
+  m_S^{\text{chain}} = \min_{i} m_S^{(i)},
+  \qquad
+  m_R^{\text{chain}} = \max_{i} m_R^{(i)}.
+\]
+
+A negated edge anywhere in the chain propagates to the chain-level refutation
+mass; a weak edge anywhere weakens the chain-level support.  Dempster's rule
+would instead treat a chain of weak edges as strong combined evidence, which
+is wrong for chained inference.
+
+\paragraph{MCTS traversal.}
+Monte Carlo Tree Search (MCTS) explores the infon hypergraph from a source
+anchor to a target anchor.  Each expansion step follows a predicate-typed edge
+to a neighbouring anchor; the chain mass is accumulated at each step.  The
+sheaf GNN (Section~\ref{sec:background:sheaf_gnn}) serves as both the MCTS
+prior --- its chain-verdict logit guides expansion --- and the terminal scorer
+--- its final verdict head evaluates completed chains.
+
+\paragraph{Connective-predicate auto-inference.}
+MCTS expansion requires identifying which predicates are connective (i.e.,
+link entities to entities) versus attributive (i.e., link entities to
+property values).  Cognition infers this automatically: a predicate is treated
+as connective when its object-is-entity ratio exceeds 0.5 across the corpus.
+Terminal anchors in chains additionally benefit from entity-widening, which
+allows slight schema mismatches at chain endpoints.  No schema annotation is
+required.
+
+% -----------------------------------------------------------------------
+\subsection{Schema Migration}
+\label{sec:architecture:migration}
+
+\paragraph{SchemaFunctor and Kan pushforward.}
+Schema migration is expressed as a functor
+$F \colon \mathcal{S}_{\text{old}} \to \mathcal{S}_{\text{new}}$ between
+schema categories, with three primitive operations:
+$\mathit{rename}$, $\mathit{merge}$, and $\mathit{delete}$.  The image of
+each existing infon triple under $F$ is computed via the left Kan extension
+of $F$ along the inclusion of the old schema, which extends $F$ to all
+cassette records while preserving inter-entity relationships.
+
+In practice, \texttt{SchemaFunctor(rename=\{...\}, merge=\{...\},
+delete=\{...\})} rewrites every anchor in the store to its image under $F$.
+Old cassettes are written to new files under the new schema; the original
+files remain on disk.
+
+\paragraph{Time-travel integrity.}
+Because old cassettes are preserved and the snapshot chain records which
+cassettes were visible at each snapshot identifier, queries issued against a
+pre-migration snapshot still return the pre-migration view.  Migration does not
+invalidate historical queries.
+
+\paragraph{Performance.}
+On a 10-cassette, 600-infon store, \texttt{store.migrate(functor,
+``schema\_v2.json'')} completes in 20\,ms.  Re-extracting the same store from
+source documents under the new schema would take on the order of seconds
+(roughly 62$\times$ longer), because each document must be re-encoded by
+SPLADE-tiny and re-parsed by the extraction pipeline.  The functor path
+bypasses both steps.
