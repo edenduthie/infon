@@ -1,2 +1,103 @@
 \section{Related Work}
-% TODO
+\label{sec:related_work}
+
+% -----------------------------------------------------------------------
+\subsection{Graph-Based Fact Verification}
+\label{sec:related_work:graph}
+
+Early graph-based approaches to fact verification represented evidence as
+graphs over retrieved sentences or entities and used graph attention
+mechanisms to aggregate evidence.  GEAR~\cite{zhou2019gear} constructs an
+evidence graph in which each retrieved sentence is a node, with edges
+capturing textual similarity, and uses graph attention propagation to
+produce a claim verdict.  KGAT~\cite{liu2020kgat} extends this with a
+knowledge-graph attention network that explicitly models fine-grained
+semantic relationships between claim tokens and evidence tokens via an
+interaction graph.  Both systems improve substantially over sentence-level
+baselines on FEVER~\cite{thorne2018fever}, but they operate on a fixed,
+retrieved evidence set: neither performs structured multi-hop traversal, and
+neither expresses calibrated uncertainty over the verdict.
+
+More recent work has moved toward structured retrieval with graph
+representations.  GraphCheck~\cite{guo2024graphcheck} uses entity and
+relation graphs built from the generated text to detect hallucinations, but
+focuses on generation faithfulness rather than claim verification over an
+external corpus.  STRIVE~\cite{pan2023strive} introduces structured
+retrieval with iterative evidence refinement for multi-step verification.
+AFEV~\cite{hu2023afev} applies adversarial training to improve robustness
+of fact-checking models on challenging claim distributions.  Cognition
+differs from all of these in that its graph is constructed dynamically from
+the cassette store per query, requires no pre-defined entity ontology, and
+represents evidence as typed infons with explicit polarity and alignment
+scores rather than as plain retrieved passages.
+
+% -----------------------------------------------------------------------
+\subsection{Selective Generation and Abstention}
+\label{sec:related_work:selective}
+
+Calibrated abstention — declining to answer when evidence is absent — has
+received increasing attention in both generation and classification
+settings.  \citet{joren2025sufficient} study the selective generation
+problem: given a context and a question, when should a model generate
+versus abstain?  They show that standard LLMs do not reliably abstain when
+the context is insufficient.  SelectLLM~\cite{ko2024selectllm} proposes a
+learned selection mechanism that routes queries to different-sized LLMs
+based on estimated difficulty, with abstention as an option.  Both lines
+of work treat abstention as an output-level decision applied post-hoc to a
+neural model.  Cognition instead grounds abstention in the DS vacuous mass
+$m(\Theta)$: the decision to abstain is structurally enforced by the
+combination rule when evidence is absent, rather than calibrated after the
+fact.
+
+% -----------------------------------------------------------------------
+\subsection{Calibration and Uncertainty Estimation}
+\label{sec:related_work:calibration}
+
+\citet{guo2017calibration} demonstrated that modern neural classifiers are
+systematically overconfident and that temperature scaling provides a simple
+post-hoc calibration.  Evidential Deep Learning~\cite{sensoy2018evidential}
+places a Dirichlet prior over class probabilities to produce uncertainty
+estimates that are theoretically grounded but require end-to-end training.
+R-GCN~\cite{schlichtkrull2018rgcn} extends graph convolutional networks to
+relational data, providing the representational backbone for many downstream
+fact-checking and knowledge-graph completion systems.  Cognition's DS mass
+is not trained for calibration; it emerges directly from the evidence
+combination rule, avoiding the distribution-shift fragility of post-hoc
+calibration layers.
+
+% -----------------------------------------------------------------------
+\subsection{Benchmark Datasets}
+\label{sec:related_work:datasets}
+
+FEVER~\cite{thorne2018fever} established the standard three-class
+(SUPPORTS / REFUTES / NEI) formulation and remains the most widely used
+benchmark for fact verification.  AVeriTeC~\cite{schlichtkrull2023averitec}
+extends this to real-world web evidence, requiring systems to retrieve
+evidence from live URLs rather than from a pre-indexed Wikipedia dump.  The
+AVeriTeC shared task~\cite{averitec2024sharedtask} introduced standardised
+evaluation scripts and a competitive leaderboard.  SciFact~\cite{wadden2020scifact}
+restricts claims to the biomedical literature with rationale-level
+annotation, stressing domain-specific retrieval.  We evaluate on all three
+to ensure results are not specific to a single corpus topology.
+
+% -----------------------------------------------------------------------
+\subsection{What Cognition Provides That Prior Work Does Not}
+\label{sec:related_work:differentiators}
+
+No prior system combines all three of the following properties.
+\textbf{Schema-free operation}: Cognition requires no ontology
+pre-specification.  Claims are grounded via SPLADE anchor encoding;
+connective predicates are autodiscovered from the data.  Graph-based
+systems such as GEAR and KGAT presuppose a fixed evidence graph structure
+or a pre-indexed knowledge graph.  \textbf{Immutable cassette storage with
+time-travel}: Cognition's cassette substrate stores every infon as a
+content-addressed, append-only record.  Old snapshots remain queryable;
+the audit trail is cryptographically verifiable.  No prior fact-checking
+system provides this property.  \textbf{DS mass with explicit $m(\Theta)$
+as a first-class output}: calibrated abstention in Cognition is not a
+post-hoc calibration layer applied to a neural softmax — it is native to
+the inference rule.  When the corpus provides no evidence, $m(\Theta) \to
+1.0$ by construction.  Evidential Deep Learning~\cite{sensoy2018evidential}
+shares the goal of principled uncertainty but requires full end-to-end
+training on labelled data with uncertainty targets; Cognition's uncertainty
+requires only the evidence combination rule.

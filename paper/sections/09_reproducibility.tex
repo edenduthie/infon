@@ -1,2 +1,50 @@
 \section{Reproducibility}
-% TODO
+\label{sec:reproducibility}
+
+\paragraph{Code and data availability.}
+All code, trained model weights, synthgen corpus, and fixture data are
+available at:
+\begin{center}
+  \url{https://github.com/edenduthie/infon}
+\end{center}
+The exact version used to produce all results in this paper is tagged
+\texttt{v0.4.0-paper}.
+
+\paragraph{Installation.}
+The study dependencies install into a standard Python~3.11+ environment
+via:
+\begin{verbatim}
+pip install -e "reference_v4/[study]"
+\end{verbatim}
+No GPU is required.  SPLADE-tiny is downloaded automatically from
+HuggingFace on first use (17~MB).
+
+\paragraph{Reproducing all results.}
+A single shell script reproduces the full evaluation matrix:
+\begin{verbatim}
+bash paper/reproducer.sh
+\end{verbatim}
+This script: (1) downloads and verifies the HoVer, AVeriTeC, and SciFact
+datasets; (2) runs all six systems over the evaluation splits; (3) writes
+fixture JSON files to \texttt{paper/tests/fixtures/}; and (4) generates
+all figures as PDF files in \texttt{paper/figures/}.
+
+\paragraph{Expected wall-clock time.}
+The full evaluation matrix requires 4--8 hours on a modern CPU (2024
+vintage, 8+ cores) using the default MCTS configuration.  Figure
+generation only (skipping system evaluation and loading pre-computed
+fixture data) completes in approximately 10 minutes.
+
+\paragraph{Compute resources.}
+All experiments were run on CPU only; no GPU was used at any stage.  Peak
+memory consumption is approximately 4~GB RAM.  Dataset caches require
+approximately 2~GB of disk storage.
+
+\paragraph{Verification.}
+After running \texttt{reproducer.sh}, the numbers audit and figure tests can
+be verified with:
+\begin{verbatim}
+pytest paper/tests/ -v
+make lint
+\end{verbatim}
+All tests must pass with exit code~0.
