@@ -1,7 +1,7 @@
 \section{Experiments}
 \label{sec:experiments}
 
-We evaluate Cognition against five baselines on three public fact-verification
+We evaluate Infon against five baselines on three public fact-verification
 benchmarks, testing three directional hypotheses about multi-hop advantage
 (H1), honest abstention via $m(\Theta)$ (H2), and DS-mass calibration (H3).
 All systems use the same per-claim \texttt{InfonStore} with zero-shot schema
@@ -28,16 +28,17 @@ different capabilities.
 
   \item \textbf{SciFact}~\cite{wadden2020scifact}: Scientific claim
     verification with rationale annotations.  Labels: \textsc{supports},
-    \textsc{refutes}, \textsc{nei}.  We use the test split.
+    \textsc{refutes}, \textsc{nei}.  We use the dev split (the test split
+    does not carry evidence labels).
 \end{itemize}
 
 \paragraph{Systems.}
 We evaluate six systems:
 
 \begin{enumerate}
-  \item \textbf{Cognition+GNN}: \texttt{InfonStore} with MCTS search and
+  \item \textbf{Infon+GNN}: \texttt{InfonStore} with MCTS search and
     the sheaf GNN chain-verdict head as terminal scorer.
-  \item \textbf{Cognition-symbolic}: \texttt{InfonStore} with MCTS and DS
+  \item \textbf{Infon-symbolic}: \texttt{InfonStore} with MCTS and DS
     mass aggregation; no GNN scorer.
   \item \textbf{Flat retrieval}: SPLADE-only retrieval without MCTS;
     verdict by majority vote over retrieved infons. (Ablation.)
@@ -45,7 +46,7 @@ We evaluate six systems:
     assignment and abstain-on-weak-retrieval heuristic.
   \item \textbf{NLI classifier}: DeBERTa-v3-base fine-tuned on NLI,
     temperature-scaled for ECE.
-  \item \textbf{LLM zero-shot}: \texttt{claude-sonnet-4-6} at temperature
+  \item \textbf{LLM zero-shot}: \texttt{claude-haiku-4-5} at temperature
     0, evidence truncated to 3,000 words.
 \end{enumerate}
 
@@ -95,7 +96,7 @@ Table~\ref{tab:baseline_gate} summarises this check.
 \subsection{H1: Multi-Hop Advantage on HoVer}
 \label{sec:experiments:h1}
 
-\textbf{Hypothesis H1}: MCTS traversal in Cognition outperforms flat
+\textbf{Hypothesis H1}: MCTS traversal in Infon outperforms flat
 retrieval at chain depth $\ge 3$ on HoVer.
 
 \paragraph{Setup.}
@@ -104,23 +105,23 @@ polarity accuracy at each depth for all four retrieval-based systems.
 
 \paragraph{Results.}
 Table~\ref{tab:h1_accuracy} shows per-depth accuracy.  At 2-hop depth,
-Cognition+GNN achieves 74.0\% and flat retrieval achieves 68.0\%, a gap
+Infon+GNN achieves 74.0\% and flat retrieval achieves 68.0\%, a gap
 of 6 percentage points.  The gap widens substantially at greater depths: at
-3 hops, Cognition+GNN reaches 70.0\% versus 55.0\% for flat retrieval
+3 hops, Infon+GNN reaches 70.0\% versus 55.0\% for flat retrieval
 (15 pp gap); at 4 hops, 66.0\% versus 42.0\% (24 pp gap).
-Cognition-symbolic follows closely: 65.0\% at 3 hops and 58.0\% at 4 hops,
+Infon-symbolic follows closely: 65.0\% at 3 hops and 58.0\% at 4 hops,
 both substantially above flat retrieval.  The symbolic floor degrades
 sharply with depth, falling to 35.0\% at 4 hops.
 
 \begin{table}[t]
   \centering
   \caption{HoVer accuracy by chain depth (polarity accuracy, \%).
-    Cognition+GNN maintains high accuracy as depth increases while flat
+    Infon+GNN maintains high accuracy as depth increases while flat
     retrieval degrades.}
   \label{tab:h1_accuracy}
   \begin{tabular}{lcccc}
     \toprule
-    \# Hops & Cog+GNN & Cog-sym & Flat retr. & Sym. floor \\
+    \# Hops & Infon+GNN & Infon-sym & Flat retr. & Sym. floor \\
     \midrule
     2 & 74.0 & 72.0 & 68.0 & 45.0 \\
     3 & 70.0 & 65.0 & 55.0 & 40.0 \\
@@ -141,18 +142,18 @@ sharply with depth, falling to 35.0\% at 4 hops.
 \end{figure}
 
 \paragraph{Finding.}
-H1 is \textbf{supported}.  Cognition+GNN exceeds flat retrieval by
+H1 is \textbf{supported}.  Infon+GNN exceeds flat retrieval by
 15 pp at 3 hops and 24 pp at 4 hops.  The MCTS search's ability to
 compose infon chains across multiple documents provides a systematic
 advantage that grows with reasoning depth.  This advantage is also present
-for Cognition-symbolic, confirming that it derives from structured traversal
+for Infon-symbolic, confirming that it derives from structured traversal
 rather than from the GNN scorer alone.
 
 % -----------------------------------------------------------------------
 \subsection{H2: Honest Abstention via $m(\Theta)$}
 \label{sec:experiments:h2}
 
-\textbf{Hypothesis H2}: Cognition's $m(\Theta)$ rises significantly for
+\textbf{Hypothesis H2}: Infon's $m(\Theta)$ rises significantly for
 NEI claims relative to \textsc{supports}/\textsc{refutes} claims; the LLM
 baseline assigns lower $m(\Theta)$ to NEI (hallucination proxy).
 
@@ -166,9 +167,9 @@ supported).
 
 \paragraph{Results.}
 Table~\ref{tab:h2_theta} shows mean $m(\Theta)$ by class.
-Cognition+GNN assigns $m(\Theta) = 0.90$ to NEI claims while assigning only
+Infon+GNN assigns $m(\Theta) = 0.90$ to NEI claims while assigning only
 0.13 and 0.17 to \textsc{supports} and \textsc{refutes} respectively.
-Cognition-symbolic shows a similarly large spread (NEI: 0.88, others:
+Infon-symbolic shows a similarly large spread (NEI: 0.88, others:
 0.15--0.18).  By contrast, the LLM zero-shot baseline assigns only
 $m(\Theta) = 0.60$ to NEI, while assigning 0.35 and 0.36 to
 \textsc{supports} and \textsc{refutes}, indicating a compressed dynamic
@@ -176,7 +177,7 @@ range that conflates genuine evidence with absence of evidence.
 
 \begin{table}[t]
   \centering
-  \caption{Mean $m(\Theta)$ by ground-truth class on AVeriTeC.  Cognition
+  \caption{Mean $m(\Theta)$ by ground-truth class on AVeriTeC.  Infon
     systems show a large NEI vs.\ non-NEI contrast; the LLM baseline is
     compressed.}
   \label{tab:h2_theta}
@@ -184,8 +185,8 @@ range that conflates genuine evidence with absence of evidence.
     \toprule
     System & $m(\Theta)$ SUPP & $m(\Theta)$ REF & $m(\Theta)$ NEI \\
     \midrule
-    Cognition+GNN       & 0.13 & 0.17 & 0.90 \\
-    Cognition-symbolic  & 0.15 & 0.18 & 0.88 \\
+    Infon+GNN       & 0.13 & 0.17 & 0.90 \\
+    Infon-symbolic  & 0.15 & 0.18 & 0.88 \\
     LLM zero-shot       & 0.35 & 0.36 & 0.60 \\
     \bottomrule
   \end{tabular}
@@ -194,23 +195,23 @@ range that conflates genuine evidence with absence of evidence.
 \end{table}
 
 The Spearman correlation $\rho(m(\Theta), \text{NEI\_ind})$ is 0.95 for
-Cognition+GNN, 0.93 for Cognition-symbolic, and 0.52 for LLM zero-shot.
-The false-positive endorsement rate on NEI claims is 3\% for Cognition+GNN,
-4\% for Cognition-symbolic, and 24\% for LLM zero-shot.
+Infon+GNN, 0.93 for Infon-symbolic, and 0.52 for LLM zero-shot.
+The false-positive endorsement rate on NEI claims is 3\% for Infon+GNN,
+4\% for Infon-symbolic, and 24\% for LLM zero-shot.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{figures/theta_distribution.pdf}
   \caption{Distribution of $m(\Theta)$ by ground-truth class on AVeriTeC.
-    Cognition systems (top two panels) show a bimodal separation; the LLM
+    Infon systems (top two panels) show a bimodal separation; the LLM
     zero-shot baseline (bottom panel) shows substantial overlap between NEI
     and non-NEI.}
   \label{fig:theta_distribution}
 \end{figure}
 
 \paragraph{Finding.}
-H2 is \textbf{supported}.  Cognition's vacuous-mass mechanism cleanly
-separates NEI from evidenced claims: $\rho = 0.95$ for Cognition+GNN
+H2 is \textbf{supported}.  Infon's vacuous-mass mechanism cleanly
+separates NEI from evidenced claims: $\rho = 0.95$ for Infon+GNN
 versus $\rho = 0.52$ for the LLM baseline.  The 8$\times$ reduction in
 false-positive NEI endorsements (3\% vs.\ 24\%) demonstrates that grounding
 abstention in DS vacuous mass is substantially more reliable than relying on
@@ -220,21 +221,21 @@ a language model's implicit uncertainty.
 \subsection{H3: DS-Mass Calibration on SciFact}
 \label{sec:experiments:h3}
 
-\textbf{Hypothesis H3}: Cognition's DS mass is better calibrated (lower
+\textbf{Hypothesis H3}: Infon's DS mass is better calibrated (lower
 ECE) than the NLI classifier softmax on SciFact.
 
 \paragraph{Setup.}
 We use the SciFact test split and report ECE (15 bins), Brier score, and
 AURC for each system.  The NLI classifier uses temperature scaling tuned on
-a held-out portion of the dev split.  For Cognition systems, the DS mass
+a held-out portion of the dev split.  For Infon systems, the DS mass
 $m_S$ is used as the confidence signal.
 
 \paragraph{Results.}
-Table~\ref{tab:h3_calibration} shows calibration metrics.  Cognition+GNN
-achieves ECE~$= 0.05$ and AURC~$= 0.15$, outperforming Cognition-symbolic
+Table~\ref{tab:h3_calibration} shows calibration metrics.  Infon+GNN
+achieves ECE~$= 0.05$ and AURC~$= 0.15$, outperforming Infon-symbolic
 (ECE~$= 0.08$, AURC~$= 0.20$) and the NLI classifier (ECE~$= 0.12$,
 AURC~$= 0.30$).  The Brier score follows the same ordering: 0.12 for
-Cognition+GNN vs.\ 0.22 for the NLI classifier.
+Infon+GNN vs.\ 0.22 for the NLI classifier.
 
 \begin{table}[t]
   \centering
@@ -245,8 +246,8 @@ Cognition+GNN vs.\ 0.22 for the NLI classifier.
     \toprule
     System & ECE $\downarrow$ & Brier $\downarrow$ & AURC $\downarrow$ \\
     \midrule
-    Cognition+GNN       & 0.05 & 0.12 & 0.15 \\
-    Cognition-symbolic  & 0.08 & 0.16 & 0.20 \\
+    Infon+GNN       & 0.05 & 0.12 & 0.15 \\
+    Infon-symbolic  & 0.08 & 0.16 & 0.20 \\
     NLI classifier      & 0.12 & 0.22 & 0.30 \\
     \bottomrule
   \end{tabular}
@@ -257,7 +258,7 @@ Cognition+GNN vs.\ 0.22 for the NLI classifier.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{figures/reliability_diagrams.pdf}
-  \caption{Reliability diagrams on SciFact.  Cognition systems (left two
+  \caption{Reliability diagrams on SciFact.  Infon systems (left two
     panels) track the diagonal closely; the NLI classifier (right panel)
     shows systematic overconfidence at high confidence bins.}
   \label{fig:reliability_diagrams}
@@ -267,13 +268,13 @@ Cognition+GNN vs.\ 0.22 for the NLI classifier.
   \centering
   \includegraphics[width=\columnwidth]{figures/pareto.pdf}
   \caption{Accuracy vs.\ AURC Pareto frontier across all systems on the
-    cross-dataset aggregate.  Cognition+GNN dominates all baselines on both
+    cross-dataset aggregate.  Infon+GNN dominates all baselines on both
     dimensions simultaneously.}
   \label{fig:pareto}
 \end{figure}
 
 \paragraph{Finding.}
-H3 is \textbf{supported}.  Cognition+GNN's ECE of 0.05 is less than half
+H3 is \textbf{supported}.  Infon+GNN's ECE of 0.05 is less than half
 the NLI classifier's ECE of 0.12, and its AURC of 0.15 is half the NLI
 classifier's 0.30.  The reliability diagrams (Figure~\ref{fig:reliability_diagrams})
 show that the DS-mass signal tracks the true accuracy closely across all
@@ -283,9 +284,9 @@ distributions typical of discriminative classifiers.
 
 \paragraph{Cross-dataset aggregate.}
 Figure~\ref{fig:pareto} plots accuracy against AURC across all six systems
-on the aggregate panel.  Cognition+GNN achieves the best accuracy (70.0\%)
+on the aggregate panel.  Infon+GNN achieves the best accuracy (70.0\%)
 and the best AURC (0.15) simultaneously, placing it on the Pareto frontier
-and dominating all baselines on both axes.  Cognition-symbolic occupies the
+and dominating all baselines on both axes.  Infon-symbolic occupies the
 second Pareto-efficient position (accuracy 65.0\%, AURC 0.20), followed by
 the LLM zero-shot (accuracy 62.0\%, AURC 0.28) and the NLI classifier
 (accuracy 60.0\%, AURC 0.30).

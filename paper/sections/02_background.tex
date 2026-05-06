@@ -2,7 +2,7 @@
 \label{sec:background}
 
 This section establishes notation and reviews the four theoretical foundations
-that Cognition builds on.
+that Infon builds on.
 
 % -----------------------------------------------------------------------
 \subsection{Dempster--Shafer Theory}
@@ -16,7 +16,7 @@ distinguishing \emph{uncertainty} (evidence spread over possibilities) from
 
 \paragraph{Frame of discernment.}
 Let $\Omega$ be a finite, mutually exclusive, exhaustive set of hypotheses
-called the \emph{frame of discernment}.  Cognition uses
+called the \emph{frame of discernment}.  Infon uses
 \[
   \Omega = \{S,\, R,\, U\},
 \]
@@ -55,7 +55,7 @@ where the normalisation constant $K = \sum_{B \cap C = \emptyset} m_1(B)\, m_2(C
 accounts for conflicting evidence.  Combination is commutative and associative,
 so evidence from multiple infons can be fused incrementally.
 
-\paragraph{Four-part mass in Cognition.}
+\paragraph{Four-part mass in Infon.}
 Throughout this paper, a verdict mass is written as the tuple
 $(m_S,\, m_R,\, m_U,\, m_\Theta)$, where
 \[
@@ -75,7 +75,7 @@ in this form.
 \subsection{Situation Semantics and Infons}
 \label{sec:background:infons}
 
-Cognition's unit of extracted knowledge is the \emph{infon}, drawn from
+Infon's unit of extracted knowledge is the \emph{infon}, drawn from
 Barwise and Perry's situation semantics~\cite{barwise1983situations}.
 
 \paragraph{Infon triple.}
@@ -90,7 +90,7 @@ predicate holds ($+1$, affirmed) or is negated ($-1$).
 \paragraph{Grounding.}
 Each infon is grounded to its source: a \emph{cassette} identifier (the SHA-256
 content hash of the document), a byte \emph{offset} into the cassette's record
-stream, and an extraction \emph{timestamp}.  This grounding lets Cognition cite
+stream, and an extraction \emph{timestamp}.  This grounding lets Infon cite
 the exact passage that generated each mass contribution and supports
 time-travel queries over snapshot manifests.
 
@@ -116,8 +116,8 @@ where $h_k$ is the aggregated BERT hidden state for vocabulary token $k$.
 Only a small fraction of dimensions are non-zero, so $\mathbf{s}$ can be
 stored and intersected efficiently with an inverted index.
 
-\paragraph{SPLADE-tiny in Cognition.}
-Cognition uses the \texttt{naver/splade-v3-lexical} distilled variant
+\paragraph{SPLADE-tiny in Infon.}
+Infon uses the \texttt{naver/splade-v3-lexical} distilled variant
 (17~MB, Apache~2.0 licence).  It runs on CPU in under 2~seconds cold-start
 and requires no GPU or external API.  Each ingested document is encoded into a
 sparse anchor vector; at query time, the query anchor is matched against
@@ -143,8 +143,8 @@ Its first cohomology group $H^1$ captures the degree to which adjacent node
 representations are \emph{inconsistent} with the restriction maps --- a
 natural anomaly signal for relational data.
 
-\paragraph{Use in Cognition.}
-Cognition's 140k-parameter sheaf GNN (\texttt{SheafHypergraphEncoder}) uses
+\paragraph{Use in Infon.}
+Infon's 140k-parameter sheaf GNN (\texttt{SheafHypergraphEncoder}) uses
 per-relation-kind restriction maps, so different predicate types carry
 different geometric transformations.  The encoder's chain-verdict head
 produces a logit over the mass components $(m_S, m_R, m_U, m_\Theta)$ that serves as the MCTS terminal

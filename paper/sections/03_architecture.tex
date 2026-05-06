@@ -1,7 +1,7 @@
 \section{System Architecture}
 \label{sec:architecture}
 
-Cognition is built from four layers that compose without coupling: a cassette
+Infon is built from four layers that compose without coupling: a cassette
 substrate that stores infons as immutable, content-addressed files; a query DSL
 that composes retrieval primitives over those files; a reasoner that converts
 retrieved infons into calibrated Dempster--Shafer verdicts; and a schema
@@ -184,7 +184,7 @@ prior --- its chain-verdict logit guides expansion --- and the terminal scorer
 \paragraph{Connective-predicate auto-inference.}
 MCTS expansion requires identifying which predicates are connective (i.e.,
 link entities to entities) versus attributive (i.e., link entities to
-property values).  Cognition infers this automatically: a predicate is treated
+property values).  Infon infers this automatically: a predicate is treated
 as connective when its object-is-entity ratio exceeds 0.5 across the corpus.
 Terminal anchors in chains additionally benefit from entity-widening, which
 allows slight schema mismatches at chain endpoints.  No schema annotation is

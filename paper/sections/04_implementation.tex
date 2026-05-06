@@ -9,9 +9,9 @@ the extraction pipeline, the executor variants, and the Strands Analyst.
 \subsection{SPLADE-tiny Encoder}
 \label{sec:implementation:encoder}
 
-Cognition uses \texttt{naver/splade-v3-lexical}, a distilled SPLADE variant
+Infon uses \texttt{naver/splade-v3-lexical}, a distilled SPLADE variant
 with a 17\,MB footprint, Apache~2.0 licence, and no GPU requirement.  The
-model weights are frozen; Cognition does not fine-tune them.
+model weights are frozen; Infon does not fine-tune them.
 
 \paragraph{Sparse activations as anchor vocabulary.}
 For an input text sequence $t$, the encoder produces a sparse vector
@@ -145,7 +145,7 @@ query, multi-hop connectivity, one-of-many reachability, and conversational
 use.
 
 \begin{lstlisting}[language=Python]
-from cognition.cassette import InfonStore, Query, Analyst
+from infon import InfonStore, Query, Analyst
 
 store = InfonStore("./data/chips", schema_path="schemas/auto.json")
 

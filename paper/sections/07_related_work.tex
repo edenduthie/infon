@@ -29,7 +29,7 @@ focuses on generation faithfulness rather than claim verification over an
 external corpus.  STRIVE~\cite{pan2023strive} introduces structured
 retrieval with iterative evidence refinement for multi-step verification.
 AFEV~\cite{hu2023afev} applies adversarial training to improve robustness
-of fact-checking models on challenging claim distributions.  Cognition
+of fact-checking models on challenging claim distributions.  Infon
 differs from all of these in that its graph is constructed dynamically from
 the cassette store per query, requires no pre-defined entity ontology, and
 represents evidence as typed infons with explicit polarity and alignment
@@ -48,7 +48,7 @@ the context is insufficient.  SelectLLM~\cite{ko2024selectllm} proposes a
 learned selection mechanism that routes queries to different-sized LLMs
 based on estimated difficulty, with abstention as an option.  Both lines
 of work treat abstention as an output-level decision applied post-hoc to a
-neural model.  Cognition instead grounds abstention in the DS vacuous mass
+neural model.  Infon instead grounds abstention in the DS vacuous mass
 $m(\Theta)$: the decision to abstain is structurally enforced by the
 combination rule when evidence is absent, rather than calibrated after the
 fact.
@@ -68,7 +68,7 @@ reliably detects out-of-distribution spans and improves trust-calibration on
 biomedical entities.  R-GCN~\cite{schlichtkrull2018rgcn} extends graph
 convolutional networks to relational data, providing the representational
 backbone for many downstream fact-checking and knowledge-graph completion
-systems.  Cognition's DS mass is not trained for calibration; it emerges
+systems.  Infon's DS mass is not trained for calibration; it emerges
 directly from the evidence combination rule, avoiding the distribution-shift
 fragility of post-hoc calibration layers.
 
@@ -88,23 +88,23 @@ annotation, stressing domain-specific retrieval.  We evaluate on all three
 to ensure results are not specific to a single corpus topology.
 
 % -----------------------------------------------------------------------
-\subsection{What Cognition Provides That Prior Work Does Not}
+\subsection{What Infon Provides That Prior Work Does Not}
 \label{sec:related_work:differentiators}
 
 No prior system combines all three of the following properties.
-\textbf{Schema-free operation}: Cognition requires no ontology
+\textbf{Schema-free operation}: Infon requires no ontology
 pre-specification.  Claims are grounded via SPLADE anchor encoding;
 connective predicates are autodiscovered from the data.  Graph-based
 systems such as GEAR and KGAT presuppose a fixed evidence graph structure
 or a pre-indexed knowledge graph.  \textbf{Immutable cassette storage with
-time-travel}: Cognition's cassette substrate stores every infon as a
+time-travel}: Infon's cassette substrate stores every infon as a
 content-addressed, append-only record.  Old snapshots remain queryable;
 the audit trail is cryptographically verifiable.  No prior fact-checking
 system provides this property.  \textbf{DS mass with explicit $m(\Theta)$
-as a first-class output}: calibrated abstention in Cognition is not a
+as a first-class output}: calibrated abstention in Infon is not a
 post-hoc calibration layer applied to a neural softmax — it is native to
 the inference rule.  When the corpus provides no evidence, $m(\Theta) \to
 1.0$ by construction.  Evidential Deep Learning~\cite{sensoy2018evidential}
 shares the goal of principled uncertainty but requires full end-to-end
-training on labelled data with uncertainty targets; Cognition's uncertainty
+training on labelled data with uncertainty targets; Infon's uncertainty
 requires only the evidence combination rule.

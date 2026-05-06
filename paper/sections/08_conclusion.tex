@@ -1,7 +1,7 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have presented Cognition, a deployable knowledge-graph reasoner for
+We have presented Infon, a deployable knowledge-graph reasoner for
 fact verification that combines three capabilities unavailable in any prior
 single system: cassette-native immutable storage, Dempster--Shafer mass
 with first-class $m(\Theta)$ as a native abstention signal, and MCTS plus
@@ -15,16 +15,16 @@ system accessible to non-technical users, citing every source it consults.
 
 Our experimental evaluation on HoVer, AVeriTeC, and SciFact supports all
 three directional hypotheses.  H1 results show a 24~pp gap at 4-hop depth
-between Cognition+GNN (66.0\%) and flat retrieval (42.0\%), supporting the
+between Infon+GNN (66.0\%) and flat retrieval (42.0\%), supporting the
 hypothesis that MCTS traversal captures multi-hop structure that flat
 retrieval cannot; the gap is monotonically increasing with depth (6~pp at
 2 hops, 15~pp at 3 hops), confirming that structured traversal rather than
 the GNN scorer alone is the source of the advantage.  H2 shows a mean
-$m(\Theta)$ of 0.90 on NEI claims for Cognition+GNN versus 0.60 for LLM
+$m(\Theta)$ of 0.90 on NEI claims for Infon+GNN versus 0.60 for LLM
 zero-shot (Spearman $\rho = 0.95$ vs.\ 0.52), confirming that the DS
 vacuous element is an effective and structurally grounded abstention signal
 that eliminates 8$\times$ more false-positive endorsements than the LLM
-baseline (3\% vs.\ 24\%).  H3 shows Cognition+GNN's ECE of 0.05 versus the
+baseline (3\% vs.\ 24\%).  H3 shows Infon+GNN's ECE of 0.05 versus the
 NLI classifier's ECE of 0.12 on SciFact, confirming that DS mass
 constructed from explicit evidence sources is better calibrated than a
 neural softmax trained on fixed label distributions, even after temperature

@@ -6,7 +6,7 @@
 \label{sec:discussion:interpretation}
 
 \paragraph{H1 — Multi-hop advantage.}
-At 4-hop depth, Cognition+GNN achieves 66.0\% accuracy versus flat retrieval's
+At 4-hop depth, Infon+GNN achieves 66.0\% accuracy versus flat retrieval's
 42.0\%, a gap of 24 percentage points.  The gap is monotonically increasing
 with depth: 6 pp at 2 hops, 15 pp at 3 hops, and 24 pp at 4 hops.  This
 pattern is precisely what the NEXT-edge graph structure predicts: flat
@@ -18,12 +18,12 @@ individual link is approximately constant across depth.  The sheaf GNN
 prior accelerates this by guiding beam selection toward structurally sound
 partial chains — those whose type signatures and polarity patterns are
 consistent with the hypothesis frame — rather than exploring the full
-branching factor uniformly.  Cognition-symbolic's parallel advantage (23 pp
+branching factor uniformly.  Infon-symbolic's parallel advantage (23 pp
 at 4 hops) confirms that the gain derives from structured MCTS traversal,
 not from the GNN scorer alone.
 
 \paragraph{H2 — Honest abstention.}
-Cognition+GNN assigns mean $m(\Theta) = 0.90$ to NEI claims and only 0.13
+Infon+GNN assigns mean $m(\Theta) = 0.90$ to NEI claims and only 0.13
 and 0.17 to \textsc{supports} and \textsc{refutes} claims respectively, with
 Spearman $\rho = 0.95$.  The LLM baseline assigns $m(\Theta) = 0.60$ to NEI
 and 0.35--0.36 to the other classes, with $\rho = 0.52$.  The interpretation
@@ -35,11 +35,11 @@ baseline, by contrast, assigns non-zero confidence to \textsc{supports} or
 \textsc{refutes} even on NEI claims because its pre-training induces a prior
 over labels that is independent of whether any retrieved context actually
 supports the claim.  The 8$\times$ reduction in false-positive endorsements
-(3\% vs.\ 24\% for Cognition+GNN vs.\ LLM) is a direct consequence of this
+(3\% vs.\ 24\% for Infon+GNN vs.\ LLM) is a direct consequence of this
 structural difference.
 
 \paragraph{H3 — DS calibration.}
-Cognition+GNN achieves ECE~$= 0.05$ versus the NLI classifier's ECE~$=
+Infon+GNN achieves ECE~$= 0.05$ versus the NLI classifier's ECE~$=
 0.12$.  This result is not incidental to the DS mechanism: DS mass is
 constructed from explicit, compositional evidence sources — polarity of
 individual infons, pairwise alignment scores between infon predicates and
@@ -59,22 +59,21 @@ characteristic upward bow at high confidence.
 \subsection{Limitations}
 \label{sec:discussion:limitations}
 
-\paragraph{Epic~02 encoder-collapse null result.}
-During the evaluation of the reference\_v2 system (the predecessor to
-Cognition) using synthetic text templates, all 7 evaluation cells produced
-exactly 0.332 accuracy — chance level for a three-class problem.  Root-cause
-analysis revealed that BERT's entity tokenisation collapsed on templated
-patterns: distinct named entities in the template generated identical
-contextual embeddings, making every retrieval key indistinguishable.  This
-invalidated the synthetic evaluation harness for that system.  The v4
-system (Cognition) avoids this failure in two ways: SPLADE-tiny uses sparse
-activations over the full vocabulary rather than dense contextual
-embeddings, so distinct tokens produce distinct sparse codes regardless of
-surrounding template structure; and the current evaluation uses real
-Wikipedia, AVeriTeC, and SciFact text rather than template-generated
-synthetic corpora.  We report this null result in the interest of
-reproducibility and to warn practitioners against evaluating dense
-retrievers on templated text.
+\paragraph{Prior encoder-collapse null result.}
+During preliminary experiments evaluating an earlier implementation using
+synthetic text templates, all evaluation cells produced exactly 0.332
+accuracy --- chance level for a three-class problem.  Root-cause analysis
+revealed that BERT's entity tokenisation collapsed on templated patterns:
+distinct named entities in the template generated identical contextual
+embeddings, making every retrieval key indistinguishable.  This invalidated
+the synthetic evaluation harness for that earlier system.  Infon avoids this
+failure in two ways: SPLADE-tiny uses sparse activations over the full
+vocabulary rather than dense contextual embeddings, so distinct tokens
+produce distinct sparse codes regardless of surrounding template structure;
+and the current evaluation uses real Wikipedia, AVeriTeC, and SciFact text
+rather than template-generated synthetic corpora.  We report this null result
+in the interest of reproducibility and to warn practitioners against
+evaluating dense retrievers on templated text.
 
 \paragraph{Schema coverage failures.}
 When the schema bootstrap step fails to discover relevant anchor predicates,
@@ -117,7 +116,7 @@ Several directions follow naturally from the current limitations.
   \item \textbf{Multimodal infons.}  The cassette format encodes
     propositional infons over text predicates.  Extending the schema to
     image captions (via vision-language embeddings) and tabular data
-    (via structured query expansion) would allow Cognition to reason over
+    (via structured query expansion) would allow Infon to reason over
     mixed-modality corpora.
 
   \item \textbf{Learned manifest pruning.}  The current manifest pruner

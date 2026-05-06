@@ -2,7 +2,7 @@
 \label{sec:system_card}
 
 \paragraph{System description.}
-Cognition is a knowledge-graph reasoner for fact verification over text
+Infon is a knowledge-graph reasoner for fact verification over text
 corpora.  It ingests documents as typed infons stored in immutable,
 content-addressed cassette files, reasons over them using MCTS with a sheaf
 GNN prior, and returns a calibrated Dempster--Shafer verdict
@@ -10,7 +10,7 @@ $(m_S, m_R, m_U, m_\Theta)$ for each claim.  A conversational Analyst agent
 provides a natural-language interface for non-specialist users.
 
 \paragraph{Intended use.}
-Cognition is designed for:
+Infon is designed for:
 \begin{itemize}
   \item Research fact-checking and knowledge-graph reasoning over text
     corpora in academic and regulatory contexts.
@@ -21,14 +21,14 @@ Cognition is designed for:
 \end{itemize}
 
 \paragraph{Out-of-scope use.}
-Cognition is \emph{not} intended for:
+Infon is \emph{not} intended for:
 \begin{itemize}
   \item Real-time production systems requiring streaming ingestion or
     sub-second latency at scale.  The current architecture does not support
     incremental cassette updates or persistent index structures optimised
     for high-throughput query serving.
   \item Life-critical decisions, including medical diagnosis, legal rulings,
-    or safety-critical engineering assessments.  Cognition's verdicts are
+    or safety-critical engineering assessments.  Infon's verdicts are
     probabilistic and subject to schema coverage failures.
   \item High-volume throughput applications (1,000+ concurrent queries).
     The MCTS component is CPU-bound and not parallelised across queries.
@@ -63,7 +63,7 @@ a controlled random process.  No personal data, proprietary data, or
 real-world documents are used in GNN training.
 SPLADE-tiny~\cite{formal2021splade} is pre-trained on MS-MARCO
 (Formal et al., 2021) and used frozen; its weights are not modified
-during any stage of Cognition's training or evaluation pipeline.
+during any stage of Infon's training or evaluation pipeline.
 No personal or proprietary data is used in any component of the system.
 
 \paragraph{Evaluation data.}
