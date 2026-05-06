@@ -1,0 +1,114 @@
+{
+  "claims": [
+    {
+      "id": 1,
+      "claim": "Aspirin reduces the risk of colorectal cancer.",
+      "cited_doc_ids": [4346465],
+      "evidence": {
+        "4346465": [
+          {
+            "sentences": [0, 1],
+            "label": "SUPPORTS"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "claim": "Smoking causes lung cancer.",
+      "cited_doc_ids": [1234567],
+      "evidence": {
+        "1234567": [
+          {
+            "sentences": [2, 3],
+            "label": "SUPPORTS"
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "claim": "Vitamin C has no effect on the common cold.",
+      "cited_doc_ids": [9876543],
+      "evidence": {
+        "9876543": [
+          {
+            "sentences": [0],
+            "label": "CONTRADICT"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "claim": "Exercise reduces the risk of type 2 diabetes.",
+      "cited_doc_ids": [5555555],
+      "evidence": {
+        "5555555": [
+          {
+            "sentences": [1, 2, 3],
+            "label": "SUPPORTS"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "claim": "Antibiotics are effective against viral infections.",
+      "cited_doc_ids": [],
+      "evidence": {}
+    }
+  ],
+  "corpus": [
+    {
+      "doc_id": 4346465,
+      "title": "Aspirin use and colorectal cancer risk",
+      "abstract": [
+        "Regular aspirin use has been associated with reduced colorectal cancer risk.",
+        "In our cohort study, aspirin users showed a 25% reduction in colorectal cancer incidence.",
+        "The protective effect was dose-dependent and statistically significant.",
+        "These findings support aspirin as a chemopreventive agent."
+      ]
+    },
+    {
+      "doc_id": 1234567,
+      "title": "Tobacco smoking and lung cancer",
+      "abstract": [
+        "Lung cancer is the leading cause of cancer death worldwide.",
+        "Cigarette smoking is strongly associated with lung cancer risk.",
+        "Smokers have a 15-30 times higher risk of developing lung cancer compared to non-smokers.",
+        "Cessation of smoking significantly reduces the risk over time."
+      ]
+    },
+    {
+      "doc_id": 9876543,
+      "title": "Effect of vitamin C on common cold duration",
+      "abstract": [
+        "The effect of vitamin C on common cold has been studied extensively.",
+        "Meta-analyses show that vitamin C supplementation reduces cold duration by 8% in adults.",
+        "Regular supplementation may reduce cold severity in some populations.",
+        "These results contradict the claim that vitamin C has no effect on the common cold."
+      ]
+    },
+    {
+      "doc_id": 5555555,
+      "title": "Physical activity and type 2 diabetes prevention",
+      "abstract": [
+        "Type 2 diabetes is a major global health burden.",
+        "Regular physical activity is associated with improved insulin sensitivity.",
+        "Exercise interventions reduce the incidence of type 2 diabetes by 30-50%.",
+        "The evidence supports exercise as a primary prevention strategy for diabetes."
+      ]
+    },
+    {
+      "doc_id": 7777777,
+      "title": "Antibiotic mechanisms and applications",
+      "abstract": [
+        "Antibiotics are compounds that inhibit bacterial growth or kill bacteria.",
+        "Antibiotics have no effect on viruses, which have different replication mechanisms.",
+        "Viral infections require antiviral treatments, not antibiotics.",
+        "Overuse of antibiotics for viral infections contributes to antibiotic resistance."
+      ]
+    }
+  ]
+}

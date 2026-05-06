@@ -1,0 +1,37 @@
+[
+  {
+    "uid": "hover_dev_0",
+    "claim": "Hobbit is a fantasy novel and the director of its film adaptation was born in New Zealand.",
+    "label": "SUPPORTED",
+    "supporting_facts": [["The Hobbit", 0], ["Peter Jackson", 1]],
+    "num_hops": 2
+  },
+  {
+    "uid": "hover_dev_1",
+    "claim": "The Avengers film grossed over one billion dollars and was produced by Marvel Studios which is owned by Disney.",
+    "label": "SUPPORTED",
+    "supporting_facts": [["The Avengers (film)", 0], ["Marvel Studios", 0], ["Disney", 2]],
+    "num_hops": 3
+  },
+  {
+    "uid": "hover_dev_2",
+    "claim": "The capital of France is Berlin.",
+    "label": "NOT_SUPPORTED",
+    "supporting_facts": [],
+    "num_hops": 2
+  },
+  {
+    "uid": "hover_dev_3",
+    "claim": "Shakespeare wrote Hamlet and it was first performed in the Globe Theatre which was built in 1599.",
+    "label": "SUPPORTED",
+    "supporting_facts": [["Hamlet", 0], ["Globe Theatre", 1]],
+    "num_hops": 2
+  },
+  {
+    "uid": "hover_dev_4",
+    "claim": "Einstein won the Nobel Prize in Physics in 1921 for his discovery of relativity and taught at Princeton which is located in New Jersey which borders New York.",
+    "label": "NOT_SUPPORTED",
+    "supporting_facts": [["Albert Einstein", 0], ["Princeton University", 1], ["New Jersey", 0]],
+    "num_hops": 4
+  }
+]
