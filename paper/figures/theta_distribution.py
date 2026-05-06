@@ -82,8 +82,8 @@ def main() -> None:
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
 
-    axes[0].set_ylabel(r"$m_\theta$ (softmax probability)", fontsize=11)
-    fig.suptitle(r"$m_\theta$ distribution by ground-truth class (H2)", fontsize=12)
+    axes[0].set_ylabel(r"$m_\Theta$ (DS vacuous mass)", fontsize=11)
+    fig.suptitle(r"$m_\Theta$ distribution by ground-truth class (H2)", fontsize=12)
     fig.tight_layout()
 
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
