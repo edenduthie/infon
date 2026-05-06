@@ -13,10 +13,14 @@ capturing textual similarity, and uses graph attention propagation to
 produce a claim verdict.  KGAT~\cite{liu2020kgat} extends this with a
 knowledge-graph attention network that explicitly models fine-grained
 semantic relationships between claim tokens and evidence tokens via an
-interaction graph.  Both systems improve substantially over sentence-level
+interaction graph.  DREAM~\cite{zheng2020dream} applies discourse-based
+relational graph reasoning to multi-hop reading comprehension, showing that
+structured inter-sentence relation graphs improve multi-hop accuracy over
+flat attention.  All three systems improve substantially over sentence-level
 baselines on FEVER~\cite{thorne2018fever}, but they operate on a fixed,
-retrieved evidence set: neither performs structured multi-hop traversal, and
-neither expresses calibrated uncertainty over the verdict.
+retrieved evidence set: none performs structured multi-hop traversal over an
+append-only evidence store, and none expresses calibrated uncertainty over
+the verdict.
 
 More recent work has moved toward structured retrieval with graph
 representations.  GraphCheck~\cite{guo2024graphcheck} uses entity and
@@ -58,12 +62,15 @@ systematically overconfident and that temperature scaling provides a simple
 post-hoc calibration.  Evidential Deep Learning~\cite{sensoy2018evidential}
 places a Dirichlet prior over class probabilities to produce uncertainty
 estimates that are theoretically grounded but require end-to-end training.
-R-GCN~\cite{schlichtkrull2018rgcn} extends graph convolutional networks to
-relational data, providing the representational backbone for many downstream
-fact-checking and knowledge-graph completion systems.  Cognition's DS mass
-is not trained for calibration; it emerges directly from the evidence
-combination rule, avoiding the distribution-shift fragility of post-hoc
-calibration layers.
+E-NER~\cite{zhou2023ener} applies the same Evidential Deep Learning
+framework to named entity recognition, showing that per-token vacuous mass
+reliably detects out-of-distribution spans and improves trust-calibration on
+biomedical entities.  R-GCN~\cite{schlichtkrull2018rgcn} extends graph
+convolutional networks to relational data, providing the representational
+backbone for many downstream fact-checking and knowledge-graph completion
+systems.  Cognition's DS mass is not trained for calibration; it emerges
+directly from the evidence combination rule, avoiding the distribution-shift
+fragility of post-hoc calibration layers.
 
 % -----------------------------------------------------------------------
 \subsection{Benchmark Datasets}
