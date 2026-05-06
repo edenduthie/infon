@@ -79,8 +79,29 @@ def load_hover(
     with open(file_path) as f:
         records = json.load(f)
 
-    if limit is not None:
-        records = records[:limit]
+    if limit is not None and limit < len(records):
+        # The HoVer dev set is sorted first by label, then by num_hops,
+        # so a naive head-slice produces an unbalanced sample. Stratify
+        # by (label × num_hops) to preserve the full distribution:
+        # take floor(limit × stratum_size / total) from each stratum.
+        import math
+        from collections import defaultdict
+
+        strata: dict = defaultdict(list)
+        for rec in records:
+            key = (rec.get("label", "NOT_SUPPORTED"), int(rec.get("num_hops", 2)))
+            strata[key].append(rec)
+
+        total = len(records)
+        stratified = []
+        for key, stratum_recs in sorted(strata.items()):
+            n_take = max(1, math.floor(limit * len(stratum_recs) / total))
+            stratified.extend(stratum_recs[:n_take])
+
+        # Trim or top up to exactly `limit`
+        if len(stratified) > limit:
+            stratified = stratified[:limit]
+        records = stratified
 
     # Collect unique page titles across the batch for bulk Wikipedia fetch
     all_page_titles: set[str] = set()
