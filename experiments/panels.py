@@ -1,4 +1,4 @@
-"""Panel builders for the Cognition benchmark evaluation.
+"""Panel builders for the Infon benchmark evaluation.
 
 Each builder reads result files produced by benchmark_eval.py and returns
 a dict matching the schema defined in paper/tests/fixtures/*.json.
@@ -36,7 +36,7 @@ def _load_results(results_dir: str, dataset: str, system: str) -> list[dict]:
     Args:
         results_dir: Root results directory.
         dataset:     Dataset name (e.g. "hover").
-        system:      System name (e.g. "cognition_gnn").
+        system:      System name (e.g. "infon_gnn").
 
     Returns:
         Merged list of result dicts from all seed files. Budget-exhausted
@@ -96,7 +96,7 @@ def _safe_accuracy(y_true: list[str], y_pred: list[str]) -> float:
 # H1 panel: HoVer — accuracy by number of reasoning hops
 # ---------------------------------------------------------------------------
 
-_H1_SYSTEMS = ["cognition_symbolic", "cognition_gnn", "flat_retrieval", "symbolic_floor"]
+_H1_SYSTEMS = ["infon_symbolic", "infon_gnn", "flat_retrieval", "symbolic_floor"]
 _H1_HOPS = [2, 3, 4]
 
 
@@ -157,7 +157,7 @@ def build_h1_panel(results_dir: str) -> dict:
 # H2 panel: AVeriTeC — m_theta by class, Spearman rho, NEI false positives
 # ---------------------------------------------------------------------------
 
-_H2_SYSTEMS = ["cognition_symbolic", "cognition_gnn", "llm_zeroshot"]
+_H2_SYSTEMS = ["infon_symbolic", "infon_gnn", "llm_zeroshot"]
 _H2_CLASSES = ["SUPPORTS", "REFUTES", "NEI"]
 
 
@@ -247,7 +247,7 @@ def build_h2_panel(results_dir: str) -> dict:
 # H3 panel: SciFact — calibration (ECE, Brier, AURC)
 # ---------------------------------------------------------------------------
 
-_H3_SYSTEMS = ["cognition_symbolic", "cognition_gnn", "nli_classifier"]
+_H3_SYSTEMS = ["infon_symbolic", "infon_gnn", "nli_classifier"]
 _N_CALIBRATION_BINS = 10
 
 
@@ -352,8 +352,8 @@ def build_h3_panel(results_dir: str) -> dict:
 # ---------------------------------------------------------------------------
 
 _ALL_SYSTEMS = [
-    "cognition_gnn",
-    "cognition_symbolic",
+    "infon_gnn",
+    "infon_symbolic",
     "nli_classifier",
     "flat_retrieval",
     "symbolic_floor",

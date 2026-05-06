@@ -38,7 +38,7 @@ def test_comparison_runs_with_mock():
             assert 0.0 <= r.theta <= 1.0
 
         # Accuracy is at least better than coin flip
-        print(f"\n  cognition: accuracy {cog_results.accuracy:.0%}, "
+        print(f"\n  infon: accuracy {cog_results.accuracy:.0%}, "
               f"θ on NEI {cog_results.calibration_on_nei():.2f}")
         print(f"  mock LLM:  accuracy {llm_results.accuracy:.0%}, "
               f"θ on NEI {llm_results.calibration_on_nei():.2f}")

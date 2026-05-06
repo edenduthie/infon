@@ -10,7 +10,7 @@ Design goals (from demo_customer.py UX — this is what users expect):
 
 Not in scope (yet):
   • Rich structural analysis (Kano, conjoint, Kan extension) — those live
-    in cognition.structural and operate on in-memory infons, not the
+    in infon.structural and operate on in-memory infons, not the
     cassette store. The bridge is `store.read_all_infons()` → pass to
     StructuralAnalyzer.
   • Remote extraction (Lambda). The executor seam is ready; LambdaExecutor
@@ -27,7 +27,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-from ..config import CognitionConfig
+from ..config import InfonConfig
 from ..encoder import Encoder
 from ..extract import extract_infons
 from ..atom import Infon
@@ -102,7 +102,7 @@ def _ingest_batch(batch: IngestBatch) -> list[dict]:
     if _WORKER_ENC is None:
         _WORKER_ENC = Encoder(schema=_WORKER_SCHEMA)
 
-    config = CognitionConfig(schema_path=schema_path)
+    config = InfonConfig(schema_path=schema_path)
 
     out = []
     remote = "://" in batch.jobs[0].out_root if batch.jobs else False
@@ -521,7 +521,7 @@ class InfonStore:
             schema = self._preview_encoder.schema if hasattr(
                 self._preview_encoder, "schema") else AnchorSchema.from_file(sp)
 
-        config = CognitionConfig(schema_path=sp)
+        config = InfonConfig(schema_path=sp)
         docs = list(documents)
         infons, _edges = extract_infons(docs, self._preview_encoder,
                                          schema, config)

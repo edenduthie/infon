@@ -579,8 +579,8 @@ def get_or_train_embedder(
     schema, trains from scratch, and saves. Either way returns an eval-
     mode embedder ready for inference.
 
-    `schema` can be either a cognition.schema.AnchorSchema or a
-    cognition.synth.Schema.
+    `schema` can be either a infon.schema.AnchorSchema or a
+    infon.synth.Schema.
     """
     from pathlib import Path as _Path
     from .synth import Schema as SynthSchema, generate_corpus

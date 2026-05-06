@@ -1,4 +1,4 @@
-"""Evaluation metrics for the Cognition benchmark harness.
+"""Evaluation metrics for the Infon benchmark harness.
 
 All functions operate on plain Python lists or numpy arrays.
 No I/O is performed here.

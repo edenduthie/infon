@@ -170,7 +170,7 @@ def query(
     chain_depth: int = 10,
     contrary: bool = False,
 ) -> QueryResult:
-    """Execute a cognition query.
+    """Execute a infon query.
 
     1. Encode query → anchor activations
     2. Detect persona (or use provided)
@@ -189,7 +189,7 @@ def query(
         encoder: trained Encoder instance
         schema: AnchorSchema instance
         store: StoreBackend instance
-        config: CognitionConfig
+        config: InfonConfig
         persona: override persona detection
         goal: optional goal string for valence tuning
         top_k: max results (default: config.default_top_k)

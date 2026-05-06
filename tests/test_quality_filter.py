@@ -21,7 +21,7 @@ import pytest
 
 # Reuse the EV scenario schema + docs
 sys.path.insert(0, os.path.dirname(__file__))
-from test_logic import setup_cognition, DOCUMENTS
+from test_logic import setup_infon, DOCUMENTS
 
 
 def _count_infons(cog) -> int:
@@ -35,10 +35,10 @@ def _has_triple(cog, subj: str, pred: str, obj: str) -> bool:
     return False
 
 
-def _make_cognition(tmpdir, quality_threshold=0.05,
+def _make_infon(tmpdir, quality_threshold=0.05,
                      max_triples_per_sentence=3):
-    """Fresh Cognition with the EV schema + quality-filter knobs."""
-    from infon import Cognition, CognitionConfig
+    """Fresh InfonEngine with the EV schema + quality-filter knobs."""
+    from infon import InfonEngine, InfonConfig
     # Reuse the existing schema JSON from test_logic
     # (we need the anchor definitions; easier to write them fresh here)
     schema = {
@@ -75,7 +75,7 @@ def _make_cognition(tmpdir, quality_threshold=0.05,
     schema_path = os.path.join(tmpdir, "schema.json")
     with open(schema_path, "w") as f:
         json.dump(schema, f)
-    cog = Cognition(CognitionConfig(
+    cog = InfonEngine(InfonConfig(
         schema_path=schema_path,
         db_path=os.path.join(tmpdir, "test.db"),
         activation_threshold=0.2,
@@ -91,7 +91,7 @@ def test_quality_filter_reduces_infons():
     """Tightening quality_threshold strictly reduces the number of
     extracted infons on the same corpus."""
     with tempfile.TemporaryDirectory() as tmpdir_lax:
-        cog_lax = _make_cognition(tmpdir_lax,
+        cog_lax = _make_infon(tmpdir_lax,
                                   quality_threshold=0.02,
                                   max_triples_per_sentence=10)
         for doc in DOCUMENTS:
@@ -100,7 +100,7 @@ def test_quality_filter_reduces_infons():
         cog_lax.close()
 
     with tempfile.TemporaryDirectory() as tmpdir_strict:
-        cog_strict = _make_cognition(tmpdir_strict,
+        cog_strict = _make_infon(tmpdir_strict,
                                      quality_threshold=0.15,
                                      max_triples_per_sentence=2)
         for doc in DOCUMENTS:
@@ -121,7 +121,7 @@ def test_core_correct_triples_survive_strict_filter():
     """Even with a strict filter, canonical EV-scenario triples
     should remain in the extracted corpus."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir,
+        cog = _make_infon(tmpdir,
                               quality_threshold=0.15,
                               max_triples_per_sentence=2)
         for doc in DOCUMENTS:
@@ -157,7 +157,7 @@ def test_role_type_hard_constraints():
     is 'relation'. These are structural invariants the filter
     enforces."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir,
+        cog = _make_infon(tmpdir,
                               quality_threshold=0.02,
                               max_triples_per_sentence=10)
         for doc in DOCUMENTS:
@@ -190,7 +190,7 @@ def test_per_sentence_cap_bounds_triples():
     """max_triples_per_sentence=1 should produce at most 1 triple
     from any single sentence in the corpus."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir,
+        cog = _make_infon(tmpdir,
                               quality_threshold=0.02,
                               max_triples_per_sentence=1)
         for doc in DOCUMENTS:

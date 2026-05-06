@@ -2,8 +2,8 @@
 
 Experimental setup:
   - RAG: Claim → dense retrieve → text snippets → sentence IDs
-  - Cognition-fixed: Claim → anchor project → infon retrieval → sentence IDs
-  - Cognition-discovered: Same, but schema from Kan extension on wiki corpus
+  - Infon-fixed: Claim → anchor project → infon retrieval → sentence IDs
+  - Infon-discovered: Same, but schema from Kan extension on wiki corpus
 
 Metrics:
   - Evidence Precision/Recall/F1 at sentence level
@@ -28,7 +28,7 @@ _REPO_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 sys.path.insert(0, str(_REPO_ROOT / "src"))
 
-from infon import Cognition, CognitionConfig, Infon, QueryResult
+from infon import InfonEngine, InfonConfig, Infon, QueryResult
 from infon.category import SchemaDiscovery
 
 
@@ -121,7 +121,7 @@ class CognitionFEVERRunner:
     """
 
     def __init__(self, schema_path: str | Path, db_path: str = ":memory:"):
-        self.config = CognitionConfig(
+        self.config = InfonConfig(
             schema_path=str(schema_path),
             db_path=db_path,
             activation_threshold=0.2,  # lower for general domain
@@ -179,7 +179,7 @@ class CognitionFEVERRunner:
             )
 
         # Fresh infon instance per claim (isolation)
-        cog = Cognition(self.config)
+        cog = InfonEngine(self.config)
 
         # Ingest evidence pages
         ingest_docs = [{

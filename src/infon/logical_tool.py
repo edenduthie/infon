@@ -85,7 +85,7 @@ def evaluate(cog, expr: dict, *,
 
     Parameters
     ----------
-    cog : Cognition
+    cog : InfonEngine
         Fitted instance with an ingested corpus.
     expr : dict
         A JSON-serialisable expression. See module docstring for grammar.
@@ -348,7 +348,7 @@ def _verdict(m: MassFunction, theta_floor: float = 0.85) -> str:
 # ══════════════════════════════════════════════════════════════════════
 
 TOOL_DESCRIPTION = """\
-Evaluate a logical expression against the cognition knowledge graph.
+Evaluate a logical expression against the infon knowledge graph.
 
 The expression is a JSON object. Allowed operators:
   triple:  {"op":"triple","s":"<actor>","p":"<relation>","o":"<object>"}

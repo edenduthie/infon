@@ -4,7 +4,7 @@ Two operations:
   build_layer(...)  → local zip file, no AWS
   publish_layer(...) → upload zip and create LayerVersion via boto3
 
-Single-layer-for-now design: we bundle torch-cpu + transformers + cognition
+Single-layer-for-now design: we bundle torch-cpu + transformers + infon
 + the 17MB model into ONE layer (~180MB unzipped, well under Lambda's 250MB
 limit). We can split the model into its own layer later if/when the model
 gets updated more often than dependencies; for now the extra complexity
@@ -25,7 +25,7 @@ Usage:
         layer_name="infon-runtime",
         region="us-east-1",
     )
-    # → arn:aws:lambda:us-east-1:123:layer:cognition-runtime:1
+    # → arn:aws:lambda:us-east-1:123:layer:infon-runtime:1
 """
 
 from __future__ import annotations
@@ -106,7 +106,7 @@ def build_layer(
     *,
     output_dir: str | Path = "./build",
     requirements: list[str] | None = None,
-    include_cognition: bool = True,
+    include_infon: bool = True,
     include_model: bool = True,
     model_dir: str | Path | None = None,
     python_version: str = "3.11",
@@ -116,11 +116,11 @@ def build_layer(
     Args:
       output_dir: where the final .zip lands.
       requirements: pip specs. Default = torch-cpu + transformers + support libs.
-      include_cognition: bundle the cognition package itself.
-      include_model: bundle cognition/model/ (17MB SPLADE + heads + tokenizer).
-      model_dir: explicit model directory (default: auto-detect in cognition
+      include_infon: bundle the infon package itself.
+      include_model: bundle infon/model/ (17MB SPLADE + heads + tokenizer).
+      model_dir: explicit model directory (default: auto-detect in infon
         package). Ignored if include_model=False.
-      python_version: not used directly, but cognition requires ≥3.11.
+      python_version: not used directly, but infon requires ≥3.11.
 
     Returns: path to the built .zip file.
 
@@ -156,8 +156,8 @@ def build_layer(
         ]
         _run(pip_cmd)
 
-        if include_cognition:
-            print("  → copying cognition package")
+        if include_infon:
+            print("  → copying infon package")
             import infon
             infon_src = Path(infon.__file__).parent
             dst = site_packages / "infon"
@@ -174,8 +174,8 @@ def build_layer(
             )
 
         if include_model:
-            # The 17MB SPLADE + heads + tokenizer lives inside the cognition
-            # package. If the user disabled include_cognition but wants the
+            # The 17MB SPLADE + heads + tokenizer lives inside the infon
+            # package. If the user disabled include_infon but wants the
             # model, copy just that subtree.
             if model_dir is None:
                 import infon

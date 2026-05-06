@@ -1,4 +1,4 @@
-"""CognitionConfig: unified configuration for local and cloud backends."""
+"""InfonConfig: unified configuration for local and cloud backends."""
 
 from __future__ import annotations
 
@@ -7,17 +7,17 @@ from pathlib import Path
 
 
 @dataclass
-class CognitionConfig:
-    """Configuration for a Cognition instance.
+class InfonConfig:
+    """Configuration for an Infon instance.
 
     Minimal setup (local, schema only — no training needed):
-        config = CognitionConfig(schema_path="data/schema.json")
+        config = InfonConfig(schema_path="data/schema.json")
 
     With saved config directory:
-        config = CognitionConfig.local("models/my-domain")
+        config = InfonConfig.local("models/my-domain")
 
     Cloud setup:
-        config = CognitionConfig.aws(
+        config = InfonConfig.aws(
             model_dir="models/my-domain",
             table="infon-prod",
             bucket="infon-prod-data",
@@ -63,7 +63,7 @@ class CognitionConfig:
     max_triples_per_sentence: int = 3
 
     # Trained SentenceEmbedder for GNN node features + head-driven
-    # triple extraction. When True, the Cognition instance will look
+    # triple extraction. When True, the InfonEngine instance will look
     # for (or lazily train) an embedder against the current schema.
     use_trained_embedder: bool = False
     embedder_model_dir: str | None = None   # default: alongside db_path
@@ -95,13 +95,13 @@ class CognitionConfig:
 
     @classmethod
     def local(cls, model_dir: str, db_path: str = "infon.db",
-              schema_path: str | None = None, **kw) -> CognitionConfig:
+              schema_path: str | None = None, **kw) -> InfonConfig:
         return cls(backend="local", model_dir=model_dir,
                    db_path=db_path, schema_path=schema_path, **kw)
 
     @classmethod
     def aws(cls, model_dir: str, table: str, bucket: str,
-            region: str = "us-east-1", **kw) -> CognitionConfig:
+            region: str = "us-east-1", **kw) -> InfonConfig:
         return cls(backend="aws", model_dir=model_dir,
                    aws_table=table, aws_bucket=bucket,
                    aws_region=region, **kw)

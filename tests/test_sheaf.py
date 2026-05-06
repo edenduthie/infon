@@ -56,7 +56,7 @@ DOCUMENTS = [
 
 
 def _make_cog(tmpdir, **overrides):
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     schema_path = os.path.join(tmpdir, "schema.json")
     with open(schema_path, "w") as f:
         json.dump(SCHEMA_DEFS, f)
@@ -70,7 +70,7 @@ def _make_cog(tmpdir, **overrides):
         max_triples_per_sentence=2,
     )
     kwargs.update(overrides)
-    return Cognition(CognitionConfig(**kwargs))
+    return InfonEngine(InfonConfig(**kwargs))
 
 
 # ═════════════════════════════════════════════════════════════════════

@@ -23,22 +23,22 @@ from infon.embedder import train_embedder
 
 @pytest.fixture(scope="module")
 def trained_pipeline():
-    """Set up cognition on the EV corpus once; return both a random-
+    """Set up infon on the EV corpus once; return both a random-
     projection reasoner and a trained-embedder reasoner."""
     sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
-    from test_logic import setup_cognition, DOCUMENTS
+    from test_logic import setup_infon, DOCUMENTS
     from infon.logic import HypergraphReasoner
 
     tmpdir = tempfile.mkdtemp()
     db_path = os.path.join(tmpdir, "test.db")
-    cog = setup_cognition(db_path)
+    cog = setup_infon(db_path)
     for d in DOCUMENTS:
         cog.ingest([d])
     cog.consolidate()
 
     # (a) Train the embedder on a synthetic corpus that shares the
     # same schema kinds (actors/relations/features/markets) but uses
-    # the cognition scenario's anchor names so feature spaces line up.
+    # the infon scenario's anchor names so feature spaces line up.
     scenario_schema = type(DEFAULT_SCHEMA)(
         actors=["toyota", "honda", "tesla", "panasonic", "catl"],
         relations=["invests", "partners", "produces", "expands",

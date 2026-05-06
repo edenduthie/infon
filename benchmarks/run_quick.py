@@ -289,7 +289,7 @@ def run_rag_quick():
 
 
 if __name__ == "__main__":
-    print("Cognition NeurIPS 2026 Benchmark — Quick Validation\n")
+    print("Infon NeurIPS 2026 Benchmark — Quick Validation\n")
 
     # Run infon conditions
     fever_agg = run_fever_quick()

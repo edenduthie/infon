@@ -1,4 +1,4 @@
-"""Agent tools for LLM-based navigation of the cognition knowledge graph.
+"""Agent tools for LLM-based navigation of the infon knowledge graph.
 
 Provides @tool-decorated functions that an LLM agent can call to query
 infons, constraints, timelines, and evidence.
@@ -6,7 +6,7 @@ infons, constraints, timelines, and evidence.
 Usage:
     from infon.agent_tools import create_tools
 
-    tools, system_prompt = create_tools(cognition_instance)
+    tools, system_prompt = create_tools(infon_instance)
     agent = Agent(model=model, system_prompt=system_prompt, tools=tools)
 """
 
@@ -228,10 +228,10 @@ def compare_entities(entity_a: str, entity_b: str) -> str:
 
 
 @tool
-def ask_cognition(question: str, persona: str = "") -> str:
+def ask_infon(question: str, persona: str = "") -> str:
     """Ask a natural language question and get a grounded answer.
 
-    Runs the full cognition query pipeline: encode → retrieve → score.
+    Runs the full infon query pipeline: encode → retrieve → score.
     Returns top infons with valence scoring.
 
     Args:
@@ -371,34 +371,34 @@ TOOLS = [
     get_constraints,
     get_timeline,
     compare_entities,
-    ask_cognition,
+    ask_infon,
     get_stats,
     evaluate_logic,
 ]
 
 
-def create_tools(cognition_instance):
-    """Initialize tools with a Cognition instance and return (tools, system_prompt).
+def create_tools(infon_instance):
+    """Initialize tools with an Infon instance and return (tools, system_prompt).
 
     Args:
-        cognition_instance: A Cognition instance with loaded model and store.
+        infon_instance: An Infon instance with loaded model and store.
 
     Returns:
         (tools_list, system_prompt)
     """
     global _cog
-    _cog = cognition_instance
+    _cog = infon_instance
 
-    schema = cognition_instance.schema
+    schema = infon_instance.schema
     type_counts = defaultdict(int)
     for name in schema.names:
         type_counts[schema.types.get(name, "unknown")] += 1
     type_desc = ", ".join(f"{t}: {c}" for t, c in sorted(type_counts.items()))
 
-    stats = cognition_instance.stats()
+    stats = infon_instance.stats()
 
     prompt = f"""\
-You are an analyst with access to a cognition knowledge graph built from
+You are an analyst with access to a infon knowledge graph built from
 document analysis using SPLADE sparse encoding with anchor projection.
 
 The graph contains {stats['infon_count']} infons (situation-semantic triples)
@@ -423,11 +423,11 @@ Your tools:
 4. get_constraints — find aggregated corpus-level assertions
 5. get_timeline — see temporal evolution of an anchor
 6. compare_entities — compare constraint profiles of two entities
-7. ask_cognition — natural language query with persona valence
+7. ask_infon — natural language query with persona valence
 8. get_stats — knowledge graph statistics
 
 Strategy: start broad (list_anchors, get_stats), then drill down
-(find_infons, get_evidence). Use ask_cognition for open-ended questions.
+(find_infons, get_evidence). Use ask_infon for open-ended questions.
 Always ground assertions in evidence sentences.
 """
     return TOOLS, prompt

@@ -1,7 +1,7 @@
-"""End-to-end: Cognition instantiated with use_trained_embedder=True.
+"""End-to-end: InfonEngine instantiated with use_trained_embedder=True.
 
 Verifies:
-  (a) The Cognition instance trains (or loads) an embedder automatically.
+  (a) The InfonEngine instance trains (or loads) an embedder automatically.
   (b) Its hypergraph builder uses the embedder for node features.
   (c) A full ingest + query round-trip works and produces a DS mass.
   (d) The embedder cache is hit on second instantiation with same schema.
@@ -41,13 +41,13 @@ DOCS = [
 ]
 
 
-def test_cognition_with_trained_embedder_instantiates():
-    """Cognition(use_trained_embedder=True) wires up without error."""
-    from infon import Cognition, CognitionConfig
+def test_infon_with_trained_embedder_instantiates():
+    """InfonEngine(use_trained_embedder=True) wires up without error."""
+    from infon import InfonEngine, InfonConfig
 
     with tempfile.TemporaryDirectory() as tmpdir:
         schema_path = _write_schema(tmpdir)
-        cog = Cognition(CognitionConfig(
+        cog = InfonEngine(InfonConfig(
             schema_path=schema_path,
             db_path=os.path.join(tmpdir, "test.db"),
             activation_threshold=0.2,
@@ -65,16 +65,16 @@ def test_cognition_with_trained_embedder_instantiates():
         cog.close()
 
 
-def test_cognition_embedder_cache_reuse():
-    """Second Cognition() with the same schema + model_dir loads from cache."""
-    from infon import Cognition, CognitionConfig
+def test_infon_embedder_cache_reuse():
+    """Second InfonEngine() with the same schema + model_dir loads from cache."""
+    from infon import InfonEngine, InfonConfig
 
     with tempfile.TemporaryDirectory() as tmpdir:
         schema_path = _write_schema(tmpdir)
         model_dir = os.path.join(tmpdir, "embedder_cache")
 
         def make():
-            return Cognition(CognitionConfig(
+            return InfonEngine(InfonConfig(
                 schema_path=schema_path,
                 db_path=os.path.join(tmpdir, "test.db"),
                 activation_threshold=0.2,
@@ -105,15 +105,15 @@ def test_cognition_embedder_cache_reuse():
         )
 
 
-def test_cognition_ingest_and_query_with_embedder():
+def test_infon_ingest_and_query_with_embedder():
     """Full round-trip: ingest corpus, query for a claim, receive a
     valid DS mass. Verifies the hypergraph builder actually uses the
     embedder to produce node features."""
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
 
     with tempfile.TemporaryDirectory() as tmpdir:
         schema_path = _write_schema(tmpdir)
-        cog = Cognition(CognitionConfig(
+        cog = InfonEngine(InfonConfig(
             schema_path=schema_path,
             db_path=os.path.join(tmpdir, "test.db"),
             activation_threshold=0.2,

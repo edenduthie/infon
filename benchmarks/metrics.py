@@ -68,8 +68,8 @@ def format_latex_table_fever(results: dict) -> str:
 
     condition_labels = {
         "rag": ("RAG (dense)", "Text snippet"),
-        "fixed": ("Cognition (fixed)", "Infon"),
-        "discovered": ("Cognition (Kan ext.)", "Infon"),
+        "fixed": ("Infon (fixed)", "Infon"),
+        "discovered": ("Infon (Kan ext.)", "Infon"),
     }
 
     for cond, metrics in results.get("fever", {}).items():
@@ -105,8 +105,8 @@ def format_latex_table_hover(results: dict) -> str:
 
     condition_labels = {
         "rag": ("RAG (dense)", "Document"),
-        "fixed": ("Cognition (fixed)", "Hyperedge"),
-        "discovered": ("Cognition (Kan ext.)", "Hyperedge"),
+        "fixed": ("Infon (fixed)", "Hyperedge"),
+        "discovered": ("Infon (Kan ext.)", "Hyperedge"),
     }
 
     for cond, metrics in results.get("hover", {}).items():
@@ -134,8 +134,8 @@ def format_comparison_table(results: dict) -> str:
 
     RAG FEVER: Gold Text Snippets → Label + Sentence IDs
     RAG HoVer: Linked Documents → Reasoning Paths
-    Cognition FEVER: Infons (Atomic Units) → Infon IDs + Support Types
-    Cognition HoVer: Hyperedges (Relational Paths) → Edge Chains
+    Infon FEVER: Infons (Atomic Units) → Infon IDs + Support Types
+    Infon HoVer: Hyperedges (Relational Paths) → Edge Chains
     """
     lines = [
         r"\begin{table*}[t]",
@@ -161,13 +161,13 @@ def format_comparison_table(results: dict) -> str:
     if "fixed" in fever:
         m = fever["fixed"]
         lines.append(
-            f"FEVER & Cognition (fixed) & Infons (Atomic) & Infon IDs + Support & "
+            f"FEVER & Infon (fixed) & Infons (Atomic) & Infon IDs + Support & "
             f"{m.get('evidence_f1', 0):.3f} & --- \\\\"
         )
     if "discovered" in fever:
         m = fever["discovered"]
         lines.append(
-            f"FEVER & Cognition (Kan) & Infons (Atomic) & Infon IDs + Support & "
+            f"FEVER & Infon (Kan) & Infons (Atomic) & Infon IDs + Support & "
             f"{m.get('evidence_f1', 0):.3f} & --- \\\\"
         )
 
@@ -183,13 +183,13 @@ def format_comparison_table(results: dict) -> str:
     if "fixed" in hover:
         m = hover["fixed"]
         lines.append(
-            f"HoVer & Cognition (fixed) & Hyperedges & Relational Paths & "
+            f"HoVer & Infon (fixed) & Hyperedges & Relational Paths & "
             f"{m.get('fact_f1', 0):.3f} & {m.get('path_coverage', 0):.3f} \\\\"
         )
     if "discovered" in hover:
         m = hover["discovered"]
         lines.append(
-            f"HoVer & Cognition (Kan) & Hyperedges & Relational Paths & "
+            f"HoVer & Infon (Kan) & Hyperedges & Relational Paths & "
             f"{m.get('fact_f1', 0):.3f} & {m.get('path_coverage', 0):.3f} \\\\"
         )
 

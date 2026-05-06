@@ -1,4 +1,4 @@
-"""cognition.logical_tool — JSON expression DSL + agent tool."""
+"""infon.logical_tool — JSON expression DSL + agent tool."""
 from __future__ import annotations
 
 import json
@@ -28,11 +28,11 @@ DOCS = [
 
 
 def _make_cog(tmp):
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     sp = os.path.join(tmp, "schema.json")
     with open(sp, "w") as f:
         json.dump(SCHEMA, f)
-    cog = Cognition(CognitionConfig(
+    cog = InfonEngine(InfonConfig(
         schema_path=sp,
         db_path=os.path.join(tmp, "cog.db"),
         random_state=42,
@@ -163,7 +163,7 @@ def test_unknown_claim_returns_high_theta():
 
 
 def test_evaluate_logic_agent_tool():
-    """The @tool wrapper works against a Cognition instance set via
+    """The @tool wrapper works against an Infon instance set via
     create_tools(...)."""
     from infon.agent_tools import create_tools, evaluate_logic
 

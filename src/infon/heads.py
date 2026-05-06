@@ -196,13 +196,13 @@ class RelationTypeHead(nn.Module):
 # MULTI-HEAD WRAPPER
 # ═══════════════════════════════════════════════════════════════════════
 
-class CognitionHeads(nn.Module):
+class InfonHeads(nn.Module):
     """All classification heads, sharing the SPLADE backbone.
 
     Usage:
         from infon.encoder import SpladeEncoder
         encoder = SpladeEncoder()  # loads backbone
-        heads = CognitionHeads.load("path/to/heads/")
+        heads = InfonHeads.load("path/to/heads/")
 
         # Get CLS from backbone
         cls = heads.encode_cls(encoder, ["sentence 1", "sentence 2"])
@@ -267,7 +267,7 @@ class CognitionHeads(nn.Module):
         }, path / "heads.pt")
 
     @classmethod
-    def load(cls, path: str | Path) -> CognitionHeads:
+    def load(cls, path: str | Path) -> InfonHeads:
         """Load head weights from disk."""
         path = Path(path)
         checkpoint = torch.load(path / "heads.pt", map_location="cpu", weights_only=True)

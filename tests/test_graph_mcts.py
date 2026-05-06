@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 
-from infon import Cognition, CognitionConfig
+from infon import InfonEngine, InfonConfig
 from infon.graph_mcts import GraphMCTS, MCTSResult, format_mcts_result
 
 
@@ -13,7 +13,7 @@ SCHEMA_PATH = str(Path(__file__).parent.parent / "data" / "automotive_schema.jso
 @pytest.fixture
 def populated_cog():
     """Build a small knowledge graph for testing."""
-    config = CognitionConfig(
+    config = InfonConfig(
         schema_path=SCHEMA_PATH,
         db_path=":memory:",
         activation_threshold=0.15,
@@ -22,7 +22,7 @@ def populated_cog():
         default_top_k=50,
         consolidation_interval=3,
     )
-    cog = Cognition(config)
+    cog = InfonEngine(config)
     docs = [
         {"text": "Toyota invested 13 billion in battery technology for solid-state batteries.",
          "id": "d1", "timestamp": "2023-06-01"},
@@ -94,11 +94,11 @@ class TestGraphMCTS:
 
     def test_empty_graph(self):
         """MCTS on empty graph should return NOT ENOUGH INFO."""
-        config = CognitionConfig(
+        config = InfonConfig(
             schema_path=SCHEMA_PATH,
             db_path=":memory:",
         )
-        cog = Cognition(config)
+        cog = InfonEngine(config)
         cog.store.init()
         mcts = GraphMCTS(
             store=cog.store,

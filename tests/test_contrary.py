@@ -12,7 +12,7 @@ from infon.dempster_shafer import (
     MassFunction, verify_claim, VerificationVerdict,
 )
 from infon.atom import Infon
-from infon import Cognition, CognitionConfig
+from infon import InfonEngine, InfonConfig
 from infon.graph_mcts import GraphMCTS
 
 
@@ -123,7 +123,7 @@ class TestVerifyClaimContrary:
 @pytest.fixture
 def cog_with_mixed_polarity():
     """Build a graph with both affirmed and negated infons."""
-    config = CognitionConfig(
+    config = InfonConfig(
         schema_path=SCHEMA_PATH,
         db_path=":memory:",
         activation_threshold=0.15,
@@ -132,7 +132,7 @@ def cog_with_mixed_polarity():
         default_top_k=50,
         consolidation_interval=999,
     )
-    cog = Cognition(config)
+    cog = InfonEngine(config)
     docs = [
         {"text": "Toyota invested heavily in solid-state battery technology.",
          "id": "d1", "timestamp": "2024-01-01"},

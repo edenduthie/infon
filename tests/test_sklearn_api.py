@@ -23,11 +23,11 @@ SCHEMA = {
 
 
 def _build_cog(tmpdir, *, seed=42):
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     sp = os.path.join(tmpdir, "schema.json")
     with open(sp, "w") as f:
         json.dump(SCHEMA, f)
-    return Cognition(CognitionConfig(
+    return InfonEngine(InfonConfig(
         schema_path=sp,
         db_path=os.path.join(tmpdir, "cog.db"),
         quality_threshold=0.04,
@@ -71,11 +71,11 @@ def test_random_state_makes_runs_identical():
 
 def test_random_state_none_does_not_break():
     with tempfile.TemporaryDirectory() as tmp:
-        from infon import Cognition, CognitionConfig
+        from infon import InfonEngine, InfonConfig
         sp = os.path.join(tmp, "schema.json")
         with open(sp, "w") as f:
             json.dump(SCHEMA, f)
-        cog = Cognition(CognitionConfig(schema_path=sp,
+        cog = InfonEngine(InfonConfig(schema_path=sp,
                                         db_path=os.path.join(tmp, "cog.db")))
         assert cog.random_state is None
         cog.close()

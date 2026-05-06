@@ -116,7 +116,7 @@ class HyperGraph:
 class HypergraphBuilder:
     """Build a HyperGraph from the store + encoder.
 
-    Optionally consumes a trained SentenceEmbedder (from `cognition.embedder`)
+    Optionally consumes a trained SentenceEmbedder (from `infon.embedder`)
     that replaces the default seeded-random-projection feature reduction.
     When a trained embedder is attached, infon features are the embedder's
     64-d node output, which carries task-aware structure (role, anchor,
@@ -127,7 +127,7 @@ class HypergraphBuilder:
         self.store = store
         self.encoder = encoder
         self.schema = schema
-        # Optional trained sentence embedder (see cognition.embedder).
+        # Optional trained sentence embedder (see infon.embedder).
         # When set, it replaces _reduce_sparse for infon features.
         self.embedder = embedder
 
@@ -4226,8 +4226,8 @@ class HypergraphReasoner(nn.Module):
                         self.encoder._projector is not None:
                     self.encoder._projector.refresh(self.schema)
                 from .extract import extract_infons
-                from .config import CognitionConfig
-                cfg = CognitionConfig()
+                from .config import InfonConfig
+                cfg = InfonConfig()
                 infons, edges = extract_infons(
                     corpus, self.encoder, self.schema, cfg,
                 )

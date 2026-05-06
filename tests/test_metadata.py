@@ -115,7 +115,7 @@ def test_coreference_recovers_additional_infons():
     sentences 2-3 use pronouns yields more extracted infons than with
     coreference disabled."""
     import tempfile, os, json
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
 
     SCHEMA = {
         "toyota":   {"type": "actor",    "tokens": ["toyota"]},
@@ -142,7 +142,7 @@ def test_coreference_recovers_additional_infons():
             schema_path = os.path.join(tmpdir, "schema.json")
             with open(schema_path, "w") as f:
                 json.dump(SCHEMA, f)
-            cog = Cognition(CognitionConfig(
+            cog = InfonEngine(InfonConfig(
                 schema_path=schema_path,
                 db_path=os.path.join(tmpdir, "test.db"),
                 activation_threshold=0.2,
@@ -189,7 +189,7 @@ def test_metadata_improves_supervision():
     GNN's self-consistent readout.
     """
     import tempfile, os, json
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     from infon.logic import HypergraphReasoner
 
     SCHEMA = {
@@ -237,7 +237,7 @@ def test_metadata_improves_supervision():
         schema_path = os.path.join(tmpdir, "schema.json")
         with open(schema_path, "w") as f:
             json.dump(SCHEMA, f)
-        cog = Cognition(CognitionConfig(
+        cog = InfonEngine(InfonConfig(
             schema_path=schema_path,
             db_path=os.path.join(tmpdir, "test.db"),
             activation_threshold=0.2,

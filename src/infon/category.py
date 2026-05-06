@@ -1,4 +1,4 @@
-"""Category-theoretic extensions for cognition.
+"""Category-theoretic extensions for infon.
 
 Three constructions from category theory applied to knowledge graphs:
 

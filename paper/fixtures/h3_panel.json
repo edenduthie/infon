@@ -1,12 +1,12 @@
 {
   "hypothesis": "H3",
   "systems": [
-    "cognition_symbolic",
-    "cognition_gnn",
+    "infon_symbolic",
+    "infon_gnn",
     "nli_classifier"
   ],
   "calibration": {
-    "cognition_symbolic": {
+    "infon_symbolic": {
       "bins": [
         0.05,
         0.15,
@@ -44,7 +44,7 @@
         0
       ]
     },
-    "cognition_gnn": {
+    "infon_gnn": {
       "bins": [
         0.05,
         0.15,
@@ -122,12 +122,12 @@
     }
   },
   "summary": {
-    "cognition_symbolic_ece": 0.2102,
-    "cognition_symbolic_brier": 0.2666,
-    "cognition_symbolic_aurc": 0.5764,
-    "cognition_gnn_ece": 0.2102,
-    "cognition_gnn_brier": 0.2666,
-    "cognition_gnn_aurc": 0.5764,
+    "infon_symbolic_ece": 0.2102,
+    "infon_symbolic_brier": 0.2666,
+    "infon_symbolic_aurc": 0.5764,
+    "infon_gnn_ece": 0.2102,
+    "infon_gnn_brier": 0.2666,
+    "infon_gnn_aurc": 0.5764,
     "nli_classifier_ece": 0.3927,
     "nli_classifier_brier": 0.3961,
     "nli_classifier_aurc": 0.3951

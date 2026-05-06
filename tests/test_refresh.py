@@ -23,12 +23,12 @@ SCHEMA = {
 }
 
 
-def _make_cognition(tmpdir):
-    from infon import Cognition, CognitionConfig
+def _make_infon(tmpdir):
+    from infon import InfonEngine, InfonConfig
     schema_path = os.path.join(tmpdir, "schema.json")
     with open(schema_path, "w") as f:
         json.dump(SCHEMA, f)
-    return Cognition(CognitionConfig(
+    return InfonEngine(InfonConfig(
         schema_path=schema_path,
         db_path=os.path.join(tmpdir, "cog.db"),
         activation_threshold=0.2,
@@ -43,7 +43,7 @@ def test_cached_reasoner_is_reused():
     """Two calls to cog.reasoner() without ingest return the same
     instance (no refitting)."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir)
+        cog = _make_infon(tmpdir)
         cog.ingest([{"id": "d1",
                      "text": "Toyota invests in battery technology."}])
         r1 = cog.reasoner()
@@ -55,7 +55,7 @@ def test_cached_reasoner_is_reused():
 def test_generation_bumps_on_ingest():
     """Each ingest() increments the generation counter."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir)
+        cog = _make_infon(tmpdir)
         g0 = cog._generation
         cog.ingest([{"id": "d1",
                      "text": "Toyota invests in battery technology."}])
@@ -72,7 +72,7 @@ def test_refresh_rebuilds_after_ingest():
     """After new ingest, refresh() reports rebuilt=True and the
     cached reasoner reflects the new evidence."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir)
+        cog = _make_infon(tmpdir)
         cog.ingest([{"id": "d1",
                      "text": "Toyota invests in battery technology."}])
         r_before = cog.reasoner()
@@ -109,7 +109,7 @@ def test_refresh_idempotent_when_no_new_ingest():
     """Calling refresh() twice without new ingest reports rebuilt=False
     on the second call."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir)
+        cog = _make_infon(tmpdir)
         cog.ingest([{"id": "d1",
                      "text": "Toyota invests in battery technology."}])
 
@@ -129,7 +129,7 @@ def test_refresh_retrain_heads_flag():
     """retrain_heads=True still works even if no heads were previously
     trained (should be a no-op, not an error)."""
     with tempfile.TemporaryDirectory() as tmpdir:
-        cog = _make_cognition(tmpdir)
+        cog = _make_infon(tmpdir)
         cog.ingest([{"id": "d1",
                      "text": "Toyota invests in battery technology."}])
         summary = cog.refresh(retrain_heads=True)

@@ -1,4 +1,4 @@
-"""LocalStore: SQLite backend for single-machine cognition.
+"""LocalStore: SQLite backend for single-machine infon.
 
 Schema follows INFON_SPEC.md section 10 — infons, edges, constraints tables
 with indexes for anchor role queries, temporal queries, and importance ranking.
@@ -126,7 +126,7 @@ def _row_to_infon(row: sqlite3.Row) -> Infon:
 
 
 class LocalStore:
-    """SQLite-backed store for local cognition."""
+    """SQLite-backed store for local infon."""
 
     def __init__(self, db_path: str = "infon.db"):
         self.db_path = db_path

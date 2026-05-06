@@ -31,11 +31,11 @@ DOCS = [
 
 
 def _make_cog(tmpdir):
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     schema_path = os.path.join(tmpdir, "schema.json")
     with open(schema_path, "w") as f:
         json.dump(SCHEMA, f)
-    return Cognition(CognitionConfig(
+    return InfonEngine(InfonConfig(
         schema_path=schema_path,
         db_path=os.path.join(tmpdir, "cog.db"),
         activation_threshold=0.2,

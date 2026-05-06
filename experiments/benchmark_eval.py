@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Checkpoint-resumable evaluation harness for the Cognition benchmark matrix.
+Checkpoint-resumable evaluation harness for the Infon benchmark matrix.
 
 Usage:
     python3 experiments/benchmark_eval.py \
@@ -163,7 +163,7 @@ def _build_systems(
         Dict mapping system_name -> system instance.
     """
     from baselines.symbolic_floor import SymbolicFloor
-    from baselines.cognition_system import InfonSystem
+    from baselines.infon_system import InfonSystem
     from baselines.nli_classifier import NLIClassifier
     from baselines.llm_zeroshot import LLMZeroShot
 
@@ -221,7 +221,7 @@ def _build_loaders(dataset_names: list[str], limit: int | None = None) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Checkpoint-resumable evaluation harness for the Cognition benchmark matrix."
+        description="Checkpoint-resumable evaluation harness for the Infon benchmark matrix."
     )
     parser.add_argument(
         "--datasets", nargs="+",

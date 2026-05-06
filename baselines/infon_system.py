@@ -261,7 +261,7 @@ class InfonSystem:
 
     def __init__(self, variant: str = "symbolic") -> None:
         self.variant = variant
-        self.name = f"cognition_{variant}"
+        self.name = f"infon_{variant}"
 
     def evaluate(self, claim: EvalClaim) -> MassFunction:
         """Evaluate the claim against its evidence docs using InfonStore.

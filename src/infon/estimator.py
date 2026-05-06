@@ -20,7 +20,7 @@ from typing import Any, Protocol, runtime_checkable
 
 @runtime_checkable
 class Estimator(Protocol):
-    """Minimal sklearn-style contract for Cognition reasoning objects.
+    """Minimal sklearn-style contract for Infon reasoning objects.
 
     Any object with these three methods can be dropped into the
     model-selection helpers (sweep, cross_val_score, ...) without
@@ -28,7 +28,7 @@ class Estimator(Protocol):
     """
 
     def fit(self, X: Any = None, y: Any = None) -> "Estimator":
-        """Train on X (a HyperGraph or a Cognition instance).
+        """Train on X (a HyperGraph or an Infon instance).
 
         y is optional — when present it's used as supervised signal;
         when None the estimator falls back to self-supervised defaults.

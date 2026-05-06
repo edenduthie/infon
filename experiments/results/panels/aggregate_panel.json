@@ -1,13 +1,13 @@
 {
   "systems": [
     {
-      "name": "cognition_gnn",
+      "name": "infon_gnn",
       "accuracy": 0.4716,
       "aurc": 0.5764,
       "ece": 0.2102
     },
     {
-      "name": "cognition_symbolic",
+      "name": "infon_symbolic",
       "accuracy": 0.4716,
       "aurc": 0.5764,
       "ece": 0.2102
@@ -38,12 +38,12 @@
     }
   ],
   "summary": {
-    "cognition_gnn_accuracy": 0.4716,
-    "cognition_gnn_aurc": 0.5764,
-    "cognition_gnn_ece": 0.2102,
-    "cognition_symbolic_accuracy": 0.4716,
-    "cognition_symbolic_aurc": 0.5764,
-    "cognition_symbolic_ece": 0.2102,
+    "infon_gnn_accuracy": 0.4716,
+    "infon_gnn_aurc": 0.5764,
+    "infon_gnn_ece": 0.2102,
+    "infon_symbolic_accuracy": 0.4716,
+    "infon_symbolic_aurc": 0.5764,
+    "infon_symbolic_ece": 0.2102,
     "nli_classifier_accuracy": 0.5033,
     "nli_classifier_aurc": 0.3951,
     "nli_classifier_ece": 0.3927,

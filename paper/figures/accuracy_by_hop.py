@@ -23,16 +23,16 @@ import numpy as np
 
 # Color-blind-safe palette (Wong 2011)
 PALETTE = {
-    "cognition_symbolic": "#0072B2",
-    "cognition_gnn": "#E69F00",
+    "infon_symbolic": "#0072B2",
+    "infon_gnn": "#E69F00",
     "flat_retrieval": "#009E73",
     "symbolic_floor": "#D55E00",
 }
 DEFAULT_COLORS = ["#0072B2", "#E69F00", "#009E73", "#D55E00"]
 
 DISPLAY_NAMES = {
-    "cognition_symbolic": "Infon-symbolic",
-    "cognition_gnn": "Infon+GNN",
+    "infon_symbolic": "Infon-symbolic",
+    "infon_gnn": "Infon+GNN",
     "flat_retrieval": "Flat retrieval",
     "symbolic_floor": "Symbolic floor",
     "nli_classifier": "NLI classifier",

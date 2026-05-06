@@ -26,7 +26,7 @@ import numpy as np
 
 from infon import (
     AnchorSchema,
-    CognitionConfig,
+    InfonConfig,
     Encoder,
     extract_infons,
     split_sentences,
@@ -358,7 +358,7 @@ def main():
     schema_path = Path(tempfile.mktemp(suffix=".json"))
     schema_path.write_text(json.dumps(GEO_SCHEMA, indent=2))
 
-    config = CognitionConfig(schema_path=str(schema_path))
+    config = InfonConfig(schema_path=str(schema_path))
     schema = AnchorSchema.from_file(schema_path)
     encoder = Encoder(schema=schema, max_length=config.max_length, device=config.device)
 

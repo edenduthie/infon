@@ -2,8 +2,8 @@
 
 Experimental setup:
   - RAG: Claim → dense retrieve → linked documents → reasoning path (flat)
-  - Cognition-fixed: Claim → anchor → NEXT chain traversal → relational paths
-  - Cognition-discovered: Same, schema from Kan extension
+  - Infon-fixed: Claim → anchor → NEXT chain traversal → relational paths
+  - Infon-discovered: Same, schema from Kan extension
 
 HoVer requires MULTI-HOP reasoning: verifying a claim like "The director of
 Film X was born in Country Y which has population Z" requires linking 3 facts
@@ -38,7 +38,7 @@ _REPO_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 sys.path.insert(0, str(_REPO_ROOT / "src"))
 
-from infon import Cognition, CognitionConfig, Infon, Edge, QueryResult
+from infon import InfonEngine, InfonConfig, Infon, Edge, QueryResult
 from infon.category import SchemaDiscovery
 
 
@@ -103,7 +103,7 @@ class CognitionHoVerRunner:
     """
 
     def __init__(self, schema_path: str | Path, db_path: str = ":memory:"):
-        self.config = CognitionConfig(
+        self.config = InfonConfig(
             schema_path=str(schema_path),
             db_path=db_path,
             activation_threshold=0.2,
@@ -157,7 +157,7 @@ class CognitionHoVerRunner:
             )
 
         # Fresh infon instance with consolidation
-        cog = Cognition(self.config)
+        cog = InfonEngine(self.config)
         cog.ingest(documents, consolidate_now=True)
 
         # Query with chain traversal enabled — this walks NEXT edges

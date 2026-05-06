@@ -1,7 +1,7 @@
 """Central seed management — sklearn-style random_state.
 
 Sets every source of stochasticity we touch: torch, torch.cuda, numpy,
-and Python's `random` module. Called once at `Cognition.__init__` when
+and Python's `random` module. Called once at `InfonEngine.__init__` when
 `config.random_state` is set, so downstream fit/train/sample calls are
 bit-identical across runs.
 
@@ -18,7 +18,7 @@ import hashlib
 def set_global_seed(seed: int) -> None:
     """Pin every global RNG to the given seed.
 
-    Called once at Cognition.__init__ when random_state is non-None.
+    Called once at InfonEngine.__init__ when random_state is non-None.
     Safe to call multiple times — last call wins.
     """
     import torch

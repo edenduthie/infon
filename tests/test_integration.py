@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from infon import Cognition, CognitionConfig
+from infon import InfonEngine, InfonConfig
 
 # ── Test schema: automotive domain ──────────────────────────────────────
 TEST_SCHEMA = {
@@ -89,7 +89,7 @@ def test_full_pipeline():
 
     db_path = tempfile.mktemp(suffix=".db")
 
-    config = CognitionConfig(
+    config = InfonConfig(
         backend="local",
         schema_path=schema_file,
         db_path=db_path,
@@ -103,8 +103,8 @@ def test_full_pipeline():
     print("=" * 78)
 
     # 1. Initialize
-    print("\n1. Initializing Cognition...")
-    cog = Cognition(config)
+    print("\n1. Initializing InfonEngine...")
+    cog = InfonEngine(config)
     print(f"   Encoder: {cog.config.model_name}")
     print(f"   Anchors: {len(cog.schema.names)}")
     print(f"   Anchor types: {dict(sorted(((t, len(ns)) for t, ns in cog.schema.by_type.items())))}")

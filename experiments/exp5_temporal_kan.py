@@ -25,7 +25,7 @@ from datetime import datetime, timedelta
 import numpy as np
 
 from infon import (
-    AnchorSchema, Encoder, CognitionConfig, extract_infons, split_sentences,
+    AnchorSchema, Encoder, InfonConfig, extract_infons, split_sentences,
 )
 from infon.category import SheafCoherence
 from infon.consolidate import build_next_edges
@@ -504,7 +504,7 @@ def run_experiment():
     schema_path.write_text(json.dumps(GEO_SCHEMA, indent=2))
 
     schema = AnchorSchema.from_file(schema_path)
-    config = CognitionConfig(schema_path=str(schema_path))
+    config = InfonConfig(schema_path=str(schema_path))
     encoder = Encoder(schema=schema)
 
     print(f"\n--- Schema ---")

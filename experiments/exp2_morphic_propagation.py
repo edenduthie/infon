@@ -17,7 +17,7 @@ import tempfile
 import numpy as np
 from pathlib import Path
 
-from infon import AnchorSchema, Encoder, CognitionConfig, extract_infons, split_sentences
+from infon import AnchorSchema, Encoder, InfonConfig, extract_infons, split_sentences
 from infon.encoder import SpladeEncoder
 
 
@@ -339,7 +339,7 @@ def extract_with_matrix(
     activation_matrix: np.ndarray,
     encoder: Encoder,
     schema: AnchorSchema,
-    config: CognitionConfig,
+    config: InfonConfig,
 ) -> list:
     """Extract infons using a pre-computed activation matrix.
 
@@ -396,7 +396,7 @@ def run_experiment():
     # 2. Encode corpus
     print("Encoding corpus through SPLADE + AnchorProjector ...")
     encoder = Encoder(schema=schema)
-    config = CognitionConfig(
+    config = InfonConfig(
         activation_threshold=0.3,
         top_k_per_role=3,
         min_confidence=0.05,

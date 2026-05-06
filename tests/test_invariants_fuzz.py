@@ -242,7 +242,7 @@ def test_forward_deterministic():
     introducing dropout / randomness into inference.
     """
     from infon.logic import HypergraphReasoner
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     import json
 
     SCHEMA = {
@@ -255,7 +255,7 @@ def test_forward_deterministic():
         schema_path = os.path.join(tmpdir, "schema.json")
         with open(schema_path, "w") as f:
             json.dump(SCHEMA, f)
-        cog = Cognition(CognitionConfig(
+        cog = InfonEngine(InfonConfig(
             schema_path=schema_path,
             db_path=os.path.join(tmpdir, "test.db"),
             activation_threshold=0.2,
@@ -284,7 +284,7 @@ def test_gradients_finite_after_training():
     """After a short training run with gradient clipping, no parameter
     is NaN or Inf. Also confirms loss decreases."""
     import json
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
 
     SCHEMA = {
         "toyota": {"type": "actor", "tokens": ["toyota"]},
@@ -304,7 +304,7 @@ def test_gradients_finite_after_training():
         schema_path = os.path.join(tmpdir, "schema.json")
         with open(schema_path, "w") as f:
             json.dump(SCHEMA, f)
-        cog = Cognition(CognitionConfig(
+        cog = InfonEngine(InfonConfig(
             schema_path=schema_path,
             db_path=os.path.join(tmpdir, "test.db"),
             activation_threshold=0.2,

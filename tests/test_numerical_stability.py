@@ -23,7 +23,7 @@ import numpy as np
 import pytest
 import torch
 
-from infon import Cognition, CognitionConfig
+from infon import InfonEngine, InfonConfig
 from infon.logic import HypergraphReasoner
 
 
@@ -54,7 +54,7 @@ def _build():
     sp = os.path.join(tmpdir, "schema.json")
     with open(sp, "w") as f:
         json.dump(SCHEMA, f)
-    cog = Cognition(CognitionConfig(
+    cog = InfonEngine(InfonConfig(
         schema_path=sp,
         db_path=os.path.join(tmpdir, "test.db"),
         activation_threshold=0.2,

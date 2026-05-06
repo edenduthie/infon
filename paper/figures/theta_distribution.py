@@ -21,8 +21,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 DISPLAY_NAMES = {
-    "cognition_symbolic": "Infon-symbolic",
-    "cognition_gnn": "Infon+GNN",
+    "infon_symbolic": "Infon-symbolic",
+    "infon_gnn": "Infon+GNN",
     "flat_retrieval": "Flat retrieval",
     "symbolic_floor": "Symbolic floor",
     "nli_classifier": "NLI classifier",

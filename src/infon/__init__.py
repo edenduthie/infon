@@ -7,9 +7,9 @@ your schema and go. Works locally (SQLite + threads) or on AWS
 (DynamoDB + S3 + Lambda containers).
 
 Quick start:
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
 
-    cog = Cognition(CognitionConfig(schema_path="data/schema.json"))
+    cog = InfonEngine(InfonConfig(schema_path="data/schema.json"))
     cog.ingest([{"text": "Toyota invests in solid-state batteries.", "id": "doc1"}])
     result = cog.query("What is Toyota investing in?")
     for inf in result.infons:
@@ -22,7 +22,7 @@ __version__ = "0.1.0"
 
 from .atom import Infon, Edge, Constraint, Span, QueryResult
 from .schema import AnchorSchema
-from .config import CognitionConfig
+from .config import InfonConfig
 from .encoder import Encoder
 from .extract import extract_infons, split_sentences
 from .consolidate import (
@@ -50,7 +50,7 @@ from .dempster_shafer import (
     mass_from_anchor_distance, mass_from_confidence,
     verify_claim, VerificationVerdict,
 )
-from .heads import CognitionHeads, NLIHead, RelevanceHead, PolarityHead, RelationTypeHead
+from .heads import InfonHeads, NLIHead, RelevanceHead, PolarityHead, RelationTypeHead
 from .graph_mcts import GraphMCTS, MCTSResult, format_mcts_result
 from .logic import (
     HypergraphReasoner, HypergraphBuilder, HyperGraph,
@@ -68,24 +68,24 @@ from infon.cassette.dsl import Query
 from infon.cassette.analyst import Analyst
 
 
-class Cognition:
+class InfonEngine:
     """Main entry point: ingest documents, query knowledge.
 
     Schema-only (no training needed):
-        cog = Cognition(CognitionConfig(schema_path="data/schema.json"))
+        cog = InfonEngine(InfonConfig(schema_path="data/schema.json"))
 
     From saved config directory:
-        cog = Cognition(CognitionConfig.local("models/my-domain"))
+        cog = InfonEngine(InfonConfig.local("models/my-domain"))
 
     AWS:
-        cog = Cognition(CognitionConfig.aws(
+        cog = InfonEngine(InfonConfig.aws(
             model_dir="models/my-domain",
             table="infon-prod",
             bucket="infon-prod-data",
         ))
     """
 
-    def __init__(self, config: CognitionConfig):
+    def __init__(self, config: InfonConfig):
         self.config = config
 
         # 0. Pin global RNGs if the caller asked for determinism.

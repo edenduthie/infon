@@ -104,10 +104,10 @@ DOCUMENTS = [
 ]
 
 
-def setup_cognition(db_path: str):
-    """Create a Cognition instance with synthetic schema and ingest documents."""
+def setup_infon(db_path: str):
+    """Create an Infon instance with synthetic schema and ingest documents."""
     import json
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     from infon.schema import AnchorSchema
 
     # Write schema to temp file
@@ -115,14 +115,14 @@ def setup_cognition(db_path: str):
     with open(schema_path, "w") as f:
         json.dump(SCHEMA_DEFS, f)
 
-    config = CognitionConfig(
+    config = InfonConfig(
         schema_path=schema_path,
         db_path=db_path,
         activation_threshold=0.2,
         min_confidence=0.02,
         top_k_per_role=3,
     )
-    cog = Cognition(config)
+    cog = InfonEngine(config)
     return cog
 
 
@@ -130,7 +130,7 @@ def test_ingest_and_build_graph():
     """Test: ingest documents, build hypergraph, verify structure."""
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
 
         # Ingest
         total = 0
@@ -178,7 +178,7 @@ def test_message_passing():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -310,7 +310,7 @@ def test_reasoner_end_to_end():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -374,7 +374,7 @@ def test_compound_queries():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -457,7 +457,7 @@ def test_that_and_ist():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -502,7 +502,7 @@ def test_conditional_reasoning():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -559,7 +559,7 @@ def test_refine_hypergraph():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -660,7 +660,7 @@ def test_sheaf_coherence_in_training():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -709,7 +709,7 @@ def test_gradient_clipping():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -745,7 +745,7 @@ def test_early_stopping():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -785,7 +785,7 @@ def test_batched_causal_evaluation():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -834,7 +834,7 @@ def test_discover_anchors():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -887,7 +887,7 @@ def test_next_anchor_prediction():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -950,7 +950,7 @@ def test_next_anchor_head():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1060,7 +1060,7 @@ def test_subgraph_classify():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1111,7 +1111,7 @@ def test_time_to_event_head():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1154,7 +1154,7 @@ def test_risk_ranking_head():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1198,7 +1198,7 @@ def test_anomaly_localization():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1234,7 +1234,7 @@ def test_counterfactual():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1282,7 +1282,7 @@ def test_attribution():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1316,7 +1316,7 @@ def test_causal_view():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1367,7 +1367,7 @@ def test_root_cause():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1420,7 +1420,7 @@ def test_do_intervention():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1465,7 +1465,7 @@ def test_refute():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1538,7 +1538,7 @@ def test_recommender_end_to_end():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in RECOMMENDER_DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1711,7 +1711,7 @@ def test_confounder_detection():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in CONFOUNDED_DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -1958,7 +1958,7 @@ def test_temporal_successor_head():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in TEMPORAL_DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -2077,7 +2077,7 @@ def test_temporal_successor_head():
 def test_self_discover_schema():
     """Test: seed with minimal anchors, let the system grow the schema."""
     import json
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     from infon.logic import HypergraphReasoner
 
     SEED_SCHEMA = {
@@ -2091,7 +2091,7 @@ def test_self_discover_schema():
         schema_path = os.path.join(tmpdir, "schema.json")
         with open(schema_path, "w") as f:
             json.dump(SEED_SCHEMA, f)
-        cog = Cognition(CognitionConfig(
+        cog = InfonEngine(InfonConfig(
             schema_path=schema_path,
             db_path=os.path.join(tmpdir, "test.db"),
             activation_threshold=0.2,
@@ -2156,7 +2156,7 @@ def test_role_type_head():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -2224,7 +2224,7 @@ def test_learned_source_weights():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -2269,7 +2269,7 @@ def test_discover_interaction_family():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         # Use the extended recommender corpus so the full interaction
         # vocabulary (adopts, prefers, avoids, selects, rejects) is
         # exercised
@@ -2329,7 +2329,7 @@ def test_discover_edge_types():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()
@@ -2366,7 +2366,7 @@ def test_discover_edge_types():
 def test_self_discover_pipeline():
     """Test: end-to-end unified self_discover() with a tiny seed."""
     import json
-    from infon import Cognition, CognitionConfig
+    from infon import InfonEngine, InfonConfig
     from infon.logic import HypergraphReasoner
 
     # Minimal seed — 3 actors, 2 relations, 1 feature, plus the two
@@ -2387,7 +2387,7 @@ def test_self_discover_pipeline():
         schema_path = os.path.join(tmpdir, "schema.json")
         with open(schema_path, "w") as f:
             json.dump(SEED, f)
-        cog = Cognition(CognitionConfig(
+        cog = InfonEngine(InfonConfig(
             schema_path=schema_path,
             db_path=os.path.join(tmpdir, "test.db"),
             activation_threshold=0.2,
@@ -2449,7 +2449,7 @@ def test_full_pipeline():
 
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = os.path.join(tmpdir, "test.db")
-        cog = setup_cognition(db_path)
+        cog = setup_infon(db_path)
         for doc in DOCUMENTS:
             cog.ingest([doc])
         cog.consolidate()

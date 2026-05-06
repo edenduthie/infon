@@ -1,4 +1,4 @@
-"""CloudStore: DynamoDB + S3 backend for serverless cognition.
+"""CloudStore: DynamoDB + S3 backend for serverless infon.
 
 Single-table design with adjacency list pattern per INFON_SPEC.md section 10.
 Requires `pip install infon[aws]` for boto3.

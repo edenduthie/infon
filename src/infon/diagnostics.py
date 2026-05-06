@@ -1,6 +1,6 @@
 """Data diagnostics — is this corpus well-posed for the reasoner?
 
-Six cheap checks that run against a populated `Cognition` store and
+Six cheap checks that run against a populated InfonEngine store and
 flag degenerate cases *before* any SSL / reasoning training. Motivated
 by the planner-fails-on-hub-anchor result we hit at scale: the
 diagnostics would have told us `battery` was a hub at a glance.
@@ -45,7 +45,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class DataReport:
-    """Diagnostic summary of a Cognition corpus."""
+    """Diagnostic summary of an InfonEngine corpus."""
     n_infons: int = 0
     n_unique_triples: int = 0
     n_actors: int = 0
@@ -73,7 +73,7 @@ class DataReport:
 
     def summary(self) -> str:
         lines = [
-            "Cognition corpus diagnostics",
+            "Infon corpus diagnostics",
             "─" * 40,
             f"  infons:            {self.n_infons}",
             f"  unique triples:    {self.n_unique_triples}",

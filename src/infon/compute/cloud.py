@@ -32,7 +32,7 @@ class CloudCompute:
     3. Lambda executes, writes result to S3
     4. Collect results
 
-    The Lambda container image must have cognition + torch + transformers
+    The Lambda container image must have infon + torch + transformers
     installed and the trained model baked in at /opt/model/.
     """
 

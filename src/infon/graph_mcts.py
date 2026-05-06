@@ -34,7 +34,7 @@ import numpy as np
 
 from .atom import Infon, Edge
 from .dempster_shafer import MassFunction, combine_multiple, combine_dempster
-from .heads import CognitionHeads
+from .heads import InfonHeads
 from .encoder import SpladeEncoder
 
 
@@ -110,10 +110,10 @@ class GraphMCTS:
     """MCTS-based traversal over the infon hypergraph.
 
     Usage:
-        from infon import Cognition, CognitionConfig
+        from infon import InfonEngine, InfonConfig
         from infon.graph_mcts import GraphMCTS
 
-        cog = Cognition(config)
+        cog = InfonEngine(config)
         cog.ingest(documents)
 
         mcts = GraphMCTS(cog.store, cog.encoder, cog.schema)
@@ -122,7 +122,7 @@ class GraphMCTS:
     """
 
     def __init__(self, store, encoder, schema,
-                 heads: CognitionHeads | None = None,
+                 heads: InfonHeads | None = None,
                  max_iterations: int = 8,
                  exploration_bias: float = 1.4,
                  max_depth: int = 4,
@@ -151,7 +151,7 @@ class GraphMCTS:
                 backbone = encoder.splade if hasattr(encoder, "splade") else encoder
                 encoder_hidden = getattr(backbone.model.config, "hidden_size", None)
                 try:
-                    candidate = CognitionHeads.load(heads_path)
+                    candidate = InfonHeads.load(heads_path)
                     if encoder_hidden is None or candidate.hidden_dim == encoder_hidden:
                         self.heads = candidate
                 except Exception:
@@ -486,7 +486,7 @@ class GraphMCTS:
         """Get [CLS] embeddings, with caching."""
         uncached = [t for t in texts if t not in self._cls_cache]
         if uncached:
-            from .heads import CognitionHeads
+            from .heads import InfonHeads
             # Use encoder's backbone directly
             all_cls = []
             device = self.encoder.splade.device if hasattr(self.encoder, 'splade') else 'cpu'

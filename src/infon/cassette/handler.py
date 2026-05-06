@@ -1,7 +1,7 @@
 """AWS Lambda handler for cassette ingestion.
 
 This file is the entrypoint ship as the Lambda function body; it's tiny
-by design. All real work happens in the layer (cognition package +
+by design. All real work happens in the layer (infon package +
 torch-cpu + transformers + the 17MB SPLADE model).
 
 Event shape (what LambdaExecutor sends):
@@ -55,7 +55,7 @@ def handler(event: dict, _context) -> dict:
 
     from infon.schema import AnchorSchema
     from infon.encoder import Encoder
-    from infon.config import CognitionConfig
+    from infon.config import InfonConfig
     from infon.extract import extract_infons
     from infon.cassette.format import CassetteWriter
     from infon.cassette.index import build_indexes
@@ -75,7 +75,7 @@ def handler(event: dict, _context) -> dict:
     if _ENCODER is None:
         _ENCODER = Encoder(schema=_SCHEMA)
 
-    config = CognitionConfig(schema_path="/tmp/schema.json")
+    config = InfonConfig(schema_path="/tmp/schema.json")
 
     summaries = []
     for job in jobs:

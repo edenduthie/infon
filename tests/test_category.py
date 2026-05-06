@@ -13,7 +13,7 @@ import numpy as np
 import pytest
 
 from infon import (
-    Cognition, CognitionConfig, AnchorSchema, Encoder,
+    InfonEngine, InfonConfig, AnchorSchema, Encoder,
     SheafCoherence, SchemaFunctor, FunctorialMigration, SchemaDiscovery,
 )
 from infon.extract import extract_infons, split_sentences
@@ -96,13 +96,13 @@ GEO_DOCS = [
 
 @pytest.fixture(scope="module")
 def geo_setup():
-    """Set up cognition with the geopolitical corpus."""
+    """Set up infon with the geopolitical corpus."""
     schema_path = Path(tempfile.mktemp(suffix=".json"))
     schema_path.write_text(json.dumps(GEO_SCHEMA, indent=2))
     db_path = tempfile.mktemp(suffix=".db")
 
-    config = CognitionConfig(schema_path=str(schema_path), db_path=db_path)
-    cog = Cognition(config)
+    config = InfonConfig(schema_path=str(schema_path), db_path=db_path)
+    cog = InfonEngine(config)
     n = cog.ingest(GEO_DOCS, consolidate_now=True)
 
     yield cog, n
@@ -427,13 +427,13 @@ class TestSchemaDiscovery:
         discovery = SchemaDiscovery()
         schema, _ = discovery.discover(sentences, n_anchors=12, min_doc_freq=2)
 
-        # Use discovered schema for cognition
+        # Use discovered schema for infon
         schema_path = Path(tempfile.mktemp(suffix=".json"))
         schema.save(schema_path)
         db_path = tempfile.mktemp(suffix=".db")
 
-        config = CognitionConfig(schema_path=str(schema_path), db_path=db_path)
-        cog = Cognition(config)
+        config = InfonConfig(schema_path=str(schema_path), db_path=db_path)
+        cog = InfonEngine(config)
 
         n = cog.ingest(GEO_DOCS[:5], consolidate_now=True)
         assert n > 0, "Should extract infons with discovered schema"
@@ -531,8 +531,8 @@ class TestCategoryIntegration:
         discovered_schema.save(schema_path)
         db_path = tempfile.mktemp(suffix=".db")
 
-        config = CognitionConfig(schema_path=str(schema_path), db_path=db_path)
-        cog = Cognition(config)
+        config = InfonConfig(schema_path=str(schema_path), db_path=db_path)
+        cog = InfonEngine(config)
         n1 = cog.ingest(GEO_DOCS[:10], consolidate_now=True)
 
         # Step 3: Build migration functor from discovered → hand-designed

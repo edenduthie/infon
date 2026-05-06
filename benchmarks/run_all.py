@@ -2,8 +2,8 @@
 
 Three conditions:
   1. RAG baseline (dense retrieval, text snippets)
-  2. Cognition-fixed (hand-crafted Wikipedia-general schema)
-  3. Cognition-discovered (Kan extension schema from corpus)
+  2. Infon-fixed (hand-crafted Wikipedia-general schema)
+  3. Infon-discovered (Kan extension schema from corpus)
 
 Two benchmarks:
   A. FEVER — evidence precision/recall/F1, FEVER score
@@ -78,10 +78,10 @@ def run_fever_rag(claims, wiki_pages, wiki_sentences, top_k=5):
 
 
 def run_fever_infon(claims, wiki_pages, schema_path, condition_name, top_k=20):
-    """Cognition system on FEVER."""
+    """Infon system on FEVER."""
     from fever.evaluate import CognitionFEVERRunner, aggregate_results
 
-    print(f"\n[FEVER] Cognition ({condition_name})")
+    print(f"\n[FEVER] Infon ({condition_name})")
     print(f"  Schema: {schema_path}")
     t0 = time.time()
 
@@ -147,10 +147,10 @@ def run_hover_rag(claims, wiki_pages, wiki_sentences, top_k=10):
 
 
 def run_hover_infon(claims, wiki_pages, schema_path, condition_name, chain_depth=15):
-    """Cognition system on HoVer with hyperedge traversal."""
+    """Infon system on HoVer with hyperedge traversal."""
     from hover.evaluate import CognitionHoVerRunner, aggregate_results
 
-    print(f"\n[HoVer] Cognition ({condition_name})")
+    print(f"\n[HoVer] Infon ({condition_name})")
     print(f"  Schema: {schema_path}")
     t0 = time.time()
 

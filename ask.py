@@ -26,7 +26,7 @@ import sys
 import time
 from pathlib import Path
 
-from infon import Cognition, CognitionConfig
+from infon import InfonEngine, InfonConfig
 
 # ── Demo data ──────────────────────────────────────────────────────────
 
@@ -86,8 +86,8 @@ def setup(schema_path=None, db_path=None, ingest_path=None):
         sp_file.write_text(json.dumps(DEMO_SCHEMA, indent=2))
         print(f"  Wrote demo schema: {sp}")
 
-    config = CognitionConfig(schema_path=sp, db_path=dp)
-    cog = Cognition(config)
+    config = InfonConfig(schema_path=sp, db_path=dp)
+    cog = InfonEngine(config)
 
     # Ingest if DB is empty or custom ingest requested
     if cog.store.count_infons() == 0 or ingest_path:

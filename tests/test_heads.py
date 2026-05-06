@@ -4,7 +4,7 @@ import pytest
 import torch
 from infon.heads import (
     NLIHead, RelevanceHead, PolarityHead, RelationTypeHead,
-    CognitionHeads, TrainingSample,
+    InfonHeads, TrainingSample,
 )
 from infon.dempster_shafer import MassFunction
 
@@ -79,16 +79,16 @@ class TestRelationTypeHead:
             assert t in valid
 
 
-class TestCognitionHeads:
+class TestInfonHeads:
     def test_save_load(self, tmp_path):
-        heads = CognitionHeads(hidden_dim=128)
+        heads = InfonHeads(hidden_dim=128)
         heads.save(tmp_path)
-        loaded = CognitionHeads.load(tmp_path)
+        loaded = InfonHeads.load(tmp_path)
         # Check param counts match
         assert heads.param_count() == loaded.param_count()
 
     def test_param_count(self):
-        heads = CognitionHeads(hidden_dim=128)
+        heads = InfonHeads(hidden_dim=128)
         counts = heads.param_count()
         assert counts["total"] > 0
         assert counts["nli"] > 0
@@ -101,5 +101,5 @@ class TestCognitionHeads:
         from pathlib import Path
         heads_path = Path(__file__).parent.parent / "src" / "infon" / "model"
         if (heads_path / "heads.pt").exists():
-            heads = CognitionHeads.load(heads_path)
+            heads = InfonHeads.load(heads_path)
             assert heads.param_count()["total"] > 100000  # ~115K with InferSent

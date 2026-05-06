@@ -21,13 +21,13 @@ _REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 sys.path.insert(0, str(_REPO_ROOT / "src"))
 
-from infon import Cognition, CognitionConfig, Infon, Edge, QueryResult
+from infon import InfonEngine, InfonConfig, Infon, Edge, QueryResult
 from infon.category import SchemaDiscovery
 from infon.dempster_shafer import (
     verify_claim, VerificationVerdict,
     MassFunction, combine_multiple,
 )
-from infon.heads import CognitionHeads
+from infon.heads import InfonHeads
 
 SCHEMA_PATH = Path(__file__).parent / "schemas" / "wikipedia_general.json"
 RESULTS_DIR = Path(__file__).parent / "results"
@@ -85,7 +85,7 @@ class FEVERClaimResult:
     gold_label: str
     gold_evidence_texts: list[str] = field(default_factory=list)
 
-    # Cognition results
+    # Infon results
     infons: list = field(default_factory=list)
     n_infons: int = 0
 
@@ -140,7 +140,7 @@ def evaluate_fever_infon(claims: list[dict], schema_path: Path,
             continue
 
         # Fresh infon instance per claim
-        config = CognitionConfig(
+        config = InfonConfig(
             schema_path=str(schema_path),
             db_path=":memory:",
             activation_threshold=0.2,
@@ -148,7 +148,7 @@ def evaluate_fever_infon(claims: list[dict], schema_path: Path,
             top_k_per_role=5,
             default_top_k=top_k,
         )
-        cog = Cognition(config)
+        cog = InfonEngine(config)
         cog.ingest(documents)
 
         # Query with claim
@@ -335,7 +335,7 @@ def evaluate_fever_heads(claims: list[dict], schema_path: Path, top_k: int = 20)
     # Load encoder and heads
     encoder = SpladeEncoder()
     heads_path = Path(__file__).parent.parent / "src" / "infon" / "model"
-    heads = CognitionHeads.load(heads_path)
+    heads = InfonHeads.load(heads_path)
 
     results = []
     for i, claim in enumerate(claims):
@@ -469,7 +469,7 @@ class HoVerClaimResult:
     gold_label: str
     gold_evidence_text: str = ""
 
-    # Cognition results
+    # Infon results
     n_infons: int = 0
     n_edges: int = 0
     n_paths: int = 0
@@ -532,7 +532,7 @@ def evaluate_hover_infon(claims: list[dict], schema_path: Path,
             continue
 
         # Fresh infon with consolidation for NEXT edges
-        config = CognitionConfig(
+        config = InfonConfig(
             schema_path=str(schema_path),
             db_path=":memory:",
             activation_threshold=0.2,
@@ -541,7 +541,7 @@ def evaluate_hover_infon(claims: list[dict], schema_path: Path,
             default_top_k=100,
             consolidation_interval=1,
         )
-        cog = Cognition(config)
+        cog = InfonEngine(config)
         cog.ingest(documents, consolidate_now=True)
 
         # Query with chain traversal
@@ -734,7 +734,7 @@ def evaluate_hover_heads(claims: list[dict], schema_path: Path) -> dict:
 
     encoder = SpladeEncoder()
     heads_path = Path(__file__).parent.parent / "src" / "infon" / "model"
-    heads = CognitionHeads.load(heads_path)
+    heads = InfonHeads.load(heads_path)
 
     results = []
     for i, claim in enumerate(claims):

@@ -26,8 +26,8 @@ POINT_COLOR = "#0072B2"
 PARETO_COLOR = "#D55E00"
 
 DISPLAY_NAMES = {
-    "cognition_symbolic": "Infon-symbolic",
-    "cognition_gnn": "Infon+GNN",
+    "infon_symbolic": "Infon-symbolic",
+    "infon_gnn": "Infon+GNN",
     "flat_retrieval": "Flat retrieval",
     "symbolic_floor": "Symbolic floor",
     "nli_classifier": "NLI classifier",

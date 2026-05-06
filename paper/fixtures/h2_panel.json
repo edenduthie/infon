@@ -1,12 +1,12 @@
 {
   "hypothesis": "H2",
   "systems": [
-    "cognition_symbolic",
-    "cognition_gnn",
+    "infon_symbolic",
+    "infon_gnn",
     "llm_zeroshot"
   ],
   "theta_by_class": {
-    "cognition_symbolic": {
+    "infon_symbolic": {
       "SUPPORTS": [
         0.7043982789036304,
         0.8969387656290587,
@@ -514,7 +514,7 @@
         0.8966204773044941
       ]
     },
-    "cognition_gnn": {
+    "infon_gnn": {
       "SUPPORTS": [
         0.7043982789036304,
         0.8969387656290587,
@@ -1532,16 +1532,16 @@
     }
   },
   "summary": {
-    "cognition_symbolic_theta_supports": 0.9318716897227626,
-    "cognition_symbolic_theta_refutes": 0.9204084118954579,
-    "cognition_symbolic_theta_nei": 0.9280908555775483,
-    "cognition_symbolic_spearman_rho": 0.013715295923680027,
-    "cognition_symbolic_fpr_nei": 0.0,
-    "cognition_gnn_theta_supports": 0.9318716897227626,
-    "cognition_gnn_theta_refutes": 0.9204084118954579,
-    "cognition_gnn_theta_nei": 0.9280908555775483,
-    "cognition_gnn_spearman_rho": 0.013715295923680027,
-    "cognition_gnn_fpr_nei": 0.0,
+    "infon_symbolic_theta_supports": 0.9318716897227626,
+    "infon_symbolic_theta_refutes": 0.9204084118954579,
+    "infon_symbolic_theta_nei": 0.9280908555775483,
+    "infon_symbolic_spearman_rho": 0.013715295923680027,
+    "infon_symbolic_fpr_nei": 0.0,
+    "infon_gnn_theta_supports": 0.9318716897227626,
+    "infon_gnn_theta_refutes": 0.9204084118954579,
+    "infon_gnn_theta_nei": 0.9280908555775483,
+    "infon_gnn_spearman_rho": 0.013715295923680027,
+    "infon_gnn_fpr_nei": 0.0,
     "llm_zeroshot_theta_supports": 0.050000000000000044,
     "llm_zeroshot_theta_refutes": 0.050000000000000044,
     "llm_zeroshot_theta_nei": 0.15000000000000002,

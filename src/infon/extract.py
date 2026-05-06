@@ -1,6 +1,6 @@
 """Extraction pipeline: documents -> sentences -> anchor activations -> infons.
 
-The core of the cognition system. Takes raw text documents and produces
+The core of the infon system. Takes raw text documents and produces
 grounded infon triples with spans, support types, hierarchy metadata,
 spatial context, and importance scores.
 """
