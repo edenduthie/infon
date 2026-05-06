@@ -5,5 +5,16 @@
     "cognition_symbolic": {"bins": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], "accuracies": [0.08, 0.18, 0.28, 0.38, 0.48, 0.58, 0.68, 0.78, 0.88, 0.95], "counts": [10, 15, 12, 18, 20, 16, 14, 12, 10, 8]},
     "cognition_gnn": {"bins": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], "accuracies": [0.09, 0.19, 0.29, 0.39, 0.50, 0.60, 0.70, 0.80, 0.89, 0.96], "counts": [10, 15, 12, 18, 20, 16, 14, 12, 10, 8]},
     "nli_classifier": {"bins": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], "accuracies": [0.15, 0.25, 0.38, 0.48, 0.55, 0.64, 0.73, 0.80, 0.88, 0.94], "counts": [10, 15, 12, 18, 20, 16, 14, 12, 10, 8]}
+  },
+  "summary": {
+    "cognition_gnn_ece": 0.05,
+    "cognition_gnn_brier": 0.12,
+    "cognition_gnn_aurc": 0.15,
+    "cognition_symbolic_ece": 0.08,
+    "cognition_symbolic_brier": 0.16,
+    "cognition_symbolic_aurc": 0.20,
+    "nli_classifier_ece": 0.12,
+    "nli_classifier_brier": 0.22,
+    "nli_classifier_aurc": 0.30
   }
 }

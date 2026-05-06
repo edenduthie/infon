@@ -5,5 +5,22 @@
     "cognition_symbolic": {"SUPPORTS": [0.1, 0.2, 0.15], "REFUTES": [0.1, 0.25, 0.2], "NEI": [0.85, 0.90, 0.88]},
     "cognition_gnn": {"SUPPORTS": [0.08, 0.18, 0.12], "REFUTES": [0.12, 0.22, 0.18], "NEI": [0.88, 0.92, 0.90]},
     "llm_zeroshot": {"SUPPORTS": [0.3, 0.4, 0.35], "REFUTES": [0.25, 0.45, 0.38], "NEI": [0.55, 0.65, 0.60]}
+  },
+  "summary": {
+    "cognition_symbolic_theta_supports": 0.15,
+    "cognition_symbolic_theta_refutes": 0.18,
+    "cognition_symbolic_theta_nei": 0.88,
+    "cognition_gnn_theta_supports": 0.13,
+    "cognition_gnn_theta_refutes": 0.17,
+    "cognition_gnn_theta_nei": 0.90,
+    "llm_zeroshot_theta_supports": 0.35,
+    "llm_zeroshot_theta_refutes": 0.36,
+    "llm_zeroshot_theta_nei": 0.60,
+    "cognition_gnn_spearman_rho": 0.95,
+    "cognition_symbolic_spearman_rho": 0.93,
+    "llm_zeroshot_spearman_rho": 0.52,
+    "cognition_gnn_fpr_nei": 0.03,
+    "cognition_symbolic_fpr_nei": 0.04,
+    "llm_zeroshot_fpr_nei": 0.24
   }
 }

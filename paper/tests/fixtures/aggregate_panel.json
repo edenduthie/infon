@@ -6,5 +6,21 @@
     {"name": "flat_retrieval", "accuracy": 0.55, "aurc": 0.35, "ece": 0.15},
     {"name": "symbolic_floor", "accuracy": 0.45, "aurc": 0.45, "ece": 0.20},
     {"name": "llm_zeroshot", "accuracy": 0.62, "aurc": 0.28, "ece": 0.18}
-  ]
+  ],
+  "summary": {
+    "cognition_gnn_accuracy": 0.70,
+    "cognition_gnn_aurc": 0.15,
+    "cognition_gnn_ece": 0.05,
+    "cognition_symbolic_accuracy": 0.65,
+    "cognition_symbolic_aurc": 0.20,
+    "cognition_symbolic_ece": 0.08,
+    "nli_classifier_accuracy": 0.60,
+    "nli_classifier_aurc": 0.30,
+    "nli_classifier_ece": 0.12,
+    "flat_retrieval_accuracy": 0.55,
+    "flat_retrieval_aurc": 0.35,
+    "llm_zeroshot_accuracy": 0.62,
+    "llm_zeroshot_aurc": 0.28,
+    "llm_zeroshot_ece": 0.18
+  }
 }

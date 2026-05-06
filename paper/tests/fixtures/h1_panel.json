@@ -5,5 +5,19 @@
     {"num_hops": 2, "cognition_symbolic": 0.72, "cognition_gnn": 0.74, "flat_retrieval": 0.68, "symbolic_floor": 0.45},
     {"num_hops": 3, "cognition_symbolic": 0.65, "cognition_gnn": 0.70, "flat_retrieval": 0.55, "symbolic_floor": 0.40},
     {"num_hops": 4, "cognition_symbolic": 0.58, "cognition_gnn": 0.66, "flat_retrieval": 0.42, "symbolic_floor": 0.35}
-  ]
+  ],
+  "summary": {
+    "cognition_gnn_2hop": 0.74,
+    "cognition_gnn_3hop": 0.70,
+    "cognition_gnn_4hop": 0.66,
+    "cognition_symbolic_2hop": 0.72,
+    "cognition_symbolic_3hop": 0.65,
+    "cognition_symbolic_4hop": 0.58,
+    "flat_retrieval_2hop": 0.68,
+    "flat_retrieval_3hop": 0.55,
+    "flat_retrieval_4hop": 0.42,
+    "symbolic_floor_2hop": 0.45,
+    "symbolic_floor_3hop": 0.40,
+    "symbolic_floor_4hop": 0.35
+  }
 }
