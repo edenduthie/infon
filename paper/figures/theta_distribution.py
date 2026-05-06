@@ -20,6 +20,15 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+DISPLAY_NAMES = {
+    "cognition_symbolic": "Infon-symbolic",
+    "cognition_gnn": "Infon+GNN",
+    "flat_retrieval": "Flat retrieval",
+    "symbolic_floor": "Symbolic floor",
+    "nli_classifier": "NLI classifier",
+    "llm_zeroshot": "LLM zero-shot",
+}
+
 # Color-blind-safe palette per class
 CLASS_COLORS = {
     "SUPPORTS": "#0072B2",
@@ -75,7 +84,7 @@ def main() -> None:
             patch.set_facecolor(color)
             patch.set_alpha(0.7)
 
-        ax.set_title(system.replace("_", " "), fontsize=10)
+        ax.set_title(DISPLAY_NAMES.get(system, system.replace("_", " ")), fontsize=10)
         ax.set_xticks(range(1, len(CLASSES) + 1))
         ax.set_xticklabels(CLASSES, fontsize=9)
         ax.set_ylim(0, 1)

@@ -24,6 +24,15 @@ import numpy as np
 # Color-blind-safe palette per system (cycled)
 SYSTEM_COLORS = ["#0072B2", "#E69F00", "#009E73", "#D55E00"]
 
+DISPLAY_NAMES = {
+    "cognition_symbolic": "Infon-symbolic",
+    "cognition_gnn": "Infon+GNN",
+    "flat_retrieval": "Flat retrieval",
+    "symbolic_floor": "Symbolic floor",
+    "nli_classifier": "NLI classifier",
+    "llm_zeroshot": "LLM zero-shot",
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Produce reliability_diagrams.pdf")
@@ -91,7 +100,7 @@ def main() -> None:
         ax.set_xlim(0, 1)
         ax.set_ylim(0, 1)
         ax.set_xlabel("Confidence", fontsize=10)
-        ax.set_title(system.replace("_", " "), fontsize=10)
+        ax.set_title(DISPLAY_NAMES.get(system, system.replace("_", " ")), fontsize=10)
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
         if idx == 0:

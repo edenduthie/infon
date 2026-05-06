@@ -25,6 +25,15 @@ import numpy as np
 POINT_COLOR = "#0072B2"
 PARETO_COLOR = "#D55E00"
 
+DISPLAY_NAMES = {
+    "cognition_symbolic": "Infon-symbolic",
+    "cognition_gnn": "Infon+GNN",
+    "flat_retrieval": "Flat retrieval",
+    "symbolic_floor": "Symbolic floor",
+    "nli_classifier": "NLI classifier",
+    "llm_zeroshot": "LLM zero-shot",
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Produce pareto.pdf")
@@ -66,7 +75,7 @@ def main() -> None:
 
     accuracies = [s["accuracy"] for s in systems]
     aurcs = [s["aurc"] for s in systems]
-    names = [s["name"].replace("_", " ") for s in systems]
+    names = [DISPLAY_NAMES.get(s["name"], s["name"].replace("_", " ")) for s in systems]
 
     pareto = compute_pareto_front(systems)
     pareto_sorted = sorted(pareto, key=lambda s: s["aurc"])

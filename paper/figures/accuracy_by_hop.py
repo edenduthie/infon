@@ -30,6 +30,15 @@ PALETTE = {
 }
 DEFAULT_COLORS = ["#0072B2", "#E69F00", "#009E73", "#D55E00"]
 
+DISPLAY_NAMES = {
+    "cognition_symbolic": "Infon-symbolic",
+    "cognition_gnn": "Infon+GNN",
+    "flat_retrieval": "Flat retrieval",
+    "symbolic_floor": "Symbolic floor",
+    "nli_classifier": "NLI classifier",
+    "llm_zeroshot": "LLM zero-shot",
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Produce accuracy_by_hop.pdf")
@@ -72,7 +81,7 @@ def main() -> None:
             x + offset,
             accuracies,
             width=bar_width,
-            label=system.replace("_", " "),
+            label=DISPLAY_NAMES.get(system, system.replace("_", " ")),
             color=color,
             edgecolor="white",
             linewidth=0.5,
