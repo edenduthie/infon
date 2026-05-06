@@ -147,7 +147,7 @@ natural anomaly signal for relational data.
 Cognition's 140k-parameter sheaf GNN (\texttt{SheafHypergraphEncoder}) uses
 per-relation-kind restriction maps, so different predicate types carry
 different geometric transformations.  The encoder's chain-verdict head
-produces a logit over $\{S, R, U, \Theta\}$ that serves as the MCTS terminal
+produces a logit over the mass components $(m_S, m_R, m_U, m_\Theta)$ that serves as the MCTS terminal
 scorer.  The $H^1$ discrepancy is separately exposed as an anomaly signal on
 reportive edges.  The GNN is trained once on the synthetic corpus
 (\S\ref{sec:implementation}) with known ground-truth verdicts, then frozen and

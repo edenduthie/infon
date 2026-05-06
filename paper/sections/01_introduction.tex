@@ -43,9 +43,9 @@ engineering properties:
 
   \item \textbf{Dempster--Shafer mass with first-class} $\boldsymbol{m(\Theta)}$.
     Every verdict is a four-part mass $(m_S, m_R, m_U, m_\Theta)$ over the
-    frame $\{S, R, U, \Theta\}$ (Supports, Refutes, Uncertain, Vacuous).
-    When the corpus provides no evidence, $m(\Theta) \to 1.0$ instead of a
-    confident wrong answer~\cite{shafer1976mathematical}.
+    frame $\Omega = \{S, R, U\}$ (Supports, Refutes, Uncertain), where
+    $m_\Theta = m(\Omega)$ is the vacuous element that rises to $1.0$ on
+    unsupported claims rather than a confident wrong answer~\cite{shafer1976mathematical}.
 
   \item \textbf{MCTS and sheaf GNN multi-hop reasoning.}  A Monte Carlo Tree
     Search traverses the infon hypergraph, with a 140k-parameter frozen sheaf
