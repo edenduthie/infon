@@ -34,6 +34,20 @@ The type annotation is used by the extractor's role-assignment heuristic
 auto-inference in the reasoner
 (Section~\ref{sec:architecture:reasoner}).
 
+\paragraph{Deterministic entity resolution via vocabulary overlap.}
+Queries are submitted as natural-language text and encoded by SPLADE-tiny
+using the same model as documents.  Because the schema's anchor definitions
+are expressed in natural vocabulary terms, a query such as ``Does Toyota
+invest in solid-state batteries?'' activates the same canonical tokens ---
+\texttt{toyota}, \texttt{invest}, \texttt{solid\_state} --- as the stored
+infons, without any embedding similarity search or entity-linking step.
+Entity resolution is therefore a vocabulary-overlap operation: the activated
+anchor set is deterministic and fully auditable.  Every step of the retrieval
+pipeline --- which tokens activated, at what score, which infons they
+selected, and which mass they contributed --- can be inspected directly from
+the cassette index.  This property makes the system straightforward to debug
+and to audit for compliance purposes.
+
 % -----------------------------------------------------------------------
 \subsection{Extraction Pipeline}
 \label{sec:implementation:extraction}
@@ -138,6 +152,21 @@ On a cold-start corpus with no prior schema, the \texttt{Analyst} can propose
 an initial ontology, ingest the documents, inspect the extraction report, and
 refine the schema iteratively.  On a 15-document AI-chip corpus starting from
 no schema, this loop reaches 100\% document coverage in 2 iterations.
+
+\paragraph{Why tools, not direct graph traversal.}
+We observed that LLM agents, even when provided with a complete ontology
+description, reliably fail to navigate knowledge graphs by direct traversal:
+they lose track of hop boundaries, conflate entity labels with attribute
+values, and hallucinate edges that are absent from the store.  The Analyst's
+tool interface sidesteps this failure mode.  When a question is expressed in
+natural language, the SPLADE encoder maps it into the same anchor vocabulary
+as the stored infons, ensuring that every relevant graph node and landmark
+vocabulary entry is touched automatically --- without the agent needing to
+enumerate them.  The agent's role is therefore reduced to question
+\emph{formulation}: it expresses what it wants to know in plain text, and the
+deterministic tools (\texttt{ask}, \texttt{connect}, \texttt{any\_of}) handle
+all graph traversal, returning cited, inspectable results.  The agent cannot
+fabricate a multi-hop chain; it can only report what the graph returns.
 
 \paragraph{One-minute start.}
 The following code snippet illustrates the full API: ingest, single-claim
