@@ -1,5 +1,7 @@
 # Infon
 
+**Paper:** [Infon: A Knowledge Graph Reasoner with Calibrated Uncertainty](paper/infon.pdf)
+
 **Infon is scikit-learn for graph reasoning on text. One store, a trained sheaf GNN prior, calibrated verdicts that say when they don't know. Laptop CPU, S3-native, under 5 seconds to first answer.**
 
 Five things make it different from everything else in this space:
