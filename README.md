@@ -1,6 +1,6 @@
-# Cognition
+# Infon
 
-**Cognition is scikit-learn for graph reasoning on text. One store, a trained sheaf GNN prior, calibrated verdicts that say when they don't know. Laptop CPU, S3-native, under 5 seconds to first answer.**
+**Infon is scikit-learn for graph reasoning on text. One store, a trained sheaf GNN prior, calibrated verdicts that say when they don't know. Laptop CPU, S3-native, under 5 seconds to first answer.**
 
 Five things make it different from everything else in this space:
 
@@ -17,7 +17,7 @@ Five things make it different from everything else in this space:
 ## One-minute start
 
 ```python
-from cognition.cassette import InfonStore, Query, Analyst
+from infon import InfonStore, Query, Analyst
 
 store = InfonStore("./data/chips", schema_path="schemas/auto.json")
 
@@ -112,11 +112,11 @@ The system prompt enforces the non-negotiables: never output a verdict without c
 
 ## The arc — how each design choice was earned
 
-Every stage below has a reproducible probe in `experiments/cassette_lab/`.
+Every stage below has a reproducible probe in `experiments/`.
 
 | # | Experiment | Result | Decision |
 |---|---|---|---|
-| 1 | Cassette format vs. SQLite/DynamoDB | Immutable + S3-native → delta ingest trivial; range gets scale with corpus fan-out | **Ship** — `InfonStore` replaces `Cognition` as the default |
+| 1 | Cassette format vs. SQLite/DynamoDB | Immutable + S3-native → delta ingest trivial; range gets scale with corpus fan-out | **Ship** — `InfonStore` is the primary entry point |
 | 2 | Manifest bbox pruner | At 300 cassettes: 7–16× shard skip on real workloads, 278× on misses | **Always on** |
 | 3 | MCTS retrieval vs. flat top-k | Flat-seed SPLADE: 0.93 recall@20 on single-hop; MCTS wins at multi-hop (flat can't find 2-hop chains) | **Use flat for factoid, MCTS for connectivity** |
 | 4 | Chain mass: Dempster vs. conjunctive min/max | Dempster amplifies S as edges accumulate (wrong for chains); min/max matches "all hops hold" | **min/max is the default** |
@@ -131,7 +131,7 @@ Every stage below has a reproducible probe in `experiments/cassette_lab/`.
 ## Install
 
 ```bash
-pip install -e cognition/
+pip install -e .
 ```
 
 | Dependency | Purpose | Required? |
@@ -203,12 +203,12 @@ a("Which chip companies is OpenAI linked to?")      # → any_of across targets
 
 | You are | Start here |
 |---|---|
-| A user evaluating fit | [00 — Quick Start](00_quick_start.ipynb) + `experiments/cassette_lab/probe_store_ux.py` |
-| Building a production pipeline | [07 — Cloud](07_cloud.ipynb) + `cognition/src/cognition/cassette/lambda_container.py` |
-| A researcher reproducing the arc | `experiments/cassette_lab/` — 20+ reproducible probes, each lands a concrete design decision |
+| A user evaluating fit | [00 — Quick Start](00_quick_start.ipynb) + `experiments/benchmark_eval.py` |
+| Building a production pipeline | [07 — Cloud](07_cloud.ipynb) + `src/infon/cassette/lambda_container.py` |
+| A researcher reproducing the arc | `experiments/` — reproducible evaluation scripts |
 | Shopping for the theory | [08 — Category Theory & Sheaves](08_category_theory.ipynb) — Kan migration + sheaf GNN + H¹ discrepancy |
-| Integrating with an LLM agent | [06 — Agent Tools](06_agent_tools.ipynb) + `cognition/src/cognition/cassette/analyst.py` |
-| Schema migration (new) | `experiments/cassette_lab/probe_migration.py` |
+| Integrating with an LLM agent | [06 — Agent Tools](06_agent_tools.ipynb) + `src/infon/cassette/analyst.py` |
+| Schema migration (new) | `experiments/exp2_morphic_propagation.py` |
 
 ---
 
@@ -224,7 +224,7 @@ a("Which chip companies is OpenAI linked to?")      # → any_of across targets
 | Ingest wall for 48 docs via `SyncExecutor` | — | ~500 ms |
 | Schema-bootstrap by Analyst (15 docs, cold start) | — | **100% coverage in 2 iterations** |
 
-Details in `experiments/cassette_lab/` — every row above has a probe.
+Details in `experiments/` — every row above has a reproducible script.
 
 ---
 
