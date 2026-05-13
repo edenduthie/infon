@@ -147,7 +147,10 @@ pip install -e .
 | `strands-agents` ≥ 1.0 | `Analyst` conversational layer | optional |
 | `boto3` | Lambda deploy + ECR | optional |
 
-17 MB SPLADE-tiny ships with the package. No model download, no GPU, no API keys.
+A 17 MB copy of [`rasyosef/splade-tiny`](https://huggingface.co/rasyosef/splade-tiny) (4.4M params,
+by Yosef Worku Alemneh) ships with the package. No model download, no GPU, no API keys.
+The bundled model and its MS-MARCO training corpus are released for **non-commercial research use only** —
+commercial users should review the upstream model card and dataset terms before deployment.
 
 ---
 
@@ -232,6 +235,21 @@ Details in `experiments/` — every row above has a reproducible script.
 
 ## References
 
-Bodnar et al. 2022 (Neural Sheaf Diffusion) · Schlichtkrull et al. 2018 (R-GCN) · Shafer 1976 (Dempster–Shafer) · Barwise & Perry 1983 (situation semantics) · Kan 1958 (adjoint functors for schema migration).
+Bodnar et al. 2022 (Neural Sheaf Diffusion) · Schlichtkrull et al. 2018 (R-GCN) · Shafer 1976 (Dempster–Shafer) · Barwise & Perry 1983 (situation semantics) · Kan 1958 (adjoint functors for schema migration) · Formal, Piwowarski & Clinchant 2021 (SPLADE).
 
 Pywren philosophy for Lambda fan-out: same API locally and in the cloud. Common Crawl's CDX layout for range-addressable archival.
+
+### Bundled model attribution
+
+Infon ships [`rasyosef/splade-tiny`](https://huggingface.co/rasyosef/splade-tiny) by Yosef Worku Alemneh as its anchor encoder:
+
+```bibtex
+@misc{alemneh2025spladetiny,
+  author = {Yosef Worku Alemneh},
+  title  = {splade-tiny},
+  year   = {2025},
+  url    = {https://huggingface.co/rasyosef/splade-tiny}
+}
+```
+
+The model is distributed under a non-commercial research licence and was trained on Microsoft's MS-MARCO passage corpus, which is also non-commercial. Users embedding Infon in commercial products are responsible for checking the upstream terms.
