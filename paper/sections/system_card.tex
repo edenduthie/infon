@@ -61,10 +61,14 @@ The sheaf GNN is trained on the synthgen corpus: synthetic hypergraphs
 with known ground-truth verdict labels, generated procedurally from
 a controlled random process.  No personal data, proprietary data, or
 real-world documents are used in GNN training.
-SPLADE-tiny~\cite{formal2021splade} is pre-trained on MS-MARCO
-(Formal et al., 2021) and used frozen; its weights are not modified
-during any stage of Infon's training or evaluation pipeline.
-No personal or proprietary data is used in any component of the system.
+The \texttt{rasyosef/splade-tiny} encoder~\cite{alemneh2025spladetiny}
+is pre-trained on Microsoft's MS-MARCO passage corpus and used frozen;
+its weights are not modified during any stage of Infon's training or
+evaluation pipeline.  Both the upstream model and MS-MARCO are
+distributed for non-commercial research use only --- commercial users
+of Infon should review the model card and dataset terms before
+deployment.  No personal or proprietary data is used in any component
+of the system.
 
 \paragraph{Evaluation data.}
 HoVer~\cite{jiang2020hover}, AVeriTeC~\cite{schlichtkrull2023averitec},

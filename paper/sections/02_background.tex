@@ -117,9 +117,14 @@ Only a small fraction of dimensions are non-zero, so $\mathbf{s}$ can be
 stored and intersected efficiently with an inverted index.
 
 \paragraph{SPLADE-tiny in Infon.}
-Infon uses the \texttt{naver/splade-v3-lexical} distilled variant
-(17~MB, Apache~2.0 licence).  It runs on CPU in under 2~seconds cold-start
-and requires no GPU or external API.  Each ingested document is encoded into a
+Infon uses \texttt{rasyosef/splade-tiny}~\cite{alemneh2025spladetiny}, a
+distilled SPLADE variant with 4.4M parameters (17~MB).  The model is
+distributed by its author on the Hugging Face Hub and was trained on
+Microsoft's MS-MARCO passage corpus, which is released for
+non-commercial research use only; users embedding Infon in commercial
+products should review the upstream model and dataset terms.  The encoder
+runs on CPU in under 2~seconds cold-start and requires no GPU or external
+API.  Each ingested document is encoded into a
 sparse anchor vector; at query time, the query anchor is matched against
 cassette-level bounding boxes in the manifest pruner, and the top-scoring
 cassettes are hydrated for full scoring.  This design keeps retrieval

@@ -9,9 +9,13 @@ the extraction pipeline, the executor variants, and the Strands Analyst.
 \subsection{SPLADE-tiny Encoder}
 \label{sec:implementation:encoder}
 
-Infon uses \texttt{naver/splade-v3-lexical}, a distilled SPLADE variant
-with a 17\,MB footprint, Apache~2.0 licence, and no GPU requirement.  The
-model weights are frozen; Infon does not fine-tune them.
+Infon uses \texttt{rasyosef/splade-tiny}~\cite{alemneh2025spladetiny}, a
+distilled SPLADE variant with 4.4M parameters, a 17\,MB footprint, and no
+GPU requirement.  The model is released by its author on Hugging Face
+under a non-commercial research licence and was trained on Microsoft's
+MS-MARCO passage corpus; commercial deployments should review the
+upstream model and dataset terms.  The model weights are frozen; Infon
+does not fine-tune them.
 
 \paragraph{Sparse activations as anchor vocabulary.}
 For an input text sequence $t$, the encoder produces a sparse vector

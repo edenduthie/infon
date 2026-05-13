@@ -35,8 +35,9 @@ engineering properties:
     misses.
 
   \item \textbf{Schema-free operation.}  Plain-English questions are encoded
-    with SPLADE-tiny~\cite{formal2021splade} (17~MB, Apache~2.0, no GPU)
-    to an anchor vocabulary. Connective predicates are auto-inferred from the
+    with the \texttt{rasyosef/splade-tiny} model~\cite{alemneh2025spladetiny}
+    (17~MB, 4.4M parameters, non-commercial research licence, no GPU) to an
+    anchor vocabulary. Connective predicates are auto-inferred from the
     data: no ontology annotation is required. A Strands-powered \texttt{Analyst}
     agent routes natural-language questions to the appropriate retrieval
     primitive, citing every source it uses.
