@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/schema.py
+# hypothesis_version: 6.148.3
+
+['actor', 'canonical_name', 'country_code', 'date_iso', 'domain', 'feature', 'level', 'location', 'macro_region', 'market', 'object', 'organisation_type', 'parent', 'precision', 'predicate', 'relation', 'subject', 'temporal', 'tokens', 'type', 'variant', 'w']

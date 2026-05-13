@@ -1,0 +1,267 @@
+{
+  "us": {
+    "type": "actor",
+    "tokens": [
+      "us",
+      "united states",
+      "america",
+      "washington"
+    ]
+  },
+  "china": {
+    "type": "actor",
+    "tokens": [
+      "china",
+      "chinese",
+      "beijing"
+    ]
+  },
+  "russia": {
+    "type": "actor",
+    "tokens": [
+      "russia",
+      "russian",
+      "moscow",
+      "kremlin"
+    ]
+  },
+  "iran": {
+    "type": "actor",
+    "tokens": [
+      "iran",
+      "iranian",
+      "tehran"
+    ]
+  },
+  "israel": {
+    "type": "actor",
+    "tokens": [
+      "israel",
+      "israeli",
+      "jerusalem"
+    ]
+  },
+  "nato": {
+    "type": "actor",
+    "tokens": [
+      "nato",
+      "alliance",
+      "atlantic"
+    ]
+  },
+  "eu": {
+    "type": "actor",
+    "tokens": [
+      "eu",
+      "european union",
+      "brussels"
+    ]
+  },
+  "un": {
+    "type": "actor",
+    "tokens": [
+      "un",
+      "united nations",
+      "security council"
+    ]
+  },
+  "india": {
+    "type": "actor",
+    "tokens": [
+      "india",
+      "indian",
+      "delhi"
+    ]
+  },
+  "japan": {
+    "type": "actor",
+    "tokens": [
+      "japan",
+      "japanese",
+      "tokyo"
+    ]
+  },
+  "palestine": {
+    "type": "actor",
+    "tokens": [
+      "palestine",
+      "palestinian",
+      "gaza",
+      "hamas"
+    ]
+  },
+  "african_union": {
+    "type": "actor",
+    "tokens": [
+      "african union",
+      "au",
+      "african"
+    ]
+  },
+  "sanction": {
+    "type": "relation",
+    "tokens": [
+      "sanction",
+      "sanctions",
+      "embargo",
+      "restrict"
+    ]
+  },
+  "negotiate": {
+    "type": "relation",
+    "tokens": [
+      "negotiate",
+      "negotiation",
+      "talks",
+      "diplomacy",
+      "diplomatic"
+    ]
+  },
+  "deploy": {
+    "type": "relation",
+    "tokens": [
+      "deploy",
+      "deployment",
+      "send",
+      "station",
+      "troops"
+    ]
+  },
+  "attack": {
+    "type": "relation",
+    "tokens": [
+      "attack",
+      "strike",
+      "bomb",
+      "assault",
+      "offensive"
+    ]
+  },
+  "trade": {
+    "type": "relation",
+    "tokens": [
+      "trade",
+      "export",
+      "import",
+      "tariff",
+      "commerce"
+    ]
+  },
+  "invest": {
+    "type": "relation",
+    "tokens": [
+      "invest",
+      "investment",
+      "fund",
+      "finance"
+    ]
+  },
+  "condemn": {
+    "type": "relation",
+    "tokens": [
+      "condemn",
+      "denounce",
+      "criticize",
+      "oppose"
+    ]
+  },
+  "cooperate": {
+    "type": "relation",
+    "tokens": [
+      "cooperate",
+      "cooperation",
+      "collaborate",
+      "joint",
+      "partnership"
+    ]
+  },
+  "nuclear": {
+    "type": "feature",
+    "tokens": [
+      "nuclear",
+      "uranium",
+      "enrichment",
+      "atomic"
+    ]
+  },
+  "military": {
+    "type": "feature",
+    "tokens": [
+      "military",
+      "army",
+      "defense",
+      "weapon"
+    ]
+  },
+  "technology": {
+    "type": "feature",
+    "tokens": [
+      "technology",
+      "cyber",
+      "ai",
+      "digital"
+    ]
+  },
+  "territory": {
+    "type": "feature",
+    "tokens": [
+      "territory",
+      "border",
+      "land",
+      "sovereignty"
+    ]
+  },
+  "humanitarian": {
+    "type": "feature",
+    "tokens": [
+      "humanitarian",
+      "aid",
+      "refugee",
+      "crisis"
+    ]
+  },
+  "maritime": {
+    "type": "feature",
+    "tokens": [
+      "maritime",
+      "naval",
+      "sea",
+      "strait",
+      "shipping"
+    ]
+  },
+  "middle_east": {
+    "type": "market",
+    "tokens": [
+      "middle east",
+      "gulf",
+      "levant"
+    ]
+  },
+  "east_asia": {
+    "type": "market",
+    "tokens": [
+      "east asia",
+      "pacific",
+      "asia-pacific",
+      "indo-pacific"
+    ]
+  },
+  "europe": {
+    "type": "market",
+    "tokens": [
+      "europe",
+      "european",
+      "continent"
+    ]
+  },
+  "africa": {
+    "type": "market",
+    "tokens": [
+      "africa",
+      "sahel",
+      "horn of africa",
+      "sub-saharan"
+    ]
+  }
+}

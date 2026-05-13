@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/store/local.py
+# hypothesis_version: 6.148.3
+
+[0.0, 100, ' AND ', ', ', '1=1', '?', 'NEXT', 'VACUUM', '[]', 'activation', 'aspect', 'cognition.db', 'coherence', 'confidence', 'decay_rate', 'direction', 'doc_count', 'doc_id', 'doc_id = ?', 'edge_type', 'edge_type = ?', 'evidence', 'importance', 'importance >= ?', 'infon_id', 'infon_ids', 'last_reinforced', 'locations', 'metadata', 'metrics', 'novelty', 'object', 'object = ?', 'object_meta', 'persistence', 'polarity', 'precision', 'predicate', 'predicate = ?', 'predicate_meta', 'pruned', 'pruned = 0', 'reinforcement_count', 'score', 'score >= ?', 'sent_id', 'sentence', 'source', 'source = ?', 'spans', 'specificity', 'strength', 'subject', 'subject = ?', 'subject_meta', 'support', 'target', 'target = ?', 'temporal_refs', 'tense', 'timestamp', 'weight']

@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Flat Text to Simulation</title>
+    <script src="vendor/d3.v7.min.js"></script>
+    <style>
+        @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 300; font-display: swap; src: url('vendor/poppins-300.ttf') format('truetype'); }
+        @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('vendor/poppins-400.ttf') format('truetype'); }
+        @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('vendor/poppins-600.ttf') format('truetype'); }
+        @font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('vendor/poppins-700.ttf') format('truetype'); }
+
+        :root {
+            --bg: #0a0a0a;
+            --container: #141414;
+            --text: #d0d0d0;
+            --title: #e5e5e5;
+            --cyan: #4dd0e1;
+            --gold: #d8b078;
+            --gray: #444444;
+            --dark: #282828;
+            --rose: #c88787;
+            --green: #059669;
+            --blue: #2563eb;
+            --amber: #f59e0b;
+            --purple: #c084fc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #slide-container {
+            width: 92%; max-width: 1000px; height: 92vh; max-height: 750px;
+            position: relative; display: flex; justify-content: center; align-items: center;
+            border: 1px solid var(--gray); border-radius: 12px;
+            background-color: var(--container);
+            box-shadow: 0 0 40px rgba(77, 208, 225, 0.08);
+        }
+
+        .slide {
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 16px 44px; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0;
+        }
+        .slide.active { display: flex; }
+
+        .graphic-container {
+            width: 100%; flex: 0 0 40%; min-height: 0;
+            display: flex; justify-content: center; align-items: center; overflow: hidden;
+        }
+        .graphic-container svg { width: auto; max-width: 100%; height: 100%; max-height: 280px; overflow: hidden; }
+
+        .text-content { width: 100%; flex: 0 1 auto; max-height: 58%; overflow-y: auto; padding-top: 8px; }
+
+        .slide.active .animated-text { opacity: 0; animation: fadeInText 1000ms cubic-bezier(0.25,0.1,0.25,1) forwards; }
+        .slide.active h2.animated-text { animation-delay: 0.4s; }
+        .slide.active .chapter-label.animated-text { animation-delay: 0.2s; }
+        .slide.active p.animated-text:nth-of-type(1) { animation-delay: 0.6s; }
+        .slide.active p.animated-text:nth-of-type(2) { animation-delay: 0.8s; }
+        .slide.active p.animated-text:nth-of-type(3) { animation-delay: 1.0s; }
+        .slide.active p.animated-text:nth-of-type(4) { animation-delay: 1.2s; }
+
+        .chapter-label { font-size: 0.6em; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 2px; display: block; }
+        .slide h2 { font-size: 1.4em; font-weight: 700; color: var(--title); margin-bottom: 8px; line-height: 1.2; }
+        .slide p { font-size: 0.85em; line-height: 1.45; margin-bottom: 5px; }
+        .slide p strong { font-weight: 600; color: var(--gold); }
+        .slide p.emphasis { font-size: 1.05em; font-weight: 600; color: var(--gold); margin-top: 3px; }
+        .slide p.dim { font-size: 0.78em; color: #777; margin-top: 3px; }
+        .slide p.accent { color: var(--cyan); font-weight: 600; }
+
+        @keyframes fadeInText { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+        #slide-counter { position: absolute; bottom: 16px; right: 24px; font-size: 11px; color: #555; letter-spacing: 1px; z-index: 10; font-weight: 500; }
+        #progress-bar { position: absolute; bottom: 0; left: 0; height: 2px; background: var(--cyan); border-radius: 0 0 12px 12px; transition: width 0.4s ease; z-index: 10; }
+    </style>
+</head>
+<body>
+
+<div id="slide-container">
+    <svg style="position:absolute; width:0; height:0;">
+        <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- ================================================================== -->
+    <!-- Slide 1: Title                                                     -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-1"></div>
+        <div class="text-content">
+            <h2 class="animated-text">From Flat Text to Simulation</h2>
+            <p class="animated-text">Your product data, market reports, and news feeds already contain the answers.</p>
+            <p class="animated-text">The question is whether your tools can <strong>reach them.</strong></p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 2: Your data today                                           -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-2"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text">Today</span>
+            <h2 class="animated-text">You Have Documents</h2>
+            <p class="animated-text">Product specs. Competitor reports. News feeds. Regulatory filings. Thousands of documents across brands and markets.</p>
+            <p class="animated-text">Your AI reads them as <strong>flat text</strong> &mdash; one chunk at a time.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 3: CENTREPIECE 1 — Topic islands                             -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-3"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--rose);">The Problem</span>
+            <h2 class="animated-text">Search Gives You Topic Islands</h2>
+            <p class="animated-text">Ask "who competes with the Camry?" and text search finds the <strong>Toyota island</strong> &mdash; everything that <em>mentions</em> the Camry.</p>
+            <p class="animated-text">The competitors are on other islands. <strong>Nothing connects them.</strong></p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 4: CENTREPIECE 2 — The gap between islands                   -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-4"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--rose);">The Gap</span>
+            <h2 class="animated-text">Similar Words &ne; Real Relationship</h2>
+            <p class="animated-text">The Camry and the Accord use similar words in their spec sheets. Text search puts them near each other.</p>
+            <p class="animated-text">But <strong>"near each other"</strong> isn't the same as <strong>"competes with."</strong> Proximity is not a relationship.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 5: CENTREPIECE 3 — THE TRANSFORMATION                        -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-5"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--gold);">The Transformation</span>
+            <h2 class="animated-text">Name the Entities. Label the Relationships.</h2>
+            <p class="animated-text">The clusters dissolve. Each dot gets a <strong>type</strong> &mdash; brand, model, variant, feature, market. Labeled connections draw in between them.</p>
+            <p class="animated-text">The link that says <strong>"competes with"</strong> crosses island boundaries. It was always there in the data &mdash; text search just couldn't see it.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 6: CENTREPIECE 4 — Follow the links                          -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-6"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--green);">The Unlock</span>
+            <h2 class="animated-text">Same Question. Follow the Links.</h2>
+            <p class="animated-text">"Who competes with the Camry?" Follow the "competes with" links: <strong>Accord, Sonata, Malibu, Elantra...</strong></p>
+            <p class="animated-text">Text search found <strong>6</strong>. The connected data found <strong>185</strong>. Same data, same AI.</p>
+            <p class="animated-text dim">One hop across a labeled connection &mdash; that's the entire difference.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 7: What else unlocks                                         -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-7"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--green);">More Unlocks</span>
+            <h2 class="animated-text">Questions That Were Impossible Before</h2>
+            <p class="animated-text"><strong>"Compare the Camry and the Accord"</strong> &mdash; pull both feature sets, compute the difference. 87 shared, 12 Camry-only, 8 Accord-only.</p>
+            <p class="animated-text"><strong>"Where does Toyota sell that BMW doesn't?"</strong> &mdash; follow "sold in" links for both, subtract. ASEAN, India, Mexico, Africa.</p>
+            <p class="animated-text"><strong>"Which brand has the most models?"</strong> &mdash; count across all 932 models. BMW: 85. Honda: 55. Audi: 42.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 8: Add market signals                                        -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-8"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text">Layer 2</span>
+            <h2 class="animated-text">Connect the News Feed</h2>
+            <p class="animated-text">94,000 market signals &mdash; news, patents, regulatory changes &mdash; each linked to the products, brands, and features they're about.</p>
+            <p class="animated-text"><strong>"Is Toyota or Tesla trending more positively?"</strong> &mdash; count positive vs negative signals. Toyota: +6.08%. Tesla: +8.99%.</p>
+            <p class="animated-text"><strong>"What happened after the DoE loan program?"</strong> &mdash; follow the timeline links. Event by event, in order.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 9: The Signal Star — hub-and-spoke model                     -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-9"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text">The Signal</span>
+            <h2 class="animated-text">Every Signal Connects to Everything It Touches</h2>
+            <p class="animated-text">A signal isn't a loose headline. It's a <strong>hub</strong> &mdash; linked to the actor who emitted it, the products it's about, the features it affects, and the documents it came from.</p>
+            <p class="animated-text">Temporal <strong>NEXT</strong> chains link signals per product by date &mdash; 47K chains that turn scattered news into ordered timelines.</p>
+            <p class="animated-text dim">One signal, six typed connections. That's what makes "what happened after X" answerable.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 10: Signal processing — MDUS scoring + PELT regimes          -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-10"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text">Processing</span>
+            <h2 class="animated-text">Separating Signal from Noise</h2>
+            <p class="animated-text">94K raw signals include duplicates, low-quality sources, and noise. <strong>MDUS scoring</strong> ranks each signal by source reliability, how many products it touches, and how large the impact is. Duplicates are collapsed.</p>
+            <p class="animated-text"><strong>PELT regime detection</strong> scans the timeline per product and finds the turning points &mdash; when did things shift from stable to disruption? From disruption to growth?</p>
+            <p class="animated-text dim">Raw feeds become ranked intelligence with annotated time periods. That's what the tools actually search.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 11: Simulate                                                 -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-11"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--gold);">Layer 3</span>
+            <h2 class="animated-text">Now Simulate</h2>
+            <p class="animated-text">Make a copy of the connected data. Remove a product. Watch what fills the gap. Measure the impact on competitors, markets, features.</p>
+            <p class="animated-text"><strong>"What if Toyota discontinues the Camry?"</strong> &mdash; test 60 scenarios, score each against your goals, pick the best response.</p>
+            <p class="animated-text dim">That's not a report. That's a planning tool.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 12: Dempster-Shafer Belief Calculus                          -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-12"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--gold);">Layer 4</span>
+            <h2 class="animated-text">Don't Guess. Combine Evidence.</h2>
+            <p class="animated-text">Four independent sources evaluate each piece of evidence: <strong>NLI classification</strong>, lexical overlap, temporal recency, source agreement.</p>
+            <p class="animated-text">Dempster-Shafer theory combines them into a single belief mass &mdash; not a probability, but an interval: <strong>how much supports, how much refutes, how much is unknown.</strong></p>
+            <p class="animated-text dim">When evidence conflicts, the system reports uncertainty &mdash; it doesn't force a guess.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 13: Graph MCTS — Tree Search                                 -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-13"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text" style="color: var(--cyan);">Layer 5</span>
+            <h2 class="animated-text">Search the Graph Like AlphaGo Searches Moves</h2>
+            <p class="animated-text">Monte Carlo Tree Search explores the knowledge graph: <strong>SELECT</strong> the most promising path, <strong>EXPAND</strong> via NEXT edges and shared anchors, <strong>EVALUATE</strong> with NLI, <strong>BACKPROPAGATE</strong> belief.</p>
+            <p class="animated-text">Multi-hop claims that no single document answers &mdash; the tree search chains facts across documents and timelines.</p>
+            <p class="animated-text dim">Flat retrieval finds 5 docs, says "supports." MCTS finds the refuting branch too &mdash; calibrated belief, not overconfidence.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 14: The journey                                              -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-14"></div>
+        <div class="text-content">
+            <span class="chapter-label animated-text">The Journey</span>
+            <h2 class="animated-text">Five Layers. Each One Unlocks the Next.</h2>
+            <p class="animated-text"><strong>Text</strong> &rarr; lookups work, relationships don't.</p>
+            <p class="animated-text"><strong>Connected data</strong> &rarr; competitors, comparisons, market gaps, sentiment, timelines.</p>
+            <p class="animated-text"><strong>Belief calculus</strong> &rarr; calibrated verdicts from conflicting evidence, not forced guesses.</p>
+            <p class="animated-text"><strong>Graph reasoning</strong> &rarr; multi-hop chains, tree search, what-if simulation.</p>
+        </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- Slide 15: Close                                                    -->
+    <!-- ================================================================== -->
+    <div class="slide">
+        <div class="graphic-container" id="graphic-15"></div>
+        <div class="text-content">
+            <h2 class="animated-text">The answers were always in the data.</h2>
+            <p class="animated-text emphasis">You just needed the right connections.</p>
+        </div>
+    </div>
+
+    <div id="slide-counter"></div>
+    <div id="progress-bar"></div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlideIndex = 0;
+    const TOTAL = slides.length;
+
+    const A_SLOW = 1800, A_MEDIUM = 1200, A_FAST = 800;
+    const C = '#4dd0e1', G = '#d8b078', S = '#444444', D = '#282828', T = '#d0d0d0';
+    const GREEN = '#059669', BLUE = '#2563eb', ROSE = '#c88787', AMBER = '#f59e0b', PURPLE = '#c084fc';
+    const DIM = '#555555';
+
+    function clearGraphic(id) {
+        const el = document.getElementById(id);
+        if (el) d3.select(`#${id}`).selectAll("*").remove();
+    }
+
+    // ====================================================================
+    // Shared data: nodes with cluster + graph positions
+    // ====================================================================
+    const NODES = [
+        {id:"toyota",  label:"Toyota",       type:"Brand",   cx:18, cy:28, gx:10, gy:12, clr:GREEN},
+        {id:"camry",   label:"Camry",        type:"Model",   cx:22, cy:37, gx:24, gy:28, clr:BLUE},
+        {id:"camry_x", label:"Camry XSE",    type:"Variant", cx:15, cy:44, gx:38, gy:44, clr:C},
+        {id:"camry_l", label:"Camry XLE",     type:"Variant", cx:26, cy:44, gx:24, gy:50, clr:C},
+        {id:"honda",   label:"Honda",         type:"Brand",   cx:80, cy:28, gx:90, gy:12, clr:GREEN},
+        {id:"accord",  label:"Accord",        type:"Model",   cx:77, cy:37, gx:76, gy:28, clr:BLUE},
+        {id:"accord_s",label:"Accord Sport",  type:"Variant", cx:84, cy:44, gx:62, gy:44, clr:C},
+        {id:"hyundai", label:"Hyundai",       type:"Brand",   cx:50, cy:16, gx:50, gy:8,  clr:GREEN},
+        {id:"sonata",  label:"Sonata",        type:"Model",   cx:50, cy:24, gx:50, gy:24, clr:BLUE},
+        {id:"sonata_s",label:"Sonata SEL",    type:"Variant", cx:50, cy:32, gx:50, gy:40, clr:C},
+        {id:"lka",     label:"Lane Keeping",  type:"Feature", cx:30, cy:68, gx:18, gy:66, clr:ROSE},
+        {id:"abs",     label:"ABS",           type:"Feature", cx:38, cy:72, gx:34, gy:72, clr:ROSE},
+        {id:"thai",    label:"Thailand",      type:"Market",  cx:68, cy:68, gx:60, gy:66, clr:PURPLE},
+        {id:"us",      label:"US",            type:"Market",  cx:74, cy:72, gx:76, gy:72, clr:PURPLE},
+    ];
+
+    const EDGES = [
+        {s:"camry_x", t:"accord_s", role:"competes with",  c:G,     key:true},
+        {s:"camry_x", t:"sonata_s", role:"competes with",  c:G,     key:true},
+        {s:"accord_s",t:"sonata_s", role:"competes with",  c:G,     key:true},
+        {s:"camry",   t:"toyota",   role:"made by",        c:"#555"},
+        {s:"accord",  t:"honda",    role:"made by",        c:"#555"},
+        {s:"sonata",  t:"hyundai",  role:"made by",        c:"#555"},
+        {s:"camry_x", t:"camry",    role:"variant of",     c:"#555"},
+        {s:"accord_s",t:"accord",   role:"variant of",     c:"#555"},
+        {s:"sonata_s",t:"sonata",   role:"variant of",     c:"#555"},
+        {s:"camry_x", t:"lka",      role:"has feature",    c:ROSE},
+        {s:"camry_x", t:"thai",     role:"sold in",        c:PURPLE},
+    ];
+
+    const CLUSTERS = [
+        {label:"Toyota docs",  cx:20, cy:36, rx:16, ry:14, clr:ROSE},
+        {label:"Honda docs",   cx:80, cy:36, rx:14, ry:14, clr:ROSE},
+        {label:"Hyundai docs", cx:50, cy:24, rx:10, ry:13, clr:ROSE},
+        {label:"Feature docs", cx:34, cy:70, rx:12, ry:8,  clr:ROSE},
+        {label:"Market docs",  cx:71, cy:70, rx:12, ry:8,  clr:ROSE},
+    ];
+
+    function nodeById(id) { return NODES.find(n => n.id === id); }
+
+    // ====================================================================
+    // Slide 1: Text → Structure → Simulation (three stages)
+    // ====================================================================
+    function drawSlide1(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 70");
+        const stages = [
+            {x:15, label:"Text",   sub:"flat documents",     color:ROSE},
+            {x:50, label:"Graph",  sub:"labeled connections", color:C},
+            {x:85, label:"Sim",    sub:"what-if testing",     color:G},
+        ];
+        // Arrows between stages
+        [31, 66].forEach((x,i) => {
+            svg.append("line").attr("x1",x).attr("y1",32).attr("x2",x).attr("y2",32)
+                .attr("stroke","#555").attr("stroke-width",1)
+                .transition().delay(A_MEDIUM+i*400).duration(A_FAST).ease(d3.easeCubicInOut)
+                .attr("x2",x+5);
+            svg.append("text").attr("x",x+2.5).attr("y",29).attr("text-anchor","middle")
+                .attr("fill","#666").attr("font-size","5px").text("\u2192").attr("opacity",0)
+                .transition().delay(A_MEDIUM+200+i*400).duration(A_FAST).attr("opacity",0.5);
+        });
+        stages.forEach((s,i) => {
+            svg.append("circle").attr("cx",s.x).attr("cy",32).attr("r",0)
+                .attr("fill",s.color).attr("opacity",0.85).style("filter","url(#glow)")
+                .transition().delay(300+i*300).duration(A_FAST).ease(d3.easeBackOut).attr("r",9);
+            svg.append("text").attr("x",s.x).attr("y",34).attr("text-anchor","middle")
+                .attr("fill","#0a0a0a").attr("font-size","3.5px").attr("font-family","Poppins").attr("font-weight","700")
+                .text(s.label).attr("opacity",0)
+                .transition().delay(500+i*300).duration(A_FAST).attr("opacity",1);
+            svg.append("text").attr("x",s.x).attr("y",48).attr("text-anchor","middle")
+                .attr("fill","#888").attr("font-size","2.5px").attr("font-family","Poppins")
+                .text(s.sub).attr("opacity",0)
+                .transition().delay(600+i*300).duration(A_FAST).attr("opacity",0.6);
+        });
+    }
+
+    // ====================================================================
+    // Slide 2: Scattered text blocks
+    // ====================================================================
+    function drawSlide2(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 75");
+        const docs = [
+            {t1:"Camry XSE",     t2:"Sedan, 301hp"},
+            {t1:"Accord Sport",  t2:"1.5L Turbo"},
+            {t1:"Sonata SEL",    t2:"191hp, CVT"},
+            {t1:"Lane Keeping",  t2:"Std on XSE"},
+            {t1:"Q3 Sales",      t2:"ASEAN +12%"},
+            {t1:"BMW 3 Series",  t2:"2024 refresh"},
+            {t1:"EV Incentive",  t2:"Thailand bill"},
+            {t1:"Altima Pricing", t2:"US update"},
+            {t1:"Fusion Review", t2:"4.2 stars"},
+        ];
+        const cols=3, cw=28, ch=14, gapX=4, gapY=6, ox=5, oy=4;
+        docs.forEach((d,i) => {
+            const col=i%cols, row=Math.floor(i/cols);
+            const x=ox+col*(cw+gapX), y=oy+row*(ch+gapY);
+            svg.append("rect").attr("x",x).attr("y",y).attr("width",cw).attr("height",ch)
+                .attr("rx",2).attr("fill",D).attr("stroke","#333").attr("stroke-width",0.4)
+                .attr("opacity",0).transition().delay(200+i*80).duration(A_FAST).attr("opacity",0.8);
+            svg.append("text").attr("x",x+cw/2).attr("y",y+5).attr("text-anchor","middle")
+                .attr("fill","#999").attr("font-size","2.5px")
+                .attr("font-family","Poppins").attr("font-weight","600")
+                .text(d.t1).attr("opacity",0)
+                .transition().delay(300+i*80).duration(A_FAST).attr("opacity",0.8);
+            svg.append("text").attr("x",x+cw/2).attr("y",y+10).attr("text-anchor","middle")
+                .attr("fill","#666").attr("font-size","2px")
+                .attr("font-family","Poppins")
+                .text(d.t2).attr("opacity",0)
+                .transition().delay(350+i*80).duration(A_FAST).attr("opacity",0.5);
+        });
+    }
+
+    // ====================================================================
+    // Slide 3: CENTREPIECE 1 — Topic islands with query
+    // ====================================================================
+    function drawSlide3(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "-2 -2 104 84");
+        // Draw cluster ellipses
+        CLUSTERS.forEach((cl,i) => {
+            svg.append("ellipse").attr("cx",cl.cx).attr("cy",cl.cy).attr("rx",cl.rx).attr("ry",cl.ry)
+                .attr("fill","none").attr("stroke",DIM).attr("stroke-width",0.6)
+                .attr("stroke-dasharray","3 2").attr("opacity",0)
+                .transition().delay(300+i*100).duration(A_FAST).attr("opacity",0.4);
+            svg.append("text").attr("x",cl.cx).attr("y",cl.cy-cl.ry-3).attr("text-anchor","middle")
+                .attr("fill","#555").attr("font-size","3px").attr("font-family","Poppins")
+                .text(cl.label).attr("opacity",0)
+                .transition().delay(400+i*100).duration(A_FAST).attr("opacity",0.4);
+        });
+        // Draw nodes at cluster positions (all gray)
+        NODES.forEach((n,i) => {
+            svg.append("circle").attr("cx",n.cx).attr("cy",n.cy).attr("r",0)
+                .attr("fill",DIM).attr("opacity",0.6)
+                .transition().delay(500+i*30).duration(600).ease(d3.easeBackOut).attr("r",2.5);
+            svg.append("text").attr("x",n.cx).attr("y",n.cy+6).attr("text-anchor","middle")
+                .attr("fill","#555").attr("font-size","2px").attr("font-family","Poppins")
+                .text(n.label).attr("opacity",0)
+                .transition().delay(600+i*30).duration(A_FAST).attr("opacity",0.4);
+        });
+        // Query dot drops in
+        const q = svg.append("circle").attr("cx",20).attr("cy",-5).attr("r",3)
+            .attr("fill",AMBER).attr("opacity",0).style("filter","url(#glow)");
+        q.transition().delay(A_SLOW).duration(A_MEDIUM).ease(d3.easeBounceOut)
+            .attr("cy",36).attr("opacity",0.9);
+        svg.append("text").attr("x",20).attr("y",-8).attr("text-anchor","middle")
+            .attr("fill",AMBER).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text('query: "Camry competitors"').attr("opacity",0)
+            .transition().delay(A_SLOW-200).duration(A_FAST).attr("opacity",0.7)
+            .transition().delay(A_FAST).duration(A_MEDIUM).attr("y",28).attr("opacity",0.5);
+        // Toyota cluster lights up
+        svg.append("ellipse").attr("cx",20).attr("cy",36).attr("rx",16).attr("ry",14)
+            .attr("fill",ROSE).attr("opacity",0)
+            .transition().delay(A_SLOW+A_MEDIUM).duration(A_FAST).attr("opacity",0.08)
+            .transition().duration(A_SLOW).attr("opacity",0.04);
+        // "Returns" label
+        svg.append("text").attr("x",20).attr("y",58).attr("text-anchor","middle")
+            .attr("fill",ROSE).attr("font-size","3px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("\u2191 returns Toyota docs").attr("opacity",0)
+            .transition().delay(A_SLOW+A_MEDIUM+A_FAST).duration(A_FAST).attr("opacity",0.7);
+        // Honda cluster stays dim with label
+        svg.append("text").attr("x",80).attr("y",58).attr("text-anchor","middle")
+            .attr("fill","#444").attr("font-size","2.5px").attr("font-family","Poppins")
+            .text("competitors are here \u2192 unreachable").attr("opacity",0)
+            .transition().delay(A_SLOW+A_MEDIUM+A_FAST+400).duration(A_FAST).attr("opacity",0.5);
+    }
+
+    // ====================================================================
+    // Slide 4: CENTREPIECE 2 — Gap between two islands
+    // ====================================================================
+    function drawSlide4(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 75");
+        // Toyota island (left)
+        svg.append("ellipse").attr("cx",25).attr("cy",35).attr("rx",18).attr("ry",16)
+            .attr("fill","none").attr("stroke",DIM).attr("stroke-width",0.8).attr("stroke-dasharray","3 2")
+            .attr("opacity",0).transition().delay(300).duration(A_FAST).attr("opacity",0.4);
+        const toyotaDots = [{x:18,y:28,l:"Toyota"},{x:25,y:35,l:"Camry"},{x:20,y:42,l:"Camry XSE"},{x:30,y:40,l:"Camry XLE"}];
+        toyotaDots.forEach((d,i) => {
+            svg.append("circle").attr("cx",d.x).attr("cy",d.y).attr("r",0)
+                .attr("fill",DIM).attr("opacity",0.6)
+                .transition().delay(400+i*60).duration(A_FAST).ease(d3.easeBackOut).attr("r",3);
+            svg.append("text").attr("x",d.x).attr("y",d.y-5).attr("text-anchor","middle")
+                .attr("fill","#666").attr("font-size","2.5px").attr("font-family","Poppins")
+                .text(d.l).attr("opacity",0).transition().delay(500+i*60).duration(A_FAST).attr("opacity",0.5);
+        });
+        // Honda island (right)
+        svg.append("ellipse").attr("cx",75).attr("cy",35).attr("rx",18).attr("ry",16)
+            .attr("fill","none").attr("stroke",DIM).attr("stroke-width",0.8).attr("stroke-dasharray","3 2")
+            .attr("opacity",0).transition().delay(500).duration(A_FAST).attr("opacity",0.4);
+        const hondaDots = [{x:70,y:28,l:"Honda"},{x:75,y:35,l:"Accord"},{x:80,y:42,l:"Accord Sport"}];
+        hondaDots.forEach((d,i) => {
+            svg.append("circle").attr("cx",d.x).attr("cy",d.y).attr("r",0)
+                .attr("fill",DIM).attr("opacity",0.6)
+                .transition().delay(600+i*60).duration(A_FAST).ease(d3.easeBackOut).attr("r",3);
+            svg.append("text").attr("x",d.x).attr("y",d.y-5).attr("text-anchor","middle")
+                .attr("fill","#666").attr("font-size","2.5px").attr("font-family","Poppins")
+                .text(d.l).attr("opacity",0).transition().delay(700+i*60).duration(A_FAST).attr("opacity",0.5);
+        });
+        // THE GAP — empty space with floating "?"
+        svg.append("text").attr("x",50).attr("y",38).attr("text-anchor","middle")
+            .attr("fill",G).attr("font-size","14px").attr("font-family","Poppins").attr("font-weight","700")
+            .text("?").attr("opacity",0).style("filter","url(#glow)")
+            .transition().delay(A_SLOW).duration(A_MEDIUM).attr("opacity",0.3);
+        // Dotted line that doesn't connect
+        svg.append("line").attr("x1",38).attr("y1",37).attr("x2",38).attr("y2",37)
+            .attr("stroke",ROSE).attr("stroke-width",0.8).attr("stroke-dasharray","2 2").attr("opacity",0)
+            .transition().delay(A_SLOW+400).duration(A_MEDIUM)
+            .attr("x2",62).attr("opacity",0.4);
+        svg.append("text").attr("x",50).attr("y",48).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2.8px").attr("font-family","Poppins")
+            .text("similar words \u2260 competes with").attr("opacity",0)
+            .transition().delay(A_SLOW+A_FAST).duration(A_MEDIUM).attr("opacity",0.6);
+    }
+
+    // ====================================================================
+    // Slide 5: CENTREPIECE 3 — THE TRANSFORMATION
+    // Clusters dissolve → dots typed → edges draw in
+    // ====================================================================
+    function drawSlide5(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "-2 -2 104 84");
+
+        // Phase 1: Draw clusters and gray dots
+        const clusterEls = CLUSTERS.map((cl,i) => {
+            const el = svg.append("ellipse").attr("cx",cl.cx).attr("cy",cl.cy).attr("rx",cl.rx).attr("ry",cl.ry)
+                .attr("fill","none").attr("stroke",DIM).attr("stroke-width",0.6).attr("stroke-dasharray","3 2")
+                .attr("opacity",0);
+            el.transition().delay(200+i*60).duration(600).attr("opacity",0.4);
+            const txt = svg.append("text").attr("x",cl.cx).attr("y",cl.cy-cl.ry-3).attr("text-anchor","middle")
+                .attr("fill","#555").attr("font-size","2.5px").attr("font-family","Poppins").text(cl.label).attr("opacity",0);
+            txt.transition().delay(300+i*60).duration(600).attr("opacity",0.35);
+            return {el, txt};
+        });
+
+        // Create node circles at cluster positions
+        const nodeEls = NODES.map((n,i) => {
+            const circle = svg.append("circle").attr("cx",n.cx).attr("cy",n.cy).attr("r",0)
+                .attr("fill",DIM).attr("opacity",0.5);
+            circle.transition().delay(400+i*25).duration(500).ease(d3.easeBackOut).attr("r",2.5);
+            const label = svg.append("text").attr("x",n.cx).attr("y",n.cy+6).attr("text-anchor","middle")
+                .attr("fill","#444").attr("font-size","1.8px").attr("font-family","Poppins").text(n.label).attr("opacity",0);
+            label.transition().delay(500+i*25).duration(500).attr("opacity",0.3);
+            return {circle, label, node:n};
+        });
+
+        // Phase 2: After 1.5s — dissolve clusters, move nodes, add color
+        const T_DISSOLVE = 1600;
+        const T_MOVE = 2000;
+
+        clusterEls.forEach(({el, txt}) => {
+            el.transition().delay(T_DISSOLVE).duration(A_FAST).attr("opacity",0);
+            txt.transition().delay(T_DISSOLVE).duration(A_FAST).attr("opacity",0);
+        });
+
+        nodeEls.forEach(({circle, label, node}, i) => {
+            circle.transition().delay(T_MOVE+i*40).duration(A_SLOW).ease(d3.easeCubicInOut)
+                .attr("cx",node.gx).attr("cy",node.gy).attr("fill",node.clr).attr("opacity",0.85).attr("r",3);
+            label.transition().delay(T_MOVE+i*40).duration(A_SLOW).ease(d3.easeCubicInOut)
+                .attr("x",node.gx).attr("y",node.gy+7).attr("fill",node.clr).attr("opacity",0.6)
+                .attr("font-size","2.2px");
+        });
+
+        // Type badges
+        const types = [{label:"Brand",x:10,y:4,c:GREEN},{label:"Model",x:30,y:4,c:BLUE},{label:"Variant",x:50,y:4,c:C},{label:"Feature",x:70,y:4,c:ROSE},{label:"Market",x:90,y:4,c:PURPLE}];
+        types.forEach((t,i) => {
+            svg.append("text").attr("x",t.x).attr("y",t.y).attr("text-anchor","middle")
+                .attr("fill",t.c).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(t.label).attr("opacity",0)
+                .transition().delay(T_MOVE+A_FAST+i*60).duration(A_FAST).attr("opacity",0.6);
+        });
+
+        // Phase 3: Draw edges
+        const T_EDGES = T_MOVE + A_SLOW + 200;
+
+        EDGES.forEach((e,i) => {
+            const sn = nodeById(e.s), tn = nodeById(e.t);
+            const line = svg.append("line")
+                .attr("x1",sn.gx).attr("y1",sn.gy).attr("x2",sn.gx).attr("y2",sn.gy)
+                .attr("stroke",e.c).attr("stroke-width", e.key ? 1.2 : 0.6)
+                .attr("opacity",0);
+            if (e.key) line.style("filter","url(#glow)");
+            line.transition().delay(T_EDGES+i*80).duration(A_FAST).ease(d3.easeCubicOut)
+                .attr("x2",tn.gx).attr("y2",tn.gy).attr("opacity", e.key ? 0.7 : 0.35);
+            // Edge label
+            const mx = (sn.gx+tn.gx)/2, my = (sn.gy+tn.gy)/2;
+            svg.append("text").attr("x",mx).attr("y",my-2).attr("text-anchor","middle")
+                .attr("fill",e.key ? G : "#555").attr("font-size", e.key ? "2.3px" : "1.8px")
+                .attr("font-family","Poppins").attr("font-weight", e.key ? "600" : "400")
+                .text(e.role).attr("opacity",0)
+                .transition().delay(T_EDGES+i*80+300).duration(A_FAST).attr("opacity", e.key ? 0.7 : 0.35);
+        });
+    }
+
+    // ====================================================================
+    // Slide 6: Follow the links — path lights up
+    // ====================================================================
+    function drawSlide6(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "-2 -2 104 84");
+
+        // Draw the full graph (static, dimmed)
+        EDGES.forEach(e => {
+            const sn = nodeById(e.s), tn = nodeById(e.t);
+            svg.append("line").attr("x1",sn.gx).attr("y1",sn.gy).attr("x2",tn.gx).attr("y2",tn.gy)
+                .attr("stroke",e.key ? G : "#333").attr("stroke-width",e.key?0.8:0.4).attr("opacity",0.2);
+        });
+        NODES.forEach(n => {
+            svg.append("circle").attr("cx",n.gx).attr("cy",n.gy).attr("r",2.5)
+                .attr("fill",n.clr).attr("opacity",0.3);
+            svg.append("text").attr("x",n.gx).attr("y",n.gy+6.5).attr("text-anchor","middle")
+                .attr("fill","#555").attr("font-size","2px").attr("font-family","Poppins").text(n.label);
+        });
+
+        // Highlight Camry XSE
+        const camry = nodeById("camry_x");
+        svg.append("circle").attr("cx",camry.gx).attr("cy",camry.gy).attr("r",0)
+            .attr("fill",C).attr("opacity",0.9).style("filter","url(#glow-strong)")
+            .transition().delay(400).duration(A_FAST).ease(d3.easeBackOut).attr("r",4.5);
+        svg.append("text").attr("x",camry.gx).attr("y",camry.gy-7).attr("text-anchor","middle")
+            .attr("fill",AMBER).attr("font-size","3px").attr("font-family","Poppins").attr("font-weight","600")
+            .text('query: "Camry competitors"').attr("opacity",0)
+            .transition().delay(600).duration(A_FAST).attr("opacity",0.8);
+
+        // Animate traversal to competitors
+        const targets = ["accord_s","sonata_s"];
+        targets.forEach((tid,i) => {
+            const tn = nodeById(tid);
+            // Light up the edge
+            const edge = svg.append("line")
+                .attr("x1",camry.gx).attr("y1",camry.gy).attr("x2",camry.gx).attr("y2",camry.gy)
+                .attr("stroke",G).attr("stroke-width",2).attr("opacity",0).style("filter","url(#glow)");
+            edge.transition().delay(A_MEDIUM+i*600).duration(A_FAST).ease(d3.easeCubicOut)
+                .attr("x2",tn.gx).attr("y2",tn.gy).attr("opacity",0.8);
+            // Light up the target
+            svg.append("circle").attr("cx",tn.gx).attr("cy",tn.gy).attr("r",2.5)
+                .attr("fill",C).attr("opacity",0)
+                .transition().delay(A_MEDIUM+i*600+A_FAST).duration(500).ease(d3.easeBackOut)
+                .attr("r",4.5).attr("opacity",0.9);
+            // "competes with" label
+            const mx = (camry.gx+tn.gx)/2, my = (camry.gy+tn.gy)/2;
+            svg.append("text").attr("x",mx).attr("y",my-3).attr("text-anchor","middle")
+                .attr("fill",G).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+                .text("competes with").attr("opacity",0)
+                .transition().delay(A_MEDIUM+i*600+400).duration(A_FAST).attr("opacity",0.7);
+        });
+
+        // Also light up Accord Sport → Sonata SEL edge
+        const as = nodeById("accord_s"), ss = nodeById("sonata_s");
+        svg.append("line").attr("x1",as.gx).attr("y1",as.gy).attr("x2",as.gx).attr("y2",as.gy)
+            .attr("stroke",G).attr("stroke-width",1.5).attr("opacity",0).style("filter","url(#glow)")
+            .transition().delay(A_MEDIUM+1200+A_FAST).duration(A_FAST).ease(d3.easeCubicOut)
+            .attr("x2",ss.gx).attr("y2",ss.gy).attr("opacity",0.6);
+
+        // Result count
+        svg.append("text").attr("x",50).attr("y",76).attr("text-anchor","middle")
+            .attr("fill",G).attr("font-size","3.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("Text search: 6    \u2502    Connected data: 185").attr("opacity",0)
+            .transition().delay(A_SLOW+A_MEDIUM+A_FAST).duration(A_MEDIUM).attr("opacity",0.7);
+    }
+
+    // ====================================================================
+    // Slide 7: Three unlocks — feature diff, market gaps, rankings
+    // ====================================================================
+    function drawSlide7(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 75");
+        const cards = [
+            {y:2, q:'"Compare Camry vs Accord"', a:"87 shared  \u2022  12 Camry-only  \u2022  8 Accord-only  \u2022  23 different values", c:C},
+            {y:26, q:'"Where does Toyota sell that BMW doesn\'t?"', a:"ASEAN  \u2022  India  \u2022  Mexico  \u2022  Africa", c:GREEN},
+            {y:50, q:'"Which brand has the most models?"', a:"BMW: 85  \u2022  Honda: 55  \u2022  Audi: 42  \u2022  Mercedes: 38  \u2022  Toyota: 36", c:BLUE},
+        ];
+        cards.forEach((card,i) => {
+            svg.append("rect").attr("x",4).attr("y",card.y).attr("width",92).attr("height",22)
+                .attr("rx",3).attr("fill",D).attr("stroke",card.c).attr("stroke-width",0.5).attr("opacity",0)
+                .transition().delay(300+i*200).duration(A_FAST).attr("opacity",0.7);
+            svg.append("text").attr("x",50).attr("y",card.y+8).attr("text-anchor","middle")
+                .attr("fill",card.c).attr("font-size","3px").attr("font-family","Poppins").attr("font-weight","600")
+                .attr("font-style","italic").text(card.q).attr("opacity",0)
+                .transition().delay(400+i*200).duration(A_FAST).attr("opacity",0.8);
+            svg.append("text").attr("x",50).attr("y",card.y+16).attr("text-anchor","middle")
+                .attr("fill","#999").attr("font-size","2.8px").attr("font-family","Poppins")
+                .text(card.a).attr("opacity",0)
+                .transition().delay(550+i*200).duration(A_FAST).attr("opacity",0.6);
+        });
+    }
+
+    // ====================================================================
+    // Slide 8: Market signals attaching to graph
+    // ====================================================================
+    function drawSlide8(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 80");
+        // Structural graph (simplified)
+        const core = [{x:20,y:20,l:"Toyota",c:GREEN},{x:50,y:20,l:"Camry",c:BLUE},{x:80,y:20,l:"Honda",c:GREEN}];
+        core.forEach((n,i) => {
+            svg.append("circle").attr("cx",n.x).attr("cy",n.y).attr("r",0)
+                .attr("fill",n.c).attr("opacity",0.7)
+                .transition().delay(200+i*80).duration(A_FAST).ease(d3.easeBackOut).attr("r",4);
+            svg.append("text").attr("x",n.x).attr("y",n.y-7).attr("text-anchor","middle")
+                .attr("fill",n.c).attr("font-size","3px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(n.l).attr("opacity",0).transition().delay(300+i*80).duration(A_FAST).attr("opacity",0.8);
+        });
+        // Connecting lines
+        [[20,20,50,20],[50,20,80,20]].forEach(([x1,y1,x2,y2],i) => {
+            svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x1).attr("y2",y1)
+                .attr("stroke","#444").attr("stroke-width",0.6)
+                .transition().delay(500+i*100).duration(A_FAST).attr("x2",x2).attr("y2",y2);
+        });
+        // Signal nodes flying in from below
+        const signals = [
+            {x:14,y:50,l:"EV incentive\nThailand",sent:"bullish",target:{x:20,y:20}},
+            {x:35,y:55,l:"Camry Hybrid\nAWD launch",sent:"bullish",target:{x:50,y:20}},
+            {x:56,y:48,l:"Q3 sales\ndecline",sent:"bearish",target:{x:50,y:20}},
+            {x:77,y:52,l:"Accord\nnew model",sent:"bullish",target:{x:80,y:20}},
+            {x:92,y:56,l:"Honda\nrecall",sent:"bearish",target:{x:80,y:20}},
+        ];
+        signals.forEach((s,i) => {
+            const col = s.sent==='bullish' ? GREEN : ROSE;
+            svg.append("circle").attr("cx",s.x).attr("cy",s.y).attr("r",0)
+                .attr("fill",AMBER).attr("opacity",0.7)
+                .transition().delay(A_FAST+i*120).duration(A_FAST).ease(d3.easeBackOut).attr("r",3);
+            s.l.split("\n").forEach((line,li) => {
+                svg.append("text").attr("x",s.x).attr("y",s.y+6+li*4).attr("text-anchor","middle")
+                    .attr("fill","#888").attr("font-size","2px").attr("font-family","Poppins")
+                    .text(line).attr("opacity",0)
+                    .transition().delay(A_FAST+100+i*120).duration(A_FAST).attr("opacity",0.5);
+            });
+            // Connecting line to structural graph
+            svg.append("line").attr("x1",s.x).attr("y1",s.y).attr("x2",s.x).attr("y2",s.y)
+                .attr("stroke",col).attr("stroke-width",0.6).attr("opacity",0.3)
+                .transition().delay(A_MEDIUM+i*120).duration(A_FAST).ease(d3.easeCubicOut)
+                .attr("x2",s.target.x).attr("y2",s.target.y).attr("opacity",0.3);
+            // Sentiment badge
+            svg.append("circle").attr("cx",s.x+5).attr("cy",s.y-3).attr("r",0)
+                .attr("fill",col).attr("opacity",0.8)
+                .transition().delay(A_MEDIUM+i*120+200).duration(500).ease(d3.easeBackOut).attr("r",1.5);
+        });
+        svg.append("text").attr("x",50).attr("y",74).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2.8px").attr("font-family","Poppins")
+            .text("94K signals \u2022 each linked to products, brands, features \u2022 tagged with sentiment and time")
+            .attr("opacity",0).transition().delay(A_SLOW+A_MEDIUM).duration(A_MEDIUM).attr("opacity",0.5);
+    }
+
+    // ====================================================================
+    // Slide 9: Signal Star — hub-and-spoke model
+    // ====================================================================
+    function drawSlide9(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 80");
+
+        // Central Signal hub
+        const HUB = {x:50, y:36};
+        svg.append("circle").attr("cx",HUB.x).attr("cy",HUB.y).attr("r",0)
+            .attr("fill",AMBER).attr("opacity",0.9).style("filter","url(#glow-strong)")
+            .transition().delay(400).duration(A_MEDIUM).ease(d3.easeBackOut).attr("r",6);
+        svg.append("text").attr("x",HUB.x).attr("y",HUB.y+1.5).attr("text-anchor","middle")
+            .attr("fill","#0a0a0a").attr("font-size","3px").attr("font-family","Poppins").attr("font-weight","700")
+            .text("Signal").attr("opacity",0)
+            .transition().delay(600).duration(A_FAST).attr("opacity",1);
+
+        // Spoke targets
+        const spokes = [
+            {x:14, y:16, label:"Actor",    sub:"(who emitted it)",  c:GREEN,  role:"EMITS",         inward:true},
+            {x:86, y:16, label:"Variant",  sub:"(which product)",   c:C,      role:"ABOUT_PRODUCT", inward:false},
+            {x:14, y:56, label:"Feature",  sub:"(what capability)", c:ROSE,   role:"ABOUT_FEATURE", inward:false},
+            {x:86, y:56, label:"Market",   sub:"(where)",           c:PURPLE, role:"AFFECTS",        inward:false},
+            {x:14, y:36, label:"Document", sub:"(source)",          c:'#888', role:"SOURCES",        inward:true},
+        ];
+
+        spokes.forEach((sp, i) => {
+            // Spoke node
+            svg.append("circle").attr("cx",sp.x).attr("cy",sp.y).attr("r",0)
+                .attr("fill",sp.c).attr("opacity",0.8)
+                .transition().delay(800+i*120).duration(A_FAST).ease(d3.easeBackOut).attr("r",4);
+            svg.append("text").attr("x",sp.x).attr("y",sp.y+8).attr("text-anchor","middle")
+                .attr("fill",sp.c).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(sp.label).attr("opacity",0)
+                .transition().delay(900+i*120).duration(A_FAST).attr("opacity",0.8);
+            svg.append("text").attr("x",sp.x).attr("y",sp.y+12).attr("text-anchor","middle")
+                .attr("fill","#555").attr("font-size","1.8px").attr("font-family","Poppins")
+                .text(sp.sub).attr("opacity",0)
+                .transition().delay(950+i*120).duration(A_FAST).attr("opacity",0.5);
+
+            // Edge line (draw from hub outward, or from spoke inward)
+            const x1 = sp.inward ? sp.x : HUB.x, y1 = sp.inward ? sp.y : HUB.y;
+            const x2 = sp.inward ? HUB.x : sp.x, y2 = sp.inward ? HUB.y : sp.y;
+            svg.append("line")
+                .attr("x1",x1).attr("y1",y1).attr("x2",x1).attr("y2",y1)
+                .attr("stroke",sp.c).attr("stroke-width",0.8).attr("opacity",0)
+                .transition().delay(1000+i*120).duration(A_FAST).ease(d3.easeCubicOut)
+                .attr("x2",x2).attr("y2",y2).attr("opacity",0.5);
+
+            // Edge role label at midpoint
+            const mx = (HUB.x + sp.x) / 2, my = (HUB.y + sp.y) / 2;
+            svg.append("text").attr("x",mx).attr("y",my-2).attr("text-anchor","middle")
+                .attr("fill",sp.c).attr("font-size","2px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(sp.role).attr("opacity",0)
+                .transition().delay(1100+i*120).duration(A_FAST).attr("opacity",0.6);
+        });
+
+        // NEXT chain — Signal → Signal₂ → Variant (temporal link)
+        const T_CHAIN = 1800;
+        const sig2 = {x:68, y:72};
+
+        // Second signal node
+        svg.append("circle").attr("cx",sig2.x).attr("cy",sig2.y).attr("r",0)
+            .attr("fill",AMBER).attr("opacity",0.7)
+            .transition().delay(T_CHAIN).duration(A_FAST).ease(d3.easeBackOut).attr("r",4);
+        svg.append("text").attr("x",sig2.x).attr("y",sig2.y+1.5).attr("text-anchor","middle")
+            .attr("fill","#0a0a0a").attr("font-size","2.2px").attr("font-family","Poppins").attr("font-weight","700")
+            .text("Signal₂").attr("opacity",0)
+            .transition().delay(T_CHAIN+100).duration(A_FAST).attr("opacity",0.9);
+
+        // NEXT edge (downward from hub)
+        svg.append("line").attr("x1",HUB.x).attr("y1",HUB.y+6).attr("x2",HUB.x).attr("y2",HUB.y+6)
+            .attr("stroke",G).attr("stroke-width",1.2).attr("stroke-dasharray","3 2").attr("opacity",0)
+            .style("filter","url(#glow)")
+            .transition().delay(T_CHAIN+200).duration(A_FAST).ease(d3.easeCubicOut)
+            .attr("x2",sig2.x).attr("y2",sig2.y).attr("opacity",0.6);
+        svg.append("text").attr("x",(HUB.x+sig2.x)/2-2).attr("y",(HUB.y+6+sig2.y)/2-2).attr("text-anchor","middle")
+            .attr("fill",G).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("NEXT").attr("opacity",0)
+            .transition().delay(T_CHAIN+400).duration(A_FAST).attr("opacity",0.7);
+
+        // Signal₂ → same Variant (reuse connection)
+        svg.append("line").attr("x1",sig2.x).attr("y1",sig2.y).attr("x2",sig2.x).attr("y2",sig2.y)
+            .attr("stroke",C).attr("stroke-width",0.6).attr("opacity",0)
+            .transition().delay(T_CHAIN+500).duration(A_FAST).ease(d3.easeCubicOut)
+            .attr("x2",86).attr("y2",56).attr("opacity",0.35);
+
+        // "47K temporal chains" label
+        svg.append("text").attr("x",50).attr("y",78).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2.5px").attr("font-family","Poppins")
+            .text("47K NEXT chains \u2022 ordered by date \u2022 \u226490 day gaps").attr("opacity",0)
+            .transition().delay(T_CHAIN+700).duration(A_MEDIUM).attr("opacity",0.45);
+    }
+
+    // ====================================================================
+    // Slide 10: MDUS scoring + PELT regime detection
+    // ====================================================================
+    function drawSlide10(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 80");
+
+        // --- Left half: Raw signals → scoring → ranked ---
+
+        // Title
+        svg.append("text").attr("x",28).attr("y",6).attr("text-anchor","middle")
+            .attr("fill","#666").attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("Signal Scoring (MDUS)").attr("opacity",0)
+            .transition().delay(200).duration(A_FAST).attr("opacity",0.6);
+
+        // Raw signal dots (scattered)
+        const rawDots = [];
+        for (let i = 0; i < 20; i++) {
+            rawDots.push({x: 5 + Math.random()*16, y: 14 + Math.random()*24, s: 1 + Math.random()*2});
+        }
+        rawDots.forEach((d,i) => {
+            svg.append("circle").attr("cx",d.x).attr("cy",d.y).attr("r",0)
+                .attr("fill",AMBER).attr("opacity",0.4)
+                .transition().delay(300+i*30).duration(500).ease(d3.easeBackOut).attr("r",d.s);
+        });
+
+        // "raw" label
+        svg.append("text").attr("x",13).attr("y",42).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2px").attr("font-family","Poppins")
+            .text("94K raw signals").attr("opacity",0)
+            .transition().delay(600).duration(A_FAST).attr("opacity",0.4);
+
+        // Funnel arrow
+        svg.append("text").attr("x",28).attr("y",28).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","6px").text("\u2192").attr("opacity",0)
+            .transition().delay(A_FAST).duration(A_FAST).attr("opacity",0.4);
+
+        // Scoring criteria (small labels)
+        const criteria = [
+            {y:16, label:"Source reliability", c:"#888"},
+            {y:22, label:"Product breadth",    c:"#888"},
+            {y:28, label:"Impact size",        c:"#888"},
+            {y:34, label:"Dedup collapse",     c:ROSE},
+        ];
+        criteria.forEach((cr,i) => {
+            svg.append("text").attr("x",28).attr("y",cr.y).attr("text-anchor","middle")
+                .attr("fill",cr.c).attr("font-size","1.8px").attr("font-family","Poppins")
+                .text(cr.label).attr("opacity",0)
+                .transition().delay(A_FAST+200+i*100).duration(A_FAST).attr("opacity",0.5);
+        });
+
+        // Arrow to ranked output
+        svg.append("text").attr("x",38).attr("y",28).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","6px").text("\u2192").attr("opacity",0)
+            .transition().delay(A_MEDIUM).duration(A_FAST).attr("opacity",0.4);
+
+        // Ranked output bars (fewer, ordered by height)
+        const ranked = [
+            {w:12, label:"EV subsidy bill",     c:GREEN},
+            {w:10, label:"Battery tech shift",   c:C},
+            {w:7,  label:"Camry hybrid AWD",     c:BLUE},
+            {w:5,  label:"Honda recall",         c:ROSE},
+            {w:3,  label:"Minor update",         c:DIM},
+        ];
+        ranked.forEach((r,i) => {
+            const y = 14 + i * 6;
+            svg.append("rect").attr("x",42).attr("y",y).attr("width",0).attr("height",4)
+                .attr("rx",1).attr("fill",r.c).attr("opacity",0.7)
+                .transition().delay(A_MEDIUM+200+i*100).duration(A_FAST).ease(d3.easeCubicOut).attr("width",r.w);
+            svg.append("text").attr("x",43+r.w).attr("y",y+3).attr("text-anchor","start")
+                .attr("fill","#777").attr("font-size","1.8px").attr("font-family","Poppins")
+                .text(r.label).attr("opacity",0)
+                .transition().delay(A_MEDIUM+400+i*100).duration(A_FAST).attr("opacity",0.5);
+        });
+
+        // "ranked" label
+        svg.append("text").attr("x",48).attr("y",46).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2px").attr("font-family","Poppins")
+            .text("ranked intelligence").attr("opacity",0)
+            .transition().delay(A_SLOW).duration(A_FAST).attr("opacity",0.4);
+
+        // --- Right half: Timeline with PELT regimes ---
+
+        svg.append("text").attr("x",75).attr("y",6).attr("text-anchor","middle")
+            .attr("fill","#666").attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("Regime Detection (PELT)").attr("opacity",0)
+            .transition().delay(A_SLOW+200).duration(A_FAST).attr("opacity",0.6);
+
+        // Timeline axis
+        const tlY = 40, tlX1 = 60, tlX2 = 96;
+        svg.append("line").attr("x1",tlX1).attr("y1",tlY).attr("x2",tlX1).attr("y2",tlY)
+            .attr("stroke","#555").attr("stroke-width",0.5)
+            .transition().delay(A_SLOW+400).duration(A_MEDIUM).attr("x2",tlX2);
+
+        // Time labels
+        ["2022","2023","2024","2025"].forEach((yr,i) => {
+            const x = tlX1 + 2 + i * 10;
+            svg.append("text").attr("x",x).attr("y",tlY+4).attr("text-anchor","middle")
+                .attr("fill","#555").attr("font-size","1.8px").attr("font-family","Poppins")
+                .text(yr).attr("opacity",0)
+                .transition().delay(A_SLOW+800+i*80).duration(A_FAST).attr("opacity",0.4);
+        });
+
+        // Signal dots along timeline (scattered vertically)
+        const tlDots = [];
+        for (let i = 0; i < 30; i++) {
+            tlDots.push({x: tlX1 + 1 + Math.random()*35, y: tlY - 4 - Math.random()*20});
+        }
+        tlDots.forEach((d,i) => {
+            svg.append("circle").attr("cx",d.x).attr("cy",d.y).attr("r",0)
+                .attr("fill",AMBER).attr("opacity",0.35)
+                .transition().delay(A_SLOW+500+i*20).duration(400).attr("r",0.8);
+        });
+
+        // PELT changepoint lines (dashed vertical)
+        const changepoints = [
+            {x:72, label:"stable",      c:GREEN},
+            {x:82, label:"disruption",  c:ROSE},
+            {x:90, label:"growth",      c:C},
+        ];
+        changepoints.forEach((cp,i) => {
+            // Vertical dashed line
+            svg.append("line").attr("x1",cp.x).attr("y1",tlY).attr("x2",cp.x).attr("y2",tlY)
+                .attr("stroke",cp.c).attr("stroke-width",0.8).attr("stroke-dasharray","2 1.5").attr("opacity",0)
+                .transition().delay(A_SLOW+A_FAST+i*200).duration(A_FAST)
+                .attr("y2",tlY-26).attr("opacity",0.6);
+            // Regime label
+            svg.append("text").attr("x",cp.x).attr("y",tlY-27).attr("text-anchor","middle")
+                .attr("fill",cp.c).attr("font-size","2px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(cp.label).attr("opacity",0)
+                .transition().delay(A_SLOW+A_FAST+200+i*200).duration(A_FAST).attr("opacity",0.6);
+        });
+
+        // Regime shading
+        const regimes = [
+            {x1:tlX1, x2:72, c:GREEN},
+            {x1:72,   x2:82, c:ROSE},
+            {x1:82,   x2:90, c:C},
+            {x1:90,   x2:tlX2, c:GREEN},
+        ];
+        regimes.forEach((rg,i) => {
+            svg.append("rect").attr("x",rg.x1).attr("y",tlY-26).attr("width",rg.x2-rg.x1).attr("height",26)
+                .attr("fill",rg.c).attr("opacity",0)
+                .transition().delay(A_SLOW+A_MEDIUM+i*150).duration(A_MEDIUM).attr("opacity",0.04);
+        });
+
+        // Bottom label
+        svg.append("text").attr("x",78).attr("y",48).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2px").attr("font-family","Poppins")
+            .text("turning points auto-detected per product").attr("opacity",0)
+            .transition().delay(A_SLOW+A_MEDIUM+A_FAST).duration(A_MEDIUM).attr("opacity",0.4);
+
+        // Divider line
+        svg.append("line").attr("x1",57).attr("y1",10).attr("x2",57).attr("y2",48)
+            .attr("stroke","#333").attr("stroke-width",0.3).attr("opacity",0)
+            .transition().delay(A_SLOW).duration(A_FAST).attr("opacity",0.3);
+    }
+
+    // ====================================================================
+    // Slide 11: Simulation — fork, remove, cascade
+    // ====================================================================
+    function drawSlide11(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 68");
+        // --- Left: Original graph ---
+        svg.append("text").attr("x",22).attr("y",5).attr("text-anchor","middle")
+            .attr("fill","#666").attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("Original").attr("opacity",0).transition().delay(200).duration(A_FAST).attr("opacity",0.5);
+        const origNodes = [
+            {x:15,y:15,l:"Toyota",c:GREEN},{x:22,y:27,l:"Camry",c:BLUE},
+            {x:10,y:40,l:"XSE",c:C},{x:22,y:40,l:"XLE",c:C},{x:35,y:27,l:"Accord",c:BLUE},
+        ];
+        origNodes.forEach((n,i) => {
+            svg.append("circle").attr("cx",n.x).attr("cy",n.y).attr("r",0)
+                .attr("fill",n.c).attr("opacity",0.6)
+                .transition().delay(300+i*50).duration(A_FAST).ease(d3.easeBackOut).attr("r",2.5);
+            svg.append("text").attr("x",n.x).attr("y",n.y+5.5).attr("text-anchor","middle")
+                .attr("fill","#777").attr("font-size","2px").attr("font-family","Poppins").text(n.l)
+                .attr("opacity",0).transition().delay(400+i*50).duration(A_FAST).attr("opacity",0.5);
+        });
+        [[15,15,22,27],[22,27,10,40],[22,27,22,40],[10,40,35,27],[22,40,35,27]].forEach(([x1,y1,x2,y2],i) => {
+            svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
+                .attr("stroke","#444").attr("stroke-width",0.5).attr("opacity",0)
+                .transition().delay(500+i*40).duration(A_FAST).attr("opacity",0.3);
+        });
+
+        // --- Arrow ---
+        svg.append("text").attr("x",50).attr("y",28).attr("text-anchor","middle")
+            .attr("fill","#666").attr("font-size","6px").text("\u2192").attr("opacity",0)
+            .transition().delay(A_FAST).duration(A_MEDIUM).attr("opacity",0.4);
+
+        // --- Right: What-if graph ---
+        svg.append("text").attr("x",78).attr("y",5).attr("text-anchor","middle")
+            .attr("fill",G).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("What if?").attr("opacity",0).transition().delay(A_MEDIUM).duration(A_FAST).attr("opacity",0.7);
+        const simNodes = [
+            {x:68,y:15,l:"Toyota",c:GREEN,fade:false},
+            {x:75,y:27,l:"Camry",c:ROSE,fade:true},
+            {x:63,y:40,l:"XSE",c:ROSE,fade:true},
+            {x:75,y:40,l:"XLE",c:ROSE,fade:true},
+            {x:88,y:27,l:"Accord",c:BLUE,fade:false},
+        ];
+        simNodes.forEach((n,i) => {
+            svg.append("circle").attr("cx",n.x).attr("cy",n.y).attr("r",0)
+                .attr("fill",n.c).attr("opacity", n.fade ? 0.2 : 0.6)
+                .transition().delay(A_MEDIUM+200+i*50).duration(A_FAST).ease(d3.easeBackOut).attr("r",2.5);
+            if (n.fade) {
+                svg.append("text").attr("x",n.x).attr("y",n.y+1).attr("text-anchor","middle")
+                    .attr("fill","#fff").attr("font-size","3.5px").attr("font-weight","700")
+                    .text("\u2717").attr("opacity",0)
+                    .transition().delay(A_SLOW+i*60).duration(A_FAST).attr("opacity",0.6);
+            }
+            svg.append("text").attr("x",n.x).attr("y",n.y+5.5).attr("text-anchor","middle")
+                .attr("fill","#777").attr("font-size","2px").attr("font-family","Poppins").text(n.l)
+                .attr("opacity",0).transition().delay(A_MEDIUM+300+i*50).duration(A_FAST).attr("opacity",0.4);
+        });
+        // Broken edges (dashed)
+        [[68,15,75,27],[75,27,63,40],[75,27,75,40]].forEach(([x1,y1,x2,y2],i) => {
+            svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
+                .attr("stroke",ROSE).attr("stroke-width",0.5).attr("stroke-dasharray","2 2").attr("opacity",0)
+                .transition().delay(A_SLOW+i*40).duration(A_FAST).attr("opacity",0.2);
+        });
+
+        // --- Impact label at bottom ---
+        svg.append("text").attr("x",78).attr("y",52).attr("text-anchor","middle")
+            .attr("fill",G).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("Accord gains +238 variants").attr("opacity",0)
+            .transition().delay(A_SLOW+A_FAST).duration(A_FAST).attr("opacity",0.7);
+    }
+
+    // ====================================================================
+    // Slide 12: Dempster-Shafer Belief Calculus
+    // ====================================================================
+    function drawSlide12(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 80");
+
+        // Title
+        svg.append("text").attr("x",50).attr("y",6).attr("text-anchor","middle")
+            .attr("fill","#666").attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+            .text("Dempster-Shafer Belief Combination").attr("opacity",0)
+            .transition().delay(200).duration(A_FAST).attr("opacity",0.6);
+
+        // Four evidence sources (left column)
+        const sources = [
+            {y:16, label:"NLI Head",          sub:"entail/neutral/contradict", c:C},
+            {y:28, label:"Lexical Overlap",   sub:"token similarity",          c:BLUE},
+            {y:40, label:"Temporal Recency",   sub:"freshness decay",           c:GREEN},
+            {y:52, label:"Source Agreement",   sub:"cross-document consensus",  c:PURPLE},
+        ];
+        sources.forEach((s,i) => {
+            svg.append("rect").attr("x",3).attr("y",s.y-4).attr("width",28).attr("height",9)
+                .attr("rx",2).attr("fill",D).attr("stroke",s.c).attr("stroke-width",0.5).attr("opacity",0)
+                .transition().delay(300+i*120).duration(A_FAST).attr("opacity",0.7);
+            svg.append("text").attr("x",17).attr("y",s.y+0.5).attr("text-anchor","middle")
+                .attr("fill",s.c).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(s.label).attr("opacity",0)
+                .transition().delay(400+i*120).duration(A_FAST).attr("opacity",0.8);
+            svg.append("text").attr("x",17).attr("y",s.y+4).attr("text-anchor","middle")
+                .attr("fill","#666").attr("font-size","1.8px").attr("font-family","Poppins")
+                .text(s.sub).attr("opacity",0)
+                .transition().delay(450+i*120).duration(A_FAST).attr("opacity",0.5);
+            // Arrow to combiner
+            svg.append("line").attr("x1",31).attr("y1",s.y).attr("x2",31).attr("y2",s.y)
+                .attr("stroke",s.c).attr("stroke-width",0.6).attr("opacity",0)
+                .transition().delay(600+i*120).duration(A_FAST).ease(d3.easeCubicOut)
+                .attr("x2",42).attr("opacity",0.4);
+        });
+
+        // Dempster combination box (center)
+        svg.append("rect").attr("x",42).attr("y",20).attr("width",18).attr("height",30)
+            .attr("rx",3).attr("fill",D).attr("stroke",G).attr("stroke-width",1).attr("opacity",0)
+            .transition().delay(A_FAST+200).duration(A_FAST).attr("opacity",0.8);
+        svg.append("text").attr("x",51).attr("y",33).attr("text-anchor","middle")
+            .attr("fill",G).attr("font-size","2.8px").attr("font-family","Poppins").attr("font-weight","700")
+            .text("Dempster").attr("opacity",0)
+            .transition().delay(A_FAST+400).duration(A_FAST).attr("opacity",0.9);
+        svg.append("text").attr("x",51).attr("y",38).attr("text-anchor","middle")
+            .attr("fill",G).attr("font-size","2.8px").attr("font-family","Poppins").attr("font-weight","700")
+            .text("Combine").attr("opacity",0)
+            .transition().delay(A_FAST+500).duration(A_FAST).attr("opacity",0.9);
+
+        // Arrow to output
+        svg.append("line").attr("x1",60).attr("y1",35).attr("x2",60).attr("y2",35)
+            .attr("stroke",G).attr("stroke-width",1).attr("opacity",0)
+            .transition().delay(A_MEDIUM).duration(A_FAST).ease(d3.easeCubicOut)
+            .attr("x2",67).attr("opacity",0.6);
+
+        // Output belief bar (right)
+        const beliefs = [
+            {label:"S=0.41", w:14, c:GREEN,  y:22},
+            {label:"R=0.12", w:4,  c:ROSE,   y:31},
+            {label:"U=0.27", w:9,  c:AMBER,  y:40},
+            {label:"\u0398=0.20", w:7,  c:DIM,   y:49},
+        ];
+        beliefs.forEach((b,i) => {
+            svg.append("rect").attr("x",68).attr("y",b.y).attr("width",0).attr("height",6)
+                .attr("rx",1.5).attr("fill",b.c).attr("opacity",0.75)
+                .transition().delay(A_MEDIUM+200+i*100).duration(A_FAST).ease(d3.easeCubicOut).attr("width",b.w);
+            svg.append("text").attr("x",69+b.w).attr("y",b.y+4.5).attr("text-anchor","start")
+                .attr("fill",b.c).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(b.label).attr("opacity",0)
+                .transition().delay(A_MEDIUM+400+i*100).duration(A_FAST).attr("opacity",0.8);
+        });
+
+        // Verdict
+        svg.append("text").attr("x",78).attr("y",62).attr("text-anchor","middle")
+            .attr("fill",GREEN).attr("font-size","3.5px").attr("font-family","Poppins").attr("font-weight","700")
+            .text("SUPPORTS").attr("opacity",0).style("filter","url(#glow)")
+            .transition().delay(A_SLOW).duration(A_MEDIUM).attr("opacity",0.9);
+        svg.append("text").attr("x",78).attr("y",67).attr("text-anchor","middle")
+            .attr("fill","#666").attr("font-size","2px").attr("font-family","Poppins")
+            .text("confidence: 0.41 (pignistic)").attr("opacity",0)
+            .transition().delay(A_SLOW+200).duration(A_FAST).attr("opacity",0.5);
+
+        // Bottom note
+        svg.append("text").attr("x",50).attr("y",76).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2.2px").attr("font-family","Poppins")
+            .text("4 sources \u00d7 N evidences \u2192 one calibrated belief mass \u2192 verdict").attr("opacity",0)
+            .transition().delay(A_SLOW+A_FAST).duration(A_MEDIUM).attr("opacity",0.4);
+    }
+
+    // ====================================================================
+    // Slide 13: Graph MCTS — Tree Search
+    // ====================================================================
+    function drawSlide13(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 80");
+
+        // Tree structure
+        const treeNodes = [
+            {x:50, y:12, label:"Root", sub:"battery_invest", c:C, r:5},
+            {x:28, y:35, label:"NEXT", sub:"ev_share_growth", c:GREEN, r:3.5},
+            {x:72, y:35, label:"NEXT", sub:"recall_cooling", c:ROSE, r:3.5},
+            {x:16, y:56, label:"ANCHOR", sub:"tesla_cost", c:BLUE, r:2.8},
+            {x:40, y:56, label:"ANCHOR", sub:"ford_license", c:BLUE, r:2.8},
+        ];
+
+        // Draw edges first (behind nodes)
+        const edges = [[0,1],[0,2],[1,3],[1,4]];
+        edges.forEach(([from,to],i) => {
+            const f = treeNodes[from], t = treeNodes[to];
+            svg.append("line").attr("x1",f.x).attr("y1",f.y).attr("x2",f.x).attr("y2",f.y)
+                .attr("stroke",t.c).attr("stroke-width",0.8).attr("opacity",0)
+                .transition().delay(A_FAST+i*200).duration(A_FAST).ease(d3.easeCubicOut)
+                .attr("x2",t.x).attr("y2",t.y).attr("opacity",0.5);
+        });
+
+        // Draw nodes
+        treeNodes.forEach((n,i) => {
+            svg.append("circle").attr("cx",n.x).attr("cy",n.y).attr("r",0)
+                .attr("fill",n.c).attr("opacity",0.85)
+                .style("filter", i===0 ? "url(#glow-strong)" : "url(#glow)")
+                .transition().delay(400+i*150).duration(A_FAST).ease(d3.easeBackOut).attr("r",n.r);
+            svg.append("text").attr("x",n.x).attr("y",n.y-n.r-2.5).attr("text-anchor","middle")
+                .attr("fill",n.c).attr("font-size","2.2px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(n.label).attr("opacity",0)
+                .transition().delay(500+i*150).duration(A_FAST).attr("opacity",0.7);
+            svg.append("text").attr("x",n.x).attr("y",n.y+n.r+5).attr("text-anchor","middle")
+                .attr("fill","#777").attr("font-size","1.8px").attr("font-family","Poppins")
+                .text(n.sub).attr("opacity",0)
+                .transition().delay(550+i*150).duration(A_FAST).attr("opacity",0.5);
+        });
+
+        // MCTS phases (right side labels)
+        const phases = [
+            {y:12, label:"SELECT", sub:"UCB1 score", c:AMBER},
+            {y:24, label:"EXPAND", sub:"NEXT + anchors", c:GREEN},
+            {y:36, label:"EVALUATE", sub:"NLI head", c:C},
+            {y:48, label:"BACKPROP", sub:"DS combine", c:G},
+        ];
+        phases.forEach((p,i) => {
+            svg.append("text").attr("x",92).attr("y",p.y).attr("text-anchor","end")
+                .attr("fill",p.c).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(p.label).attr("opacity",0)
+                .transition().delay(A_MEDIUM+i*150).duration(A_FAST).attr("opacity",0.7);
+            svg.append("text").attr("x",92).attr("y",p.y+4).attr("text-anchor","end")
+                .attr("fill","#555").attr("font-size","1.8px").attr("font-family","Poppins")
+                .text(p.sub).attr("opacity",0)
+                .transition().delay(A_MEDIUM+100+i*150).duration(A_FAST).attr("opacity",0.4);
+        });
+
+        // Backpropagation arrows (upward, animated)
+        const T_BACKPROP = A_SLOW + A_FAST;
+        [[16,56,28,35],[40,56,28,35],[28,35,50,12],[72,35,50,12]].forEach(([x1,y1,x2,y2],i) => {
+            svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x1).attr("y2",y1)
+                .attr("stroke",G).attr("stroke-width",1.2).attr("stroke-dasharray","2 2").attr("opacity",0)
+                .style("filter","url(#glow)")
+                .transition().delay(T_BACKPROP+i*200).duration(A_FAST).ease(d3.easeCubicOut)
+                .attr("x2",x2).attr("y2",y2).attr("opacity",0.5);
+        });
+
+        // Result comparison at bottom
+        svg.append("text").attr("x",50).attr("y",70).attr("text-anchor","middle")
+            .attr("fill","#666").attr("font-size","2.5px").attr("font-family","Poppins")
+            .text("Flat: S=0.97 (overconfident)    \u2502    MCTS: S=0.29 R=0.20 (calibrated)").attr("opacity",0)
+            .transition().delay(T_BACKPROP+A_FAST).duration(A_MEDIUM).attr("opacity",0.6);
+
+        // Bottom note
+        svg.append("text").attr("x",50).attr("y",77).attr("text-anchor","middle")
+            .attr("fill","#555").attr("font-size","2px").attr("font-family","Poppins")
+            .text("multi-hop reasoning \u2022 explores refuting branches \u2022 calibrated belief").attr("opacity",0)
+            .transition().delay(T_BACKPROP+A_MEDIUM).duration(A_FAST).attr("opacity",0.4);
+    }
+
+    // ====================================================================
+    // Slide 14: The journey — five layers
+    // ====================================================================
+    function drawSlide14(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "0 0 100 75");
+        const stages = [
+            {x:10, y:25, label:"Text", c:ROSE},
+            {x:30, y:25, label:"Graph", c:C},
+            {x:50, y:25, label:"Belief", c:G},
+            {x:70, y:25, label:"Reason", c:AMBER},
+            {x:90, y:25, label:"Sim", c:PURPLE},
+        ];
+        const items = [
+            ["lookups \u2713","relations \u2717","evidence \u2717","multi-hop \u2717","what-if \u2717"],
+            ["lookups \u2713","relations \u2713","evidence \u2717","multi-hop \u2717","what-if \u2717"],
+            ["lookups \u2713","relations \u2713","evidence \u2713","multi-hop \u2717","what-if \u2717"],
+            ["lookups \u2713","relations \u2713","evidence \u2713","multi-hop \u2713","what-if \u2717"],
+            ["lookups \u2713","relations \u2713","evidence \u2713","multi-hop \u2713","what-if \u2713"],
+        ];
+        // Arrows
+        [19, 39, 59, 79].forEach((x,i) => {
+            svg.append("text").attr("x",x+1).attr("y",27).attr("text-anchor","middle")
+                .attr("fill","#555").attr("font-size","6px").text("\u2192").attr("opacity",0)
+                .transition().delay(A_FAST+i*200).duration(A_FAST).attr("opacity",0.4);
+        });
+        stages.forEach((s,si) => {
+            svg.append("circle").attr("cx",s.x).attr("cy",s.y).attr("r",0)
+                .attr("fill",s.c).attr("opacity",0.8).style("filter","url(#glow)")
+                .transition().delay(300+si*180).duration(A_FAST).ease(d3.easeBackOut).attr("r",7);
+            svg.append("text").attr("x",s.x).attr("y",s.y+1.5).attr("text-anchor","middle")
+                .attr("fill","#0a0a0a").attr("font-size","3px").attr("font-family","Poppins").attr("font-weight","700")
+                .text(s.label).attr("opacity",0)
+                .transition().delay(500+si*180).duration(A_FAST).attr("opacity",1);
+            items[si].forEach((item,ci) => {
+                const ok = item.includes("\u2713");
+                svg.append("text").attr("x",s.x).attr("y",40+ci*6.5).attr("text-anchor","middle")
+                    .attr("fill", ok ? GREEN : "#555").attr("font-size","2px")
+                    .attr("font-family","Poppins").text(item).attr("opacity",0)
+                    .transition().delay(A_FAST+si*180+ci*30).duration(A_FAST).attr("opacity", ok ? 0.7 : 0.35);
+            });
+        });
+    }
+
+    // ====================================================================
+    // Slide 15: Close — radiating connections
+    // ====================================================================
+    function drawSlide15(id) {
+        const svg = d3.select(`#${id}`).append("svg").attr("viewBox", "-5 -5 110 110");
+        svg.append("circle").attr("cx",50).attr("cy",50).attr("r",5).attr("fill",G).style("filter","url(#glow)");
+        // Radiating rings
+        function radiate(delay, color) {
+            svg.append("circle").attr("cx",50).attr("cy",50).attr("r",7)
+                .attr("fill","none").attr("stroke",color).attr("stroke-width",0.8).attr("opacity",0.5)
+                .transition().delay(delay).duration(A_SLOW*2).ease(d3.easeQuadOut)
+                .attr("r",50).attr("opacity",0).remove();
+        }
+        [400,1000,1600,2200,2800].forEach(d => radiate(d, G));
+        setTimeout(() => { [0,600,1200].forEach(d => radiate(d, C)); }, 3000);
+        // Orbiting answer dots
+        const answers = [
+            {label:"185",c:GREEN}, {label:"S=0.41",c:C}, {label:"MCTS",c:AMBER},
+            {label:"belief",c:PURPLE}, {label:"what if?",c:G}, {label:"calibrated",c:ROSE}
+        ];
+        answers.forEach((a,i) => {
+            const startAngle = (i/answers.length)*2*Math.PI;
+            const orb = svg.append("circle").attr("r",2.5).attr("fill",a.c).attr("opacity",0);
+            const lbl = svg.append("text").attr("text-anchor","middle")
+                .attr("fill",a.c).attr("font-size","2.5px").attr("font-family","Poppins").attr("font-weight","600")
+                .text(a.label).attr("opacity",0);
+            setTimeout(() => {
+                d3.timer(function(elapsed) {
+                    const angle = startAngle + elapsed * 0.0008;
+                    const r = 22;
+                    const x = 50 + r * Math.cos(angle);
+                    const y = 50 + r * Math.sin(angle);
+                    orb.attr("cx",x).attr("cy",y).attr("opacity",0.7);
+                    lbl.attr("x",x).attr("y",y+6).attr("opacity",0.5);
+                    return false;
+                });
+            }, 800+i*120);
+        });
+    }
+
+    // ====================================================================
+    // Dispatcher & Navigation
+    // ====================================================================
+    const drawFns = [drawSlide1,drawSlide2,drawSlide3,drawSlide4,drawSlide5,drawSlide6,drawSlide7,drawSlide8,drawSlide9,drawSlide10,drawSlide11,drawSlide12,drawSlide13,drawSlide14,drawSlide15];
+
+    function renderGraphic(i) { clearGraphic(`graphic-${i+1}`); if(drawFns[i]) drawFns[i](`graphic-${i+1}`); }
+
+    function updateCounter() {
+        document.getElementById('slide-counter').textContent = `${currentSlideIndex+1} / ${TOTAL}`;
+        document.getElementById('progress-bar').style.width = `${((currentSlideIndex+1)/TOTAL)*100}%`;
+    }
+
+    function showSlide(index) {
+        if(index<0||index>=TOTAL) return;
+        slides[currentSlideIndex].classList.remove('active');
+        slides[currentSlideIndex].querySelectorAll('.animated-text').forEach(el => el.classList.remove('animated-text'));
+        clearGraphic(`graphic-${currentSlideIndex+1}`);
+        slides[index].classList.add('active');
+        renderGraphic(index);
+        setTimeout(() => {
+            slides[index].querySelectorAll('h2, p, .chapter-label').forEach(el => el.classList.add('animated-text'));
+        }, 100);
+        currentSlideIndex = index;
+        updateCounter();
+    }
+
+    document.addEventListener('keydown', e => {
+        if(e.key==='ArrowRight'||e.key===' ') { e.preventDefault(); showSlide(currentSlideIndex+1); }
+        else if(e.key==='ArrowLeft') showSlide(currentSlideIndex-1);
+    });
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if(dx<-50) showSlide(currentSlideIndex+1); else if(dx>50) showSlide(currentSlideIndex-1);
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        if(location.hash) {
+            const n = parseInt(location.hash.replace('#',''), 10);
+            if(n>=1&&n<=TOTAL) showSlide(n-1); else showSlide(0);
+        } else showSlide(0);
+    });
+</script>
+
+</body>
+</html>

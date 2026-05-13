@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/__init__.py
+# hypothesis_version: 6.148.3
+
+[0.0, 1000, 50000, '0.1.0', 'NEXT', 'anchor_defs', 'anchor_names', 'anchor_types', 'anchors', 'aws', 'backend', 'close', 'config.json', 'constraint_count', 'feature', 'has_sequences', 'infon_count', 'model', 'model_name', 'schema.json', 'shutdown', 'tokens', 'type']

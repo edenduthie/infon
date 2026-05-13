@@ -68,9 +68,13 @@ Schema bootstrap (the two-iteration `extraction_report()` + spectral clustering 
 
 ---
 
-### Decision: LLM call parameters — claude-sonnet-4-6, temperature=0, max_tokens=256
+### Decision: LLM call parameters — AWS Bedrock, claude-sonnet-4-6, temperature=0, max_tokens=256
 
-All LLM calls use `claude-sonnet-4-6` (the same model used in the system's Analyst; consistent across paper). `temperature=0` for determinism (the cache records real API responses; determinism means re-running with the same inputs never produces a different result). `max_tokens=256` is sufficient for the JSON response format with a brief verdict and confidence value.
+All LLM calls use AWS Bedrock (`us.anthropic.claude-sonnet-4-6-20251001-v1:0` cross-region inference endpoint, `us-east-1`). Bedrock is used instead of the Anthropic API directly because the evaluation host has IAM-based Bedrock access and no `ANTHROPIC_API_KEY`. The model is the same (claude-sonnet-4-6); only the transport changes.
+
+The Bedrock Messages API is invoked via `boto3.client("bedrock-runtime", region_name="us-east-1")` with `invoke_model()` using the same message format as the Anthropic SDK. `temperature=0` for determinism. `max_tokens=256` is sufficient for the JSON response format with a brief verdict and confidence value.
+
+The six-component cache key includes the Bedrock model ID: `sha256(model_id + system_prompt + user_prompt + temperature + max_tokens + api_provider)` where `api_provider = "bedrock"`. This ensures the committed cache is never accidentally replayed against a different transport.
 
 **Why `max_tokens=256` and not more:** The prompt instructs the model to respond with a single JSON line. 256 tokens covers any plausible JSON response. Higher limits waste API budget and make the budget guard calculation noisier.
 

@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/encoder.py
+# hypothesis_version: 6.148.3
+
+[256, 2000, '#', 'anchor_defs', 'anchor_names', 'anchor_types', 'attention_mask', 'config.json', 'cpu', 'cuda', 'ed', 'en', 'end', 'er', 'feature', 'get_vocab', 'ignore', 'ing', 'input_ids', 'ly', 'max_length', 'model', 'model_name', 'mps', 'multilingual', 'pt', 's', 'schema.json', 'splade-tiny', 'start', 'text', 'tiny', 'tion', 'tokens', 'type', 'xlmr', '|', '▁']

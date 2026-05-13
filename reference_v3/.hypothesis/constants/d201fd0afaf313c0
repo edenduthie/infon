@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/extract.py
+# hypothesis_version: 6.148.3
+
+[0.0, 1e-08, 0.5, 0.8, 1.0, 'ASSERTS', 'INITIATES', 'LOCATED_AT', 'TARGETS', '\\b(\\d{4})\\b', 'conditional', 'confidence', 'country', 'country_code', 'direct', 'doc_id', 'end', 'future', 'half', 'hierarchical', 'id', 'inf_', 'inferred', 'level', 'macro_region', 'month', 'name', 'object', 'object_meta', 'past', 'precision', 'predicate', 'predicate_meta', 'present', 'present_continuous', 'quarter', 'relative', 'semantic', 'source', 'start', 'subject', 'subject_meta', 'text', 'timestamp', 'tokens', 'ts', 'type', 'unknown', 'year', '|']

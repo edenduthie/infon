@@ -1,0 +1,33 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.egg-info/
+.env
+*.db
+*.db.bak
+.ipynb_checkpoints/
+.hypothesis/
+.pytest_cache/
+data/situation_index/
+
+# Large data files (use HuggingFace datasets API instead)
+benchmarks/data/
+benchmarks/results/
+cognition/data/training_samples*.json
+*.zip
+
+# Visual cognition (separate project)
+visual-cognition/
+
+# Large model weights / experiments — not part of the shipping workshop
+# (the bundled SPLADE-tiny model ships: see cognition/src/cognition/model/)
+cognition/yolov8n.pt
+cognition/demo_chimera/data/
+experiments/gnn_supply_chain/
+sparse-train/
+training-kit/
+*.npy
+
+# Ignore stray .pt files *except* the bundled model weights
+*.pt
+!cognition/src/cognition/model/*.pt

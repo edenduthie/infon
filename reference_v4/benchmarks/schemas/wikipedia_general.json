@@ -1,0 +1,106 @@
+{
+  "person": {
+    "type": "actor",
+    "tokens": ["person", "people", "man", "woman", "he", "she", "who"]
+  },
+  "organization": {
+    "type": "actor",
+    "tokens": ["organization", "company", "team", "group", "party", "band", "university", "school", "institution"]
+  },
+  "government": {
+    "type": "actor",
+    "tokens": ["government", "state", "country", "nation", "president", "minister", "military"]
+  },
+  "located_in": {
+    "type": "relation",
+    "tokens": ["located", "based", "situated", "in", "at", "from"]
+  },
+  "is_a": {
+    "type": "relation",
+    "tokens": ["is", "was", "are", "were", "being", "type", "kind"]
+  },
+  "part_of": {
+    "type": "relation",
+    "tokens": ["part", "member", "belongs", "within", "included", "contains"]
+  },
+  "created": {
+    "type": "relation",
+    "tokens": ["created", "made", "built", "wrote", "produced", "directed", "founded", "invented"]
+  },
+  "performed": {
+    "type": "relation",
+    "tokens": ["performed", "played", "acted", "sang", "starred", "appeared"]
+  },
+  "occurred": {
+    "type": "relation",
+    "tokens": ["occurred", "happened", "took", "held", "began", "ended", "started"]
+  },
+  "won": {
+    "type": "relation",
+    "tokens": ["won", "awarded", "received", "earned", "achieved", "gained"]
+  },
+  "defeated": {
+    "type": "relation",
+    "tokens": ["defeated", "beat", "lost", "against", "versus", "competed"]
+  },
+  "born": {
+    "type": "relation",
+    "tokens": ["born", "birth", "native", "grew"]
+  },
+  "died": {
+    "type": "relation",
+    "tokens": ["died", "death", "killed", "passed"]
+  },
+  "released": {
+    "type": "relation",
+    "tokens": ["released", "published", "launched", "premiered", "debuted"]
+  },
+  "named": {
+    "type": "relation",
+    "tokens": ["named", "called", "known", "titled", "renamed"]
+  },
+  "succeeded": {
+    "type": "relation",
+    "tokens": ["succeeded", "replaced", "followed", "preceded", "after", "before"]
+  },
+  "place": {
+    "type": "feature",
+    "tokens": ["city", "town", "village", "place", "area", "district", "region", "province"]
+  },
+  "country": {
+    "type": "feature",
+    "tokens": ["country", "nation", "republic", "kingdom", "empire"]
+  },
+  "date": {
+    "type": "feature",
+    "tokens": ["year", "date", "century", "decade", "era", "period"]
+  },
+  "number": {
+    "type": "feature",
+    "tokens": ["number", "total", "amount", "population", "million", "billion", "thousand"]
+  },
+  "work": {
+    "type": "feature",
+    "tokens": ["film", "movie", "album", "song", "book", "novel", "series", "show"]
+  },
+  "event": {
+    "type": "feature",
+    "tokens": ["war", "battle", "election", "tournament", "championship", "festival", "ceremony"]
+  },
+  "award": {
+    "type": "feature",
+    "tokens": ["award", "prize", "medal", "trophy", "honor", "nomination"]
+  },
+  "language": {
+    "type": "feature",
+    "tokens": ["language", "english", "french", "spanish", "german", "chinese", "arabic"]
+  },
+  "science": {
+    "type": "feature",
+    "tokens": ["science", "theory", "discovery", "research", "experiment", "study"]
+  },
+  "sport": {
+    "type": "feature",
+    "tokens": ["sport", "game", "season", "league", "cup", "match", "race"]
+  }
+}

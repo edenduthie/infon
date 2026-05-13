@@ -1,0 +1,21 @@
+{
+  "toyota": {
+    "type": "actor",
+    "tokens": [
+      "toyota"
+    ]
+  },
+  "invest": {
+    "type": "relation",
+    "tokens": [
+      "invest",
+      "investment"
+    ]
+  },
+  "battery": {
+    "type": "feature",
+    "tokens": [
+      "battery"
+    ]
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "toyota": {
+    "type": "actor",
+    "tokens": [
+      "toyota"
+    ],
+    "country_code": "JP"
+  },
+  "tesla": {
+    "type": "actor",
+    "tokens": [
+      "tesla"
+    ],
+    "country_code": "US"
+  },
+  "ford": {
+    "type": "actor",
+    "tokens": [
+      "ford"
+    ],
+    "country_code": "US"
+  },
+  "bmw": {
+    "type": "actor",
+    "tokens": [
+      "bmw"
+    ],
+    "country_code": "DE"
+  },
+  "byd": {
+    "type": "actor",
+    "tokens": [
+      "byd"
+    ],
+    "country_code": "CN"
+  },
+  "panasonic": {
+    "type": "actor",
+    "tokens": [
+      "panasonic"
+    ],
+    "country_code": "JP"
+  },
+  "invest": {
+    "type": "relation",
+    "tokens": [
+      "invest",
+      "investment",
+      "investing"
+    ]
+  },
+  "launch": {
+    "type": "relation",
+    "tokens": [
+      "launch",
+      "unveil",
+      "introduce",
+      "release"
+    ]
+  },
+  "partner": {
+    "type": "relation",
+    "tokens": [
+      "partner",
+      "partnership",
+      "collaborate",
+      "alliance"
+    ]
+  },
+  "expand": {
+    "type": "relation",
+    "tokens": [
+      "expand",
+      "expansion",
+      "grow",
+      "growth"
+    ]
+  },
+  "decline": {
+    "type": "relation",
+    "tokens": [
+      "decline",
+      "drop",
+      "fall",
+      "decrease"
+    ]
+  },
+  "delay": {
+    "type": "relation",
+    "tokens": [
+      "delay",
+      "postpone",
+      "push back"
+    ]
+  },
+  "battery": {
+    "type": "feature",
+    "tokens": [
+      "battery",
+      "batteries"
+    ]
+  },
+  "ev": {
+    "type": "feature",
+    "tokens": [
+      "ev",
+      "electric vehicle",
+      "electric"
+    ]
+  },
+  "solid_state": {
+    "type": "feature",
+    "tokens": [
+      "solid-state",
+      "solid state"
+    ]
+  },
+  "autonomous": {
+    "type": "feature",
+    "tokens": [
+      "autonomous",
+      "self-driving",
+      "autopilot"
+    ]
+  },
+  "us": {
+    "type": "market",
+    "tokens": [
+      "us",
+      "united states",
+      "america"
+    ]
+  },
+  "europe": {
+    "type": "market",
+    "tokens": [
+      "europe",
+      "european"
+    ]
+  },
+  "china": {
+    "type": "market",
+    "tokens": [
+      "china",
+      "chinese"
+    ]
+  }
+}

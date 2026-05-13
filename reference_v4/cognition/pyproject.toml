@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cognition"
+version = "0.1.0"
+description = "Document → infon → temporal knowledge graph. SPLADE + schema projection. Local or AWS."
+requires-python = ">=3.11"
+license = "Apache-2.0"
+dependencies = [
+    "torch>=2.0",
+    "transformers>=4.40",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+aws = ["boto3>=1.28"]
+all = ["boto3>=1.28"]
+
+[project.scripts]
+cognition = "cognition.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cognition = ["model/*"]

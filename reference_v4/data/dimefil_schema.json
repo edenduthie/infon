@@ -1,0 +1,3963 @@
+{
+  "diplomatic": {
+    "type": "relation",
+    "tokens": [
+      "diplomatic",
+      "diplomacy",
+      "diplomat"
+    ],
+    "level": "L1"
+  },
+  "bilateral_relations": {
+    "type": "relation",
+    "tokens": [
+      "bilateral",
+      "relations"
+    ],
+    "level": "L2",
+    "parent": "diplomatic"
+  },
+  "state_visits": {
+    "type": "relation",
+    "tokens": [
+      "visit",
+      "summit",
+      "meeting",
+      "delegation"
+    ],
+    "level": "L3",
+    "parent": "bilateral_relations"
+  },
+  "diplomatic_recognition": {
+    "type": "relation",
+    "tokens": [
+      "recognition",
+      "recognize",
+      "recognise",
+      "sever"
+    ],
+    "level": "L3",
+    "parent": "bilateral_relations"
+  },
+  "embassy_operations": {
+    "type": "relation",
+    "tokens": [
+      "embassy",
+      "consulate",
+      "ambassador",
+      "consular"
+    ],
+    "level": "L3",
+    "parent": "bilateral_relations"
+  },
+  "bilateral_agreements": {
+    "type": "relation",
+    "tokens": [
+      "treaty",
+      "agreement",
+      "pact",
+      "memorandum",
+      "ratification"
+    ],
+    "level": "L3",
+    "parent": "bilateral_relations"
+  },
+  "multilateral_engagement": {
+    "type": "relation",
+    "tokens": [
+      "multilateral",
+      "international organization"
+    ],
+    "level": "L2",
+    "parent": "diplomatic"
+  },
+  "intl_organizations": {
+    "type": "relation",
+    "tokens": [
+      "united nations",
+      "un",
+      "security council",
+      "general assembly"
+    ],
+    "level": "L3",
+    "parent": "multilateral_engagement"
+  },
+  "regional_organizations": {
+    "type": "relation",
+    "tokens": [
+      "asean",
+      "nato",
+      "eu",
+      "african union",
+      "aukus",
+      "quad"
+    ],
+    "level": "L3",
+    "parent": "multilateral_engagement"
+  },
+  "multilateral_treaties": {
+    "type": "relation",
+    "tokens": [
+      "multilateral treaty",
+      "arms control",
+      "non-proliferation"
+    ],
+    "level": "L3",
+    "parent": "multilateral_engagement"
+  },
+  "procedural_warfare": {
+    "type": "relation",
+    "tokens": [
+      "procedural",
+      "agenda",
+      "accreditation",
+      "veto"
+    ],
+    "level": "L3",
+    "parent": "multilateral_engagement"
+  },
+  "diplomatic_pressure": {
+    "type": "relation",
+    "tokens": [
+      "protest",
+      "condemn",
+      "pressure"
+    ],
+    "level": "L2",
+    "parent": "diplomatic"
+  },
+  "formal_protests": {
+    "type": "relation",
+    "tokens": [
+      "protest",
+      "condemnation",
+      "demarche",
+      "summon",
+      "boycott"
+    ],
+    "level": "L3",
+    "parent": "diplomatic_pressure"
+  },
+  "diplomatic_isolation": {
+    "type": "relation",
+    "tokens": [
+      "isolation",
+      "quarantine",
+      "exclusion",
+      "travel ban"
+    ],
+    "level": "L3",
+    "parent": "diplomatic_pressure"
+  },
+  "peace_mediation": {
+    "type": "relation",
+    "tokens": [
+      "peace",
+      "mediation",
+      "ceasefire"
+    ],
+    "level": "L2",
+    "parent": "diplomatic"
+  },
+  "conflict_resolution": {
+    "type": "relation",
+    "tokens": [
+      "peace process",
+      "ceasefire",
+      "armistice",
+      "peace treaty"
+    ],
+    "level": "L3",
+    "parent": "peace_mediation"
+  },
+  "mediation_facilitation": {
+    "type": "relation",
+    "tokens": [
+      "mediation",
+      "mediator",
+      "arbitration",
+      "shuttle diplomacy"
+    ],
+    "level": "L3",
+    "parent": "peace_mediation"
+  },
+  "normalization_ops": {
+    "type": "relation",
+    "tokens": [
+      "normalization",
+      "threshold",
+      "legitimization"
+    ],
+    "level": "L2",
+    "parent": "diplomatic"
+  },
+  "threshold_shifting": {
+    "type": "relation",
+    "tokens": [
+      "threshold",
+      "erosion",
+      "precedent",
+      "overton"
+    ],
+    "level": "L3",
+    "parent": "normalization_ops"
+  },
+  "legitimization": {
+    "type": "relation",
+    "tokens": [
+      "legitimization",
+      "justification",
+      "reinterpretation"
+    ],
+    "level": "L3",
+    "parent": "normalization_ops"
+  },
+  "informational": {
+    "type": "relation",
+    "tokens": [
+      "information",
+      "informational",
+      "media",
+      "propaganda"
+    ],
+    "level": "L1"
+  },
+  "strategic_comms": {
+    "type": "relation",
+    "tokens": [
+      "strategic communication",
+      "public diplomacy",
+      "messaging"
+    ],
+    "level": "L2",
+    "parent": "informational"
+  },
+  "public_diplomacy": {
+    "type": "relation",
+    "tokens": [
+      "broadcasting",
+      "cultural center",
+      "exchange program",
+      "branding"
+    ],
+    "level": "L3",
+    "parent": "strategic_comms"
+  },
+  "government_messaging": {
+    "type": "relation",
+    "tokens": [
+      "government statement",
+      "press conference",
+      "white paper",
+      "announcement"
+    ],
+    "level": "L3",
+    "parent": "strategic_comms"
+  },
+  "info_operations": {
+    "type": "relation",
+    "tokens": [
+      "information operation",
+      "influence operation"
+    ],
+    "level": "L2",
+    "parent": "informational"
+  },
+  "propaganda_influence": {
+    "type": "relation",
+    "tokens": [
+      "propaganda",
+      "influence",
+      "bot",
+      "astroturfing",
+      "troll"
+    ],
+    "level": "L3",
+    "parent": "info_operations"
+  },
+  "disinformation": {
+    "type": "relation",
+    "tokens": [
+      "disinformation",
+      "deepfake",
+      "false flag",
+      "forgery",
+      "conspiracy"
+    ],
+    "level": "L3",
+    "parent": "info_operations"
+  },
+  "info_warfare": {
+    "type": "relation",
+    "tokens": [
+      "cognitive warfare",
+      "psyop",
+      "narrative warfare",
+      "memetic"
+    ],
+    "level": "L3",
+    "parent": "info_operations"
+  },
+  "cyber_info_ops": {
+    "type": "relation",
+    "tokens": [
+      "cyber information",
+      "hack",
+      "leak"
+    ],
+    "level": "L2",
+    "parent": "informational"
+  },
+  "cyber_enabled_info": {
+    "type": "relation",
+    "tokens": [
+      "defacement",
+      "hijacking",
+      "hack and release",
+      "doxxing"
+    ],
+    "level": "L3",
+    "parent": "cyber_info_ops"
+  },
+  "info_control": {
+    "type": "relation",
+    "tokens": [
+      "internet shutdown",
+      "censorship",
+      "blocking",
+      "throttling",
+      "vpn"
+    ],
+    "level": "L3",
+    "parent": "cyber_info_ops"
+  },
+  "leak_ecosystem": {
+    "type": "relation",
+    "tokens": [
+      "leak",
+      "whistleblower",
+      "journalist asset",
+      "timed release"
+    ],
+    "level": "L3",
+    "parent": "cyber_info_ops"
+  },
+  "media_journalism": {
+    "type": "relation",
+    "tokens": [
+      "media",
+      "journalism",
+      "press"
+    ],
+    "level": "L2",
+    "parent": "informational"
+  },
+  "media_relations": {
+    "type": "relation",
+    "tokens": [
+      "interview",
+      "press embargo",
+      "accreditation",
+      "correspondent"
+    ],
+    "level": "L3",
+    "parent": "media_journalism"
+  },
+  "media_control": {
+    "type": "relation",
+    "tokens": [
+      "media closure",
+      "censorship",
+      "editorial control",
+      "journalist arrest"
+    ],
+    "level": "L3",
+    "parent": "media_journalism"
+  },
+  "military": {
+    "type": "relation",
+    "tokens": [
+      "military",
+      "armed forces",
+      "defense",
+      "defence"
+    ],
+    "level": "L1"
+  },
+  "force_projection": {
+    "type": "relation",
+    "tokens": [
+      "force projection",
+      "combat",
+      "strike",
+      "operation"
+    ],
+    "level": "L2",
+    "parent": "military"
+  },
+  "combat_operations": {
+    "type": "relation",
+    "tokens": [
+      "invasion",
+      "strike",
+      "bombardment",
+      "bombing",
+      "missile",
+      "drone",
+      "raid"
+    ],
+    "level": "L3",
+    "parent": "force_projection"
+  },
+  "military_posturing": {
+    "type": "relation",
+    "tokens": [
+      "exercise",
+      "drill",
+      "mobilization",
+      "weapons test",
+      "parade"
+    ],
+    "level": "L3",
+    "parent": "force_projection"
+  },
+  "naval_operations": {
+    "type": "relation",
+    "tokens": [
+      "naval",
+      "blockade",
+      "carrier",
+      "submarine",
+      "escort",
+      "mine"
+    ],
+    "level": "L3",
+    "parent": "force_projection"
+  },
+  "air_operations": {
+    "type": "relation",
+    "tokens": [
+      "no-fly zone",
+      "air patrol",
+      "reconnaissance",
+      "airlift",
+      "bomber"
+    ],
+    "level": "L3",
+    "parent": "force_projection"
+  },
+  "maritime_gray_zone": {
+    "type": "relation",
+    "tokens": [
+      "coast guard",
+      "harassment",
+      "ramming",
+      "fishing fleet",
+      "militia"
+    ],
+    "level": "L3",
+    "parent": "force_projection"
+  },
+  "military_presence": {
+    "type": "relation",
+    "tokens": [
+      "military base",
+      "deployment",
+      "basing"
+    ],
+    "level": "L2",
+    "parent": "military"
+  },
+  "forward_deployment": {
+    "type": "relation",
+    "tokens": [
+      "base establishment",
+      "forward operating",
+      "troop rotation",
+      "advisor"
+    ],
+    "level": "L3",
+    "parent": "military_presence"
+  },
+  "base_operations": {
+    "type": "relation",
+    "tokens": [
+      "base expansion",
+      "base closure",
+      "port access",
+      "overflight",
+      "logistics hub"
+    ],
+    "level": "L3",
+    "parent": "military_presence"
+  },
+  "defense_cooperation": {
+    "type": "relation",
+    "tokens": [
+      "defense cooperation",
+      "military assistance",
+      "alliance"
+    ],
+    "level": "L2",
+    "parent": "military"
+  },
+  "military_assistance": {
+    "type": "relation",
+    "tokens": [
+      "military sales",
+      "military financing",
+      "training",
+      "equipping"
+    ],
+    "level": "L3",
+    "parent": "defense_cooperation"
+  },
+  "alliance_operations": {
+    "type": "relation",
+    "tokens": [
+      "alliance",
+      "collective defense",
+      "article 5",
+      "burden sharing"
+    ],
+    "level": "L3",
+    "parent": "defense_cooperation"
+  },
+  "unconventional_warfare": {
+    "type": "relation",
+    "tokens": [
+      "unconventional",
+      "proxy",
+      "irregular",
+      "guerrilla"
+    ],
+    "level": "L2",
+    "parent": "military"
+  },
+  "proxy_operations": {
+    "type": "relation",
+    "tokens": [
+      "proxy",
+      "militia",
+      "mercenary",
+      "private military",
+      "foreign fighter"
+    ],
+    "level": "L3",
+    "parent": "unconventional_warfare"
+  },
+  "irregular_warfare": {
+    "type": "relation",
+    "tokens": [
+      "guerrilla",
+      "insurgency",
+      "sabotage",
+      "subversion",
+      "coup"
+    ],
+    "level": "L3",
+    "parent": "unconventional_warfare"
+  },
+  "wmd_strategic": {
+    "type": "relation",
+    "tokens": [
+      "nuclear",
+      "wmd",
+      "missile",
+      "chemical",
+      "biological"
+    ],
+    "level": "L2",
+    "parent": "military"
+  },
+  "nuclear_operations": {
+    "type": "relation",
+    "tokens": [
+      "nuclear test",
+      "nuclear alert",
+      "nuclear doctrine",
+      "nuclear umbrella"
+    ],
+    "level": "L3",
+    "parent": "wmd_strategic"
+  },
+  "missile_operations": {
+    "type": "relation",
+    "tokens": [
+      "ballistic missile",
+      "cruise missile",
+      "hypersonic",
+      "anti-satellite"
+    ],
+    "level": "L3",
+    "parent": "wmd_strategic"
+  },
+  "cbrn_operations": {
+    "type": "relation",
+    "tokens": [
+      "chemical weapon",
+      "biological weapon",
+      "radiological"
+    ],
+    "level": "L3",
+    "parent": "wmd_strategic"
+  },
+  "space_cyber_mil": {
+    "type": "relation",
+    "tokens": [
+      "space military",
+      "cyber military"
+    ],
+    "level": "L2",
+    "parent": "military"
+  },
+  "space_operations": {
+    "type": "relation",
+    "tokens": [
+      "satellite",
+      "anti-satellite",
+      "space weapon",
+      "orbital"
+    ],
+    "level": "L3",
+    "parent": "space_cyber_mil"
+  },
+  "cyber_mil_operations": {
+    "type": "relation",
+    "tokens": [
+      "offensive cyber",
+      "cyber espionage",
+      "cyber attack",
+      "cyber implant"
+    ],
+    "level": "L3",
+    "parent": "space_cyber_mil"
+  },
+  "escalation_mgmt": {
+    "type": "relation",
+    "tokens": [
+      "escalation",
+      "de-escalation"
+    ],
+    "level": "L2",
+    "parent": "military"
+  },
+  "escalation_control": {
+    "type": "relation",
+    "tokens": [
+      "escalation signal",
+      "escalation pause",
+      "proportional response"
+    ],
+    "level": "L3",
+    "parent": "escalation_mgmt"
+  },
+  "deescalation_ops": {
+    "type": "relation",
+    "tokens": [
+      "off-ramp",
+      "step-back",
+      "confidence building"
+    ],
+    "level": "L3",
+    "parent": "escalation_mgmt"
+  },
+  "economic": {
+    "type": "relation",
+    "tokens": [
+      "economic",
+      "economy",
+      "trade"
+    ],
+    "level": "L1"
+  },
+  "trade_policy": {
+    "type": "relation",
+    "tokens": [
+      "trade policy",
+      "tariff",
+      "trade"
+    ],
+    "level": "L2",
+    "parent": "economic"
+  },
+  "tariffs_duties": {
+    "type": "relation",
+    "tokens": [
+      "tariff",
+      "duty",
+      "customs",
+      "anti-dumping",
+      "countervailing"
+    ],
+    "level": "L3",
+    "parent": "trade_policy"
+  },
+  "trade_agreements": {
+    "type": "relation",
+    "tokens": [
+      "free trade",
+      "trade agreement",
+      "customs union",
+      "common market"
+    ],
+    "level": "L3",
+    "parent": "trade_policy"
+  },
+  "import_export_controls": {
+    "type": "relation",
+    "tokens": [
+      "export ban",
+      "import ban",
+      "quota",
+      "licensing",
+      "export control"
+    ],
+    "level": "L3",
+    "parent": "trade_policy"
+  },
+  "economic_sanctions": {
+    "type": "relation",
+    "tokens": [
+      "sanction",
+      "embargo"
+    ],
+    "level": "L2",
+    "parent": "economic"
+  },
+  "comprehensive_sanctions": {
+    "type": "relation",
+    "tokens": [
+      "embargo",
+      "economic embargo",
+      "arms embargo",
+      "comprehensive sanction"
+    ],
+    "level": "L3",
+    "parent": "economic_sanctions"
+  },
+  "targeted_sanctions": {
+    "type": "relation",
+    "tokens": [
+      "targeted sanction",
+      "asset freeze",
+      "entity list",
+      "secondary sanction"
+    ],
+    "level": "L3",
+    "parent": "economic_sanctions"
+  },
+  "export_controls": {
+    "type": "relation",
+    "tokens": [
+      "dual-use",
+      "technology control",
+      "export restriction"
+    ],
+    "level": "L3",
+    "parent": "economic_sanctions"
+  },
+  "humanitarian_econ_warfare": {
+    "type": "relation",
+    "tokens": [
+      "humanitarian exemption",
+      "food security",
+      "aid diversion"
+    ],
+    "level": "L3",
+    "parent": "economic_sanctions"
+  },
+  "investment_capital": {
+    "type": "relation",
+    "tokens": [
+      "investment",
+      "capital",
+      "fdi"
+    ],
+    "level": "L2",
+    "parent": "economic"
+  },
+  "fdi": {
+    "type": "relation",
+    "tokens": [
+      "foreign direct investment",
+      "fdi",
+      "sovereign wealth",
+      "nationalization",
+      "expropriation"
+    ],
+    "level": "L3",
+    "parent": "investment_capital"
+  },
+  "development_finance": {
+    "type": "relation",
+    "tokens": [
+      "development loan",
+      "infrastructure investment",
+      "belt and road",
+      "debt trap"
+    ],
+    "level": "L3",
+    "parent": "investment_capital"
+  },
+  "sovereign_debt_weapon": {
+    "type": "relation",
+    "tokens": [
+      "sovereign debt",
+      "collateral",
+      "cross-default"
+    ],
+    "level": "L3",
+    "parent": "investment_capital"
+  },
+  "economic_coercion": {
+    "type": "relation",
+    "tokens": [
+      "economic coercion",
+      "market access"
+    ],
+    "level": "L2",
+    "parent": "economic"
+  },
+  "market_access": {
+    "type": "relation",
+    "tokens": [
+      "market access denial",
+      "discriminatory",
+      "regulatory harassment",
+      "boycott"
+    ],
+    "level": "L3",
+    "parent": "economic_coercion"
+  },
+  "supply_chain": {
+    "type": "relation",
+    "tokens": [
+      "supply chain",
+      "critical input",
+      "rare earth",
+      "energy cutoff"
+    ],
+    "level": "L3",
+    "parent": "economic_coercion"
+  },
+  "chokepoint_control": {
+    "type": "relation",
+    "tokens": [
+      "chokepoint",
+      "critical mineral",
+      "shipping insurance",
+      "port terminal"
+    ],
+    "level": "L3",
+    "parent": "economic_coercion"
+  },
+  "economic_cooperation": {
+    "type": "relation",
+    "tokens": [
+      "economic cooperation",
+      "economic integration"
+    ],
+    "level": "L2",
+    "parent": "economic"
+  },
+  "economic_integration": {
+    "type": "relation",
+    "tokens": [
+      "economic union",
+      "currency union",
+      "single market",
+      "economic corridor"
+    ],
+    "level": "L3",
+    "parent": "economic_cooperation"
+  },
+  "industrial_cooperation": {
+    "type": "relation",
+    "tokens": [
+      "joint venture",
+      "technology transfer",
+      "standards harmonization"
+    ],
+    "level": "L3",
+    "parent": "economic_cooperation"
+  },
+  "resource_energy": {
+    "type": "relation",
+    "tokens": [
+      "resource",
+      "energy",
+      "pipeline"
+    ],
+    "level": "L2",
+    "parent": "economic"
+  },
+  "energy_policy": {
+    "type": "relation",
+    "tokens": [
+      "energy export",
+      "pipeline",
+      "energy price",
+      "strategic reserve"
+    ],
+    "level": "L3",
+    "parent": "resource_energy"
+  },
+  "resource_control": {
+    "type": "relation",
+    "tokens": [
+      "nationalization",
+      "mining rights",
+      "fishing rights",
+      "water resource"
+    ],
+    "level": "L3",
+    "parent": "resource_energy"
+  },
+  "economic_restructuring": {
+    "type": "relation",
+    "tokens": [
+      "decoupling",
+      "reshoring",
+      "friend-shoring"
+    ],
+    "level": "L2",
+    "parent": "economic"
+  },
+  "decoupling_ops": {
+    "type": "relation",
+    "tokens": [
+      "reshoring",
+      "friend-shoring",
+      "near-shoring",
+      "strategic autonomy",
+      "decoupling"
+    ],
+    "level": "L3",
+    "parent": "economic_restructuring"
+  },
+  "recoupling_ops": {
+    "type": "relation",
+    "tokens": [
+      "integration reversal",
+      "dependency reduction",
+      "critical mineral independence"
+    ],
+    "level": "L3",
+    "parent": "economic_restructuring"
+  },
+  "financial": {
+    "type": "relation",
+    "tokens": [
+      "financial",
+      "finance",
+      "banking",
+      "monetary"
+    ],
+    "level": "L1"
+  },
+  "monetary_policy": {
+    "type": "relation",
+    "tokens": [
+      "monetary policy",
+      "currency",
+      "central bank"
+    ],
+    "level": "L2",
+    "parent": "financial"
+  },
+  "currency_operations": {
+    "type": "relation",
+    "tokens": [
+      "currency manipulation",
+      "devaluation",
+      "de-dollarization",
+      "digital currency"
+    ],
+    "level": "L3",
+    "parent": "monetary_policy"
+  },
+  "central_bank_actions": {
+    "type": "relation",
+    "tokens": [
+      "interest rate",
+      "quantitative easing",
+      "reserve freeze",
+      "swap line"
+    ],
+    "level": "L3",
+    "parent": "monetary_policy"
+  },
+  "banking_payments": {
+    "type": "relation",
+    "tokens": [
+      "banking",
+      "payment",
+      "swift"
+    ],
+    "level": "L2",
+    "parent": "financial"
+  },
+  "banking_restrictions": {
+    "type": "relation",
+    "tokens": [
+      "swift",
+      "correspondent banking",
+      "transaction blocking",
+      "wire transfer"
+    ],
+    "level": "L3",
+    "parent": "banking_payments"
+  },
+  "alt_payment_systems": {
+    "type": "relation",
+    "tokens": [
+      "alternative payment",
+      "cryptocurrency",
+      "barter",
+      "local currency",
+      "cbdc"
+    ],
+    "level": "L3",
+    "parent": "banking_payments"
+  },
+  "capital_markets": {
+    "type": "relation",
+    "tokens": [
+      "capital market",
+      "stock market",
+      "bond"
+    ],
+    "level": "L2",
+    "parent": "financial"
+  },
+  "financial_market_access": {
+    "type": "relation",
+    "tokens": [
+      "capital market ban",
+      "ipo blocking",
+      "delisting",
+      "bond market"
+    ],
+    "level": "L3",
+    "parent": "capital_markets"
+  },
+  "market_manipulation": {
+    "type": "relation",
+    "tokens": [
+      "market manipulation",
+      "short selling",
+      "credit rating",
+      "flash crash"
+    ],
+    "level": "L3",
+    "parent": "capital_markets"
+  },
+  "intl_finance": {
+    "type": "relation",
+    "tokens": [
+      "international finance",
+      "imf",
+      "world bank"
+    ],
+    "level": "L2",
+    "parent": "financial"
+  },
+  "multilateral_finance": {
+    "type": "relation",
+    "tokens": [
+      "imf",
+      "world bank",
+      "development bank",
+      "multilateral loan"
+    ],
+    "level": "L3",
+    "parent": "intl_finance"
+  },
+  "debt_operations": {
+    "type": "relation",
+    "tokens": [
+      "sovereign debt",
+      "debt default",
+      "vulture fund",
+      "debt restructuring"
+    ],
+    "level": "L3",
+    "parent": "intl_finance"
+  },
+  "financial_crime": {
+    "type": "relation",
+    "tokens": [
+      "money laundering",
+      "financial crime"
+    ],
+    "level": "L2",
+    "parent": "financial"
+  },
+  "aml": {
+    "type": "relation",
+    "tokens": [
+      "anti-money laundering",
+      "aml",
+      "fatf",
+      "kyc",
+      "suspicious activity"
+    ],
+    "level": "L3",
+    "parent": "financial_crime"
+  },
+  "asset_recovery": {
+    "type": "relation",
+    "tokens": [
+      "asset seizure",
+      "forfeiture",
+      "unexplained wealth",
+      "shell company"
+    ],
+    "level": "L3",
+    "parent": "financial_crime"
+  },
+  "fintech_disruption": {
+    "type": "relation",
+    "tokens": [
+      "fintech",
+      "digital payment",
+      "defi"
+    ],
+    "level": "L2",
+    "parent": "financial"
+  },
+  "fintech_weapon": {
+    "type": "relation",
+    "tokens": [
+      "payment platform ban",
+      "mobile money",
+      "blockchain",
+      "defi",
+      "stablecoin"
+    ],
+    "level": "L3",
+    "parent": "fintech_disruption"
+  },
+  "financial_infra": {
+    "type": "relation",
+    "tokens": [
+      "financial data center",
+      "trading system",
+      "high-frequency trading"
+    ],
+    "level": "L3",
+    "parent": "fintech_disruption"
+  },
+  "intelligence": {
+    "type": "relation",
+    "tokens": [
+      "intelligence",
+      "espionage",
+      "spy"
+    ],
+    "level": "L1"
+  },
+  "humint": {
+    "type": "relation",
+    "tokens": [
+      "humint",
+      "human intelligence",
+      "agent"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "agent_operations": {
+    "type": "relation",
+    "tokens": [
+      "agent recruitment",
+      "infiltration",
+      "deep cover",
+      "double agent",
+      "honeytrap"
+    ],
+    "level": "L3",
+    "parent": "humint"
+  },
+  "diplomatic_intelligence": {
+    "type": "relation",
+    "tokens": [
+      "diplomatic cover",
+      "intelligence station",
+      "commercial cover",
+      "noc"
+    ],
+    "level": "L3",
+    "parent": "humint"
+  },
+  "sigint": {
+    "type": "relation",
+    "tokens": [
+      "sigint",
+      "signals intelligence",
+      "interception"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "comms_intelligence": {
+    "type": "relation",
+    "tokens": [
+      "cable interception",
+      "cellular surveillance",
+      "internet monitoring",
+      "satellite interception"
+    ],
+    "level": "L3",
+    "parent": "sigint"
+  },
+  "electronic_intelligence": {
+    "type": "relation",
+    "tokens": [
+      "radar signature",
+      "telemetry",
+      "electronic intelligence"
+    ],
+    "level": "L3",
+    "parent": "sigint"
+  },
+  "cyber_intelligence": {
+    "type": "relation",
+    "tokens": [
+      "cyber intelligence",
+      "cyber espionage"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "cyber_espionage": {
+    "type": "relation",
+    "tokens": [
+      "apt",
+      "zero-day",
+      "supply chain compromise",
+      "spear phishing"
+    ],
+    "level": "L3",
+    "parent": "cyber_intelligence"
+  },
+  "cyber_surveillance": {
+    "type": "relation",
+    "tokens": [
+      "mass surveillance",
+      "device compromise",
+      "cloud infiltration",
+      "dark web"
+    ],
+    "level": "L3",
+    "parent": "cyber_intelligence"
+  },
+  "tech_intelligence": {
+    "type": "relation",
+    "tokens": [
+      "technical intelligence",
+      "imagery intelligence"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "imint": {
+    "type": "relation",
+    "tokens": [
+      "satellite reconnaissance",
+      "aerial reconnaissance",
+      "drone surveillance",
+      "synthetic aperture"
+    ],
+    "level": "L3",
+    "parent": "tech_intelligence"
+  },
+  "masint": {
+    "type": "relation",
+    "tokens": [
+      "nuclear test detection",
+      "missile launch detection",
+      "chemical signature",
+      "acoustic intelligence"
+    ],
+    "level": "L3",
+    "parent": "tech_intelligence"
+  },
+  "counterintelligence": {
+    "type": "relation",
+    "tokens": [
+      "counterintelligence",
+      "mole hunt"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "defensive_ci": {
+    "type": "relation",
+    "tokens": [
+      "mole hunt",
+      "security clearance",
+      "polygraph",
+      "insider threat"
+    ],
+    "level": "L3",
+    "parent": "counterintelligence"
+  },
+  "offensive_ci": {
+    "type": "relation",
+    "tokens": [
+      "double agent",
+      "deception operation",
+      "disinformation feed",
+      "honeypot"
+    ],
+    "level": "L3",
+    "parent": "counterintelligence"
+  },
+  "covert_action": {
+    "type": "relation",
+    "tokens": [
+      "covert action",
+      "covert operation"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "political_action": {
+    "type": "relation",
+    "tokens": [
+      "election interference",
+      "political party funding",
+      "opposition support",
+      "protest funding"
+    ],
+    "level": "L3",
+    "parent": "covert_action"
+  },
+  "paramilitary_action": {
+    "type": "relation",
+    "tokens": [
+      "assassination",
+      "rendition",
+      "sabotage",
+      "arms smuggling",
+      "false flag"
+    ],
+    "level": "L3",
+    "parent": "covert_action"
+  },
+  "intel_cooperation": {
+    "type": "relation",
+    "tokens": [
+      "intelligence sharing",
+      "five eyes"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "intel_sharing": {
+    "type": "relation",
+    "tokens": [
+      "five eyes",
+      "intelligence agreement",
+      "intelligence fusion",
+      "database access"
+    ],
+    "level": "L3",
+    "parent": "intel_cooperation"
+  },
+  "joint_intel_ops": {
+    "type": "relation",
+    "tokens": [
+      "joint surveillance",
+      "joint cyber",
+      "counter-terrorism",
+      "counter-intelligence"
+    ],
+    "level": "L3",
+    "parent": "intel_cooperation"
+  },
+  "attribution_warfare": {
+    "type": "relation",
+    "tokens": [
+      "attribution",
+      "false flag"
+    ],
+    "level": "L2",
+    "parent": "intelligence"
+  },
+  "attribution_obfuscation": {
+    "type": "relation",
+    "tokens": [
+      "false flag attribution",
+      "multi-actor confusion",
+      "cutout"
+    ],
+    "level": "L3",
+    "parent": "attribution_warfare"
+  },
+  "attribution_shaping": {
+    "type": "relation",
+    "tokens": [
+      "preemptive attribution",
+      "attribution narrative",
+      "technical indicator"
+    ],
+    "level": "L3",
+    "parent": "attribution_warfare"
+  },
+  "law_enforcement": {
+    "type": "relation",
+    "tokens": [
+      "law enforcement",
+      "police",
+      "legal"
+    ],
+    "level": "L1"
+  },
+  "transnational_crime": {
+    "type": "relation",
+    "tokens": [
+      "transnational crime",
+      "organized crime",
+      "trafficking"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "organized_crime": {
+    "type": "relation",
+    "tokens": [
+      "organized crime",
+      "drug trafficking",
+      "human trafficking",
+      "arms trafficking",
+      "money laundering"
+    ],
+    "level": "L3",
+    "parent": "transnational_crime"
+  },
+  "terrorism": {
+    "type": "relation",
+    "tokens": [
+      "terrorism",
+      "counter-terrorism",
+      "terrorist financing",
+      "radicalization"
+    ],
+    "level": "L3",
+    "parent": "transnational_crime"
+  },
+  "intl_law_coop": {
+    "type": "relation",
+    "tokens": [
+      "extradition",
+      "mutual legal assistance"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "bilateral_law_coop": {
+    "type": "relation",
+    "tokens": [
+      "extradition",
+      "mutual legal assistance",
+      "joint investigation"
+    ],
+    "level": "L3",
+    "parent": "intl_law_coop"
+  },
+  "multilateral_law_coop": {
+    "type": "relation",
+    "tokens": [
+      "interpol",
+      "europol",
+      "red notice",
+      "international task force"
+    ],
+    "level": "L3",
+    "parent": "intl_law_coop"
+  },
+  "border_immigration": {
+    "type": "relation",
+    "tokens": [
+      "border",
+      "immigration",
+      "deportation"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "border_control": {
+    "type": "relation",
+    "tokens": [
+      "border closure",
+      "border wall",
+      "border patrol",
+      "biometric"
+    ],
+    "level": "L3",
+    "parent": "border_immigration"
+  },
+  "immigration_enforcement": {
+    "type": "relation",
+    "tokens": [
+      "deportation",
+      "visa restriction",
+      "refugee",
+      "weaponized migration"
+    ],
+    "level": "L3",
+    "parent": "border_immigration"
+  },
+  "maritime_law": {
+    "type": "relation",
+    "tokens": [
+      "maritime law",
+      "coast guard",
+      "port security"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "maritime_security": {
+    "type": "relation",
+    "tokens": [
+      "port security",
+      "container inspection",
+      "ship boarding",
+      "fishing enforcement"
+    ],
+    "level": "L3",
+    "parent": "maritime_law"
+  },
+  "coast_guard_ops": {
+    "type": "relation",
+    "tokens": [
+      "search and rescue",
+      "drug interdiction",
+      "migrant interdiction",
+      "eez patrol"
+    ],
+    "level": "L3",
+    "parent": "maritime_law"
+  },
+  "lawfare": {
+    "type": "relation",
+    "tokens": [
+      "lawfare",
+      "legal warfare",
+      "jurisdiction"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "jurisdictional_assertion": {
+    "type": "relation",
+    "tokens": [
+      "universal jurisdiction",
+      "extraterritorial",
+      "long-arm statute"
+    ],
+    "level": "L3",
+    "parent": "lawfare"
+  },
+  "legal_persecution": {
+    "type": "relation",
+    "tokens": [
+      "political prosecution",
+      "selective enforcement",
+      "asset seizure"
+    ],
+    "level": "L3",
+    "parent": "lawfare"
+  },
+  "temporal_legal_ops": {
+    "type": "relation",
+    "tokens": [
+      "fait accompli",
+      "customary practice",
+      "adverse possession"
+    ],
+    "level": "L3",
+    "parent": "lawfare"
+  },
+  "democratic_process_weapon": {
+    "type": "relation",
+    "tokens": [
+      "referendum",
+      "plebiscite",
+      "constitutional crisis",
+      "no-confidence"
+    ],
+    "level": "L3",
+    "parent": "lawfare"
+  },
+  "regulatory_enforcement": {
+    "type": "relation",
+    "tokens": [
+      "regulatory",
+      "antitrust",
+      "compliance"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "economic_regulation": {
+    "type": "relation",
+    "tokens": [
+      "antitrust",
+      "competition enforcement",
+      "sanctions violation",
+      "tax evasion"
+    ],
+    "level": "L3",
+    "parent": "regulatory_enforcement"
+  },
+  "technology_regulation": {
+    "type": "relation",
+    "tokens": [
+      "data privacy",
+      "cybersecurity regulation",
+      "encryption",
+      "platform regulation",
+      "ai regulation"
+    ],
+    "level": "L3",
+    "parent": "regulatory_enforcement"
+  },
+  "judicial_cooperation": {
+    "type": "relation",
+    "tokens": [
+      "judicial cooperation",
+      "international court"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "intl_courts": {
+    "type": "relation",
+    "tokens": [
+      "icc",
+      "icj",
+      "international criminal court",
+      "war crimes",
+      "arbitration"
+    ],
+    "level": "L3",
+    "parent": "judicial_cooperation"
+  },
+  "legal_assistance": {
+    "type": "relation",
+    "tokens": [
+      "letters rogatory",
+      "evidence collection",
+      "witness testimony",
+      "prisoner transfer"
+    ],
+    "level": "L3",
+    "parent": "judicial_cooperation"
+  },
+  "transnational_repression": {
+    "type": "relation",
+    "tokens": [
+      "transnational repression",
+      "overseas police"
+    ],
+    "level": "L2",
+    "parent": "law_enforcement"
+  },
+  "extraterritorial_law": {
+    "type": "relation",
+    "tokens": [
+      "overseas police station",
+      "involuntary return",
+      "fox hunt",
+      "rendition"
+    ],
+    "level": "L3",
+    "parent": "transnational_repression"
+  },
+  "diaspora_control": {
+    "type": "relation",
+    "tokens": [
+      "diaspora",
+      "community organization",
+      "wechat surveillance",
+      "social credit",
+      "exit ban"
+    ],
+    "level": "L3",
+    "parent": "transnational_repression"
+  },
+  "environmental": {
+    "type": "relation",
+    "tokens": [
+      "environmental",
+      "ecological"
+    ],
+    "level": "L1"
+  },
+  "water_warfare": {
+    "type": "relation",
+    "tokens": [
+      "water warfare",
+      "dam",
+      "river"
+    ],
+    "level": "L2",
+    "parent": "environmental"
+  },
+  "hydro_hegemony": {
+    "type": "relation",
+    "tokens": [
+      "dam manipulation",
+      "sediment trapping",
+      "weaponized water",
+      "aquifer",
+      "river diversion"
+    ],
+    "level": "L3",
+    "parent": "water_warfare"
+  },
+  "atmospheric_ops": {
+    "type": "relation",
+    "tokens": [
+      "weather modification",
+      "pollution"
+    ],
+    "level": "L2",
+    "parent": "environmental"
+  },
+  "weather_modification": {
+    "type": "relation",
+    "tokens": [
+      "cloud seeding",
+      "rainfall diversion",
+      "weather modification"
+    ],
+    "level": "L3",
+    "parent": "atmospheric_ops"
+  },
+  "pollution_export": {
+    "type": "relation",
+    "tokens": [
+      "acid rain",
+      "toxic waste",
+      "smog"
+    ],
+    "level": "L3",
+    "parent": "atmospheric_ops"
+  },
+  "bio_resource_warfare": {
+    "type": "relation",
+    "tokens": [
+      "fisheries",
+      "agricultural warfare"
+    ],
+    "level": "L2",
+    "parent": "environmental"
+  },
+  "fisheries_depletion": {
+    "type": "relation",
+    "tokens": [
+      "iuu fishing",
+      "illegal fishing",
+      "breeding ground",
+      "invasive species"
+    ],
+    "level": "L3",
+    "parent": "bio_resource_warfare"
+  },
+  "agricultural_warfare": {
+    "type": "relation",
+    "tokens": [
+      "crop disease",
+      "pollinator",
+      "soil degradation",
+      "seed monopoly"
+    ],
+    "level": "L3",
+    "parent": "bio_resource_warfare"
+  },
+  "east_asia": {
+    "type": "location",
+    "tokens": [
+      "east asia"
+    ],
+    "level": "region",
+    "macro_region": "East Asia"
+  },
+  "china": {
+    "type": "location",
+    "tokens": [
+      "china",
+      "chinese",
+      "beijing",
+      "prc"
+    ],
+    "level": "country",
+    "parent": "east_asia",
+    "country_code": "CN",
+    "macro_region": "East Asia"
+  },
+  "south_china_sea": {
+    "type": "location",
+    "tokens": [
+      "south china sea",
+      "scs"
+    ],
+    "level": "body_of_water",
+    "parent": "china",
+    "macro_region": "East Asia"
+  },
+  "taiwan_strait": {
+    "type": "location",
+    "tokens": [
+      "taiwan strait"
+    ],
+    "level": "strait",
+    "parent": "china",
+    "macro_region": "East Asia"
+  },
+  "xinjiang": {
+    "type": "location",
+    "tokens": [
+      "xinjiang",
+      "uyghur"
+    ],
+    "level": "admin_region",
+    "parent": "china",
+    "macro_region": "East Asia"
+  },
+  "hong_kong": {
+    "type": "location",
+    "tokens": [
+      "hong kong"
+    ],
+    "level": "admin_region",
+    "parent": "china",
+    "macro_region": "East Asia"
+  },
+  "tibet": {
+    "type": "location",
+    "tokens": [
+      "tibet",
+      "tibetan"
+    ],
+    "level": "admin_region",
+    "parent": "china",
+    "macro_region": "East Asia"
+  },
+  "hainan": {
+    "type": "location",
+    "tokens": [
+      "hainan"
+    ],
+    "level": "admin_region",
+    "parent": "china",
+    "macro_region": "East Asia"
+  },
+  "japan": {
+    "type": "location",
+    "tokens": [
+      "japan",
+      "japanese",
+      "tokyo"
+    ],
+    "level": "country",
+    "parent": "east_asia",
+    "country_code": "JP",
+    "macro_region": "East Asia"
+  },
+  "senkaku": {
+    "type": "location",
+    "tokens": [
+      "senkaku",
+      "diaoyu"
+    ],
+    "level": "island",
+    "parent": "japan",
+    "macro_region": "East Asia"
+  },
+  "okinawa": {
+    "type": "location",
+    "tokens": [
+      "okinawa"
+    ],
+    "level": "island",
+    "parent": "japan",
+    "macro_region": "East Asia"
+  },
+  "south_korea": {
+    "type": "location",
+    "tokens": [
+      "south korea",
+      "korean",
+      "seoul",
+      "rok"
+    ],
+    "level": "country",
+    "parent": "east_asia",
+    "country_code": "KR",
+    "macro_region": "East Asia"
+  },
+  "dmz_korea": {
+    "type": "location",
+    "tokens": [
+      "dmz",
+      "demilitarized zone",
+      "38th parallel"
+    ],
+    "level": "border_zone",
+    "parent": "south_korea",
+    "macro_region": "East Asia"
+  },
+  "north_korea": {
+    "type": "location",
+    "tokens": [
+      "north korea",
+      "pyongyang",
+      "dprk"
+    ],
+    "level": "country",
+    "parent": "east_asia",
+    "country_code": "KP",
+    "macro_region": "East Asia"
+  },
+  "taiwan": {
+    "type": "location",
+    "tokens": [
+      "taiwan",
+      "taipei",
+      "formosa",
+      "roc"
+    ],
+    "level": "country",
+    "parent": "east_asia",
+    "country_code": "TW",
+    "macro_region": "East Asia"
+  },
+  "mongolia": {
+    "type": "location",
+    "tokens": [
+      "mongolia",
+      "ulaanbaatar"
+    ],
+    "level": "country",
+    "parent": "east_asia",
+    "country_code": "MN",
+    "macro_region": "East Asia"
+  },
+  "southeast_asia": {
+    "type": "location",
+    "tokens": [
+      "southeast asia",
+      "asean"
+    ],
+    "level": "region",
+    "macro_region": "Southeast Asia"
+  },
+  "philippines": {
+    "type": "location",
+    "tokens": [
+      "philippines",
+      "filipino",
+      "manila"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "PH",
+    "macro_region": "Southeast Asia"
+  },
+  "scarborough_shoal": {
+    "type": "location",
+    "tokens": [
+      "scarborough shoal"
+    ],
+    "level": "reef_shoal",
+    "parent": "philippines",
+    "macro_region": "Southeast Asia"
+  },
+  "second_thomas_shoal": {
+    "type": "location",
+    "tokens": [
+      "second thomas shoal",
+      "ayungin"
+    ],
+    "level": "reef_shoal",
+    "parent": "philippines",
+    "macro_region": "Southeast Asia"
+  },
+  "spratly_islands": {
+    "type": "location",
+    "tokens": [
+      "spratly",
+      "spratlys"
+    ],
+    "level": "island",
+    "parent": "philippines",
+    "macro_region": "Southeast Asia"
+  },
+  "subic_bay": {
+    "type": "location",
+    "tokens": [
+      "subic bay"
+    ],
+    "level": "port",
+    "parent": "philippines",
+    "macro_region": "Southeast Asia"
+  },
+  "vietnam": {
+    "type": "location",
+    "tokens": [
+      "vietnam",
+      "vietnamese",
+      "hanoi"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "VN",
+    "macro_region": "Southeast Asia"
+  },
+  "cam_ranh_bay": {
+    "type": "location",
+    "tokens": [
+      "cam ranh bay"
+    ],
+    "level": "port",
+    "parent": "vietnam",
+    "macro_region": "Southeast Asia"
+  },
+  "paracel_islands": {
+    "type": "location",
+    "tokens": [
+      "paracel",
+      "paracels",
+      "hoang sa"
+    ],
+    "level": "island",
+    "parent": "vietnam",
+    "macro_region": "Southeast Asia"
+  },
+  "indonesia": {
+    "type": "location",
+    "tokens": [
+      "indonesia",
+      "indonesian",
+      "jakarta"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "ID",
+    "macro_region": "Southeast Asia"
+  },
+  "malacca_strait": {
+    "type": "location",
+    "tokens": [
+      "malacca strait",
+      "strait of malacca"
+    ],
+    "level": "strait",
+    "parent": "indonesia",
+    "macro_region": "Southeast Asia"
+  },
+  "lombok_strait": {
+    "type": "location",
+    "tokens": [
+      "lombok strait"
+    ],
+    "level": "strait",
+    "parent": "indonesia",
+    "macro_region": "Southeast Asia"
+  },
+  "natuna_islands": {
+    "type": "location",
+    "tokens": [
+      "natuna"
+    ],
+    "level": "island",
+    "parent": "indonesia",
+    "macro_region": "Southeast Asia"
+  },
+  "malaysia": {
+    "type": "location",
+    "tokens": [
+      "malaysia",
+      "malaysian",
+      "kuala lumpur"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "MY",
+    "macro_region": "Southeast Asia"
+  },
+  "singapore": {
+    "type": "location",
+    "tokens": [
+      "singapore",
+      "singaporean"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "SG",
+    "macro_region": "Southeast Asia"
+  },
+  "thailand": {
+    "type": "location",
+    "tokens": [
+      "thailand",
+      "thai",
+      "bangkok"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "TH",
+    "macro_region": "Southeast Asia"
+  },
+  "myanmar": {
+    "type": "location",
+    "tokens": [
+      "myanmar",
+      "burma",
+      "burmese"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "MM",
+    "macro_region": "Southeast Asia"
+  },
+  "cambodia": {
+    "type": "location",
+    "tokens": [
+      "cambodia",
+      "cambodian",
+      "phnom penh"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "KH",
+    "macro_region": "Southeast Asia"
+  },
+  "laos": {
+    "type": "location",
+    "tokens": [
+      "laos",
+      "lao",
+      "vientiane"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "LA",
+    "macro_region": "Southeast Asia"
+  },
+  "brunei": {
+    "type": "location",
+    "tokens": [
+      "brunei"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "BN",
+    "macro_region": "Southeast Asia"
+  },
+  "timor_leste": {
+    "type": "location",
+    "tokens": [
+      "timor-leste",
+      "east timor"
+    ],
+    "level": "country",
+    "parent": "southeast_asia",
+    "country_code": "TL",
+    "macro_region": "Southeast Asia"
+  },
+  "south_asia": {
+    "type": "location",
+    "tokens": [
+      "south asia"
+    ],
+    "level": "region",
+    "macro_region": "South Asia"
+  },
+  "india": {
+    "type": "location",
+    "tokens": [
+      "india",
+      "indian",
+      "new delhi",
+      "modi"
+    ],
+    "level": "country",
+    "parent": "south_asia",
+    "country_code": "IN",
+    "macro_region": "South Asia"
+  },
+  "lac": {
+    "type": "location",
+    "tokens": [
+      "line of actual control",
+      "lac",
+      "ladakh",
+      "galwan"
+    ],
+    "level": "border_zone",
+    "parent": "india",
+    "macro_region": "South Asia"
+  },
+  "kashmir": {
+    "type": "location",
+    "tokens": [
+      "kashmir",
+      "jammu"
+    ],
+    "level": "admin_region",
+    "parent": "india",
+    "macro_region": "South Asia"
+  },
+  "andaman_nicobar": {
+    "type": "location",
+    "tokens": [
+      "andaman",
+      "nicobar"
+    ],
+    "level": "island",
+    "parent": "india",
+    "macro_region": "South Asia"
+  },
+  "pakistan": {
+    "type": "location",
+    "tokens": [
+      "pakistan",
+      "pakistani",
+      "islamabad"
+    ],
+    "level": "country",
+    "parent": "south_asia",
+    "country_code": "PK",
+    "macro_region": "South Asia"
+  },
+  "bangladesh": {
+    "type": "location",
+    "tokens": [
+      "bangladesh",
+      "bangladeshi",
+      "dhaka"
+    ],
+    "level": "country",
+    "parent": "south_asia",
+    "country_code": "BD",
+    "macro_region": "South Asia"
+  },
+  "sri_lanka": {
+    "type": "location",
+    "tokens": [
+      "sri lanka",
+      "colombo",
+      "hambantota"
+    ],
+    "level": "country",
+    "parent": "south_asia",
+    "country_code": "LK",
+    "macro_region": "South Asia"
+  },
+  "hambantota_port": {
+    "type": "location",
+    "tokens": [
+      "hambantota port"
+    ],
+    "level": "port",
+    "parent": "sri_lanka",
+    "macro_region": "South Asia"
+  },
+  "nepal": {
+    "type": "location",
+    "tokens": [
+      "nepal",
+      "kathmandu"
+    ],
+    "level": "country",
+    "parent": "south_asia",
+    "country_code": "NP",
+    "macro_region": "South Asia"
+  },
+  "maldives": {
+    "type": "location",
+    "tokens": [
+      "maldives"
+    ],
+    "level": "country",
+    "parent": "south_asia",
+    "country_code": "MV",
+    "macro_region": "South Asia"
+  },
+  "central_asia": {
+    "type": "location",
+    "tokens": [
+      "central asia"
+    ],
+    "level": "region",
+    "macro_region": "Central Asia"
+  },
+  "kazakhstan": {
+    "type": "location",
+    "tokens": [
+      "kazakhstan",
+      "kazakh",
+      "astana"
+    ],
+    "level": "country",
+    "parent": "central_asia",
+    "country_code": "KZ",
+    "macro_region": "Central Asia"
+  },
+  "uzbekistan": {
+    "type": "location",
+    "tokens": [
+      "uzbekistan",
+      "uzbek",
+      "tashkent"
+    ],
+    "level": "country",
+    "parent": "central_asia",
+    "country_code": "UZ",
+    "macro_region": "Central Asia"
+  },
+  "turkmenistan": {
+    "type": "location",
+    "tokens": [
+      "turkmenistan",
+      "turkmen"
+    ],
+    "level": "country",
+    "parent": "central_asia",
+    "country_code": "TM",
+    "macro_region": "Central Asia"
+  },
+  "kyrgyzstan": {
+    "type": "location",
+    "tokens": [
+      "kyrgyzstan",
+      "kyrgyz",
+      "bishkek"
+    ],
+    "level": "country",
+    "parent": "central_asia",
+    "country_code": "KG",
+    "macro_region": "Central Asia"
+  },
+  "tajikistan": {
+    "type": "location",
+    "tokens": [
+      "tajikistan",
+      "tajik",
+      "dushanbe"
+    ],
+    "level": "country",
+    "parent": "central_asia",
+    "country_code": "TJ",
+    "macro_region": "Central Asia"
+  },
+  "middle_east": {
+    "type": "location",
+    "tokens": [
+      "middle east",
+      "mideast"
+    ],
+    "level": "region",
+    "macro_region": "Middle East"
+  },
+  "iran": {
+    "type": "location",
+    "tokens": [
+      "iran",
+      "iranian",
+      "tehran",
+      "persia"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "IR",
+    "macro_region": "Middle East"
+  },
+  "strait_of_hormuz": {
+    "type": "location",
+    "tokens": [
+      "strait of hormuz",
+      "hormuz"
+    ],
+    "level": "strait",
+    "parent": "iran",
+    "macro_region": "Middle East"
+  },
+  "israel": {
+    "type": "location",
+    "tokens": [
+      "israel",
+      "israeli",
+      "jerusalem",
+      "tel aviv"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "IL",
+    "macro_region": "Middle East"
+  },
+  "gaza": {
+    "type": "location",
+    "tokens": [
+      "gaza",
+      "gaza strip"
+    ],
+    "level": "admin_region",
+    "parent": "israel",
+    "macro_region": "Middle East"
+  },
+  "west_bank": {
+    "type": "location",
+    "tokens": [
+      "west bank",
+      "judea",
+      "samaria"
+    ],
+    "level": "admin_region",
+    "parent": "israel",
+    "macro_region": "Middle East"
+  },
+  "golan_heights": {
+    "type": "location",
+    "tokens": [
+      "golan",
+      "golan heights"
+    ],
+    "level": "admin_region",
+    "parent": "israel",
+    "macro_region": "Middle East"
+  },
+  "saudi_arabia": {
+    "type": "location",
+    "tokens": [
+      "saudi arabia",
+      "saudi",
+      "riyadh"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "SA",
+    "macro_region": "Middle East"
+  },
+  "uae": {
+    "type": "location",
+    "tokens": [
+      "uae",
+      "emirates",
+      "abu dhabi",
+      "dubai"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "AE",
+    "macro_region": "Middle East"
+  },
+  "qatar": {
+    "type": "location",
+    "tokens": [
+      "qatar",
+      "doha"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "QA",
+    "macro_region": "Middle East"
+  },
+  "iraq": {
+    "type": "location",
+    "tokens": [
+      "iraq",
+      "iraqi",
+      "baghdad"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "IQ",
+    "macro_region": "Middle East"
+  },
+  "syria": {
+    "type": "location",
+    "tokens": [
+      "syria",
+      "syrian",
+      "damascus"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "SY",
+    "macro_region": "Middle East"
+  },
+  "turkey": {
+    "type": "location",
+    "tokens": [
+      "turkey",
+      "turkish",
+      "ankara",
+      "istanbul",
+      "turkiye"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "TR",
+    "macro_region": "Middle East"
+  },
+  "lebanon": {
+    "type": "location",
+    "tokens": [
+      "lebanon",
+      "lebanese",
+      "beirut",
+      "hezbollah"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "LB",
+    "macro_region": "Middle East"
+  },
+  "yemen": {
+    "type": "location",
+    "tokens": [
+      "yemen",
+      "yemeni",
+      "houthi",
+      "sanaa"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "YE",
+    "macro_region": "Middle East"
+  },
+  "bab_el_mandeb": {
+    "type": "location",
+    "tokens": [
+      "bab el-mandeb",
+      "bab al-mandab"
+    ],
+    "level": "strait",
+    "parent": "yemen",
+    "macro_region": "Middle East"
+  },
+  "jordan": {
+    "type": "location",
+    "tokens": [
+      "jordan",
+      "jordanian",
+      "amman"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "JO",
+    "macro_region": "Middle East"
+  },
+  "kuwait": {
+    "type": "location",
+    "tokens": [
+      "kuwait"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "KW",
+    "macro_region": "Middle East"
+  },
+  "bahrain": {
+    "type": "location",
+    "tokens": [
+      "bahrain"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "BH",
+    "macro_region": "Middle East"
+  },
+  "oman": {
+    "type": "location",
+    "tokens": [
+      "oman",
+      "muscat"
+    ],
+    "level": "country",
+    "parent": "middle_east",
+    "country_code": "OM",
+    "macro_region": "Middle East"
+  },
+  "europe": {
+    "type": "location",
+    "tokens": [
+      "europe",
+      "european"
+    ],
+    "level": "region",
+    "macro_region": "Europe"
+  },
+  "russia": {
+    "type": "location",
+    "tokens": [
+      "russia",
+      "russian",
+      "moscow",
+      "kremlin"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "RU",
+    "macro_region": "Europe"
+  },
+  "crimea": {
+    "type": "location",
+    "tokens": [
+      "crimea",
+      "crimean",
+      "sevastopol"
+    ],
+    "level": "admin_region",
+    "parent": "russia",
+    "macro_region": "Europe"
+  },
+  "kaliningrad": {
+    "type": "location",
+    "tokens": [
+      "kaliningrad"
+    ],
+    "level": "admin_region",
+    "parent": "russia",
+    "macro_region": "Europe"
+  },
+  "arctic_russia": {
+    "type": "location",
+    "tokens": [
+      "arctic",
+      "northern sea route"
+    ],
+    "level": "region",
+    "parent": "russia",
+    "macro_region": "Europe"
+  },
+  "ukraine": {
+    "type": "location",
+    "tokens": [
+      "ukraine",
+      "ukrainian",
+      "kyiv",
+      "kiev"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "UA",
+    "macro_region": "Europe"
+  },
+  "donbas": {
+    "type": "location",
+    "tokens": [
+      "donbas",
+      "donetsk",
+      "luhansk",
+      "donbass"
+    ],
+    "level": "admin_region",
+    "parent": "ukraine",
+    "macro_region": "Europe"
+  },
+  "zaporizhzhia": {
+    "type": "location",
+    "tokens": [
+      "zaporizhzhia",
+      "zaporozhye"
+    ],
+    "level": "admin_region",
+    "parent": "ukraine",
+    "macro_region": "Europe"
+  },
+  "uk": {
+    "type": "location",
+    "tokens": [
+      "united kingdom",
+      "britain",
+      "british",
+      "london",
+      "uk"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "GB",
+    "macro_region": "Europe"
+  },
+  "france": {
+    "type": "location",
+    "tokens": [
+      "france",
+      "french",
+      "paris",
+      "macron"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "FR",
+    "macro_region": "Europe"
+  },
+  "germany": {
+    "type": "location",
+    "tokens": [
+      "germany",
+      "german",
+      "berlin"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "DE",
+    "macro_region": "Europe"
+  },
+  "poland": {
+    "type": "location",
+    "tokens": [
+      "poland",
+      "polish",
+      "warsaw"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "PL",
+    "macro_region": "Europe"
+  },
+  "baltic_states": {
+    "type": "location",
+    "tokens": [
+      "baltic",
+      "estonia",
+      "latvia",
+      "lithuania"
+    ],
+    "level": "region",
+    "parent": "europe",
+    "macro_region": "Europe"
+  },
+  "finland": {
+    "type": "location",
+    "tokens": [
+      "finland",
+      "finnish",
+      "helsinki"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "FI",
+    "macro_region": "Europe"
+  },
+  "sweden": {
+    "type": "location",
+    "tokens": [
+      "sweden",
+      "swedish",
+      "stockholm"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "SE",
+    "macro_region": "Europe"
+  },
+  "norway": {
+    "type": "location",
+    "tokens": [
+      "norway",
+      "norwegian",
+      "oslo"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "NO",
+    "macro_region": "Europe"
+  },
+  "italy": {
+    "type": "location",
+    "tokens": [
+      "italy",
+      "italian",
+      "rome"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "IT",
+    "macro_region": "Europe"
+  },
+  "spain": {
+    "type": "location",
+    "tokens": [
+      "spain",
+      "spanish",
+      "madrid"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "ES",
+    "macro_region": "Europe"
+  },
+  "greece": {
+    "type": "location",
+    "tokens": [
+      "greece",
+      "greek",
+      "athens"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "GR",
+    "macro_region": "Europe"
+  },
+  "serbia": {
+    "type": "location",
+    "tokens": [
+      "serbia",
+      "serbian",
+      "belgrade"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "RS",
+    "macro_region": "Europe"
+  },
+  "kosovo": {
+    "type": "location",
+    "tokens": [
+      "kosovo",
+      "pristina"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "XK",
+    "macro_region": "Europe"
+  },
+  "romania": {
+    "type": "location",
+    "tokens": [
+      "romania",
+      "romanian",
+      "bucharest"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "RO",
+    "macro_region": "Europe"
+  },
+  "hungary": {
+    "type": "location",
+    "tokens": [
+      "hungary",
+      "hungarian",
+      "budapest"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "HU",
+    "macro_region": "Europe"
+  },
+  "netherlands": {
+    "type": "location",
+    "tokens": [
+      "netherlands",
+      "dutch",
+      "amsterdam",
+      "the hague"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "NL",
+    "macro_region": "Europe"
+  },
+  "belgium": {
+    "type": "location",
+    "tokens": [
+      "belgium",
+      "belgian",
+      "brussels"
+    ],
+    "level": "country",
+    "parent": "europe",
+    "country_code": "BE",
+    "macro_region": "Europe"
+  },
+  "north_america": {
+    "type": "location",
+    "tokens": [
+      "north america"
+    ],
+    "level": "region",
+    "macro_region": "North America"
+  },
+  "us": {
+    "type": "location",
+    "tokens": [
+      "united states",
+      "us",
+      "usa",
+      "america",
+      "american",
+      "washington"
+    ],
+    "level": "country",
+    "parent": "north_america",
+    "country_code": "US",
+    "macro_region": "North America"
+  },
+  "guam": {
+    "type": "location",
+    "tokens": [
+      "guam"
+    ],
+    "level": "island",
+    "parent": "us",
+    "macro_region": "North America"
+  },
+  "diego_garcia": {
+    "type": "location",
+    "tokens": [
+      "diego garcia"
+    ],
+    "level": "military_base",
+    "parent": "us",
+    "macro_region": "North America"
+  },
+  "hawaii": {
+    "type": "location",
+    "tokens": [
+      "hawaii",
+      "pearl harbor"
+    ],
+    "level": "admin_region",
+    "parent": "us",
+    "macro_region": "North America"
+  },
+  "canada": {
+    "type": "location",
+    "tokens": [
+      "canada",
+      "canadian",
+      "ottawa"
+    ],
+    "level": "country",
+    "parent": "north_america",
+    "country_code": "CA",
+    "macro_region": "North America"
+  },
+  "mexico": {
+    "type": "location",
+    "tokens": [
+      "mexico",
+      "mexican",
+      "mexico city"
+    ],
+    "level": "country",
+    "parent": "north_america",
+    "country_code": "MX",
+    "macro_region": "North America"
+  },
+  "south_america": {
+    "type": "location",
+    "tokens": [
+      "south america",
+      "latin america"
+    ],
+    "level": "region",
+    "macro_region": "South America"
+  },
+  "brazil": {
+    "type": "location",
+    "tokens": [
+      "brazil",
+      "brazilian",
+      "brasilia"
+    ],
+    "level": "country",
+    "parent": "americas"
+  },
+  "argentina": {
+    "type": "location",
+    "tokens": [
+      "argentina",
+      "argentine",
+      "buenos aires"
+    ],
+    "level": "country",
+    "parent": "south_america",
+    "country_code": "AR",
+    "macro_region": "South America"
+  },
+  "colombia": {
+    "type": "location",
+    "tokens": [
+      "colombia",
+      "colombian",
+      "bogota"
+    ],
+    "level": "country",
+    "parent": "south_america",
+    "country_code": "CO",
+    "macro_region": "South America"
+  },
+  "venezuela": {
+    "type": "location",
+    "tokens": [
+      "venezuela",
+      "venezuelan",
+      "caracas"
+    ],
+    "level": "country",
+    "parent": "south_america",
+    "country_code": "VE",
+    "macro_region": "South America"
+  },
+  "chile": {
+    "type": "location",
+    "tokens": [
+      "chile",
+      "chilean",
+      "santiago"
+    ],
+    "level": "country",
+    "parent": "south_america",
+    "country_code": "CL",
+    "macro_region": "South America"
+  },
+  "peru": {
+    "type": "location",
+    "tokens": [
+      "peru",
+      "peruvian",
+      "lima"
+    ],
+    "level": "country",
+    "parent": "south_america",
+    "country_code": "PE",
+    "macro_region": "South America"
+  },
+  "cuba": {
+    "type": "location",
+    "tokens": [
+      "cuba",
+      "cuban",
+      "havana"
+    ],
+    "level": "country",
+    "parent": "south_america",
+    "country_code": "CU",
+    "macro_region": "South America"
+  },
+  "africa": {
+    "type": "location",
+    "tokens": [
+      "africa",
+      "african"
+    ],
+    "level": "region",
+    "macro_region": "Africa"
+  },
+  "egypt": {
+    "type": "location",
+    "tokens": [
+      "egypt",
+      "egyptian",
+      "cairo",
+      "suez"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "EG",
+    "macro_region": "Africa"
+  },
+  "suez_canal": {
+    "type": "location",
+    "tokens": [
+      "suez canal",
+      "suez"
+    ],
+    "level": "L3",
+    "parent": "egypt"
+  },
+  "south_africa": {
+    "type": "location",
+    "tokens": [
+      "south africa",
+      "pretoria",
+      "johannesburg"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "ZA",
+    "macro_region": "Africa"
+  },
+  "nigeria": {
+    "type": "location",
+    "tokens": [
+      "nigeria",
+      "nigerian",
+      "abuja",
+      "lagos"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "NG",
+    "macro_region": "Africa"
+  },
+  "ethiopia": {
+    "type": "location",
+    "tokens": [
+      "ethiopia",
+      "ethiopian",
+      "addis ababa"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "ET",
+    "macro_region": "Africa"
+  },
+  "kenya": {
+    "type": "location",
+    "tokens": [
+      "kenya",
+      "kenyan",
+      "nairobi"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "KE",
+    "macro_region": "Africa"
+  },
+  "djibouti": {
+    "type": "location",
+    "tokens": [
+      "djibouti"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "DJ",
+    "macro_region": "Africa"
+  },
+  "somalia": {
+    "type": "location",
+    "tokens": [
+      "somalia",
+      "somali",
+      "mogadishu"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "SO",
+    "macro_region": "Africa"
+  },
+  "horn_of_africa": {
+    "type": "location",
+    "tokens": [
+      "horn of africa"
+    ],
+    "level": "region",
+    "parent": "somalia",
+    "macro_region": "Africa"
+  },
+  "sudan": {
+    "type": "location",
+    "tokens": [
+      "sudan",
+      "sudanese",
+      "khartoum"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "SD",
+    "macro_region": "Africa"
+  },
+  "libya": {
+    "type": "location",
+    "tokens": [
+      "libya",
+      "libyan",
+      "tripoli"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "LY",
+    "macro_region": "Africa"
+  },
+  "dr_congo": {
+    "type": "location",
+    "tokens": [
+      "congo",
+      "kinshasa",
+      "drc"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "CD",
+    "macro_region": "Africa"
+  },
+  "niger": {
+    "type": "location",
+    "tokens": [
+      "niger",
+      "niamey"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "NE",
+    "macro_region": "Africa"
+  },
+  "mali": {
+    "type": "location",
+    "tokens": [
+      "mali",
+      "bamako"
+    ],
+    "level": "country",
+    "parent": "africa",
+    "country_code": "ML",
+    "macro_region": "Africa"
+  },
+  "sahel": {
+    "type": "location",
+    "tokens": [
+      "sahel"
+    ],
+    "level": "region",
+    "parent": "africa",
+    "macro_region": "Africa"
+  },
+  "oceania": {
+    "type": "location",
+    "tokens": [
+      "oceania",
+      "pacific islands"
+    ],
+    "level": "region",
+    "macro_region": "Oceania"
+  },
+  "australia": {
+    "type": "location",
+    "tokens": [
+      "australia",
+      "australian",
+      "canberra"
+    ],
+    "level": "country",
+    "parent": "oceania",
+    "country_code": "AU",
+    "macro_region": "Oceania"
+  },
+  "pine_gap": {
+    "type": "location",
+    "tokens": [
+      "pine gap"
+    ],
+    "level": "military_base",
+    "parent": "australia",
+    "macro_region": "Oceania"
+  },
+  "new_zealand": {
+    "type": "location",
+    "tokens": [
+      "new zealand",
+      "wellington"
+    ],
+    "level": "country",
+    "parent": "oceania",
+    "country_code": "NZ",
+    "macro_region": "Oceania"
+  },
+  "fiji": {
+    "type": "location",
+    "tokens": [
+      "fiji",
+      "suva"
+    ],
+    "level": "country",
+    "parent": "oceania",
+    "country_code": "FJ",
+    "macro_region": "Oceania"
+  },
+  "png": {
+    "type": "location",
+    "tokens": [
+      "papua new guinea",
+      "png",
+      "port moresby"
+    ],
+    "level": "country",
+    "parent": "oceania",
+    "country_code": "PG",
+    "macro_region": "Oceania"
+  },
+  "solomon_islands": {
+    "type": "location",
+    "tokens": [
+      "solomon islands"
+    ],
+    "level": "country",
+    "parent": "oceania",
+    "country_code": "SB",
+    "macro_region": "Oceania"
+  },
+  "tonga": {
+    "type": "location",
+    "tokens": [
+      "tonga"
+    ],
+    "level": "country",
+    "parent": "oceania",
+    "country_code": "TO",
+    "macro_region": "Oceania"
+  },
+  "indo_pacific": {
+    "type": "location",
+    "tokens": [
+      "indo-pacific",
+      "indo pacific"
+    ],
+    "level": "region",
+    "macro_region": "Indo-Pacific"
+  },
+  "indian_ocean": {
+    "type": "location",
+    "tokens": [
+      "indian ocean"
+    ],
+    "level": "body_of_water",
+    "parent": "indo_pacific",
+    "macro_region": "Indo-Pacific"
+  },
+  "pacific_ocean": {
+    "type": "location",
+    "tokens": [
+      "pacific ocean",
+      "pacific"
+    ],
+    "level": "body_of_water",
+    "parent": "indo_pacific",
+    "macro_region": "Indo-Pacific"
+  },
+  "arctic": {
+    "type": "location",
+    "tokens": [
+      "arctic",
+      "north pole"
+    ],
+    "level": "region",
+    "macro_region": "Arctic"
+  },
+  "global": {
+    "type": "location",
+    "tokens": [
+      "global",
+      "worldwide"
+    ],
+    "level": "region",
+    "macro_region": "Global"
+  },
+  "government": {
+    "type": "actor",
+    "tokens": [
+      "government",
+      "state",
+      "regime",
+      "administration"
+    ]
+  },
+  "military_org": {
+    "type": "actor",
+    "tokens": [
+      "military",
+      "armed forces",
+      "army",
+      "navy",
+      "air force"
+    ]
+  },
+  "pla": {
+    "type": "actor",
+    "tokens": [
+      "pla",
+      "peoples liberation army"
+    ],
+    "parent": "military_org",
+    "country_code": "CN"
+  },
+  "pla_navy": {
+    "type": "actor",
+    "tokens": [
+      "plan",
+      "pla navy",
+      "chinese navy"
+    ],
+    "parent": "military_org",
+    "country_code": "CN"
+  },
+  "ccg": {
+    "type": "actor",
+    "tokens": [
+      "china coast guard",
+      "ccg"
+    ],
+    "parent": "military_org",
+    "country_code": "CN"
+  },
+  "us_military": {
+    "type": "actor",
+    "tokens": [
+      "us military",
+      "pentagon",
+      "us forces"
+    ],
+    "parent": "military_org",
+    "country_code": "US"
+  },
+  "us_navy": {
+    "type": "actor",
+    "tokens": [
+      "us navy",
+      "seventh fleet",
+      "pacific fleet"
+    ],
+    "parent": "military_org",
+    "country_code": "US"
+  },
+  "jsdf": {
+    "type": "actor",
+    "tokens": [
+      "jsdf",
+      "japan self-defense",
+      "jmsdf"
+    ],
+    "parent": "military_org",
+    "country_code": "JP"
+  },
+  "russian_military": {
+    "type": "actor",
+    "tokens": [
+      "russian military",
+      "russian armed forces"
+    ],
+    "parent": "military_org",
+    "country_code": "RU"
+  },
+  "nato_forces": {
+    "type": "actor",
+    "tokens": [
+      "nato forces",
+      "nato allied"
+    ],
+    "parent": "military_org"
+  },
+  "intelligence_org": {
+    "type": "actor",
+    "tokens": [
+      "intelligence agency",
+      "intelligence service"
+    ]
+  },
+  "cia": {
+    "type": "actor",
+    "tokens": [
+      "cia",
+      "central intelligence agency"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "US"
+  },
+  "fbi": {
+    "type": "actor",
+    "tokens": [
+      "fbi",
+      "federal bureau"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "US"
+  },
+  "nsa": {
+    "type": "actor",
+    "tokens": [
+      "nsa",
+      "national security agency"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "US"
+  },
+  "mss": {
+    "type": "actor",
+    "tokens": [
+      "mss",
+      "ministry of state security"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "CN"
+  },
+  "fsb": {
+    "type": "actor",
+    "tokens": [
+      "fsb",
+      "federal security service"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "RU"
+  },
+  "gru": {
+    "type": "actor",
+    "tokens": [
+      "gru",
+      "military intelligence"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "RU"
+  },
+  "mi6": {
+    "type": "actor",
+    "tokens": [
+      "mi6",
+      "sis",
+      "secret intelligence service"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "GB"
+  },
+  "mossad": {
+    "type": "actor",
+    "tokens": [
+      "mossad"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "IL"
+  },
+  "isi": {
+    "type": "actor",
+    "tokens": [
+      "isi",
+      "inter-services intelligence"
+    ],
+    "parent": "intelligence_org",
+    "country_code": "PK"
+  },
+  "intl_org": {
+    "type": "actor",
+    "tokens": [
+      "international organization"
+    ]
+  },
+  "un_org": {
+    "type": "actor",
+    "tokens": [
+      "united nations",
+      "un"
+    ],
+    "parent": "intl_org"
+  },
+  "unsc": {
+    "type": "actor",
+    "tokens": [
+      "security council",
+      "unsc"
+    ],
+    "parent": "un_org"
+  },
+  "unga": {
+    "type": "actor",
+    "tokens": [
+      "general assembly",
+      "unga"
+    ],
+    "parent": "un_org"
+  },
+  "iaea": {
+    "type": "actor",
+    "tokens": [
+      "iaea",
+      "international atomic energy"
+    ],
+    "parent": "un_org"
+  },
+  "nato": {
+    "type": "actor",
+    "tokens": [
+      "nato",
+      "north atlantic treaty"
+    ],
+    "parent": "intl_org"
+  },
+  "eu_org": {
+    "type": "actor",
+    "tokens": [
+      "european union",
+      "eu",
+      "european commission"
+    ],
+    "parent": "intl_org"
+  },
+  "asean_org": {
+    "type": "actor",
+    "tokens": [
+      "asean",
+      "association of southeast asian"
+    ],
+    "parent": "intl_org"
+  },
+  "brics": {
+    "type": "actor",
+    "tokens": [
+      "brics"
+    ],
+    "parent": "intl_org"
+  },
+  "sco": {
+    "type": "actor",
+    "tokens": [
+      "sco",
+      "shanghai cooperation"
+    ],
+    "parent": "intl_org"
+  },
+  "aukus_org": {
+    "type": "actor",
+    "tokens": [
+      "aukus"
+    ],
+    "parent": "intl_org"
+  },
+  "quad_org": {
+    "type": "actor",
+    "tokens": [
+      "quad",
+      "quadrilateral"
+    ],
+    "parent": "intl_org"
+  },
+  "imf_org": {
+    "type": "actor",
+    "tokens": [
+      "imf",
+      "international monetary fund"
+    ],
+    "parent": "intl_org"
+  },
+  "world_bank_org": {
+    "type": "actor",
+    "tokens": [
+      "world bank"
+    ],
+    "parent": "intl_org"
+  },
+  "non_state_actor": {
+    "type": "actor",
+    "tokens": [
+      "non-state",
+      "non state",
+      "militant",
+      "insurgent"
+    ]
+  },
+  "hamas": {
+    "type": "actor",
+    "tokens": [
+      "hamas"
+    ],
+    "parent": "non_state_actor",
+    "country_code": "PS"
+  },
+  "hezbollah_actor": {
+    "type": "actor",
+    "tokens": [
+      "hezbollah"
+    ],
+    "parent": "non_state_actor",
+    "country_code": "LB"
+  },
+  "houthi": {
+    "type": "actor",
+    "tokens": [
+      "houthi",
+      "ansar allah",
+      "houthis"
+    ],
+    "level": "L3",
+    "parent": "government"
+  },
+  "wagner": {
+    "type": "actor",
+    "tokens": [
+      "wagner",
+      "wagner group",
+      "pmc"
+    ],
+    "parent": "non_state_actor",
+    "country_code": "RU"
+  },
+  "isis": {
+    "type": "actor",
+    "tokens": [
+      "isis",
+      "isil",
+      "islamic state",
+      "daesh"
+    ],
+    "parent": "non_state_actor"
+  },
+  "taliban": {
+    "type": "actor",
+    "tokens": [
+      "taliban"
+    ],
+    "parent": "non_state_actor",
+    "country_code": "AF"
+  },
+  "persian_gulf": {
+    "type": "location",
+    "tokens": [
+      "persian gulf",
+      "gulf",
+      "arabian gulf"
+    ],
+    "level": "L2",
+    "parent": "middle_east"
+  },
+  "ras_laffan": {
+    "type": "location",
+    "tokens": [
+      "ras laffan",
+      "north field"
+    ],
+    "level": "L3",
+    "parent": "qatar"
+  },
+  "red_sea": {
+    "type": "location",
+    "tokens": [
+      "red sea",
+      "bab el-mandeb",
+      "bab al-mandab"
+    ],
+    "level": "L2",
+    "parent": "middle_east"
+  },
+  "irgc": {
+    "type": "actor",
+    "tokens": [
+      "irgc",
+      "revolutionary guard",
+      "islamic revolutionary guard corps",
+      "quds force"
+    ],
+    "level": "L3",
+    "parent": "government"
+  },
+  "hezbollah": {
+    "type": "actor",
+    "tokens": [
+      "hezbollah",
+      "hizbollah"
+    ],
+    "level": "L3",
+    "parent": "government"
+  },
+  "opec": {
+    "type": "actor",
+    "tokens": [
+      "opec",
+      "opec+",
+      "oil cartel",
+      "petroleum exporting"
+    ],
+    "level": "L2",
+    "parent": "government"
+  },
+  "iea": {
+    "type": "actor",
+    "tokens": [
+      "iea",
+      "international energy agency"
+    ],
+    "level": "L2",
+    "parent": "government"
+  },
+  "crude_oil": {
+    "type": "relation",
+    "tokens": [
+      "crude oil",
+      "brent",
+      "wti",
+      "crude",
+      "barrel",
+      "petroleum"
+    ],
+    "level": "L3",
+    "parent": "resource_energy"
+  },
+  "lng": {
+    "type": "relation",
+    "tokens": [
+      "lng",
+      "liquefied natural gas",
+      "natural gas",
+      "gas export"
+    ],
+    "level": "L3",
+    "parent": "resource_energy"
+  },
+  "jet_fuel": {
+    "type": "relation",
+    "tokens": [
+      "jet fuel",
+      "kerosene",
+      "aviation fuel",
+      "jet-a"
+    ],
+    "level": "L3",
+    "parent": "refining"
+  },
+  "refining": {
+    "type": "relation",
+    "tokens": [
+      "refinery",
+      "refining",
+      "crack spread",
+      "distillate",
+      "refined product"
+    ],
+    "level": "L3",
+    "parent": "resource_energy"
+  },
+  "fertilizer": {
+    "type": "relation",
+    "tokens": [
+      "fertilizer",
+      "ammonia",
+      "urea",
+      "ammonium nitrate",
+      "nitrogen fertilizer"
+    ],
+    "level": "L3",
+    "parent": "supply_chain"
+  },
+  "petrochemical": {
+    "type": "relation",
+    "tokens": [
+      "petrochemical",
+      "ethylene",
+      "propylene",
+      "naphtha",
+      "polyethylene",
+      "polypropylene",
+      "styrene"
+    ],
+    "level": "L3",
+    "parent": "supply_chain"
+  },
+  "shipping_insurance": {
+    "type": "relation",
+    "tokens": [
+      "war risk",
+      "insurance premium",
+      "marine insurance",
+      "reinsurance",
+      "hull insurance"
+    ],
+    "level": "L3",
+    "parent": "chokepoint_control"
+  },
+  "shipping_disruption": {
+    "type": "relation",
+    "tokens": [
+      "tanker",
+      "shipping disruption",
+      "vessel",
+      "cargo",
+      "container",
+      "rerouting",
+      "force majeure"
+    ],
+    "level": "L3",
+    "parent": "chokepoint_control"
+  },
+  "food_security": {
+    "type": "relation",
+    "tokens": [
+      "food security",
+      "food price",
+      "food crisis",
+      "agriculture",
+      "crop"
+    ],
+    "level": "L3",
+    "parent": "supply_chain"
+  },
+  "strategic_reserves": {
+    "type": "relation",
+    "tokens": [
+      "strategic petroleum reserve",
+      "spr",
+      "strategic reserve",
+      "stockpile",
+      "inventory"
+    ],
+    "level": "L3",
+    "parent": "energy_policy"
+  },
+  "price_shock": {
+    "type": "relation",
+    "tokens": [
+      "price spike",
+      "price surge",
+      "price shock",
+      "inflation",
+      "cost increase"
+    ],
+    "level": "L3",
+    "parent": "economic_coercion"
+  },
+  "blockade": {
+    "type": "relation",
+    "tokens": [
+      "blockade",
+      "naval blockade",
+      "maritime blockade",
+      "closure",
+      "shut"
+    ],
+    "level": "L3",
+    "parent": "naval_operations"
+  },
+  "force_majeure": {
+    "type": "relation",
+    "tokens": [
+      "force majeure",
+      "contract suspension",
+      "delivery halt"
+    ],
+    "level": "L3",
+    "parent": "supply_chain"
+  },
+  "aviation": {
+    "type": "relation",
+    "tokens": [
+      "airline",
+      "aviation",
+      "flight",
+      "airport",
+      "fare",
+      "lufthansa",
+      "air canada"
+    ],
+    "level": "L3",
+    "parent": "supply_chain"
+  },
+  "pipeline": {
+    "type": "relation",
+    "tokens": [
+      "pipeline",
+      "druzhba",
+      "east-west pipeline",
+      "petroline"
+    ],
+    "level": "L3",
+    "parent": "energy_policy"
+  }
+}

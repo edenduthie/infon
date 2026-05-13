@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/graph_mcts.py
+# hypothesis_version: 6.148.3
+
+[0.0, 0.01, 0.08, 0.1, 0.15, 0.25, 0.3, 1.0, 1.4, '  (no traversal)', '?', 'NEXT', 'NOT ENOUGH INFO', 'REFUTES', 'SUPPORTS', 'anchor', 'attention_mask', 'cpu', 'heads.pt', 'hidden_size', 'inf', 'input_ids', 'iteration', 'model', 'neutral', 'new_children', 'pt', 'refutes', 'root', 'root_belief', 'root_entropy', 'selected_path', 'splade', 'supports', 'theta', '→', '│']

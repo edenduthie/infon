@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cognition-benchmarks"
+version = "0.1.0"
+description = "NeurIPS 2026 benchmarks: Cognition vs RAG on FEVER and HoVer"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+dependencies = [
+    "cognition",
+    "sentence-transformers>=2.2",
+    "faiss-cpu>=1.7",
+    "numpy>=1.24",
+    "torch>=2.0",
+]
+
+[project.optional-dependencies]
+full = [
+    "datasets",
+    "huggingface-hub",
+]

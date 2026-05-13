@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/consolidate.py
+# hypothesis_version: 6.148.3
+
+[0.0, 0.1, 0.25, 1.0, 100, 10000, '%', '%Y', '%Y-%m', '%Y-%m-%d', '%Y-%m-%dT%H:%M', '%Y-%m-%dT%H:%M:%S', '0', 'NEXT', 'anchor', 'anchor_role', 'gap_days', 'object', 'predicate', 'subject']

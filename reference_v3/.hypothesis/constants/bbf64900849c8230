@@ -1,0 +1,4 @@
+# file: /Users/cpro/Desktop/ontology-workshop/cognition/src/cognition/heads.py
+# hypothesis_version: 6.148.3
+
+[0.0, 0.1, 0.5, 1.0, 128, 5000, ' are ', ' had ', ' has ', ' is ', ' was ', ' were ', 'NOT ENOUGH INFO', 'REFUTES', 'SUPPORTS', 'after', 'at', 'attention_mask', 'attributive', 'because', 'before', 'between', 'causal', 'caused', 'claim', 'cpu', 'due to', 'during', 'evidence', 'from', 'heads.pt', 'hidden_dim', 'in', 'input_ids', 'label', 'led to', 'located', 'near', 'nli', 'none', 'polarity', 'pt', 'relation_type', 'relevance', 'resulted', 'since', 'spatial', 'temporal', 'therefore', 'to', 'total', 'until', 'when', 'while']

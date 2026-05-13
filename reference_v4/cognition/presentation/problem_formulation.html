@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Is a Hypergraph · A Problem Formulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe4;
+  --paper-2:#ebe3cf;
+  --ink:#1c1815;
+  --accent:#c13b2c;
+  --accent-soft:rgba(193,59,44,.1);
+  --muted:#8a7f6d;
+  --line:rgba(28,24,21,.15);
+  --line-strong:rgba(28,24,21,.3);
+  --display:'Fraunces',serif;
+  --italic:'Instrument Serif',serif;
+  --mono:'JetBrains Mono',monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow:hidden;height:100%;width:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--display);
+  font-weight:400;
+  line-height:1.3;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Atmospheric overlays */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(193,59,44,.05), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 85% 100%, rgba(28,24,21,.04), transparent 50%);
+  pointer-events:none;
+  z-index:2;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.35 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  opacity:.35;
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:999;
+}
+
+/* Deck chrome */
+.chrome{
+  position:fixed;
+  top:clamp(18px,2.5vh,32px);
+  left:clamp(32px,4.5vw,72px);
+  right:clamp(32px,4.5vw,72px);
+  z-index:100;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.2em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.chrome-left{display:flex;align-items:center;gap:16px}
+.seal{
+  width:36px;height:36px;
+  border:1.5px solid var(--accent);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);
+  font-size:11px;
+  color:var(--accent);
+  letter-spacing:0;
+  position:relative;
+}
+.seal::after{
+  content:'';
+  position:absolute;inset:-5px;
+  border:1px dashed var(--accent);
+  border-radius:50%;
+  opacity:.4;
+}
+.chrome-center{
+  display:flex;align-items:center;gap:14px;
+}
+.progress{
+  width:180px;height:1px;background:var(--line);position:relative;
+}
+.progress>span{
+  position:absolute;inset:0 auto 0 0;
+  background:var(--accent);
+  width:0%;
+  transition:width .5s cubic-bezier(.2,.8,.3,1);
+}
+
+.footer{
+  position:fixed;
+  bottom:clamp(16px,2.2vh,28px);
+  left:clamp(32px,4.5vw,72px);
+  right:clamp(32px,4.5vw,72px);
+  display:flex;justify-content:space-between;align-items:center;
+  z-index:100;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.15em;
+  color:var(--muted);
+  text-transform:uppercase;
+  pointer-events:none;
+}
+.footer kbd{
+  background:var(--ink);color:var(--paper);
+  padding:2px 6px;border-radius:2px;font-family:var(--mono);
+  font-size:9px;margin:0 2px;
+}
+
+/* Deck + slides */
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide{
+  position:absolute;inset:0;
+  padding:clamp(64px,7.5vh,90px) clamp(32px,4.5vw,72px) clamp(52px,6.5vh,78px);
+  display:flex;flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .45s ease-out;
+  overflow:hidden;
+}
+.slide.active{
+  opacity:1;
+  pointer-events:auto;
+  z-index:10;
+}
+
+/* Stagger reveal */
+.stagger>*{opacity:0;transform:translateY(20px)}
+.slide.active .stagger>*{
+  animation:rise .9s cubic-bezier(.2,.8,.3,1) forwards;
+}
+.slide.active .stagger>*:nth-child(1){animation-delay:.05s}
+.slide.active .stagger>*:nth-child(2){animation-delay:.18s}
+.slide.active .stagger>*:nth-child(3){animation-delay:.31s}
+.slide.active .stagger>*:nth-child(4){animation-delay:.44s}
+.slide.active .stagger>*:nth-child(5){animation-delay:.57s}
+.slide.active .stagger>*:nth-child(6){animation-delay:.70s}
+.slide.active .stagger>*:nth-child(7){animation-delay:.83s}
+.slide.active .stagger>*:nth-child(8){animation-delay:.96s}
+.slide.active .stagger>*:nth-child(9){animation-delay:1.09s}
+
+@keyframes rise{
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes draw{
+  to{stroke-dashoffset:0}
+}
+@keyframes fillBar{
+  to{transform:scaleX(var(--target,1))}
+}
+@keyframes pulse{
+  0%,100%{opacity:.6}
+  50%{opacity:1}
+}
+
+/* Typography primitives */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--accent);
+  display:inline-flex;align-items:center;gap:10px;
+}
+.eyebrow::before{
+  content:'';
+  display:inline-block;
+  width:18px;height:1px;background:var(--accent);
+}
+
+h1.display{
+  font-family:var(--display);
+  font-weight:300;
+  font-size:clamp(48px,8.5vw,132px);
+  line-height:.88;
+  letter-spacing:-0.035em;
+  font-variation-settings:"opsz" 144;
+}
+h1.display em{
+  font-family:var(--italic);
+  font-style:italic;
+  font-weight:400;
+  color:var(--accent);
+}
+h2.section{
+  font-family:var(--display);
+  font-weight:300;
+  font-size:clamp(36px,5vw,72px);
+  line-height:.95;
+  letter-spacing:-0.025em;
+  font-variation-settings:"opsz" 144;
+}
+h2.section em{
+  font-family:var(--italic);
+  font-style:italic;
+  font-weight:400;
+}
+
+p.lede{
+  font-family:var(--italic);
+  font-size:clamp(16px,1.55vw,21px);
+  line-height:1.45;
+  color:var(--ink);
+  max-width:46ch;
+}
+p.lede em{color:var(--accent);font-style:normal;font-family:var(--display);font-weight:500}
+
+.caption{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.mono{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--ink);
+  line-height:1.7;
+}
+
+.rule{
+  width:72px;height:2px;
+  background:var(--ink);
+  margin:24px 0;
+}
+.rule.accent{background:var(--accent)}
+
+/* ─── SLIDE 1: TITLE ──────────────────────── */
+#s1{
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  gap:clamp(16px,2vh,28px);
+}
+#s1 .head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+}
+#s1 .title-block{
+  align-self:center;
+  position:relative;
+}
+#s1 h1{
+  font-size:clamp(64px,11.5vw,180px);
+  line-height:.84;
+}
+#s1 .meta-block{
+  display:grid;grid-template-columns:auto auto;
+  column-gap:60px;row-gap:6px;
+  align-items:baseline;
+  justify-self:end;
+}
+#s1 .meta-block .k{color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+#s1 .meta-block .v{font-family:var(--mono);font-size:12px;letter-spacing:.05em}
+#s1 .bg-diagram{
+  position:absolute;
+  right:-3vw;top:-6vh;
+  width:min(36vw,460px);
+  opacity:.22;
+  pointer-events:none;
+}
+
+/* ─── SLIDE 2: THE GAP ─────────────────────── */
+#s2{display:grid;grid-template-rows:auto 1fr;gap:clamp(14px,2vh,22px);min-height:0}
+#s2 .split{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:clamp(24px,3vw,56px);
+  align-items:center;
+  min-height:0;
+}
+#s2 .col{
+  display:flex;flex-direction:column;justify-content:center;gap:14px;
+  position:relative;
+  padding-top:18px;
+}
+#s2 .col-label{
+  position:absolute;top:0;left:0;
+  font-family:var(--mono);font-size:10px;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--muted);
+}
+#s2 .divider{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  position:relative;align-self:stretch;
+}
+#s2 .divider-line{
+  width:1px;height:100%;
+  background:repeating-linear-gradient(180deg,var(--line-strong) 0,var(--line-strong) 4px,transparent 4px,transparent 8px);
+}
+#s2 .question-mark{
+  position:absolute;
+  font-family:var(--display);
+  font-weight:300;
+  font-size:clamp(52px,7vw,100px);
+  color:var(--accent);
+  background:var(--paper);
+  padding:0 16px;
+  line-height:1;
+}
+#s2 .token-box{
+  font-family:var(--mono);font-size:11px;line-height:1.9;
+  max-width:320px;color:var(--ink);
+  padding:20px 22px;
+  background:rgba(28,24,21,.04);
+  border-left:2px solid var(--muted);
+}
+#s2 .token-box .tok{display:inline-block;margin-right:3px;padding:1px 5px;background:var(--paper-2);border-radius:2px;font-size:10px}
+#s2 .concept-blob{
+  position:relative;width:100%;aspect-ratio:1;max-width:280px;
+  margin-left:auto;
+}
+#s2 .concept-blob svg{width:100%;height:100%}
+#s2 .body-text{
+  font-family:var(--italic);font-size:17px;line-height:1.5;max-width:32ch;
+}
+
+/* ─── SLIDE 3: THREE TOOLS ──────────────────── */
+#s3{display:grid;grid-template-rows:auto auto 1fr;gap:clamp(16px,2.2vh,28px);min-height:0}
+#s3 .three{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:clamp(16px,2.5vw,32px);
+  min-height:0;
+}
+#s3 .card{
+  padding:20px 20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.2);
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;
+  min-height:0;
+}
+#s3 .card.ours{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+#s3 .card-tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--muted);
+}
+#s3 .card.ours .card-tag{color:var(--accent)}
+#s3 .card-title{
+  font-family:var(--display);font-weight:300;font-size:26px;
+  line-height:1;letter-spacing:-0.02em;
+}
+#s3 .card-vis{
+  margin:4px 0;height:96px;
+  display:flex;align-items:center;justify-content:center;
+}
+#s3 .card-body{
+  font-family:var(--italic);font-size:15px;line-height:1.45;
+  color:var(--ink);
+}
+#s3 .card-limit{
+  margin-top:auto;
+  padding-top:12px;
+  border-top:1px dashed var(--line-strong);
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  line-height:1.55;
+}
+#s3 .card.ours .card-limit{color:var(--accent);border-top-color:var(--accent)}
+
+/* ─── SLIDE 4: INFONS ARE ATOMS ─────────── */
+#s4{display:grid;grid-template-columns:minmax(0,.9fr) 1.1fr;gap:clamp(32px,4vw,60px);align-items:center;min-height:0}
+#s4 .lhs{display:flex;flex-direction:column;gap:18px;min-height:0}
+#s4 .diagram{position:relative;width:100%;aspect-ratio:1.2/1;min-height:0;max-height:100%}
+#s4 .diagram svg{width:100%;height:100%;overflow:visible}
+#s4 h2 em{color:var(--accent)}
+
+/* ─── SLIDE 5: ARCHITECTURE ──────────────── */
+#s5{display:grid;grid-template-rows:auto auto 1fr auto;gap:clamp(14px,2vh,22px);min-height:0}
+#s5 .pipeline{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:0;
+  align-items:stretch;
+  position:relative;
+  min-height:0;
+}
+#s5 .stage{
+  padding:16px 14px;
+  position:relative;
+  border-left:1px solid var(--line);
+  display:flex;flex-direction:column;gap:10px;
+  min-height:0;
+}
+#s5 .stage:first-child{border-left:none}
+#s5 .stage-num{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;
+  color:var(--accent);text-transform:uppercase;
+}
+#s5 .stage-name{
+  font-family:var(--display);font-weight:300;font-size:19px;
+  line-height:1.08;letter-spacing:-0.02em;
+}
+#s5 .stage-impl{
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  line-height:1.65;margin-top:4px;
+}
+#s5 .stage-vis{
+  height:56px;display:flex;align-items:center;justify-content:center;
+  margin:2px 0;
+}
+#s5 .notes{
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  padding-top:14px;border-top:1px solid var(--line);
+  flex-wrap:wrap;
+}
+#s5 .note-item{
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  letter-spacing:.05em;
+}
+#s5 .note-item strong{color:var(--ink);font-weight:500}
+
+/* ─── SLIDE 6: EVIDENCE ──────────────────── */
+#s6{display:grid;grid-template-rows:auto auto 1fr;gap:clamp(14px,2vh,22px);min-height:0}
+#s6 .evidence-grid{
+  display:grid;grid-template-columns:1fr 1.05fr;
+  gap:clamp(24px,3.5vw,48px);min-height:0;align-items:stretch;
+}
+#s6 .lhs{display:flex;flex-direction:column;justify-content:center;gap:16px}
+#s6 .bignum{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(72px,10vw,140px);
+  line-height:.85;letter-spacing:-0.04em;
+  color:var(--accent);
+  font-variation-settings:"opsz" 144;
+}
+#s6 .bignum em{
+  font-family:var(--italic);font-weight:400;color:var(--ink);
+}
+#s6 .context-line{
+  font-family:var(--italic);font-size:17px;line-height:1.4;max-width:36ch;
+}
+#s6 .stats{
+  display:grid;grid-template-columns:auto auto;
+  column-gap:32px;row-gap:8px;align-items:baseline;
+  padding-top:14px;border-top:1px solid var(--line);
+}
+#s6 .stats .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+#s6 .stats .v{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:-0.02em}
+
+#s6 .heads{
+  display:flex;flex-direction:column;gap:6px;
+  padding:18px 20px;
+  background:rgba(28,24,21,.03);
+  border-left:2px solid var(--accent);
+  min-height:0;
+  overflow:hidden;
+}
+#s6 .heads-head{
+  display:grid;grid-template-columns:130px 1fr 52px;gap:10px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;
+  color:var(--muted);text-transform:uppercase;
+  padding-bottom:8px;border-bottom:1px solid var(--line);
+  margin-bottom:4px;
+}
+#s6 .head-row{
+  display:grid;grid-template-columns:130px 1fr 52px;gap:10px;
+  align-items:center;font-family:var(--mono);font-size:10.5px;
+}
+#s6 .head-label{color:var(--ink)}
+#s6 .head-bar{
+  position:relative;height:11px;
+  background:var(--paper-2);
+}
+#s6 .head-fill{
+  position:absolute;inset:0;
+  background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 1.1s cubic-bezier(.2,.8,.3,1);
+}
+.slide.active .head-row .head-fill{transform:scaleX(var(--v,0))}
+#s6 .head-num{text-align:right;color:var(--accent);font-weight:500}
+
+/* ─── SLIDE 7: OPEN QUESTIONS ────────────── */
+#s7{display:grid;grid-template-rows:auto auto 1fr;gap:clamp(14px,2vh,22px);min-height:0}
+#s7 .qs{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:clamp(20px,2.5vw,36px);
+  min-height:0;
+}
+#s7 .q{
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;
+  padding:14px 0;
+  min-height:0;
+}
+#s7 .q-num{
+  font-family:var(--display);font-weight:300;
+  font-size:60px;line-height:.85;color:var(--accent);
+  font-variation-settings:"opsz" 144;
+}
+#s7 .q-body{
+  font-family:var(--display);font-weight:400;
+  font-size:20px;line-height:1.15;letter-spacing:-0.015em;
+  max-width:22ch;
+}
+#s7 .q-body em{font-family:var(--italic);font-weight:400;color:var(--accent)}
+#s7 .q-hint{
+  font-family:var(--italic);font-size:13.5px;line-height:1.5;
+  color:var(--muted);margin-top:auto;padding-top:12px;
+  border-top:1px dashed var(--line-strong);
+}
+#s7 .q-svg{height:70px;margin-top:4px}
+#s7 .q-svg svg{width:100%;height:100%}
+
+/* ─── SLIDE 8: WHAT'S NEXT ──────────────── */
+#s8{display:grid;grid-template-rows:auto 1fr auto;gap:clamp(14px,2vh,22px);min-height:0}
+#s8 .head-block{display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:end}
+#s8 .timeline{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  gap:0;align-items:stretch;
+  position:relative;
+  min-height:0;
+}
+#s8 .timeline::before{
+  content:'';
+  position:absolute;
+  top:38px;left:0;right:0;height:1px;
+  background:var(--line-strong);
+}
+#s8 .tl-item{
+  padding:0 14px;
+  position:relative;
+  min-height:0;
+}
+#s8 .tl-dot{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--paper);
+  border:2px solid var(--ink);
+  position:absolute;
+  top:32px;left:16px;
+}
+#s8 .tl-item.done .tl-dot{background:var(--accent);border-color:var(--accent)}
+#s8 .tl-item.current .tl-dot{
+  background:var(--paper);border-color:var(--accent);
+  box-shadow:0 0 0 5px var(--accent-soft);
+}
+#s8 .tl-date{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:18px;
+  position:relative;
+}
+#s8 .tl-title{
+  font-family:var(--display);font-weight:300;font-size:22px;
+  line-height:1.05;letter-spacing:-0.02em;margin-top:24px;
+}
+#s8 .tl-title em{font-family:var(--italic);color:var(--accent)}
+#s8 .tl-body{
+  font-family:var(--italic);font-size:13.5px;line-height:1.45;
+  color:var(--ink);margin-top:8px;
+}
+#s8 .tl-impl{
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  margin-top:10px;letter-spacing:.04em;line-height:1.55;
+}
+#s8 .closing{
+  padding:16px 0 0;
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:end;
+}
+#s8 .closing-q{
+  font-family:var(--italic);font-size:clamp(18px,2.1vw,26px);
+  line-height:1.3;color:var(--ink);max-width:42ch;
+}
+#s8 .closing-q em{font-family:var(--display);font-style:normal;color:var(--accent)}
+#s8 .closing-cite{
+  font-family:var(--mono);font-size:10px;letter-spacing:.15em;
+  color:var(--muted);text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+
+<!-- Chrome -->
+<div class="chrome">
+  <div class="chrome-left">
+    <div class="seal">gC</div>
+    <span>Problem Formulation · Draft 01</span>
+  </div>
+  <div class="chrome-center">
+    <div class="progress"><span id="progress-bar"></span></div>
+    <span id="slide-label">01 / 08</span>
+  </div>
+</div>
+
+<div class="footer">
+  <span>graph-cognition · 2026-05-02</span>
+  <span><kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</span>
+</div>
+
+<div class="deck">
+
+<!-- ══════════════════ SLIDE 1: TITLE ══════════════════ -->
+<section class="slide active" id="s1">
+  <div class="head">
+    <div class="stagger" style="display:flex;flex-direction:column;gap:6px">
+      <span class="eyebrow">A Problem Formulation</span>
+      <span class="caption">For the situated-reasoning programme · v1</span>
+    </div>
+    <div class="meta-block stagger">
+      <span class="k">Domain</span>      <span class="v">open-world text → N</span>
+      <span class="k">Encoder</span>     <span class="v">SPLADE-tiny (frozen)</span>
+      <span class="k">Runtime</span>     <span class="v">torch · transformers · numpy</span>
+      <span class="k">Corpus</span>      <span class="v">5 docs · 49 infons</span>
+      <span class="k">Schema</span>      <span class="v">22 anchors (seedable)</span>
+      <span class="k">Date</span>        <span class="v">2026-05-02</span>
+    </div>
+  </div>
+
+  <div class="title-block">
+    <svg class="bg-diagram" viewBox="0 0 500 500" fill="none">
+      <circle cx="250" cy="250" r="180" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 6" opacity="0.5"/>
+      <circle cx="250" cy="250" r="120" stroke="var(--ink)" stroke-width="1" opacity="0.15"/>
+      <circle cx="250" cy="250" r="60"  stroke="var(--ink)" stroke-width="1" opacity="0.25"/>
+      <g stroke="var(--ink)" stroke-width="0.8" opacity="0.25">
+        <circle cx="250" cy="90" r="8" fill="var(--paper-2)"/>
+        <circle cx="410" cy="250" r="8" fill="var(--paper-2)"/>
+        <circle cx="250" cy="410" r="8" fill="var(--paper-2)"/>
+        <circle cx="90" cy="250" r="8" fill="var(--paper-2)"/>
+        <circle cx="250" cy="250" r="10" fill="var(--accent)" opacity="0.5"/>
+        <line x1="250" y1="98" x2="250" y2="240"/>
+        <line x1="402" y1="250" x2="260" y2="250"/>
+        <line x1="250" y1="402" x2="250" y2="260"/>
+        <line x1="98" y1="250" x2="240" y2="250"/>
+      </g>
+    </svg>
+
+    <h1 class="display stagger">
+      <span style="display:block">Text is a</span>
+      <span style="display:block"><em>hypergraph.</em></span>
+    </h1>
+  </div>
+
+  <div class="stagger" style="display:flex;justify-content:space-between;align-items:end;gap:40px">
+    <p class="lede" style="max-width:52ch">
+      Three claims. <em>First</em>: documents are hypergraphs, not sequences.
+      <em>Second</em>: a GNN with logic in its aggregators reasons over them.
+      <em>Third</em>: we have shipped the machine — and have measurements.
+    </p>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+      <span class="caption" style="color:var(--accent)">→ Read</span>
+      <span class="mono" style="font-size:11px">~8 min · 8 slides</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SLIDE 2: THE GAP ══════════════════ -->
+<section class="slide" id="s2">
+  <div class="stagger" style="display:flex;justify-content:space-between;align-items:end;gap:40px">
+    <div>
+      <span class="eyebrow">§1 · The question</span>
+      <h2 class="section" style="margin-top:16px">
+        How does a machine know<br>
+        what a document <em>claims?</em>
+      </h2>
+    </div>
+    <p class="caption" style="max-width:28ch;text-align:right">
+      Two failure modes today. Opaque models won't tell you why.
+      Triple stores won't tell you when they're wrong.
+    </p>
+  </div>
+
+  <div class="split">
+    <div class="col">
+      <span class="col-label">What a machine reads</span>
+      <div class="token-box">
+        <span class="tok">▁Toy</span><span class="tok">ota</span><span class="tok">▁invests</span><span class="tok">▁in</span><span class="tok">▁solid</span><span class="tok">-</span><span class="tok">state</span><span class="tok">▁batt</span><span class="tok">eries</span><span class="tok">▁in</span><span class="tok">▁Japan</span><span class="tok">.</span>
+        <br><br>
+        → <span style="color:var(--muted)">token sequence → 768-d blob</span><br>
+        <span style="color:var(--muted)">No identity. No polarity. No tense.<br>No provenance. No ignorance.</span>
+      </div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="question-mark">?</span>
+    </div>
+
+    <div class="col" style="align-items:flex-end;text-align:right">
+      <span class="col-label" style="left:auto;right:0">What a human means</span>
+      <div class="concept-blob">
+        <svg viewBox="0 0 340 340">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--ink)"/>
+            </marker>
+          </defs>
+          <g>
+            <!-- Infon at centre -->
+            <ellipse cx="170" cy="170" rx="62" ry="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"/>
+            <text x="170" y="162" text-anchor="middle" font-family="Fraunces" font-size="12" fill="var(--accent)">Toyota invests battery</text>
+            <text x="170" y="178" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="var(--muted)">past · pos · conf 0.81</text>
+
+            <!-- Subject anchor -->
+            <circle cx="50"  cy="80"  r="24" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="50"  y="84" text-anchor="middle" font-family="JetBrains Mono" font-size="10">Toyota</text>
+
+            <!-- Predicate anchor -->
+            <circle cx="290" cy="80"  r="24" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="290" y="84" text-anchor="middle" font-family="JetBrains Mono" font-size="10">invests</text>
+
+            <!-- Object anchor -->
+            <circle cx="50"  cy="260" r="24" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="50"  y="264" text-anchor="middle" font-family="JetBrains Mono" font-size="10">battery</text>
+
+            <!-- Market anchor -->
+            <circle cx="290" cy="260" r="24" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="290" y="264" text-anchor="middle" font-family="JetBrains Mono" font-size="10">Japan</text>
+
+            <!-- Spokes -->
+            <g stroke="var(--accent)" stroke-width="0.9" fill="none" opacity="0.7">
+              <path d="M70 95 L 115 150" marker-end="url(#arrow)"/>
+              <path d="M270 95 L 225 150" marker-end="url(#arrow)"/>
+              <path d="M115 190 L 70 240" marker-end="url(#arrow)"/>
+              <path d="M225 190 L 270 240" marker-end="url(#arrow)"/>
+            </g>
+
+            <!-- Role labels -->
+            <text x="72" y="130" font-family="JetBrains Mono" font-size="7" fill="var(--muted)">INITIATES</text>
+            <text x="228" y="130" font-family="JetBrains Mono" font-size="7" fill="var(--muted)" text-anchor="start">ASSERTS</text>
+            <text x="90" y="216" font-family="JetBrains Mono" font-size="7" fill="var(--muted)">TARGETS</text>
+            <text x="232" y="216" font-family="JetBrains Mono" font-size="7" fill="var(--muted)">LOCATED_AT</text>
+          </g>
+        </svg>
+      </div>
+      <p class="mono" style="font-size:11px;color:var(--muted);max-width:30ch">
+        An <span style="color:var(--accent)">infon</span> — a triple with tense, polarity, confidence, provenance.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SLIDE 3: THREE TOOLS ══════════════════ -->
+<section class="slide" id="s3">
+  <div class="stagger">
+    <span class="eyebrow">§2 · Why existing approaches fail</span>
+    <h2 class="section" style="margin-top:16px">
+      Three tools. <em>None fit.</em>
+    </h2>
+  </div>
+
+  <p class="lede stagger" style="max-width:68ch">
+    Three tools dominate the field. <em>Knowledge graphs</em> lose context.
+    <em>Language models</em> lose inspection. <em>RAG</em> loses calibration.
+    None can say <em>"I don't know"</em> in a way you can act on.
+    Our bet combines their strengths — a typed hypergraph read by a GNN
+    whose aggregators are logic.
+  </p>
+
+  <div class="three stagger">
+    <div class="card">
+      <span class="card-tag">Option A</span>
+      <span class="card-title">Knowledge<br>graphs</span>
+      <div class="card-vis">
+        <svg width="170" height="90" viewBox="0 0 170 90">
+          <g>
+            <circle cx="30" cy="25" r="13" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1.2"/>
+            <circle cx="140" cy="25" r="13" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1.2"/>
+            <circle cx="85" cy="65" r="13" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1.2"/>
+            <line x1="43" y1="25" x2="127" y2="25" stroke="var(--ink)" stroke-width="0.8"/>
+            <line x1="36" y1="35" x2="79" y2="55" stroke="var(--ink)" stroke-width="0.8"/>
+            <line x1="134" y1="35" x2="91" y2="55" stroke="var(--ink)" stroke-width="0.8"/>
+            <text x="85" y="18" font-family="JetBrains Mono" font-size="7" fill="var(--muted)" text-anchor="middle">invests</text>
+            <text x="30" y="29" font-family="JetBrains Mono" font-size="7" text-anchor="middle" fill="var(--ink)">Toy</text>
+            <text x="140" y="29" font-family="JetBrains Mono" font-size="7" text-anchor="middle" fill="var(--ink)">bat</text>
+            <text x="85" y="69" font-family="JetBrains Mono" font-size="7" text-anchor="middle" fill="var(--ink)">JP</text>
+          </g>
+        </svg>
+      </div>
+      <p class="card-body">
+        <em>Strength:</em> symbolic, inspectable, traversable.
+      </p>
+      <p class="card-limit"><em>Limit:</em> strip tense, polarity, source, hedging. "Toyota invested" and "Toyota may invest" become the same edge.</p>
+    </div>
+
+    <div class="card">
+      <span class="card-tag">Option B</span>
+      <span class="card-title">Language<br>models</span>
+      <div class="card-vis">
+        <svg width="170" height="90" viewBox="0 0 170 90">
+          <g>
+            <rect x="10" y="12" width="150" height="66" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1" opacity="0.6"/>
+            <g font-family="JetBrains Mono" font-size="6" fill="var(--muted)">
+              <text x="18" y="24">0.12 0.8 -0.3 0.07 0.4 ...</text>
+              <text x="18" y="36">0.9 -0.1 0.2 -0.5 0.1 ...</text>
+              <text x="18" y="48">-0.3 0.5 0.02 0.7 -0.4 ...</text>
+              <text x="18" y="60">0.05 0.6 -0.8 0.2 0.1 ...</text>
+              <text x="18" y="72">...</text>
+            </g>
+            <rect x="10" y="12" width="150" height="66" fill="none" stroke="var(--accent)" stroke-width="1.3" stroke-dasharray="3 3"/>
+          </g>
+        </svg>
+      </div>
+      <p class="card-body">
+        <em>Strength:</em> fluent, implicit, end-to-end.
+      </p>
+      <p class="card-limit"><em>Limit:</em> no claim provenance, no calibration, no honest "I don't know." Hallucinates as readily as it recalls.</p>
+    </div>
+
+    <div class="card ours">
+      <span class="card-tag">Our bet</span>
+      <span class="card-title">Infon<br>hypergraph + GNN</span>
+      <div class="card-vis">
+        <svg width="180" height="96" viewBox="0 0 180 96">
+          <g>
+            <rect x="8" y="36" width="28" height="26" fill="none" stroke="var(--accent)" stroke-width="1.3"/>
+            <text x="22" y="52" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--accent)">txt</text>
+            <path d="M38 49 L 58 49" stroke="var(--accent)" stroke-width="1.2" marker-end="url(#a1)"/>
+            <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--accent)"/></marker></defs>
+
+            <!-- Hypergraph nodes -->
+            <circle cx="70" cy="28" r="6" fill="var(--accent)"/>
+            <circle cx="70" cy="49" r="6" fill="var(--accent)" opacity="0.7"/>
+            <circle cx="70" cy="70" r="6" fill="var(--accent)" opacity="0.4"/>
+            <path d="M77 28 L 100 20" stroke="var(--accent)" stroke-width="0.9"/>
+            <path d="M77 28 L 100 42" stroke="var(--accent)" stroke-width="0.9"/>
+            <path d="M77 49 L 100 49" stroke="var(--accent)" stroke-width="0.9"/>
+            <path d="M77 49 L 100 70" stroke="var(--accent)" stroke-width="0.9"/>
+            <path d="M77 70 L 100 78" stroke="var(--accent)" stroke-width="0.9"/>
+            <circle cx="110" cy="20" r="4" fill="none" stroke="var(--accent)" stroke-width="1"/>
+            <circle cx="110" cy="42" r="4" fill="none" stroke="var(--accent)" stroke-width="1"/>
+            <circle cx="110" cy="49" r="4" fill="none" stroke="var(--accent)" stroke-width="1"/>
+            <circle cx="110" cy="70" r="4" fill="none" stroke="var(--accent)" stroke-width="1"/>
+            <circle cx="110" cy="78" r="4" fill="none" stroke="var(--accent)" stroke-width="1"/>
+
+            <path d="M120 49 L 138 49" stroke="var(--accent)" stroke-width="1.2" marker-end="url(#a1)"/>
+            <text x="150" y="39" font-family="JetBrains Mono" font-size="7" fill="var(--accent)">S: 0.62</text>
+            <text x="150" y="50" font-family="JetBrains Mono" font-size="7" fill="var(--muted)">R: 0.05</text>
+            <text x="150" y="61" font-family="JetBrains Mono" font-size="7" fill="var(--muted)">θ: 0.30</text>
+          </g>
+        </svg>
+      </div>
+      <p class="card-body">
+        <em>Strength:</em> inspection + calibration + honest θ — at once.
+      </p>
+      <p class="card-limit"><em>Cost:</em> a seed schema. In exchange: every output traces to concrete anchors you authored, and θ is a first-class output.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SLIDE 4: THE INSIGHT ══════════════════ -->
+<section class="slide" id="s4">
+  <div class="lhs">
+    <div class="stagger">
+      <span class="eyebrow">§3 · The insight</span>
+      <h2 class="section" style="margin-top:16px">
+        The edge <em>type</em> is<br>the <em>logical connective.</em>
+      </h2>
+      <div class="rule accent"></div>
+    </div>
+
+    <p class="lede stagger">
+      One sentence: <em>the edge type is the logical connective.</em>
+      A GNN has one aggregator per edge type — so we choose those
+      aggregators to be IKL operators.
+    </p>
+
+    <p class="lede stagger" style="max-width:44ch">
+      Three mappings, covering the graph:
+      spoke edges use <em>AND</em> (all three roles must hold),
+      temporal edges use <em>IF–THEN</em> (premise gates conclusion),
+      spatial edges use <em>IST</em> (context gates content).
+      Each message-passing step is an inference step.
+    </p>
+
+    <p class="caption stagger" style="margin-top:12px">
+      → after Barwise (infons) and Hayes (IKL)
+    </p>
+  </div>
+
+  <div class="diagram stagger">
+    <svg viewBox="0 0 580 500" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <marker id="arrow-b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="var(--ink)"/>
+        </marker>
+        <marker id="arrow-a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+
+      <!-- Text in, infons + typed edges -->
+      <g>
+        <rect x="30" y="30" width="150" height="60" rx="3" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="105" y="55" text-anchor="middle" font-family="Fraunces" font-size="15" font-weight="400">Document</text>
+        <text x="105" y="74" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="12" fill="var(--muted)">"Toyota invests ..."</text>
+
+        <path d="M185 60 L 235 60" stroke="var(--ink)" stroke-width="1.3" marker-end="url(#arrow-b)" fill="none"/>
+
+        <rect x="240" y="30" width="160" height="60" rx="3" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="320" y="55" text-anchor="middle" font-family="Fraunces" font-size="15" font-weight="400" fill="var(--paper)">Hypergraph</text>
+        <text x="320" y="74" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="var(--paper)">2 NODE KINDS · 8 REL TYPES</text>
+      </g>
+
+      <!-- Vertical connector -->
+      <path d="M320 94 L 320 140" stroke="var(--ink)" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+
+      <!-- Aggregators middle panel -->
+      <g>
+        <rect x="60" y="150" width="520" height="210" rx="3" fill="rgba(255,255,255,.2)" stroke="var(--line)" stroke-width="1"/>
+        <text x="70" y="173" font-family="JetBrains Mono" font-size="9.5" fill="var(--muted)" letter-spacing="2">LAYER ℓ · per-relation aggregator</text>
+
+        <!-- Row 1: AND -->
+        <g transform="translate(80, 190)">
+          <rect x="0" y="0" width="80" height="34" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1"/>
+          <text x="40" y="16" text-anchor="middle" font-family="Fraunces" font-size="11">INITIATES</text>
+          <text x="40" y="28" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="var(--muted)">ASSERTS · TARGETS</text>
+          <path d="M90 17 L 130 17" stroke="var(--accent)" stroke-width="1.2" marker-end="url(#arrow-a)"/>
+          <text x="155" y="20" font-family="Instrument Serif" font-style="italic" font-size="16" fill="var(--accent)">AND</text>
+          <text x="205" y="20" font-family="JetBrains Mono" font-size="10" fill="var(--muted)">min(gated neighbours)</text>
+          <text x="380" y="20" font-family="Instrument Serif" font-style="italic" font-size="12" fill="var(--ink)">— "all must hold"</text>
+        </g>
+
+        <!-- Row 2: IF–THEN -->
+        <g transform="translate(80, 235)">
+          <rect x="0" y="0" width="80" height="34" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+          <text x="40" y="16" text-anchor="middle" font-family="Fraunces" font-size="11">NEXT</text>
+          <text x="40" y="28" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="var(--muted)">ENTAILS · CAUSES</text>
+          <path d="M90 17 L 130 17" stroke="var(--accent)" stroke-width="1.2" marker-end="url(#arrow-a)"/>
+          <text x="155" y="20" font-family="Instrument Serif" font-style="italic" font-size="16" fill="var(--accent)">IF → THEN</text>
+          <text x="250" y="20" font-family="JetBrains Mono" font-size="10" fill="var(--muted)">attention-gated flow</text>
+          <text x="400" y="20" font-family="Instrument Serif" font-style="italic" font-size="12" fill="var(--ink)">— "premise gates conclusion"</text>
+        </g>
+
+        <!-- Row 3: IST -->
+        <g transform="translate(80, 280)">
+          <rect x="0" y="0" width="80" height="34" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+          <text x="40" y="16" text-anchor="middle" font-family="Fraunces" font-size="11">LOCATED_AT</text>
+          <text x="40" y="28" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="var(--muted)">(spatial)</text>
+          <path d="M90 17 L 130 17" stroke="var(--accent)" stroke-width="1.2" marker-end="url(#arrow-a)"/>
+          <text x="155" y="20" font-family="Instrument Serif" font-style="italic" font-size="16" fill="var(--accent)">IST</text>
+          <text x="200" y="20" font-family="JetBrains Mono" font-size="10" fill="var(--muted)">multiplicative context gate</text>
+          <text x="400" y="20" font-family="Instrument Serif" font-style="italic" font-size="12" fill="var(--ink)">— "context gates content"</text>
+        </g>
+
+        <!-- Row 4: default -->
+        <g transform="translate(80, 325)">
+          <rect x="0" y="0" width="80" height="24" fill="var(--paper)" stroke="var(--muted)" stroke-width="1"/>
+          <text x="40" y="16" text-anchor="middle" font-family="Fraunces" font-size="10" fill="var(--muted)">other</text>
+          <path d="M90 12 L 130 12" stroke="var(--muted)" stroke-width="1"/>
+          <text x="155" y="15" font-family="Instrument Serif" font-style="italic" font-size="13" fill="var(--muted)">weighted mean (standard R-GCN)</text>
+        </g>
+      </g>
+
+      <!-- Output -->
+      <g>
+        <path d="M320 360 L 320 400" stroke="var(--ink)" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+        <rect x="190" y="400" width="260" height="50" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"/>
+        <text x="320" y="422" text-anchor="middle" font-family="Fraunces" font-size="14" fill="var(--accent)">DS mass function</text>
+        <text x="320" y="440" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink)" letter-spacing="1">{ S, R, U, θ } · sums to 1</text>
+      </g>
+
+      <!-- Caption -->
+      <text x="30" y="486" font-family="Instrument Serif" font-style="italic" font-size="14" fill="var(--ink)">
+        "A forward pass through the network is the evaluation of a small compositional logic."
+      </text>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════════════ SLIDE 5: ARCHITECTURE ══════════════════ -->
+<section class="slide" id="s5">
+  <div class="stagger">
+    <span class="eyebrow">§4 · The machine</span>
+    <h2 class="section" style="margin-top:16px">
+      What a <em>reasoner</em> actually does.
+    </h2>
+  </div>
+
+  <p class="lede stagger" style="max-width:72ch">
+    Five stages, each individually replaceable. The architecture is
+    <em>domain-agnostic</em>; a specific reasoner is defined by
+    <em>schema + corpus</em> and nothing else.
+  </p>
+
+  <div class="pipeline stagger">
+
+    <div class="stage">
+      <span class="stage-num">01 · Extract</span>
+      <span class="stage-name">Text &nbsp;→&nbsp; infons</span>
+      <div class="stage-vis">
+        <svg width="160" height="60" viewBox="0 0 160 60">
+          <g>
+            <rect x="8" y="22" width="44" height="18" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="30" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="8">text</text>
+            <path d="M56 30 L 72 30" stroke="var(--ink)" stroke-width="1" marker-end="url(#ar1)"/>
+            <defs><marker id="ar1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--ink)"/></marker></defs>
+            <g>
+              <rect x="78" y="14" width="44" height="10" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+              <rect x="78" y="28" width="44" height="10" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+              <rect x="78" y="42" width="44" height="10" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+              <text x="100" y="22" text-anchor="middle" font-family="JetBrains Mono" font-size="7">S · P · O</text>
+              <text x="100" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="7">S · P · O</text>
+              <text x="100" y="50" text-anchor="middle" font-family="JetBrains Mono" font-size="7">S · P · O</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <p class="stage-impl">
+        SPLADE + schema<br>
+        projection<br>
+        → 49 infons / 5 docs
+      </p>
+    </div>
+
+    <div class="stage">
+      <span class="stage-num">02 · Propagate</span>
+      <span class="stage-name">Typed<br>message passing</span>
+      <div class="stage-vis">
+        <svg width="160" height="60" viewBox="0 0 160 60">
+          <g>
+            <circle cx="30" cy="20" r="7" fill="var(--ink)"/>
+            <circle cx="80" cy="30" r="7" fill="var(--ink)"/>
+            <circle cx="130" cy="20" r="7" fill="var(--ink)"/>
+            <circle cx="55" cy="45" r="7" fill="var(--ink)"/>
+            <circle cx="105" cy="45" r="7" fill="var(--ink)"/>
+            <line x1="37" y1="20" x2="73" y2="30" stroke="var(--accent)" stroke-width="1"/>
+            <line x1="87" y1="30" x2="123" y2="22" stroke="var(--accent)" stroke-width="1"/>
+            <line x1="35" y1="24" x2="48" y2="43" stroke="var(--accent)" stroke-width="0.9"/>
+            <line x1="80" y1="36" x2="102" y2="42" stroke="var(--accent)" stroke-width="0.9"/>
+            <line x1="82" y1="36" x2="58" y2="43" stroke="var(--accent)" stroke-width="0.9"/>
+            <line x1="125" y1="26" x2="110" y2="42" stroke="var(--accent)" stroke-width="0.9"/>
+          </g>
+        </svg>
+      </div>
+      <p class="stage-impl">
+        2 R-GCN <em>or Sheaf</em> layers<br>
+        hidden = 64<br>
+        aggregator = LOGIC
+      </p>
+    </div>
+
+    <div class="stage">
+      <span class="stage-num">03 · Teach</span>
+      <span class="stage-name">Self-supervised<br>training</span>
+      <div class="stage-vis">
+        <svg width="160" height="60" viewBox="0 0 160 60">
+          <g>
+            <rect x="10" y="10" width="26" height="18" fill="var(--paper-2)" stroke="var(--muted)" stroke-width="0.8"/>
+            <rect x="10" y="32" width="26" height="18" fill="var(--paper-2)" stroke="var(--muted)" stroke-width="0.8"/>
+            <rect x="40" y="10" width="26" height="18" fill="var(--paper-2)" stroke="var(--muted)" stroke-width="0.8"/>
+            <rect x="40" y="32" width="26" height="18" fill="var(--paper-2)" stroke="var(--muted)" stroke-width="0.8"/>
+            <text x="38" y="24" text-anchor="middle" font-family="JetBrains Mono" font-size="6" fill="var(--muted)">4 srcs</text>
+            <path d="M70 30 L 92 30" stroke="var(--ink)" stroke-width="1" marker-end="url(#ar2)"/>
+            <defs><marker id="ar2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--ink)"/></marker></defs>
+            <rect x="96" y="18" width="52" height="24" fill="var(--ink)"/>
+            <text x="122" y="34" text-anchor="middle" font-family="Fraunces" font-size="10" fill="var(--paper)">Dempster</text>
+          </g>
+        </svg>
+      </div>
+      <p class="stage-impl">
+        6 heuristic DS sources<br>
+        → fused teacher<br>
+        KL + sheaf coherence + L<sub>F</sub>
+      </p>
+    </div>
+
+    <div class="stage">
+      <span class="stage-num">04 · Read</span>
+      <span class="stage-name">Belief<br>mass readout</span>
+      <div class="stage-vis">
+        <svg width="160" height="60" viewBox="0 0 160 60">
+          <g>
+            <rect x="10" y="25" width="14" height="14" fill="var(--ink)"/>
+            <path d="M24 32 L 42 32" stroke="var(--ink)" stroke-width="1" marker-end="url(#ar3)"/>
+            <defs><marker id="ar3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--ink)"/></marker></defs>
+            <g font-family="JetBrains Mono" font-size="8" fill="var(--ink)">
+              <rect x="46" y="12"  width="30" height="10" fill="var(--accent)" opacity="0.9"/>
+              <text x="80" y="21">S 0.62</text>
+              <rect x="46" y="24"  width="4"  height="10" fill="var(--muted)" opacity="0.5"/>
+              <text x="80" y="33">R 0.05</text>
+              <rect x="46" y="36"  width="2"  height="10" fill="var(--muted)" opacity="0.4"/>
+              <text x="80" y="45">U 0.03</text>
+              <rect x="46" y="48"  width="15" height="10" fill="var(--muted)"/>
+              <text x="80" y="57" fill="var(--accent)">θ 0.30</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <p class="stage-impl">
+        Linear(64 → 4) + softmax<br>
+        { S, R, U, θ }<br>
+        ignorance is preserved
+      </p>
+    </div>
+
+    <div class="stage">
+      <span class="stage-num">05 · Refine</span>
+      <span class="stage-name">Discover<br>new edges</span>
+      <div class="stage-vis">
+        <svg width="160" height="60" viewBox="0 0 160 60">
+          <g>
+            <circle cx="40" cy="20" r="7" fill="var(--ink)"/>
+            <circle cx="40" cy="44" r="7" fill="var(--ink)"/>
+            <circle cx="120" cy="20" r="7" fill="var(--ink)"/>
+            <circle cx="120" cy="44" r="7" fill="var(--ink)"/>
+            <!-- Existing -->
+            <line x1="47" y1="20" x2="113" y2="20" stroke="var(--muted)" stroke-width="0.9"/>
+            <line x1="47" y1="44" x2="113" y2="44" stroke="var(--muted)" stroke-width="0.9"/>
+            <!-- Discovered -->
+            <line x1="47" y1="23" x2="113" y2="41" stroke="var(--accent)" stroke-width="1.3" stroke-dasharray="3 2"/>
+            <text x="80" y="37" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="10" fill="var(--accent)">CAUSES</text>
+          </g>
+        </svg>
+      </div>
+      <p class="stage-impl">
+        IF-THEN + readout<br>
+        → CAUSES / CONTRADICTS<br>
+        → NEXT (self-supervised)
+      </p>
+    </div>
+
+  </div>
+
+  <div class="notes stagger">
+    <div class="note-item"><strong>Extends via:</strong> 9 task heads on a shared backbone — next-anchor · time · risk · anomaly · root-cause · counterfactual · recommend · attribute · refute</div>
+    <div class="note-item"><strong>Runs on:</strong> laptop CPU · <em>torch + transformers + numpy</em> · 184 tests · refresh + expand handle streaming</div>
+  </div>
+</section>
+
+<!-- ══════════════════ SLIDE 6: EVIDENCE ══════════════════ -->
+<section class="slide" id="s6">
+  <div class="stagger">
+    <span class="eyebrow">§5 · Evidence</span>
+    <h2 class="section" style="margin-top:16px">
+      The first reasoner<br><em>works.</em>
+    </h2>
+  </div>
+
+  <p class="lede stagger" style="max-width:68ch">
+    Three measurements carry the argument. <em>First</em>, calibration:
+    NEI θ climbed 0.00 → 1.00 and accuracy 45% → 85% after the relevance
+    filter. <em>Second</em>, the world model: next-infon MRR 0.51 without
+    labels. <em>Third</em>, the harness: 184 tests pass in ~2.5 minutes on
+    a laptop CPU — pure torch + transformers + numpy.
+  </p>
+
+  <div class="evidence-grid stagger">
+    <div class="lhs">
+      <div class="bignum">
+        9<em>×</em> heads
+      </div>
+      <p class="context-line">
+        Nine task heads on one 64-d backbone.
+        All fit once, inferred cheaply, tested to failure.
+      </p>
+      <div class="stats">
+        <span class="k">Infons extracted</span><span class="v">49</span>
+        <span class="k">Train loss</span><span class="v" style="color:var(--accent)">0.79 → 0.007</span>
+        <span class="k">θ on NEI claims</span><span class="v" style="color:var(--accent)">0.00 → 1.00</span>
+        <span class="k">Accuracy vs LLM</span><span class="v">45% → 85%</span>
+        <span class="k">Wall clock</span><span class="v">&lt; 1 min</span>
+      </div>
+    </div>
+
+    <div class="heads">
+      <div class="heads-head">
+        <span>Head</span><span>outcome · scenario</span><span style="text-align:right">score</span>
+      </div>
+      <div class="head-row" style="--v:.98">
+        <span class="head-label">belief mass</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">S=.62</span>
+      </div>
+      <div class="head-row" style="--v:.92">
+        <span class="head-label">next-anchor</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">91%</span>
+      </div>
+      <div class="head-row" style="--v:.95">
+        <span class="head-label">role-typing</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">92%</span>
+      </div>
+      <div class="head-row" style="--v:.81">
+        <span class="head-label">DS source weights</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">.81</span>
+      </div>
+      <div class="head-row" style="--v:.88">
+        <span class="head-label">refute (confound)</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">p=.87</span>
+      </div>
+      <div class="head-row" style="--v:1.0">
+        <span class="head-label">root cause</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">dist=1</span>
+      </div>
+      <div class="head-row" style="--v:.74">
+        <span class="head-label">time-to-event</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">0.8d</span>
+      </div>
+      <div class="head-row" style="--v:.98">
+        <span class="head-label">temporal NEXT</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">4/4 ✓</span>
+      </div>
+      <div class="head-row" style="--v:1.0">
+        <span class="head-label">recommender · BPR</span>
+        <div class="head-bar"><div class="head-fill"></div></div>
+        <span class="head-num">37→.004</span>
+      </div>
+
+      <div style="margin-top:10px;display:flex;gap:20px;font-family:var(--mono);font-size:9.5px;color:var(--muted)">
+        <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:6px;background:var(--accent);display:inline-block"></span>head output · EV battery scenario</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SLIDE 7: OPEN QUESTIONS ══════════════════ -->
+<section class="slide" id="s7">
+  <div class="stagger">
+    <span class="eyebrow">§6 · Open problems</span>
+    <h2 class="section" style="margin-top:16px">
+      Three questions<br>this corpus <em>does not answer.</em>
+    </h2>
+  </div>
+
+  <p class="lede stagger" style="max-width:68ch">
+    One corpus proves the architecture compiles. Three questions decide
+    whether it generalises. <em>All three are answered by picking a
+    second corpus</em> — which is the work now in front of us.
+  </p>
+
+  <div class="qs stagger">
+    <div class="q">
+      <span class="q-num">01.</span>
+      <p class="q-body">Can <em>one schema</em> reason across two domains?</p>
+      <div class="q-svg">
+        <svg viewBox="0 0 240 90">
+          <g font-family="JetBrains Mono" font-size="9">
+            <circle cx="40" cy="25" r="18" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="40" y="28" text-anchor="middle" fill="var(--ink)">auto</text>
+            <circle cx="200" cy="25" r="18" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="200" y="28" text-anchor="middle" fill="var(--ink)">bio</text>
+            <circle cx="120" cy="65" r="18" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1"/>
+            <text x="120" y="68" text-anchor="middle" fill="var(--accent)">invests?</text>
+            <line x1="50" y1="38" x2="110" y2="55" stroke="var(--ink)" stroke-width="0.8" stroke-dasharray="2 2"/>
+            <line x1="190" y1="38" x2="130" y2="55" stroke="var(--ink)" stroke-width="0.8" stroke-dasharray="2 2"/>
+          </g>
+        </svg>
+      </div>
+      <p class="q-hint">
+        <em>The test:</em> "invests" in autos means capital deployment;
+        in biotech it means a clinical trial stake. Shared anchor name,
+        different semantic neighbourhood. Decision: merge or split.
+      </p>
+    </div>
+
+    <div class="q">
+      <span class="q-num">02.</span>
+      <p class="q-body">Does the propagation <em>survive bidirectional</em>?</p>
+      <div class="q-svg">
+        <svg viewBox="0 0 240 90">
+          <g font-family="JetBrains Mono" font-size="9" fill="var(--ink)">
+            <circle cx="30" cy="40" r="14" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="30" y="44" text-anchor="middle">subj</text>
+            <rect x="90" y="25" width="60" height="30" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+            <text x="120" y="44" text-anchor="middle" fill="var(--accent)">infon</text>
+            <circle cx="210" cy="40" r="14" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1"/>
+            <text x="210" y="44" text-anchor="middle">obj</text>
+            <line x1="44" y1="40" x2="87" y2="40" stroke="var(--accent)" stroke-width="1.3" marker-end="url(#mm1)"/>
+            <defs><marker id="mm1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+            <line x1="153" y1="40" x2="196" y2="40" stroke="var(--muted)" stroke-width="1" marker-end="url(#mm2)" stroke-dasharray="3 2"/>
+            <defs><marker id="mm2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--muted)"/></marker></defs>
+            <text x="120" y="76" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="10" fill="var(--muted)">OBJECT doesn't flow back</text>
+          </g>
+        </svg>
+      </div>
+      <p class="q-hint">
+        <em>The test:</em> spoke edges are directed. Subject sends
+        messages, object doesn't flow back. Confounder interventions
+        on the object vanish — exposed by our refute-head experiment.
+      </p>
+    </div>
+
+    <div class="q">
+      <span class="q-num">03.</span>
+      <p class="q-body">Does the <em>recipe</em> generalise?</p>
+      <div class="q-svg">
+        <svg viewBox="0 0 240 90">
+          <g font-family="Fraunces" font-size="10">
+            <rect x="10" y="20" width="46" height="50" fill="var(--accent)" opacity="0.9"/>
+            <text x="33" y="48" text-anchor="middle" fill="var(--paper)">EV</text>
+            <text x="33" y="60" text-anchor="middle" fill="var(--paper)" font-size="7" font-family="JetBrains Mono">v1 · done</text>
+
+            <rect x="66" y="20" width="46" height="50" fill="none" stroke="var(--accent)" stroke-dasharray="2 2" stroke-width="1"/>
+            <text x="89" y="48" text-anchor="middle" fill="var(--accent)">next?</text>
+
+            <rect x="122" y="25" width="46" height="40" fill="none" stroke="var(--muted)" stroke-dasharray="2 2" stroke-width="1"/>
+            <text x="145" y="50" text-anchor="middle" fill="var(--muted)">?</text>
+
+            <rect x="178" y="30" width="46" height="30" fill="none" stroke="var(--muted)" stroke-dasharray="2 2" stroke-width="1"/>
+            <text x="201" y="50" text-anchor="middle" fill="var(--muted)">?</text>
+          </g>
+        </svg>
+      </div>
+      <p class="q-hint">
+        <em>The test:</em> the self-discovery pipeline assumed clean
+        three-sentence chronology. Noisy news text, scientific
+        abstracts, legal prose — all unproven. Candidates in work.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SLIDE 8: WHAT'S NEXT ══════════════════ -->
+<section class="slide" id="s8">
+  <div class="head-block stagger">
+    <div>
+      <span class="eyebrow">§7 · Next</span>
+      <h2 class="section" style="margin-top:16px">
+        Second corpus. <em>Then a third.</em>
+      </h2>
+    </div>
+    <p class="caption" style="text-align:right">
+      Done → Doing → Next · dates in UTC
+    </p>
+  </div>
+
+  <div class="timeline stagger">
+
+    <div class="tl-item done">
+      <span class="tl-date">04-29 · v0</span>
+      <span class="tl-dot"></span>
+      <p class="tl-title">Hypergraph<br>reasoner</p>
+      <p class="tl-body">SPLADE + R-GCN with IKL aggregators. DS-calibrated readout. Refinement discovers CAUSES/CONTRADICTS.</p>
+      <p class="tl-impl">29 tests · 64-d hidden · 2 layers</p>
+    </div>
+
+    <div class="tl-item done">
+      <span class="tl-date">05-01 · v1</span>
+      <span class="tl-dot"></span>
+      <p class="tl-title">Self-supervised<br><em>discovery</em></p>
+      <p class="tl-body">Schema auto-expansion. Role typing. Learned DS weights. Interaction families. Edge-type clusters.</p>
+      <p class="tl-impl">6 discovery stages · 53 tests pass</p>
+    </div>
+
+    <div class="tl-item done">
+      <span class="tl-date">05-02 · v2</span>
+      <span class="tl-dot"></span>
+      <p class="tl-title">Cognition()<br><em>+ calibration</em></p>
+      <p class="tl-body">Seedable API · quality filter · θ-calibration fix (NEI 0.00 → 1.00) · refresh + expand.</p>
+      <p class="tl-impl">166 tests · accuracy 45% → 85%</p>
+    </div>
+
+    <div class="tl-item done">
+      <span class="tl-date">05-02 · v2.1</span>
+      <span class="tl-dot"></span>
+      <p class="tl-title">Sheaf<br><em>layer</em></p>
+      <p class="tl-body">Per-relation restriction maps P<sub>fwd</sub> / P<sub>bwd</sub> + sheaf-Laplacian. Drop-in for R-GCN.</p>
+      <p class="tl-impl">+8 tests · 170 total · calibration preserved</p>
+    </div>
+
+    <div class="tl-item current">
+      <span class="tl-date">05-03 · v3</span>
+      <span class="tl-dot"></span>
+      <p class="tl-title">Self-supervised<br><em>MDP + AutoML</em></p>
+      <p class="tl-body">Barlow / VICReg / Temporal-JEPA (MRR 0.51) · intrinsic-reward (no hand-coded sources) · analyze_corpus / sweep / cross_val_score / ensemble_top_k · random_state reproducibility.</p>
+      <p class="tl-impl">184 tests · sklearn-style Estimator contract</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tl-date">soon · v4</span>
+      <span class="tl-dot"></span>
+      <p class="tl-title">Second<br>corpus</p>
+      <p class="tl-body">Messy discourse order, dense temporal structure. Repeat the recipe; sheaf and JEPA should cash in at scale.</p>
+      <p class="tl-impl">candidates · climate FEVER · bio abstracts · earnings calls</p>
+    </div>
+
+  </div>
+
+  <div class="closing stagger">
+    <p class="closing-q">
+      One reasoner compiles the architecture. The <em>AutoML loop</em> turns it
+      into a library. A <em>second corpus</em> turns it into a framework.
+      One is done; the next is a week away.
+    </p>
+    <p class="closing-cite">
+      cognition · research memo v2<br>
+      gitlab.aws.dev/cpro/ontology-workshop
+    </p>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const total = slides.length;
+
+  function goto(n){
+    current = Math.max(0, Math.min(total - 1, n));
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    const pct = ((current + 1) / total) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('slide-label').textContent =
+      String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown' || e.key === 'j'){ e.preventDefault(); goto(current + 1);}
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'k'){ e.preventDefault(); goto(current - 1);}
+    else if (e.key === 'Home'){ goto(0);}
+    else if (e.key === 'End'){ goto(total - 1);}
+    else if (e.key === 'f' || e.key === 'F'){
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('kbd')) return;
+    const half = window.innerWidth / 2;
+    goto(e.clientX > half ? current + 1 : current - 1);
+  });
+
+  goto(0);
+})();
+</script>
+
+</body>
+</html>
