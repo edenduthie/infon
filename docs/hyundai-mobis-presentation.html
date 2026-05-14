@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>Infon for Internal Knowledge — Hyundai Mobis</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { overflow: hidden; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #faf8f3;
+    --bg-soft:   #f3efe6;
+    --ink:       #14181c;
+    --ink-soft:  #2c333b;
+    --muted:     #6b7280;
+    --rule:      #d8d3c6;
+    --accent:    #0e7490;   /* deep teal */
+    --accent-2:  #c44536;   /* warm coral, used sparingly */
+    --supports:  #2f7a4a;
+    --refutes:   #c44536;
+    --theta:     #b58a30;
+    --card-bg:   #ffffff;
+    --shadow:    0 1px 0 rgba(20,24,28,0.04), 0 6px 22px rgba(20,24,28,0.05);
+  }
+
+  .reveal {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  .reveal-viewport { background: var(--bg); }
+  body { background: var(--bg); }
+
+  .reveal .slides {
+    text-align: left;
+  }
+
+  .reveal .slides > section,
+  .reveal .slides > section > section {
+    padding: 4rem 7rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    line-height: 1.45;
+    box-sizing: border-box;
+  }
+  .reveal .slides {
+    width: 100% !important;
+    text-align: left;
+  }
+
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+    font-family: 'Fraunces', 'Times New Roman', serif;
+    font-weight: 500;
+    font-variation-settings: "opsz" 64;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0 0 1.2rem 0;
+  }
+
+  .reveal h1 { font-size: 2.6rem; font-weight: 600; }
+  .reveal h2 { font-size: 2.0rem; }
+  .reveal h3 { font-size: 1.5rem; }
+  .reveal h4 { font-size: 1.15rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0; text-transform: uppercase; color: var(--muted); }
+
+  .reveal p, .reveal li, .reveal td, .reveal th { font-size: 1.0rem; line-height: 1.5; }
+  .reveal ul { list-style: none; padding-left: 0; margin: 0; }
+  .reveal ul > li { padding-left: 1.6rem; position: relative; margin-bottom: 0.55rem; }
+  .reveal ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.65em;
+    width: 0.55rem; height: 1px;
+    background: var(--accent);
+  }
+  .reveal ol { padding-left: 1.4rem; margin: 0; }
+  .reveal ol > li { padding-left: 0.4rem; margin-bottom: 0.55rem; }
+  .reveal ol > li::marker { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .reveal strong { font-weight: 600; color: var(--ink); }
+  .reveal em { font-style: italic; color: var(--ink-soft); }
+
+  .reveal code, .reveal .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+  .reveal code { background: var(--bg-soft); padding: 0.06em 0.35em; border-radius: 3px; }
+
+  /* Header chrome -------------------------------------------------- */
+  .slide-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+  .slide-eyebrow .num { color: var(--muted); margin-right: 0.8rem; }
+
+  /* Lead paragraph & accents -------------------------------------- */
+  .lead {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    margin-bottom: 1.4rem;
+  }
+  .pull {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    margin: 1.2rem 0;
+  }
+  .caption {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin-top: 0.7rem;
+  }
+
+  /* Cards / grids -------------------------------------------------- */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: stretch; }
+  .grid-7 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 1.1rem 1.2rem;
+    box-shadow: var(--shadow);
+  }
+  .card h4 { color: var(--accent); margin-bottom: 0.6rem; }
+  .card p, .card li { font-size: 0.92rem; }
+
+  /* Tables --------------------------------------------------------- */
+  .reveal table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .reveal th, .reveal td {
+    text-align: left;
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .reveal th {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .reveal tr:last-child td { border-bottom: none; }
+
+  /* Title slide ---------------------------------------------------- */
+  .title-slide {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  }
+  .title-slide .greeting {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin-bottom: 2.8rem;
+    font-weight: 400;
+  }
+  .title-slide .greeting .romaji { color: var(--muted); font-size: 0.85rem; margin-left: 0.6rem; letter-spacing: 0.03em; }
+  .title-slide h1 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 1.05;
+    margin-bottom: 0.4rem;
+    max-width: 900px;
+  }
+  .title-slide .subtitle {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 3rem;
+  }
+  .title-slide .meta {
+    font-size: 0.95rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.1rem;
+    max-width: 700px;
+  }
+  .title-slide .meta strong { color: var(--ink); }
+
+  /* Section divider ------------------------------------------------ */
+  .section-divider {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .section-divider .num {
+    font-family: 'Fraunces', serif;
+    font-size: 6rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .section-divider h2 {
+    color: var(--bg);
+    font-size: 3rem;
+    max-width: 800px;
+  }
+  .section-divider .blurb { color: rgba(250,248,243,0.7); max-width: 600px; margin-top: 1.2rem; font-size: 1.05rem; }
+
+  /* Closing slide -------------------------------------------------- */
+  .closing-slide .thanks {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin-top: 2rem;
+  }
+  .closing-slide .thanks .romaji { color: var(--muted); font-size: 0.85rem; margin-left: 0.6rem; }
+
+  /* SVG diagrams --------------------------------------------------- */
+  .diagram { width: 100%; margin: 0.6rem 0; }
+  .diagram text { font-family: 'Inter', sans-serif; fill: var(--ink); }
+  .diagram .mono { font-family: 'JetBrains Mono', monospace; }
+  .diagram .muted { fill: var(--muted); }
+  .diagram .accent { fill: var(--accent); }
+  .diagram .stroke-accent { stroke: var(--accent); }
+  .diagram .stroke-ink { stroke: var(--ink); }
+  .diagram .fill-card { fill: var(--card-bg); }
+  .diagram .fill-soft { fill: var(--bg-soft); }
+  .diagram .step-box {
+    fill: var(--card-bg);
+    stroke: var(--rule);
+    stroke-width: 1;
+  }
+  .diagram .accent-box {
+    fill: var(--card-bg);
+    stroke: var(--accent);
+    stroke-width: 1.5;
+  }
+
+  /* Page chrome / footer ------------------------------------------- */
+  .footer {
+    position: absolute;
+    bottom: 1.4rem;
+    left: 7rem;
+    right: 7rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .footer .left { font-weight: 500; }
+
+  /* Reveal controls/progress styling ------------------------------- */
+  .reveal .progress { color: var(--accent); height: 3px; }
+  .reveal .controls { color: var(--muted); }
+  .reveal .slide-number { color: var(--muted); background: transparent; font-family: 'Inter', sans-serif; font-size: 0.7rem; }
+
+  /* Special blocks ------------------------------------------------- */
+  .quad {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg-soft);
+    border-left: 3px solid var(--accent);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    margin: 0.8rem 0;
+  }
+
+  .legend { display: flex; gap: 1.4rem; margin-top: 0.5rem; font-size: 0.82rem; color: var(--muted); }
+  .legend .swatch { display: inline-block; width: 0.7rem; height: 0.7rem; margin-right: 0.4rem; vertical-align: middle; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- ─────────────────────────────────────────────────────────── Slide 0 ── -->
+<section class="title-slide">
+  <div class="greeting">안녕하세요 <span class="romaji">— annyeonghaseyo</span></div>
+  <h1>Infon for Internal Knowledge</h1>
+  <div class="subtitle">A calibrated knowledge graph for Hyundai Mobis</div>
+  <div class="meta">
+    <strong>Eden Duthie</strong> · AgenticX<br>
+    Friday, 15 May 2026 · Microsoft Teams
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 1 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">01</span>Introduction</div>
+  <h2>Who I am, what we do</h2>
+  <div class="grid-2" style="margin-top: 1.6rem;">
+    <div>
+      <h4>Eden Duthie</h4>
+      <p>Applied NLP and agent systems. Author of the <em>Infon</em> paper (AgenticX, May 2026) — a knowledge-graph reasoner with calibrated uncertainty.</p>
+    </div>
+    <div>
+      <h4>AgenticX</h4>
+      <p>We build grounded, auditable knowledge systems for the enterprise — systems that <strong>cite their sources</strong> and <strong>tell you when they don't know</strong>.</p>
+    </div>
+  </div>
+  <div class="pull" style="margin-top: 2rem;">
+    The systems we build don't hallucinate, because they don't generate the answer — they retrieve it, verify it, and cite it.
+  </div>
+  <div class="footer"><span class="left">Infon for Hyundai Mobis</span><span>15 May 2026</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 2 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">02</span>What we heard</div>
+  <h2>Your priorities, as we understood them</h2>
+  <div class="grid-7" style="margin-top: 1.4rem;">
+    <ol style="counter-reset: list 0;">
+      <li><strong>Internal knowledge first</strong> — search, summarise, reuse; reduce duplicated research.</li>
+      <li><strong>Governance & structure</strong> — metadata classification, security levels, source traceability.</li>
+      <li><strong>Human-in-the-loop</strong> — manual scoring, feedback loops.</li>
+      <li><strong>Document-centric</strong> — PPTs, reports, attachments; not only datasets.</li>
+    </ol>
+    <ol start="5">
+      <li><strong>Historical tracking</strong> — how a topic evolves over time.</li>
+      <li><strong>Selective external data</strong> — patents, news, subscription DBs as complement.</li>
+      <li><strong>Measurable KPIs</strong> — usage logs, reuse, engagement.</li>
+    </ol>
+  </div>
+  <div class="pull" style="margin-top: 1.4rem;">
+    "Reducing duplicated research is our highest-stated priority."
+  </div>
+  <div class="footer"><span class="left">Infon for Hyundai Mobis</span><span>15 May 2026</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SECTION 1 ══════ -->
+<section class="section-divider">
+  <div class="num">1</div>
+  <h2>Our approach</h2>
+  <p class="blurb">How infon works, from the ground up.</p>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 3 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">03</span>Section 1 · The problem</div>
+  <h2>Why the obvious solutions fall short</h2>
+  <div class="grid-2" style="margin-top: 1.6rem;">
+    <div class="card">
+      <h4>ChatGPT &nbsp;·&nbsp; RAG</h4>
+      <p>Retrieves passages and <strong>fabricates the connection between them.</strong> Sounds confident even when the corpus is silent. No way to audit which document supports which claim.</p>
+    </div>
+    <div class="card">
+      <h4>Classical knowledge graphs</h4>
+      <p>Require <strong>rigid, hand-curated schemas.</strong> Cannot express that the corpus simply has no answer. Building one for a new domain takes months.</p>
+    </div>
+  </div>
+  <div class="pull" style="margin-top: 1.8rem;">
+    What's missing is a system that <strong>reasons across documents</strong>, <strong>cites every step</strong>, and is <strong>honest about absence of evidence</strong>.
+  </div>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>03 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 4 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">04</span>Section 1 · What infon is</div>
+  <h2>One sentence, one picture</h2>
+  <p class="lead">Infon is a knowledge-graph reasoner that fact-checks claims over your documents with calibrated uncertainty.</p>
+
+  <svg class="diagram" viewBox="0 0 1100 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0e7490"/>
+      </marker>
+    </defs>
+    <!-- 5 boxes -->
+    <g>
+      <rect class="step-box" x="20"  y="60" width="170" height="80" rx="6"/>
+      <text x="105" y="95" text-anchor="middle" font-weight="600" font-size="14">Documents</text>
+      <text x="105" y="115" text-anchor="middle" class="muted" font-size="11">PPT · PDF · DOCX · XLSX</text>
+    </g>
+    <g>
+      <rect class="step-box" x="220" y="60" width="170" height="80" rx="6"/>
+      <text x="305" y="95" text-anchor="middle" font-weight="600" font-size="14">Extracted facts</text>
+      <text x="305" y="115" text-anchor="middle" class="muted" font-size="11">infons (typed quadruples)</text>
+    </g>
+    <g>
+      <rect class="step-box" x="420" y="60" width="170" height="80" rx="6"/>
+      <text x="505" y="95" text-anchor="middle" font-weight="600" font-size="14">Cassette store</text>
+      <text x="505" y="115" text-anchor="middle" class="muted" font-size="11">immutable · content-addressed</text>
+    </g>
+    <g>
+      <rect class="step-box" x="620" y="60" width="170" height="80" rx="6"/>
+      <text x="705" y="95" text-anchor="middle" font-weight="600" font-size="14">Reasoner</text>
+      <text x="705" y="115" text-anchor="middle" class="muted" font-size="11">multi-hop · calibrated</text>
+    </g>
+    <g>
+      <rect class="accent-box" x="820" y="60" width="240" height="80" rx="6"/>
+      <text x="940" y="95" text-anchor="middle" font-weight="600" font-size="14" class="accent">Cited verdict</text>
+      <text x="940" y="115" text-anchor="middle" class="muted" font-size="11">(supports, refutes, uncertain, θ)</text>
+    </g>
+    <!-- arrows -->
+    <line x1="190" y1="100" x2="218" y2="100" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow1)"/>
+    <line x1="390" y1="100" x2="418" y2="100" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow1)"/>
+    <line x1="590" y1="100" x2="618" y2="100" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow1)"/>
+    <line x1="790" y1="100" x2="818" y2="100" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  </svg>
+
+  <div class="grid-3" style="margin-top: 1.2rem;">
+    <div class="card"><h4>Cassette-native</h4><p>Every document becomes an immutable, content-addressed file. Full audit trail.</p></div>
+    <div class="card"><h4>Honest uncertainty</h4><p>Every answer carries <code>(S, R, U, θ)</code>. θ rises when the corpus is silent.</p></div>
+    <div class="card"><h4>Multi-hop reasoning</h4><p>Chains facts <em>across documents</em> via guided search, not flat retrieval.</p></div>
+  </div>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>04 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 5 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">05</span>Section 1 · The unit of knowledge</div>
+  <h2>The <em>infon</em>, stored as a <em>cassette</em></h2>
+  <div class="grid-2" style="margin-top: 1.4rem;">
+    <div>
+      <h4>An infon is a typed quadruple</h4>
+      <div class="quad">⟨ predicate, &nbsp;subject, &nbsp;object &nbsp;;&nbsp; polarity ⟩</div>
+      <p style="font-size: 0.95rem;">Example, extracted from a 2024 LG press release:</p>
+      <div class="quad" style="border-left-color: var(--supports);">⟨ supplies,  LG_Energy_Solution,  solid_state_cells  ;  +1 ⟩</div>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-top: 0.6rem;">Every infon is grounded to its source: document hash, byte offset, ingestion timestamp.</p>
+    </div>
+    <div>
+      <h4>A cassette is one document</h4>
+      <p>Stored as a single immutable <code>.inf</code> file: content-addressed, append-only, S3-native (or any object store, or local disk).</p>
+      <ul style="margin-top: 1rem;">
+        <li><strong>Time-travel.</strong> Every ingest creates a new snapshot. Old views remain queryable forever.</li>
+        <li><strong>Schema migration without reingestion.</strong> Change the ontology, rewrite the index in seconds — 62× faster than re-extraction.</li>
+        <li><strong>Idempotent.</strong> Re-running an ingest costs nothing.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>05 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 6 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">06</span>Section 1 · The pipeline</div>
+  <h2>How a question gets answered</h2>
+
+  <svg class="diagram" viewBox="0 0 1100 260" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0e7490"/>
+      </marker>
+    </defs>
+    <!-- Step circles + boxes -->
+    <g transform="translate(0,40)">
+      <!-- 1 -->
+      <circle cx="100" cy="20" r="16" fill="#0e7490"/>
+      <text x="100" y="25" text-anchor="middle" font-weight="600" font-size="14" fill="#faf8f3">1</text>
+      <rect class="step-box" x="20" y="50" width="160" height="80" rx="6"/>
+      <text x="100" y="80" text-anchor="middle" font-weight="600" font-size="13">Question</text>
+      <text x="100" y="100" text-anchor="middle" class="muted" font-size="11">plain English</text>
+      <text x="100" y="118" text-anchor="middle" class="muted" font-size="10" font-style="italic">"Who supplies SSB to Hyundai?"</text>
+      <!-- 2 -->
+      <circle cx="290" cy="20" r="16" fill="#0e7490"/>
+      <text x="290" y="25" text-anchor="middle" font-weight="600" font-size="14" fill="#faf8f3">2</text>
+      <rect class="step-box" x="210" y="50" width="160" height="80" rx="6"/>
+      <text x="290" y="80" text-anchor="middle" font-weight="600" font-size="13">Encode</text>
+      <text x="290" y="100" text-anchor="middle" class="muted" font-size="11">→ anchor set</text>
+      <text x="290" y="118" text-anchor="middle" class="muted" font-size="10">CPU · no GPU · no API</text>
+      <!-- 3 -->
+      <circle cx="480" cy="20" r="16" fill="#0e7490"/>
+      <text x="480" y="25" text-anchor="middle" font-weight="600" font-size="14" fill="#faf8f3">3</text>
+      <rect class="step-box" x="400" y="50" width="160" height="80" rx="6"/>
+      <text x="480" y="80" text-anchor="middle" font-weight="600" font-size="13">Prune</text>
+      <text x="480" y="100" text-anchor="middle" class="muted" font-size="11">manifest pruner</text>
+      <text x="480" y="118" text-anchor="middle" class="muted" font-size="10">7–16× fewer reads</text>
+      <!-- 4 -->
+      <circle cx="670" cy="20" r="16" fill="#0e7490"/>
+      <text x="670" y="25" text-anchor="middle" font-weight="600" font-size="14" fill="#faf8f3">4</text>
+      <rect class="step-box" x="590" y="50" width="160" height="80" rx="6"/>
+      <text x="670" y="80" text-anchor="middle" font-weight="600" font-size="13">Reason</text>
+      <text x="670" y="100" text-anchor="middle" class="muted" font-size="11">MCTS + sheaf GNN</text>
+      <text x="670" y="118" text-anchor="middle" class="muted" font-size="10">multi-hop chain</text>
+      <!-- 5 -->
+      <circle cx="900" cy="20" r="16" fill="#c44536"/>
+      <text x="900" y="25" text-anchor="middle" font-weight="600" font-size="14" fill="#faf8f3">5</text>
+      <rect class="accent-box" x="780" y="50" width="240" height="80" rx="6" stroke="#c44536"/>
+      <text x="900" y="80" text-anchor="middle" font-weight="600" font-size="13" fill="#c44536">Cited verdict</text>
+      <text x="900" y="100" text-anchor="middle" class="muted" font-size="11">(S, R, U, θ)</text>
+      <text x="900" y="118" text-anchor="middle" class="muted" font-size="10">+ every source citation</text>
+    </g>
+    <!-- Arrows -->
+    <g transform="translate(0,40)">
+      <line x1="180" y1="90" x2="208" y2="90" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow2)"/>
+      <line x1="370" y1="90" x2="398" y2="90" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow2)"/>
+      <line x1="560" y1="90" x2="588" y2="90" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow2)"/>
+      <line x1="750" y1="90" x2="778" y2="90" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow2)"/>
+    </g>
+    <text x="550" y="220" text-anchor="middle" class="muted" font-size="11" font-style="italic">Every step is inspectable. Every retrieved infon and its mass contribution can be audited.</text>
+  </svg>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>06 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 7 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">07</span>Section 1 · Calibrated uncertainty</div>
+  <h2>"I don't know" as a first-class output</h2>
+  <div class="grid-2" style="margin-top: 1.2rem;">
+    <div>
+      <p>Every verdict is a four-part mass over three outcomes:</p>
+      <ul style="margin-top: 0.6rem;">
+        <li><strong style="color: var(--supports);">Supports</strong> — evidence backs the claim.</li>
+        <li><strong style="color: var(--refutes);">Refutes</strong> — evidence contradicts the claim.</li>
+        <li><strong style="color: var(--theta);">θ (theta)</strong> — the corpus <em>doesn't speak to it</em>.</li>
+      </ul>
+      <p style="margin-top: 1rem;">When the corpus has no relevant evidence, θ rises toward 1.0. The Analyst is constrained to <strong>tell the user</strong> rather than guess.</p>
+      <p style="margin-top: 0.6rem; color: var(--muted); font-size: 0.88rem;">Mass is constructed via Dempster–Shafer combination, not a learned softmax — calibration is structural, not trained.</p>
+    </div>
+
+    <svg class="diagram" viewBox="0 0 460 320" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <text x="20" y="24" font-weight="600" font-size="13">Infon verdict</text>
+      <text x="20" y="42" class="muted" font-size="11" font-style="italic">on a claim the corpus answers</text>
+
+      <!-- Three bars -->
+      <g transform="translate(20,60)">
+        <rect x="0" y="0"   width="200" height="22" fill="#2f7a4a"/>
+        <rect x="0" y="28"  width="60"  height="22" fill="#c44536"/>
+        <rect x="0" y="56"  width="40"  height="22" fill="#b58a30"/>
+        <text x="208" y="16" font-size="11" font-weight="500">Supports 0.62</text>
+        <text x="68"  y="44" font-size="11" font-weight="500">Refutes 0.18</text>
+        <text x="48"  y="72" font-size="11" font-weight="500">θ 0.12</text>
+      </g>
+
+      <text x="20" y="170" font-weight="600" font-size="13">LLM "confidence"</text>
+      <text x="20" y="188" class="muted" font-size="11" font-style="italic">on the same claim</text>
+      <g transform="translate(20,200)">
+        <rect x="0" y="0" width="280" height="22" fill="#6b7280"/>
+        <text x="288" y="16" font-size="11" font-weight="500">87%</text>
+      </g>
+
+      <text x="20" y="260" class="muted" font-size="11" font-style="italic">A single number can't express "the corpus is silent"</text>
+      <text x="20" y="276" class="muted" font-size="11" font-style="italic">— calibrated mass can, via θ.</text>
+    </svg>
+  </div>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>07 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 8 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">08</span>Section 1 · Multi-hop reasoning</div>
+  <h2>Connecting facts across documents</h2>
+  <div class="grid-2" style="margin-top: 1.2rem;">
+    <div>
+      <p><strong>Single-hop:</strong> "Does company A supply component X?" → answered from one document.</p>
+      <p style="margin-top: 0.8rem;"><strong>Multi-hop:</strong> "Does company A supply X <em>through any supplier</em>?" → answered by <strong>chaining facts across documents</strong>, each edge cited.</p>
+      <ul style="margin-top: 1rem;">
+        <li>Most useful Mobis questions are multi-hop — <em>partners of partners</em>, <em>supplier of a competitor's component</em>, <em>what changed since last review</em>.</li>
+        <li>The reasoner uses guided search (MCTS) with a small frozen graph neural net as the chain scorer — it can <em>find</em> chains that flat retrieval misses entirely.</li>
+      </ul>
+    </div>
+
+    <svg class="diagram" viewBox="0 0 480 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#0e7490"/>
+        </marker>
+      </defs>
+
+      <!-- Node A -->
+      <circle cx="80"  cy="70"  r="42" class="fill-card" stroke="#0e7490" stroke-width="2"/>
+      <text   x="80"  y="68" text-anchor="middle" font-weight="600" font-size="13">Hyundai</text>
+      <text   x="80"  y="84" text-anchor="middle" class="muted" font-size="10">Mobis</text>
+
+      <!-- Node B -->
+      <circle cx="240" cy="180" r="42" class="fill-card" stroke="#0e7490" stroke-width="2"/>
+      <text   x="240" y="178" text-anchor="middle" font-weight="600" font-size="13">LG Energy</text>
+      <text   x="240" y="194" text-anchor="middle" class="muted" font-size="10">Solution</text>
+
+      <!-- Node C -->
+      <circle cx="400" cy="70"  r="42" class="fill-card" stroke="#c44536" stroke-width="2"/>
+      <text   x="400" y="68" text-anchor="middle" font-weight="600" font-size="13" fill="#c44536">solid_state</text>
+      <text   x="400" y="84" text-anchor="middle" class="muted" font-size="10">cells</text>
+
+      <!-- Edge A→B -->
+      <line x1="113" y1="98" x2="207" y2="158" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow3)"/>
+      <text x="135" y="135" font-size="11" font-weight="600" class="accent">partners with</text>
+      <text x="135" y="150" class="muted" font-size="9" font-style="italic">[doc#1 · 2024-03 LG release]</text>
+
+      <!-- Edge B→C -->
+      <line x1="273" y1="158" x2="368" y2="98" class="stroke-accent" stroke-width="1.5" marker-end="url(#arrow3)"/>
+      <text x="285" y="135" font-size="11" font-weight="600" class="accent">develops</text>
+      <text x="285" y="150" class="muted" font-size="9" font-style="italic">[doc#2 · LG R&amp;D report]</text>
+
+      <!-- Chain conclusion -->
+      <text x="240" y="260" text-anchor="middle" font-weight="600" font-size="13">⇒ Hyundai &nbsp;<tspan class="accent">connected to</tspan>&nbsp; solid_state</text>
+      <text x="240" y="278" text-anchor="middle" class="muted" font-size="11" font-style="italic">verdict: SUPPORTS · cited via 2 documents</text>
+    </svg>
+  </div>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>08 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 9 ── -->
+<section>
+  <div class="slide-eyebrow"><span class="num">09</span>Section 1 · The Analyst</div>
+  <h2>Conversational layer with hard guardrails</h2>
+  <p class="lead">Your analysts never write queries. They ask in plain language. The system constrains itself.</p>
+
+  <div class="grid-2" style="margin-top: 1.4rem;">
+    <div>
+      <h4>How it works</h4>
+      <p>The Analyst is a thin agent over the cassette store. It calls fixed tools — <code>ask</code>, <code>connect</code>, <code>any_of</code> — and returns a written answer with a citation panel. <strong>It cannot fabricate a chain</strong> — it can only report what the graph returned.</p>
+      <p style="margin-top: 1rem; color: var(--muted); font-size: 0.9rem;">Cross-session memory: prior findings persist; the Analyst checks them at the start of every session.</p>
+    </div>
+    <div class="card">
+      <h4>Built-in non-negotiables</h4>
+      <ul>
+        <li><strong>Never</strong> returns an answer without citing the sources that produced it.</li>
+        <li>When <strong>θ &gt; 0.7</strong>, explicitly says <em>"the corpus does not answer this."</em></li>
+        <li>Runs <code>extraction_report()</code> on any newly-ingested store before answering.</li>
+        <li>These are <em>prompt-enforced constraints</em>, not soft suggestions.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>09 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 10 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">10</span>Section 1 · Architecture</div>
+  <h2>Architecture at a glance</h2>
+
+  <svg class="diagram" viewBox="0 0 1100 360" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <!-- Layer rows -->
+    <g font-family="Inter">
+      <!-- Layer 7 -->
+      <rect x="60" y="20"  width="900" height="36" rx="4" class="step-box" stroke="#0e7490"/>
+      <text x="80"  y="44" font-weight="600" font-size="13">Layer 7</text>
+      <text x="180" y="44" font-size="13">Analyst conversational UI</text>
+      <text x="940" y="44" text-anchor="end" font-size="11" class="accent" font-weight="600">SHIPPED · EXTENDED IN PoC</text>
+
+      <!-- Layer 6 -->
+      <rect x="60" y="62"  width="900" height="36" rx="4" class="step-box" stroke="#c44536"/>
+      <text x="80"  y="86" font-weight="600" font-size="13">Layer 6</text>
+      <text x="180" y="86" font-size="13">KPI · audit · usage instrumentation</text>
+      <text x="940" y="86" text-anchor="end" font-size="11" fill="#c44536" font-weight="600">BUILT IN PoC</text>
+
+      <!-- Layer 5 -->
+      <rect x="60" y="104" width="900" height="36" rx="4" class="step-box" stroke="#c44536"/>
+      <text x="80"  y="128" font-weight="600" font-size="13">Layer 5</text>
+      <text x="180" y="128" font-size="13">Access control · governance</text>
+      <text x="940" y="128" text-anchor="end" font-size="11" fill="#c44536" font-weight="600">BUILT IN PoC</text>
+
+      <!-- Layer 4 -->
+      <rect x="60" y="146" width="900" height="36" rx="4" class="step-box" stroke="#c44536"/>
+      <text x="80"  y="170" font-weight="600" font-size="13">Layer 4</text>
+      <text x="180" y="170" font-size="13">Human-in-the-loop validation queue</text>
+      <text x="940" y="170" text-anchor="end" font-size="11" fill="#c44536" font-weight="600">BUILT IN PoC</text>
+
+      <!-- Layer 3 -->
+      <rect x="60" y="188" width="900" height="36" rx="4" class="step-box" stroke="#0e7490"/>
+      <text x="80"  y="212" font-weight="600" font-size="13">Layer 3</text>
+      <text x="180" y="212" font-size="13">Query DSL · Reasoner (Dempster–Shafer + MCTS + sheaf GNN)</text>
+      <text x="940" y="212" text-anchor="end" font-size="11" class="accent" font-weight="600">SHIPPED</text>
+
+      <!-- Layer 2 -->
+      <rect x="60" y="230" width="900" height="36" rx="4" class="step-box" stroke="#0e7490"/>
+      <text x="80"  y="254" font-weight="600" font-size="13">Layer 2</text>
+      <text x="180" y="254" font-size="13">Cassette substrate (S3 or local; content-addressed; time-travel)</text>
+      <text x="940" y="254" text-anchor="end" font-size="11" class="accent" font-weight="600">SHIPPED</text>
+
+      <!-- Layer 1 -->
+      <rect x="60" y="272" width="900" height="36" rx="4" class="step-box" stroke="#c44536"/>
+      <text x="80"  y="296" font-weight="600" font-size="13">Layer 1</text>
+      <text x="180" y="296" font-size="13">Document preprocessor (PPT · PDF · DOCX · XLSX · OCR)</text>
+      <text x="940" y="296" text-anchor="end" font-size="11" fill="#c44536" font-weight="600">BUILT IN PoC</text>
+
+      <!-- Layer 0 -->
+      <rect x="60" y="314" width="900" height="36" rx="4" fill="#f3efe6" stroke="#d8d3c6"/>
+      <text x="80"  y="338" font-weight="600" font-size="13">Layer 0</text>
+      <text x="180" y="338" font-size="13">Documents (internal corpus + external feeds)</text>
+      <text x="940" y="338" text-anchor="end" font-size="11" class="muted" font-weight="600">SOURCE</text>
+    </g>
+  </svg>
+
+  <div class="legend"><span><span class="swatch" style="background: var(--accent);"></span>shipped today</span><span><span class="swatch" style="background: var(--accent-2);"></span>built during the PoC</span></div>
+  <div class="footer"><span class="left">Section 1 · Approach</span><span>10 / 22</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SECTION 2 ══════ -->
+<section class="section-divider">
+  <div class="num">2</div>
+  <h2>Top 3 benefits for Hyundai Mobis</h2>
+  <p class="blurb">Three slides. Each maps to a stated priority and a concrete infon capability.</p>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 11 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">11</span>Section 2 · Benefit 1</div>
+  <h2>Reduce duplicated research <span style="color: var(--muted); font-size: 0.7em; font-weight: 400;">— your highest priority</span></h2>
+
+  <div class="grid-2" style="margin-top: 1.2rem;">
+    <div>
+      <h4>The problem</h4>
+      <p>The same question is researched repeatedly across teams. Reports sit unread. Institutional knowledge is buried inside PPTs and PDFs that no one knows to look for.</p>
+
+      <h4 style="margin-top: 1.4rem;">The capability</h4>
+      <p>A single graph traversal returns <strong>every fact on a topic, with every source document grouped.</strong> A fact cited in ten reports is stored once and returned with all ten citations.</p>
+    </div>
+    <div>
+      <div class="card">
+        <h4>Example query</h4>
+        <p style="font-style: italic; font-family: 'Fraunces', serif; font-size: 1.05rem;">"Show all internal knowledge on solid-state electrolyte suppliers, grouped by author team and date."</p>
+      </div>
+      <div class="card" style="margin-top: 1rem;">
+        <h4>What changes</h4>
+        <p>Analysts find existing knowledge <em>before</em> commissioning new work. Cross-team duplication becomes <strong>visible and measurable</strong> — not just a complaint.</p>
+      </div>
+      <div class="card" style="margin-top: 1rem; border-color: var(--accent);">
+        <h4 style="color: var(--accent);">KPI hook</h4>
+        <p>Queries answered from internal knowledge vs queries that prompted new external research.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="left">Section 2 · Benefits</span><span>11 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 12 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">12</span>Section 2 · Benefit 2</div>
+  <h2>Track how knowledge evolves over time</h2>
+  <div class="grid-2" style="margin-top: 1.2rem;">
+    <div>
+      <p><strong>The problem.</strong> Internal reports are written as snapshots. There's no easy way to ask <em>"what did we say about X last year, and how has our view changed?"</em></p>
+      <p style="margin-top: 0.8rem;"><strong>The capability.</strong> Every ingest is an immutable snapshot. Nothing is ever rewritten. Queries can be scoped to any point in time.</p>
+      <ul style="margin-top: 1rem;">
+        <li><em>What did internal documents say about Toyota's solid-state timeline in 2023 vs 2025?</em></li>
+        <li><em>Show the trajectory of our cost estimate for LiDAR over 18 months.</em></li>
+      </ul>
+      <p style="margin-top: 1rem; color: var(--muted); font-size: 0.9rem;">Time-travel is native to the cassette store. Schema migrations preserve historical queries — old answers stay correct.</p>
+    </div>
+
+    <svg class="diagram" viewBox="0 0 460 320" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <!-- 2023 panel -->
+      <rect x="10" y="30" width="200" height="240" rx="6" class="fill-card" stroke="#d8d3c6"/>
+      <text x="20" y="22" font-weight="600" font-size="12" class="muted">SNAPSHOT · 2023</text>
+      <text x="20" y="60" font-weight="600" font-size="13">Toyota — SSB timeline</text>
+      <g transform="translate(20,80)" font-size="11">
+        <text y="0"  font-weight="500">Production target</text>
+        <text y="16" fill="#2f7a4a" font-weight="600">2025 mass production</text>
+        <text y="38" font-weight="500">Cell tech</text>
+        <text y="54" class="muted">sulfide electrolyte</text>
+        <text y="76" font-weight="500">Partner</text>
+        <text y="92" class="muted">Panasonic Energy</text>
+        <text y="124" class="muted" font-style="italic">"on track for 2025"</text>
+        <text y="140" class="muted" font-size="10">— Toyota R&amp;D Report 2023-08</text>
+      </g>
+
+      <!-- 2025 panel -->
+      <rect x="250" y="30" width="200" height="240" rx="6" class="fill-card" stroke="#c44536" stroke-width="1.5"/>
+      <text x="260" y="22" font-weight="600" font-size="12" fill="#c44536">SNAPSHOT · 2025</text>
+      <text x="260" y="60" font-weight="600" font-size="13">Toyota — SSB timeline</text>
+      <g transform="translate(260,80)" font-size="11">
+        <text y="0"  font-weight="500">Production target</text>
+        <text y="16" fill="#c44536" font-weight="600">deferred to 2027–2030</text>
+        <text y="38" font-weight="500">Cell tech</text>
+        <text y="54" class="muted">sulfide electrolyte</text>
+        <text y="76" font-weight="500">Partner</text>
+        <text y="92" class="muted">Panasonic + Idemitsu</text>
+        <text y="124" class="muted" font-style="italic">"delays in scale-up"</text>
+        <text y="140" class="muted" font-size="10">— Reuters 2024-09 + Toyota 2025-Q1</text>
+      </g>
+
+      <text x="230" y="298" text-anchor="middle" class="muted" font-size="11" font-style="italic">Same anchor · two snapshots · same store</text>
+    </svg>
+  </div>
+  <div class="footer"><span class="left">Section 2 · Benefits</span><span>12 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 13 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">13</span>Section 2 · Benefit 3</div>
+  <h2>Answers you can trust</h2>
+  <p class="lead">Three trust mechanisms, one slide. They all answer the same governance question — <em>can a decision-maker trust a result this system returns?</em></p>
+
+  <div class="grid-3" style="margin-top: 1.4rem;">
+    <div class="card">
+      <h4>Every answer cites its sources</h4>
+      <p>Each infon carries document hash, byte offset, ingestion timestamp. The Analyst is prompt-constrained never to output a verdict without citing the contributing sources. Click → opens the exact passage.</p>
+    </div>
+    <div class="card">
+      <h4>The system says "I don't know"</h4>
+      <p>When θ &gt; 0.7, the answer is <em>"the corpus does not contain a verified answer."</em> No fabrication on absent evidence — the abstention is structural, not learned.</p>
+    </div>
+    <div class="card">
+      <h4>Contradictions surface automatically</h4>
+      <p>The polarity channel (+1 affirmed / −1 negated) lets the system <em>find disagreements</em> across documents. Pre-decision risk review becomes a one-line query.</p>
+    </div>
+  </div>
+
+  <div class="pull" style="margin-top: 1.6rem;">
+    Citations, abstention, contradictions — these are not features bolted on to make the system "responsible." They are <strong>structural properties of how infon represents knowledge.</strong>
+  </div>
+  <div class="footer"><span class="left">Section 2 · Benefits</span><span>13 / 22</span></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SECTION 3 ══════ -->
+<section class="section-divider">
+  <div class="num">3</div>
+  <h2>Proposed 10-week PoC roadmap</h2>
+  <p class="blurb">Iterative. Schema-first. Validation built in. Honest scope.</p>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 14 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">14</span>Section 3 · Philosophy</div>
+  <h2>How we plan to run the PoC</h2>
+  <div class="grid-2" style="margin-top: 1.2rem;">
+    <div class="card">
+      <h4>Iterative, not waterfall</h4>
+      <p>Every phase ends with something you can <em>actually use</em> — not a slide deck describing it.</p>
+    </div>
+    <div class="card">
+      <h4>Schema-first</h4>
+      <p>Bootstrapped in week 1 from the Mobis Korean glossary + a sample corpus. The schema improves throughout the PoC.</p>
+    </div>
+    <div class="card">
+      <h4>Validation built in</h4>
+      <p>Human-in-the-loop queue live by week 5. Reviewer feedback drives schema v2.</p>
+    </div>
+    <div class="card">
+      <h4>Honest scope</h4>
+      <p>PoC runs on a curated set of 150–300 docs. Full-corpus and external connectors are post-PoC.</p>
+    </div>
+  </div>
+  <div class="footer"><span class="left">Section 3 · Roadmap</span><span>14 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 15 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">15</span>Section 3 · The plan</div>
+  <h2>The 10-week plan</h2>
+  <table style="margin-top: 0.6rem;">
+    <thead>
+      <tr><th style="width:8%;">Weeks</th><th style="width:18%;">Phase</th><th style="width:44%;">Key deliverables</th><th style="width:30%;">Milestone</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1–2</strong></td>
+        <td><strong>Bootstrap</strong></td>
+        <td>Sample corpus + glossary received; Korean encoder swap (multilingual / KoSPLADE); schema v1 drafted; preprocessor running on Mobis formats</td>
+        <td>First Korean documents ingested under schema v1</td>
+      </tr>
+      <tr>
+        <td><strong>3–4</strong></td>
+        <td><strong>Foundation</strong></td>
+        <td>150–300 curated docs ingested; basic query API; first end-to-end hero query answered with citations</td>
+        <td>A real Mobis question, answered with cited cross-document facts</td>
+      </tr>
+      <tr>
+        <td><strong>5–6</strong></td>
+        <td><strong>Governance + HITL</strong></td>
+        <td>Review queue UI; cassette-level security classification; role-based query filter; audit log</td>
+        <td>Domain experts using the review queue daily</td>
+      </tr>
+      <tr>
+        <td><strong>7–8</strong></td>
+        <td><strong>Synthesis + KPI</strong></td>
+        <td>LLM synthesis layer; KPI dashboard; schema v2 from review feedback</td>
+        <td>Validated-fact growth visible on the dashboard</td>
+      </tr>
+      <tr>
+        <td><strong>9</strong></td>
+        <td><strong>Stabilise</strong></td>
+        <td>Edge-case handling; schema v2 ingest; final KPI capture</td>
+        <td>Frozen system for evaluation week</td>
+      </tr>
+      <tr>
+        <td><strong>10</strong></td>
+        <td><strong>Report + decision</strong></td>
+        <td>Measured KPIs vs agreed targets; PoC report</td>
+        <td>Joint go / no-go decision</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer"><span class="left">Section 3 · Roadmap</span><span>15 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 16 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">16</span>Section 3 · Week 1</div>
+  <h2>What week 1 actually looks like</h2>
+  <div class="grid-2" style="margin-top: 1.2rem;">
+    <div>
+      <h4>Pre-engagement (before week 1 starts)</h4>
+      <ul>
+        <li>Sample corpus delivered — <strong>50–100 representative Korean documents</strong>.</li>
+        <li>Mobis internal glossary or taxonomy received.</li>
+        <li>PoC success criteria and KPI targets agreed in writing.</li>
+      </ul>
+
+      <h4 style="margin-top: 1.4rem;">Days 1–2</h4>
+      <ul>
+        <li>Korean-capable SPLADE variant swapped in and validated on the sample.</li>
+        <li>Document preprocessor running on Mobis formats (PPTX, PDF, DOCX, XLSX).</li>
+        <li>Schema v1 drafted from glossary anchors.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Days 3–4</h4>
+      <ul>
+        <li>First ingest of the sample corpus.</li>
+        <li><code>extraction_report()</code> surfaces coverage gaps automatically.</li>
+        <li>Schema patch + re-ingest of failed cases.</li>
+      </ul>
+
+      <h4 style="margin-top: 1.4rem;">Day 5</h4>
+      <ul>
+        <li>First internal demo: a hero query on real Mobis content, with citations.</li>
+      </ul>
+
+      <div class="pull" style="margin-top: 1.5rem; font-size: 1.05rem;">
+        The iteration cadence for the rest of the PoC: <strong>ingest → report → refine → re-ingest.</strong>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="left">Section 3 · Roadmap</span><span>16 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 17 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">17</span>Section 3 · Scope</div>
+  <h2>In scope vs deferred</h2>
+  <div class="grid-2" style="margin-top: 1.2rem;">
+    <div class="card" style="border-left: 3px solid var(--accent);">
+      <h4 style="color: var(--accent);">In PoC scope · 10 weeks</h4>
+      <ul>
+        <li>Document preprocessor (PPT/PDF/DOCX/XLSX).</li>
+        <li><strong>Korean-language extraction</strong> — encoder swap is week-1 work.</li>
+        <li>Schema v1 → v2 bootstrap + refinement.</li>
+        <li>150–300 curated internal documents ingested.</li>
+        <li>HITL review queue.</li>
+        <li>Security classification + role-based access.</li>
+        <li>KPI dashboard + audit log.</li>
+        <li>Query UI (chat + graph viewer + citations).</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--muted);">
+      <h4 style="color: var(--muted);">Deferred to post-PoC</h4>
+      <ul>
+        <li>Full-corpus ingestion (thousands of docs).</li>
+        <li>External connectors (patents, news, subscription DBs).</li>
+        <li>SSO integration with the Mobis identity provider.</li>
+        <li>Production-grade SLA and monitoring.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pull" style="margin-top: 1.4rem;">
+    Cut items are <strong>scaling</strong>, not <strong>capability</strong>. Every capability you'll evaluate the PoC on is in the 10-week scope.
+  </div>
+  <div class="footer"><span class="left">Section 3 · Roadmap</span><span>17 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 18 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">18</span>Section 3 · Roles</div>
+  <h2>Roles and working pattern</h2>
+  <div class="grid-3" style="margin-top: 1.2rem;">
+    <div class="card">
+      <h4>AgenticX</h4>
+      <p>Schema design, ingestion pipeline, reasoner tuning, query UI, KPI instrumentation. Owns the technical delivery.</p>
+    </div>
+    <div class="card">
+      <h4>Deloitte</h4>
+      <p>Delivery partner. Engagement management, on-site Mobis coordination, change management, integration support.</p>
+    </div>
+    <div class="card">
+      <h4>Hyundai Mobis</h4>
+      <p>Document curation (each phase), domain-expert reviewers (weeks 5–10), KPI target setting (week 1), final evaluation (week 10).</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 1.8rem;">
+    <h4>Cadence</h4>
+    <ul>
+      <li><strong>Weekly checkpoint</strong> — progress, blockers, next-week plan.</li>
+      <li><strong>Schema review every two weeks</strong> — domain experts + AgenticX schema lead.</li>
+      <li><strong>Phase-end demo</strong> — at weeks 2, 4, 6, 8, 10.</li>
+    </ul>
+  </div>
+  <div class="footer"><span class="left">Section 3 · Roadmap</span><span>18 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 19 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">19</span>Section 3 · Risks</div>
+  <h2>Risks and mitigations</h2>
+  <table style="margin-top: 0.4rem;">
+    <thead><tr><th style="width:42%;">Risk</th><th style="width:58%;">Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Bundled SPLADE-tiny is English-trained; Korean documents need a different encoder.</td>
+        <td>Week-1 swap to a multilingual or Korean-trained SPLADE variant (KoSPLADE / mSPLADE); validate anchor coverage on a Korean sample before scaling ingest.</td>
+      </tr>
+      <tr>
+        <td>Korean tokenisation / morphological variation degrades anchor matching.</td>
+        <td>Korean-aware tokenizer in the encoder; anchor vocabulary seeded from the Mobis Korean glossary; verify with <code>extraction_report()</code>.</td>
+      </tr>
+      <tr>
+        <td>Schema v1 extracts poorly on real Mobis content.</td>
+        <td>Run <code>extraction_report()</code> on the week-1 sample; iterate before scaling ingest.</td>
+      </tr>
+      <tr>
+        <td>Security review blocks document access.</td>
+        <td>Start week 1 with a "safe" curated subset already agreed pre-engagement.</td>
+      </tr>
+      <tr>
+        <td>KPI targets disputed at week 10.</td>
+        <td>Agree targets <strong>in writing</strong> in week 1; measurement method documented in the SoW.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer"><span class="left">Section 3 · Roadmap</span><span>19 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 20 ─ -->
+<section>
+  <div class="slide-eyebrow"><span class="num">20</span>Section 3 · Next steps</div>
+  <h2>Immediate next steps</h2>
+  <ol style="margin-top: 1.4rem; font-size: 1.05rem;">
+    <li><strong>Scoping call</strong> — agree corpus scope, security requirements, integration points (SAP, PLM, document store), and KPI definitions.</li>
+    <li><strong>Sample corpus</strong> — 50–100 representative Korean documents across key knowledge areas.</li>
+    <li><strong>Internal glossary or taxonomy</strong> — Korean anchor vocabulary seed.</li>
+    <li><strong>PoC success criteria in writing</strong> — specific KPIs, target values, measurement method.</li>
+    <li><strong>Kick-off</strong> — week 1 begins as soon as items 1–4 are agreed.</li>
+  </ol>
+  <div class="pull" style="margin-top: 2rem;">
+    None of these require a contract to start. The scoping call is the only thing that needs to happen this month.
+  </div>
+  <div class="footer"><span class="left">Section 3 · Roadmap</span><span>20 / 22</span></div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────── Slide 21 ─ -->
+<section class="closing-slide">
+  <div class="slide-eyebrow"><span class="num">21</span>Summary</div>
+  <h2>To recap</h2>
+  <div class="grid-3" style="margin-top: 1.4rem;">
+    <div class="card">
+      <h4>What we heard</h4>
+      <p>Internal knowledge first. Governance. HITL. Document-centric. Historical tracking. KPIs.</p>
+    </div>
+    <div class="card">
+      <h4>What infon brings</h4>
+      <p>Cited multi-hop reasoning. Time-travel. Calibrated "I don't know." Native source traceability.</p>
+    </div>
+    <div class="card">
+      <h4>What we propose</h4>
+      <p>10-week iterative PoC. Korean-first. HITL live by week 5. Measurable KPIs by week 10.</p>
+    </div>
+  </div>
+
+  <div class="thanks">감사합니다 <span class="romaji">— gamsahamnida · thank you</span></div>
+  <p class="caption">Questions?</p>
+  <div class="footer"><span class="left">Infon for Hyundai Mobis</span><span>21 / 22</span></div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.4,
+    maxScale: 1.6,
+    controls: true,
+    progress: true,
+    slideNumber: false,
+    hash: true,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'none',
+    keyboard: true,
+    overview: true,
+    touch: true,
+    pdfSeparateFragments: false,
+  });
+</script>
+
+</body>
+</html>
